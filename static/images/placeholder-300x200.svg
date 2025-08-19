@@ -1,0 +1,5 @@
+<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="200" fill="#f2f4f8"/>
+  <text x="150" y="95" font-family="Roboto, sans-serif" font-size="14" fill="#525252" text-anchor="middle">Newsletter Image</text>
+  <text x="150" y="115" font-family="Roboto, sans-serif" font-size="12" fill="#9f1853" text-anchor="middle">300 × 200</text>
+</svg>
