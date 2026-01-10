@@ -32,7 +32,6 @@
       
       <!-- Desktop Navigation -->
       <div class="hidden md:flex items-center space-x-8">
-        <a href="/" class="text-foreground hover:text-primary transition-colors">Home</a>
         <a href="https://blog.samizdata.co/" target="_blank" rel="noopener noreferrer" 
            class="text-foreground hover:text-primary transition-colors">
           Newsletter
@@ -43,7 +42,6 @@
           Training
           <span class="sr-only">(opens in new tab)</span>
         </a>
-        <a href="#about" class="text-foreground hover:text-primary transition-colors">About</a>
         <a href="#contact" class="text-foreground hover:text-primary transition-colors">Contact</a>
       </div>
       
@@ -69,9 +67,6 @@
     {#if isMenuOpen}
       <div class="md:hidden border-t border-border">
         <div class="py-4 space-y-4">
-          <a href="/" class="block text-foreground hover:text-primary transition-colors" on:click={closeMenu}>
-            Home
-          </a>
           <a href="https://blog.samizdata.co/" target="_blank" rel="noopener noreferrer"
              class="block text-foreground hover:text-primary transition-colors" on:click={closeMenu}>
             Newsletter
@@ -81,9 +76,6 @@
              class="block text-foreground hover:text-primary transition-colors" on:click={closeMenu}>
             Training
             <span class="sr-only">(opens in new tab)</span>
-          </a>
-          <a href="#about" class="block text-foreground hover:text-primary transition-colors" on:click={closeMenu}>
-            About
           </a>
           <a href="#contact" class="block text-foreground hover:text-primary transition-colors" on:click={closeMenu}>
             Contact

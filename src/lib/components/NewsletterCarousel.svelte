@@ -232,7 +232,7 @@
         rel="noopener noreferrer"
         class="btn btn-secondary"
       >
-        Visit Our Newsletter
+        Read the newsletter
         <span class="sr-only">(opens in new tab)</span>
       </a>
     </div>

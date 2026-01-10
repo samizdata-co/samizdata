@@ -163,7 +163,7 @@
     <div class="max-w-4xl mx-auto">
       {#if mounted}
         <h1 class="samizdata-heading samizdata-h1 mb-6 animate-fade-in">
-          Turn your <span class="text-primary font-bold">data</span> into stories that 
+          We turn <span class="text-primary font-bold">data</span> into stories that 
           <span class="inline-block min-w-[200px] text-left">
             {#key currentText}
               <span class="glitch text-primary font-bold" data-text={currentText}>
@@ -180,16 +180,15 @@
       {/if}
       
       <p class="samizdata-body text-muted-foreground mb-8 max-w-2xl mx-auto animate-slide-up">
-        SAMIZDATA transforms complex data into compelling narratives that resonate with your audience. 
-        We specialize in data storytelling, visualization, and interactive experiences.
+        SAMIZDATA helps organisations transform complex data into insight. We specialise in data storytelling, visualisation, and interactive experiences.
       </p>
       
       <div class="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">
-        <a href="#about" class="btn btn-primary">
-          Transform Your Data
+        <a href="#contact" class="btn btn-primary">
+          Let's talk!
         </a>
         <a href="#services" class="btn btn-secondary">
-          See Our Services
+          What we do
         </a>
       </div>
     </div>

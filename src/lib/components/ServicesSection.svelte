@@ -98,7 +98,7 @@
       </p>
       
       <a href="#contact" class="btn btn-primary">
-        Get Started
+        Get in touch
       </a>
     </div>
   </div>
