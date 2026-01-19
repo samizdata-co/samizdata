@@ -180,7 +180,7 @@
       {/if}
       
       <p class="samizdata-body text-muted-foreground mb-8 max-w-2xl mx-auto animate-slide-up">
-        SAMIZDATA helps organisations transform complex data into insight. We specialise in data storytelling, visualisation, and interactive experiences.
+        SAMIZDATA works with media organisations and non-profits to transform complex data into insight. We specialise in research, data storytelling, visualisation, and interactive experiences.
       </p>
       
       <div class="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up">

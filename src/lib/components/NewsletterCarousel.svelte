@@ -1,5 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import * as Carousel from '$lib/components/ui/carousel';
+  import type { CarouselAPI } from '$lib/components/ui/carousel/context';
   
   interface NewsletterItem {
     title: string;
@@ -9,10 +11,12 @@
     image?: string;
   }
   
-  let newsletterItems: NewsletterItem[] = [];
-  let loading = true;
-  let error = false;
-  let currentIndex = 0;
+  let newsletterItems: NewsletterItem[] = $state([]);
+  let loading = $state(true);
+  let error = $state(false);
+  let api: CarouselAPI | undefined = $state(undefined);
+  let current = $state(0);
+  let count = $state(0);
   
   // Fallback content for when RSS fails or is loading
   const fallbackItems: NewsletterItem[] = [
@@ -73,31 +77,35 @@
     }
   }
   
-  function nextSlide() {
-    currentIndex = (currentIndex + 1) % Math.max(newsletterItems.length - 2, 1);
+  function setCarouselApi(carouselApi: CarouselAPI | undefined) {
+    api = carouselApi;
   }
   
-  function prevSlide() {
-    currentIndex = currentIndex === 0 ? Math.max(newsletterItems.length - 3, 0) : currentIndex - 1;
-  }
-  
-  function goToSlide(index: number) {
-    currentIndex = index;
-  }
+  $effect(() => {
+    if (!api) return;
+    
+    count = api.scrollSnapList().length;
+    current = api.selectedScrollSnap();
+    
+    api.on('select', () => {
+      if (api) {
+        current = api.selectedScrollSnap();
+      }
+    });
+  });
   
   // Auto-rotate slides
   onMount(() => {
     const interval = setInterval(() => {
-      if (newsletterItems.length > 3) {
-        nextSlide();
+      if (api && api.canScrollNext()) {
+        api.scrollNext();
+      } else if (api) {
+        api.scrollTo(0);
       }
     }, 5000);
     
     return () => clearInterval(interval);
   });
-  
-  $: visibleItems = newsletterItems.slice(currentIndex, currentIndex + 3);
-  $: maxSlides = Math.max(newsletterItems.length - 2, 1);
 </script>
 
 <section id="newsletter" class="samizdata-section bg-muted/30">
@@ -133,95 +141,85 @@
         {/each}
       </div>
     {:else}
-      <!-- Newsletter items -->
-      <div class="relative">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {#each visibleItems as item, index}
-            <article class="card group hover:scale-105 transition-transform duration-300">
-              {#if item.image}
-                <div class="aspect-video bg-muted rounded-t-lg overflow-hidden">
-                  <img 
-                    src={item.image} 
-                    alt={item.title}
-                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                    loading="lazy"
-                  />
-                </div>
-              {/if}
-              
-              <div class="p-6">
-                <h3 class="samizdata-heading samizdata-h4 mb-3 text-foreground line-clamp-2">
-                  {item.title}
-                </h3>
-                
-                <p class="text-muted-foreground mb-4 text-sm line-clamp-3">
-                  {item.description}
-                </p>
-                
-                {#if item.pubDate}
-                  <p class="text-xs text-muted-foreground mb-4">
-                    {new Date(item.pubDate).toLocaleDateString()}
-                  </p>
+      <!-- Newsletter items carousel -->
+      <Carousel.Root 
+        setApi={setCarouselApi}
+        opts={{ 
+          align: 'start',
+          loop: true,
+          slidesToScroll: 1
+        }}
+        class="w-full"
+      >
+        <Carousel.Content class="-ml-2 md:-ml-4">
+          {#each newsletterItems as item}
+            <Carousel.Item class="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+              <article class="card group hover:scale-105 transition-transform duration-300 h-full">
+                {#if item.image}
+                  <div class="aspect-video bg-muted rounded-t-lg overflow-hidden">
+                    <img 
+                      src={item.image} 
+                      alt={item.title}
+                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      loading="lazy"
+                    />
+                  </div>
                 {/if}
                 
-                <a 
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center text-primary hover:text-primary/80 transition-colors font-medium"
-                >
-                  Read more
-                  <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                  <span class="sr-only">(opens in new tab)</span>
-                </a>
-              </div>
-            </article>
+                <div class="p-6">
+                  <h3 class="samizdata-heading samizdata-h4 mb-3 text-foreground line-clamp-2">
+                    {item.title}
+                  </h3>
+                  
+                  <p class="text-muted-foreground mb-4 text-sm line-clamp-3">
+                    {item.description}
+                  </p>
+                  
+                  {#if item.pubDate}
+                    <p class="text-xs text-muted-foreground mb-4">
+                      {new Date(item.pubDate).toLocaleDateString()}
+                    </p>
+                  {/if}
+                  
+                  <a 
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center text-primary hover:text-primary/80 transition-colors font-medium"
+                  >
+                    Read more
+                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                    <span class="sr-only">(opens in new tab)</span>
+                  </a>
+                </div>
+              </article>
+            </Carousel.Item>
           {/each}
-        </div>
+        </Carousel.Content>
         
         <!-- Navigation controls -->
         {#if newsletterItems.length > 3}
           <div class="flex items-center justify-center mt-8 space-x-4">
-            <button 
-              type="button"
-              class="p-2 rounded-full bg-card border border-border hover:bg-muted transition-colors"
-              aria-label="Previous items"
-              on:click={prevSlide}
-              disabled={currentIndex === 0}
-            >
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
+            <Carousel.Previous class="static translate-y-0" />
             
             <!-- Dots indicator -->
             <div class="flex space-x-2">
-              {#each Array(maxSlides) as _, index}
+              {#each Array(count) as _, index}
                 <button
                   type="button"
-                  class="w-2 h-2 rounded-full transition-colors {index === currentIndex ? 'bg-primary' : 'bg-muted'}"
+                  class="w-2 h-2 rounded-full transition-colors {index === current ? 'bg-primary' : 'bg-muted'}"
                   aria-label="Go to slide {index + 1}"
-                  on:click={() => goToSlide(index)}
+                  onclick={() => api?.scrollTo(index)}
                 ></button>
               {/each}
             </div>
             
-            <button 
-              type="button"
-              class="p-2 rounded-full bg-card border border-border hover:bg-muted transition-colors"
-              aria-label="Next items"
-              on:click={nextSlide}
-              disabled={currentIndex >= maxSlides - 1}
-            >
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
+            <Carousel.Next class="static translate-y-0" />
           </div>
         {/if}
-      </div>
+      </Carousel.Root>
     {/if}
     
     <!-- Newsletter CTA -->

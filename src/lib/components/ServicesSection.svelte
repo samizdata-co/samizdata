@@ -1,13 +1,13 @@
 <script lang="ts">
   const services = [
     {
-      title: "Data storytelling",
-      description: "Transform complex datasets into compelling narratives that engage and inform your audience.",
+      title: "Research",
+      description: "Conduct in-depth data research to uncover insights.",
       items: ["Data journalism", "Reports"],
-      icon: "📊"
+      icon: "🔬"
     },
     {
-      title: "Dataviz",
+      title: "Data storytelling",
       description: "Create stunning visual representations of your data that make complex information accessible.",
       items: ["Charts and infographics", "Video and animation"],
       icon: "📈"
