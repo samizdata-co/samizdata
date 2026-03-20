@@ -1,14 +1,26 @@
 <script lang="ts">
+	import ContactSection from '$lib/components/ContactSection.svelte';
+	import Footer from '$lib/components/Footer.svelte';
 	import HeroSection from '$lib/components/HeroSection.svelte';
-	import ServicesSection from '$lib/components/ServicesSection.svelte';
-	import NewsletterCarousel from '$lib/components/NewsletterCarousel.svelte';
+	import TopNav from '$lib/components/TopNav.svelte';
+	import WorkSection from '$lib/components/WorkSection.svelte';
+	import { navItems } from '$lib/data/homepage';
 </script>
 
 <svelte:head>
-	<title>SAMIZDATA • Data Storytelling & Visualisation</title>
-	<meta name="description" content="Transform your data into compelling stories that inform, make an impact, and move people. Professional data storytelling and visualisation services.">
+	<meta property="og:title" content="SAMIZDATA" />
+	<meta
+		property="og:description"
+		content="SAMIZDATA is a consultancy for data-driven storytelling."
+	/>
 </svelte:head>
 
-<HeroSection />
-<ServicesSection />
-<NewsletterCarousel />
+<TopNav items={navItems} />
+
+<main>
+	<HeroSection />
+	<WorkSection />
+	<ContactSection />
+</main>
+
+<Footer />
