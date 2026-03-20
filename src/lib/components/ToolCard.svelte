@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ToolCardData } from '$lib/data/homepage';
+	import type { ToolCardData } from '$lib/data/site';
 
 	let { card }: { card: ToolCardData } = $props();
 </script>

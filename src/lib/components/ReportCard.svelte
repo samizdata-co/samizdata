@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ReportCardData } from '$lib/data/homepage';
+	import type { ReportCardData } from '$lib/data/site';
 
 	let { card }: { card: ReportCardData } = $props();
 </script>
@@ -16,7 +16,7 @@
 		</div>
 		<h3>{card.title}</h3>
 		<p>{card.description}</p>
-		<a href={card.href}>Read full report</a>
+		<a href={card.href}>{card.cta}</a>
 	</div>
 </article>
 

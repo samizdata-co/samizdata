@@ -1,21 +1,46 @@
 <script lang="ts">
+	import { defaultLocale, type AppLocale } from '$lib/i18n/locales';
+	import { locale as localeStore } from '$lib/translations';
 	import MaterialIcon from './MaterialIcon.svelte';
+
+	let { standalone = false }: { standalone?: boolean } = $props();
+
+	const copy = {
+		en: {
+			title: 'Get in touch',
+			body:
+				"Whether you have a massive dataset or just the seed of an idea, let's build something rigorous together.",
+			email: 'Direct Email',
+			locationLabel: 'Location',
+			location: 'London, UK',
+			social: 'Social'
+		},
+		ro: {
+			title: 'Ia legatura cu noi',
+			body:
+				'Fie ca ai un set urias de date sau doar germenul unei idei, hai sa construim impreuna ceva riguros.',
+			email: 'Email direct',
+			locationLabel: 'Locatie',
+			location: 'Londra, Regatul Unit',
+			social: 'Social'
+		}
+	} as const;
+
+	const activeLocale = $derived(($localeStore as AppLocale | undefined) ?? defaultLocale);
+	const strings = $derived(copy[activeLocale]);
 </script>
 
-<section class="contact" id="contact">
+<section class:standalone class="contact" id="contact">
 	<div class="shell contact-grid">
 		<div id="about">
-			<h2 class="section-title">Get in touch</h2>
-			<p>
-				Whether you have a massive dataset or just the seed of an idea, let's build something
-				rigorous together.
-			</p>
+			<h2 class="section-title">{strings.title}</h2>
+			<p>{strings.body}</p>
 		</div>
 
 		<div class="stack">
 			<a class="email-card" href="mailto:mail@samizdata.co">
 				<div>
-					<span class="eyebrow">Direct Email</span>
+					<span class="eyebrow">{strings.email}</span>
 					<strong>mail@samizdata.co</strong>
 				</div>
 				<MaterialIcon name="north_east" size="36px" />
@@ -23,11 +48,11 @@
 
 			<div class="meta-grid">
 				<div class="meta-card">
-					<span class="eyebrow muted">Location</span>
-					<p>London, UK</p>
+					<span class="eyebrow muted">{strings.locationLabel}</span>
+					<p>{strings.location}</p>
 				</div>
 				<div class="meta-card">
-					<span class="eyebrow muted">Social</span>
+					<span class="eyebrow muted">{strings.social}</span>
 					<p><a href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a></p>
 				</div>
 			</div>
@@ -39,6 +64,11 @@
 	.contact {
 		padding-block: 8rem;
 		background: var(--color-surface);
+	}
+
+	.contact.standalone {
+		padding-top: 12rem;
+		min-height: calc(100vh - 6rem);
 	}
 
 	.contact-grid {

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { FeatureCardData } from '$lib/data/homepage';
+	import type { FeatureCardData } from '$lib/data/site';
 	import MaterialIcon from './MaterialIcon.svelte';
 
 	let { card, large = false }: { card: FeatureCardData; large?: boolean } = $props();

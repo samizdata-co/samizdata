@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ImageCardData } from '$lib/data/homepage';
+	import type { ImageCardData } from '$lib/data/site';
 
 	let { card, tall = false }: { card: ImageCardData; tall?: boolean } = $props();
 </script>

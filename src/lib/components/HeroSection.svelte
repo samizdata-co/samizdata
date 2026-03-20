@@ -1,22 +1,52 @@
+<script lang="ts">
+	import { defaultLocale, localizePath, type AppLocale } from '$lib/i18n/locales';
+	import { locale as localeStore } from '$lib/translations';
+
+	const copy = {
+		en: {
+			titleLead: 'SAMIZDATA is a consultancy for',
+			titleAccent: 'data-driven',
+			titleTail: 'storytelling.',
+			body:
+				'We research, write and build data tools for media organisations, NGOs and other public-benefit institutions.',
+			primaryCta: "Let's talk!",
+			secondaryCta: 'What we do',
+			scrollCue: 'Portfolio & Expertise'
+		},
+		ro: {
+			titleLead: 'SAMIZDATA este o consultanta pentru',
+			titleAccent: 'storytelling bazat pe date',
+			titleTail: '.',
+			body:
+				'Cercetam, scriem si construim instrumente de date pentru organizatii media, ONG-uri si alte institutii de interes public.',
+			primaryCta: 'Hai sa vorbim!',
+			secondaryCta: 'Ce facem',
+			scrollCue: 'Portofoliu si expertiza'
+		}
+	} as const;
+
+	const activeLocale = $derived(($localeStore as AppLocale | undefined) ?? defaultLocale);
+	const strings = $derived(copy[activeLocale]);
+	const contactHref = $derived(localizePath('/contact', activeLocale));
+	const workHref = $derived(`${localizePath('/', activeLocale)}#work`);
+</script>
+
 <section class="hero" id="top">
 	<div class="grid-pattern" aria-hidden="true"></div>
 	<div class="shell hero-inner">
 		<div class="copy">
 			<h1 class="display-title">
-				SAMIZDATA is a consultancy for <span>data-driven</span> storytelling.
+				{strings.titleLead} <span>{strings.titleAccent}</span>{strings.titleTail}
 			</h1>
-			<p>
-				We research, write and build data tools for media organisations, NGOs and other
-				public-benefit institutions.
-			</p>
+			<p>{strings.body}</p>
 			<div class="button-row">
-				<a class="btn btn-primary" href="#contact">Let's talk!</a>
-				<a class="btn btn-secondary" href="#work">What we do</a>
+				<a class="btn btn-primary" href={contactHref}>{strings.primaryCta}</a>
+				<a class="btn btn-secondary" href={workHref}>{strings.secondaryCta}</a>
 			</div>
 		</div>
 
 		<div class="scroll-cue" aria-hidden="true">
-			<span class="eyebrow">Portfolio & Expertise</span>
+			<span class="eyebrow">{strings.scrollCue}</span>
 			<div class="line"><i></i></div>
 		</div>
 	</div>

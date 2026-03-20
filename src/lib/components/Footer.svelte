@@ -1,19 +1,44 @@
 <script lang="ts">
-	import { footerLinks } from '$lib/data/homepage';
+	import { defaultLocale, localizePath, type AppLocale } from '$lib/i18n/locales';
+	import { locale as localeStore } from '$lib/translations';
 	import Logo from './Logo.svelte';
+
+	const copy = {
+		en: {
+			connect: 'Connect',
+			rights: '© 2024 SAMIZDATA.',
+			location: 'London, UK',
+			privacy: 'Privacy Policy',
+			terms: 'Terms'
+		},
+		ro: {
+			connect: 'Conectare',
+			rights: '© 2024 SAMIZDATA.',
+			location: 'Londra, Regatul Unit',
+			privacy: 'Politica de confidentialitate',
+			terms: 'Termeni'
+		}
+	} as const;
+
+	const activeLocale = $derived(($localeStore as AppLocale | undefined) ?? defaultLocale);
+	const strings = $derived(copy[activeLocale]);
+	const footerLinks = $derived([
+		{ label: strings.privacy, href: localizePath('/privacy-policy', activeLocale) },
+		{ label: strings.terms, href: localizePath('/terms', activeLocale) }
+	]);
 </script>
 
 <footer class="footer">
 	<div class="shell footer-grid">
 		<div class="brand">
 			<Logo compact />
-			<p class="eyebrow muted">© 2024 SAMIZDATA.</p>
+			<p class="eyebrow muted">{strings.rights}</p>
 		</div>
 
 		<div class="connect">
-			<p class="eyebrow">Connect</p>
+			<p class="eyebrow">{strings.connect}</p>
 			<a href="mailto:mail@samizdata.co">mail@samizdata.co</a>
-			<span>London, UK</span>
+			<span>{strings.location}</span>
 		</div>
 
 		<div class="legal">
