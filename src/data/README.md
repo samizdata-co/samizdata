@@ -12,20 +12,27 @@ What we want to show in the portfolio
 
 ## Interactive visualisations
 
-- Energy price calculator
-- How much territory does Ukraine control? Use this interactive map to find out
-- Personal inflation calculator: how do you compare to the rest of Britain?
-- Where are industries clustered in the UK?
+- Land and Environmental Defenders report charts
 - The Covid-19 pandemic made us fall in love with Christmas songs
 
 - [ ] Find BBFAW scrolly
 - [ ] Add [Brexit vulnerability chart](https://nsmg-projects-public.s3.eu-west-2.amazonaws.com/live/nsmg-041/index.html)
 - [ ] Find other examples from [here](https://nsmediadataunit.github.io/nsmg-project-list/index.html)
 
-## Charts and infographics
+## Data portals
+
+- OpenMoney.md
+- OpenLobbying
+
+<!-- ## Charts and infographics
 
 - Mental Health Survey Results
 - Spotify
 - Britain’s hidden health crisis: How overcrowded housing may be spreading Covid-19
+- Apprenticeship in print -->
 
 ## Training
+
+
+
+With 16 years of experience in journalism, our team is skilled in data gathering, analysis, visualisation and storytelling. Here are some of the stories we have worked on.
