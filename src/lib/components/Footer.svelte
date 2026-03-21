@@ -1,9 +1,5 @@
 <script lang="ts">
-  import {
-    defaultLocale,
-    localizePath,
-    type AppLocale,
-  } from "$lib/i18n/locales";
+  import { defaultLocale, type AppLocale } from "$lib/i18n/locales";
   import { locale as localeStore } from "$lib/translations";
   import Logo from "./Logo.svelte";
 
@@ -12,15 +8,11 @@
       connect: "Connect",
       rights: "© 2026 SAMIZDATA Ltd.",
       location: "London, UK",
-      privacy: "Privacy Policy",
-      terms: "Terms",
     },
     ro: {
       connect: "Conectare",
       rights: "© 2026 SAMIZDATA Ltd.",
       location: "Londra, Regatul Unit",
-      privacy: "Politica de confidențialitate",
-      terms: "Termeni",
     },
   } as const;
 
@@ -28,13 +20,6 @@
     ($localeStore as AppLocale | undefined) ?? defaultLocale,
   );
   const strings = $derived(copy[activeLocale]);
-  const footerLinks = $derived([
-    {
-      label: strings.privacy,
-      href: localizePath("/privacy-policy", activeLocale),
-    },
-    { label: strings.terms, href: localizePath("/terms", activeLocale) },
-  ]);
 </script>
 
 <footer class="footer">
@@ -49,18 +34,12 @@
       <a href="mailto:mail@samizdata.co">mail@samizdata.co</a>
       <span>{strings.location}</span>
     </div>
-
-    <div class="legal">
-      {#each footerLinks as link}
-        <a href={link.href}>{link.label}</a>
-      {/each}
-    </div>
   </div>
 </footer>
 
 <style>
   .footer {
-    padding-block: 4rem;
+    padding-block: 2.5rem;
     background: var(--color-surface-low);
     border-top: 1px solid rgba(222, 191, 197, 0.2);
   }
@@ -68,20 +47,18 @@
   .footer-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.25rem;
   }
 
   .brand,
-  .connect,
-  .legal {
+  .connect {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.5rem;
   }
 
   .connect a,
-  .connect span,
-  .legal a {
+  .connect span {
     font-size: 0.75rem;
     font-weight: 500;
     letter-spacing: 0.14em;
@@ -94,11 +71,6 @@
     font-weight: 900;
   }
 
-  .legal {
-    gap: 0.9rem;
-  }
-
-  .legal a:hover,
   .connect a:hover {
     text-decoration: underline;
     text-decoration-color: var(--color-primary-container);
@@ -107,17 +79,8 @@
 
   @media (min-width: 820px) {
     .footer-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      align-items: start;
-    }
-
-    .legal {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       align-items: end;
-    }
-
-    .legal {
-      flex-direction: row;
-      justify-content: end;
       gap: 2rem;
     }
   }

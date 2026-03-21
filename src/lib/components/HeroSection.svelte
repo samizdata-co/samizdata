@@ -31,7 +31,7 @@
     ($localeStore as AppLocale | undefined) ?? defaultLocale,
   );
   const strings = $derived(copy[activeLocale]);
-  const contactHref = $derived(localizePath("/contact", activeLocale));
+  const contactHref = $derived(`${localizePath("/", activeLocale)}#contact`);
   const workHref = $derived(`${localizePath("/", activeLocale)}#work`);
 </script>
 

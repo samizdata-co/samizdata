@@ -1,7 +1,7 @@
 <script lang="ts">
+  import { ArrowUpRight } from "@lucide/svelte";
   import { defaultLocale, type AppLocale } from "$lib/i18n/locales";
   import { locale as localeStore } from "$lib/translations";
-  import MaterialIcon from "./MaterialIcon.svelte";
 
   let { standalone = false }: { standalone?: boolean } = $props();
 
@@ -43,7 +43,7 @@
           <span class="eyebrow">{strings.email}</span>
           <strong>mail@samizdata.co</strong>
         </div>
-        <MaterialIcon name="north_east" size="36px" />
+        <ArrowUpRight size={36} strokeWidth={2.1} />
       </a>
 
       <div class="meta-grid">
@@ -54,7 +54,7 @@
         <div class="meta-card">
           <span class="eyebrow muted">{strings.social}</span>
           <p>
-            <a href="https://www.linkedin.com" target="_blank" rel="noreferrer"
+            <a href="https://www.linkedin.com/in/nicucalcea/" target="_blank" rel="noreferrer"
               >LinkedIn</a
             >
           </p>

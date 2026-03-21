@@ -9,6 +9,7 @@
   let idleTimer: ReturnType<typeof setTimeout>;
   let animFrame: number;
   let driftActive = false;
+  let motionToken = 0;
 
   const NS = "http://www.w3.org/2000/svg";
 
@@ -40,14 +41,22 @@
   const easeInOut = (t: number) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
   const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
-  function tween(ms: number, onTick: (t: number) => void): Promise<void> {
+  function tween(
+    ms: number,
+    onTick: (t: number) => void,
+    token = motionToken,
+  ): Promise<boolean> {
     return new Promise((resolve) => {
       const start = performance.now();
       function frame(now: number) {
+        if (token !== motionToken) {
+          resolve(false);
+          return;
+        }
         const raw = Math.min((now - start) / ms, 1);
         onTick(easeInOut(raw));
         if (raw < 1) animFrame = requestAnimationFrame(frame);
-        else resolve();
+        else resolve(true);
       }
       animFrame = requestAnimationFrame(frame);
     });
@@ -127,18 +136,29 @@
 
     const alt = [18, 24, 20];
     const orig = BARS.map((d) => d.w);
+    const token = ++motionToken;
 
-    await tween(800, (t) => {
-      barEls.forEach((r, i) =>
-        r.setAttribute("width", String(lerp(orig[i], alt[i], t))),
-      );
-    });
+    const widened = await tween(
+      800,
+      (t) => {
+        barEls.forEach((r, i) =>
+          r.setAttribute("width", String(lerp(orig[i], alt[i], t))),
+        );
+      },
+      token,
+    );
+    if (!widened || token !== motionToken) return;
     await wait(500);
-    await tween(800, (t) => {
-      barEls.forEach((r, i) =>
-        r.setAttribute("width", String(lerp(alt[i], orig[i], t))),
-      );
-    });
+    const restored = await tween(
+      800,
+      (t) => {
+        barEls.forEach((r, i) =>
+          r.setAttribute("width", String(lerp(alt[i], orig[i], t))),
+        );
+      },
+      token,
+    );
+    if (!restored || token !== motionToken) return;
 
     state = "bars";
     scheduleIdle();
@@ -147,37 +167,43 @@
   // ── Hover in: bars morph into dots, axes draw in ─────────────────────────
 
   async function toScatter() {
-    if (state === "scatter" || state === "transitioning") return;
+    if (state === "scatter") return;
     driftActive = false;
     cancelAnimationFrame(animFrame);
     clearTimeout(idleTimer);
     state = "transitioning";
+    const token = ++motionToken;
 
     // Bars collapse to their dot position while axes draw in
-    await tween(480, (t) => {
-      barEls.forEach((r, i) => {
-        const d = BARS[i];
-        const dot = d.dot;
-        const w = lerp(d.w, dot.s, t);
-        const h = lerp(d.h, dot.s, t);
-        const cx = lerp(d.x + d.w / 2, dot.cx, t);
-        const cy = lerp(d.y + d.h / 2, dot.cy, t);
-        r.setAttribute("x", String(cx - w / 2));
-        r.setAttribute("y", String(cy - h / 2));
-        r.setAttribute("width", String(w));
-        r.setAttribute("height", String(h));
-        r.setAttribute("rx", String(lerp(1, dot.s / 2, t)));
-        r.setAttribute("opacity", String(lerp(d.op, 0.85, t)));
-      });
+    const completed = await tween(
+      480,
+      (t) => {
+        barEls.forEach((r, i) => {
+          const d = BARS[i];
+          const dot = d.dot;
+          const w = lerp(d.w, dot.s, t);
+          const h = lerp(d.h, dot.s, t);
+          const cx = lerp(d.x + d.w / 2, dot.cx, t);
+          const cy = lerp(d.y + d.h / 2, dot.cy, t);
+          r.setAttribute("x", String(cx - w / 2));
+          r.setAttribute("y", String(cy - h / 2));
+          r.setAttribute("width", String(w));
+          r.setAttribute("height", String(h));
+          r.setAttribute("rx", String(lerp(1, dot.s / 2, t)));
+          r.setAttribute("opacity", String(lerp(d.op, 0.85, t)));
+        });
 
-      // x-axis draws left-to-right, y-axis draws top-to-bottom
-      const xAxis = AXES[0];
-      axisEls[0].setAttribute("x2", String(lerp(xAxis.x1, xAxis.x2, t)));
-      axisEls[0].setAttribute("opacity", String(lerp(0, 0.3, t)));
-      const yAxis = AXES[1];
-      axisEls[1].setAttribute("y2", String(lerp(yAxis.y1, yAxis.y2, t)));
-      axisEls[1].setAttribute("opacity", String(lerp(0, 0.3, t)));
-    });
+        // x-axis draws left-to-right, y-axis draws top-to-bottom
+        const xAxis = AXES[0];
+        axisEls[0].setAttribute("x2", String(lerp(xAxis.x1, xAxis.x2, t)));
+        axisEls[0].setAttribute("opacity", String(lerp(0, 0.3, t)));
+        const yAxis = AXES[1];
+        axisEls[1].setAttribute("y2", String(lerp(yAxis.y1, yAxis.y2, t)));
+        axisEls[1].setAttribute("opacity", String(lerp(0, 0.3, t)));
+      },
+      token,
+    );
+    if (!completed || token !== motionToken) return;
 
     state = "scatter";
     startDrift();
@@ -213,10 +239,11 @@
   // ── Hover out: dots expand back into bars, axes fade out ─────────────────
 
   async function toBars() {
-    if (state === "bars" || state === "transitioning") return;
+    if (state === "bars") return;
     driftActive = false;
     cancelAnimationFrame(animFrame);
     state = "transitioning";
+    const token = ++motionToken;
 
     // Snapshot current dot positions (may have drifted)
     const snap = barEls.map((r) => ({
@@ -228,24 +255,29 @@
         parseFloat(r.getAttribute("height") ?? "0") / 2,
     }));
 
-    await tween(480, (t) => {
-      barEls.forEach((r, i) => {
-        const d = BARS[i];
-        const w = lerp(d.dot.s, d.w, t);
-        const h = lerp(d.dot.s, d.h, t);
-        const cx = lerp(snap[i].cx, d.x + d.w / 2, t);
-        const cy = lerp(snap[i].cy, d.y + d.h / 2, t);
-        r.setAttribute("x", String(cx - w / 2));
-        r.setAttribute("y", String(cy - h / 2));
-        r.setAttribute("width", String(w));
-        r.setAttribute("height", String(h));
-        r.setAttribute("rx", String(lerp(d.dot.s / 2, 1, t)));
-        r.setAttribute("opacity", String(lerp(0.85, d.op, t)));
-      });
+    const completed = await tween(
+      480,
+      (t) => {
+        barEls.forEach((r, i) => {
+          const d = BARS[i];
+          const w = lerp(d.dot.s, d.w, t);
+          const h = lerp(d.dot.s, d.h, t);
+          const cx = lerp(snap[i].cx, d.x + d.w / 2, t);
+          const cy = lerp(snap[i].cy, d.y + d.h / 2, t);
+          r.setAttribute("x", String(cx - w / 2));
+          r.setAttribute("y", String(cy - h / 2));
+          r.setAttribute("width", String(w));
+          r.setAttribute("height", String(h));
+          r.setAttribute("rx", String(lerp(d.dot.s / 2, 1, t)));
+          r.setAttribute("opacity", String(lerp(0.85, d.op, t)));
+        });
 
-      axisEls[0].setAttribute("opacity", String(lerp(0.3, 0, t)));
-      axisEls[1].setAttribute("opacity", String(lerp(0.3, 0, t)));
-    });
+        axisEls[0].setAttribute("opacity", String(lerp(0.3, 0, t)));
+        axisEls[1].setAttribute("opacity", String(lerp(0.3, 0, t)));
+      },
+      token,
+    );
+    if (!completed || token !== motionToken) return;
 
     // Snap to exact resting values
     barEls.forEach((r, i) => {
@@ -301,6 +333,10 @@
     align-items: center;
     gap: 0.25rem;
     cursor: default;
+  }
+
+  :global(a) .logo {
+    cursor: pointer;
   }
 
   .mark {

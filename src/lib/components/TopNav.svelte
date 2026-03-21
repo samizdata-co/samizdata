@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { ChevronDown, Menu, MoonStar, X } from "@lucide/svelte";
   import { page } from "$app/state";
   import {
     defaultLocale,
@@ -8,7 +9,6 @@
   } from "$lib/i18n/locales";
   import { locale as localeStore } from "$lib/translations";
   import Logo from "./Logo.svelte";
-  import MaterialIcon from "./MaterialIcon.svelte";
 
   let { pathname }: { pathname: string } = $props();
   let isMobileMenuOpen = $state(false);
@@ -47,9 +47,12 @@
   );
   const strings = $derived(copy[activeLocale]);
   const navItems = $derived([
-    { label: strings.work, href: `${localizePath("/", activeLocale)}#work` },
     { label: strings.about, href: `${localizePath("/", activeLocale)}#about` },
-    { label: strings.contact, href: localizePath("/contact", activeLocale) },
+    { label: strings.work, href: `${localizePath("/", activeLocale)}#work` },
+    {
+      label: strings.contact,
+      href: `${localizePath("/", activeLocale)}#contact`,
+    },
   ]);
   const switcherOptions = $derived([
     {
@@ -90,7 +93,7 @@
       <details class="locale-switcher">
         <summary aria-label={strings.languageLabel}>
           <span class="flag" aria-hidden="true">{currentOption.flag}</span>
-          <MaterialIcon name="expand_more" size="18px" />
+          <ChevronDown size={18} strokeWidth={2.25} />
         </summary>
         <div class="locale-menu">
           {#each alternateOptions as option}
@@ -98,7 +101,6 @@
               href={option.href}
               data-sveltekit-preload-data="off"
               data-sveltekit-preload-code="off"
-              data-sveltekit-reload
               lang={option.code}
               aria-label={option.label}
             >
@@ -107,13 +109,15 @@
           {/each}
         </div>
       </details>
+      <!--
       <button
         type="button"
         class="theme-toggle"
         aria-label={strings.themeToggle}
       >
-        <MaterialIcon name="dark_mode" size="22px" />
+        <MoonStar size={22} strokeWidth={2} />
       </button>
+      -->
       <button
         type="button"
         class="menu-toggle"
@@ -126,7 +130,11 @@
           isMobileMenuOpen = !isMobileMenuOpen;
         }}
       >
-        <MaterialIcon name={isMobileMenuOpen ? "close" : "menu"} size="24px" />
+        {#if isMobileMenuOpen}
+          <X size={24} strokeWidth={2.25} />
+        {:else}
+          <Menu size={24} strokeWidth={2.25} />
+        {/if}
       </button>
     </div>
   </div>
@@ -263,10 +271,12 @@
     display: inline-flex;
   }
 
+  /*
   .theme-toggle {
     color: var(--color-primary-container);
     transform: scale(0.95);
   }
+  */
 
   .mobile-menu {
     display: grid;

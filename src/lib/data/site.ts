@@ -5,10 +5,10 @@ export type NavItem = {
   href: string;
 };
 
-export type FeatureCardData = {
+export type ServiceCardData = {
   title: string;
   description: string;
-  icon: "dashboard" | "school";
+  icon: "file-search" | "chart-no-axes-combined" | "graduation-cap";
   href: string;
   variant?: "accent";
   label?: string;
