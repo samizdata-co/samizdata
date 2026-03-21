@@ -6,16 +6,16 @@
 	const copy = {
 		en: {
 			connect: 'Connect',
-			rights: '© 2024 SAMIZDATA.',
+			rights: '© 2026 SAMIZDATA.',
 			location: 'London, UK',
 			privacy: 'Privacy Policy',
 			terms: 'Terms'
 		},
 		ro: {
 			connect: 'Conectare',
-			rights: '© 2024 SAMIZDATA.',
+			rights: '© 2026 SAMIZDATA.',
 			location: 'Londra, Regatul Unit',
-			privacy: 'Politica de confidentialitate',
+			privacy: 'Politica de confidențialitate',
 			terms: 'Termeni'
 		}
 	} as const;

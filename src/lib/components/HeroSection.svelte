@@ -4,9 +4,9 @@
 
 	const copy = {
 		en: {
-			titleLead: 'SAMIZDATA is a consultancy for',
-			titleAccent: 'data-driven',
-			titleTail: 'storytelling.',
+			titleLead: 'SAMIZDATA is a',
+			titleAccent: 'data-driven storytelling',
+			titleTail: ' consultancy.',
 			body:
 				'We research, write and build data tools for media organisations, NGOs and other public-benefit institutions.',
 			primaryCta: "Let's talk!",
@@ -14,14 +14,14 @@
 			scrollCue: 'Portfolio & Expertise'
 		},
 		ro: {
-			titleLead: 'SAMIZDATA este o consultanta pentru',
-			titleAccent: 'storytelling bazat pe date',
+			titleLead: 'SAMIZDATA este o agenție de',
+			titleAccent: 'storytelling de date',
 			titleTail: '.',
 			body:
-				'Cercetam, scriem si construim instrumente de date pentru organizatii media, ONG-uri si alte institutii de interes public.',
-			primaryCta: 'Hai sa vorbim!',
+				'Cercetăm, scriem și construim instrumente de date pentru organizații media, ONG-uri și alte instituții de interes public.',
+			primaryCta: 'Hai să vorbim!',
 			secondaryCta: 'Ce facem',
-			scrollCue: 'Portofoliu si expertiza'
+			scrollCue: 'Portofoliu și expertiză'
 		}
 	} as const;
 
@@ -34,12 +34,15 @@
 <section class="hero" id="top">
 	<div class="grid-pattern" aria-hidden="true"></div>
 	<div class="shell hero-inner">
-		<div class="copy">
-			<h1 class="display-title">
-				{strings.titleLead} <span>{strings.titleAccent}</span>{strings.titleTail}
-			</h1>
-			<p>{strings.body}</p>
-			<div class="button-row">
+			<div class="copy">
+				<h1 class="display-title">
+					<span class="title-lead">{strings.titleLead}</span>
+					<span class="title-accent">{strings.titleAccent}</span><span class="title-tail"
+						>{strings.titleTail}</span
+					>
+				</h1>
+				<p>{strings.body}</p>
+				<div class="button-row">
 				<a class="btn btn-primary" href={contactHref}>{strings.primaryCta}</a>
 				<a class="btn btn-secondary" href={workHref}>{strings.secondaryCta}</a>
 			</div>
@@ -55,9 +58,10 @@
 <style>
 	.hero {
 		position: relative;
-		height: 100vh;
+		min-height: 100vh;
+		min-height: 100svh;
 		padding-top: 6rem;
-		overflow: clip;
+		overflow: hidden;
 		background: var(--color-surface);
 	}
 
@@ -75,7 +79,8 @@
 	.hero-inner {
 		position: relative;
 		z-index: 1;
-		height: calc(100vh - 6rem);
+		min-height: calc(100vh - 6rem);
+		min-height: calc(100svh - 6rem);
 		display: flex;
 		flex-direction: column;
 		justify-content: space-between;
@@ -92,16 +97,31 @@
 		flex: 1;
 	}
 
-	h1 span {
+	h1 {
+		font-size: clamp(3.35rem, 7vw, 8.75rem);
+		margin: 0 0 1.5rem;
+		line-height: 0.94;
+		letter-spacing: -0.04em;
+		text-wrap: balance;
+	}
+
+	.title-lead,
+	.title-accent,
+	.title-tail {
+		display: inline;
+	}
+
+	.title-accent {
 		color: var(--color-primary-container);
 		font-style: italic;
+		margin-left: 0.18ch;
 	}
 
 	p {
 		max-width: 40rem;
-		margin: 0 0 3rem;
-		font-size: clamp(1.25rem, 2vw, 1.5rem);
-		line-height: 1.6;
+		margin: 0 0 2.25rem;
+		font-size: clamp(1.12rem, 1.7vw, 1.35rem);
+		line-height: 1.5;
 		color: var(--color-muted);
 	}
 
@@ -143,6 +163,60 @@
 		}
 		50% {
 			transform: translateY(100%);
+		}
+	}
+
+	@media (max-height: 900px) {
+		.hero-inner {
+			padding-top: clamp(2.5rem, 6vh, 4rem);
+			padding-bottom: 1.5rem;
+			gap: 1.25rem;
+		}
+
+		h1 {
+			font-size: clamp(2.85rem, 6.3vw, 6.3rem);
+			margin-bottom: 1.2rem;
+			line-height: 0.96;
+		}
+
+		p {
+			margin-bottom: 1.5rem;
+		}
+
+		.line {
+			height: 2.25rem;
+		}
+	}
+
+	@media (max-height: 760px) {
+		.hero-inner {
+			padding-top: 1.5rem;
+			padding-bottom: 1rem;
+			gap: 0.85rem;
+		}
+
+		h1 {
+			font-size: clamp(2.35rem, 5.2vw, 4.75rem);
+			margin-bottom: 0.85rem;
+			line-height: 0.98;
+		}
+
+		p {
+			font-size: clamp(1rem, 1.45vw, 1.12rem);
+			margin-bottom: 1.15rem;
+			line-height: 1.4;
+		}
+
+		.scroll-cue {
+			gap: 0.75rem;
+		}
+
+		.scroll-cue span {
+			letter-spacing: 0.24em;
+		}
+
+		.line {
+			height: 1.75rem;
 		}
 	}
 </style>

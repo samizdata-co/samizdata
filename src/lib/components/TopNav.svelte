@@ -6,12 +6,15 @@
 	import MaterialIcon from './MaterialIcon.svelte';
 
 	let { pathname }: { pathname: string } = $props();
+	let isMobileMenuOpen = $state(false);
 
 	const copy = {
 		en: {
 			homeLabel: 'SAMIZDATA home',
 			primaryLabel: 'Primary navigation',
 			languageLabel: 'Language',
+			mobileMenuOpen: 'Open menu',
+			mobileMenuClose: 'Close menu',
 			themeToggle: 'Toggle theme',
 			work: 'What we do',
 			about: 'Who we are',
@@ -23,6 +26,8 @@
 			homeLabel: 'Pagina principala SAMIZDATA',
 			primaryLabel: 'Navigatie principala',
 			languageLabel: 'Limba',
+			mobileMenuOpen: 'Deschide meniul',
+			mobileMenuClose: 'Inchide meniul',
 			themeToggle: 'Schimba tema',
 			work: 'Ce facem',
 			about: 'Cine suntem',
@@ -56,13 +61,16 @@
 	const currentOption = $derived(
 		switcherOptions.find((option) => option.code === activeLocale) ?? switcherOptions[0]
 	);
+	const alternateOptions = $derived(
+		switcherOptions.filter((option) => option.code !== activeLocale)
+	);
 </script>
 
-<nav class="nav">
-	<div class="shell nav-inner">
-		<a href={localizePath('/', activeLocale)} aria-label={strings.homeLabel}>
-			<Logo />
-		</a>
+	<nav class="nav">
+		<div class="shell nav-inner">
+			<a href={localizePath('/', activeLocale)} aria-label={strings.homeLabel}>
+				<Logo />
+			</a>
 
 		<div class="links" aria-label={strings.primaryLabel}>
 			{#each navItems as item}
@@ -70,37 +78,60 @@
 			{/each}
 		</div>
 
-		<div class="actions">
-			<details class="locale-switcher">
-				<summary aria-label={strings.languageLabel}>
-					<MaterialIcon name="language" size="22px" />
-					<span class="flag" aria-hidden="true">{currentOption.flag}</span>
-					<span class="summary-label">{currentOption.label}</span>
-					<MaterialIcon name="expand_more" size="18px" />
-				</summary>
-				<div class="locale-menu">
-					{#each switcherOptions as option}
-						<a
-							href={option.href}
-							data-sveltekit-preload-data="off"
-							data-sveltekit-preload-code="off"
-							data-sveltekit-reload
-							class:active={option.code === activeLocale}
-							aria-current={option.code === activeLocale ? 'page' : undefined}
-							lang={option.code}
-						>
-							<span class="flag" aria-hidden="true">{option.flag}</span>
-							<span>{option.label}</span>
-						</a>
-					{/each}
-				</div>
-			</details>
-			<button type="button" class="theme-toggle" aria-label={strings.themeToggle}>
-				<MaterialIcon name="dark_mode" size="22px" />
-			</button>
+			<div class="actions">
+				<details class="locale-switcher">
+					<summary aria-label={strings.languageLabel}>
+						<span class="flag" aria-hidden="true">{currentOption.flag}</span>
+						<MaterialIcon name="expand_more" size="18px" />
+					</summary>
+					<div class="locale-menu">
+						{#each alternateOptions as option}
+							<a
+								href={option.href}
+								data-sveltekit-preload-data="off"
+								data-sveltekit-preload-code="off"
+								data-sveltekit-reload
+								lang={option.code}
+								aria-label={option.label}
+							>
+								<span class="flag" aria-hidden="true">{option.flag}</span>
+							</a>
+						{/each}
+					</div>
+				</details>
+				<button type="button" class="theme-toggle" aria-label={strings.themeToggle}>
+					<MaterialIcon name="dark_mode" size="22px" />
+				</button>
+				<button
+					type="button"
+					class="menu-toggle"
+					aria-label={isMobileMenuOpen ? strings.mobileMenuClose : strings.mobileMenuOpen}
+					aria-expanded={isMobileMenuOpen}
+					aria-controls="mobile-nav"
+					onclick={() => {
+						isMobileMenuOpen = !isMobileMenuOpen;
+					}}
+				>
+					<MaterialIcon name={isMobileMenuOpen ? 'close' : 'menu'} size="24px" />
+				</button>
+			</div>
 		</div>
-	</div>
-</nav>
+
+		{#if isMobileMenuOpen}
+			<div class="shell mobile-menu" id="mobile-nav" aria-label={strings.primaryLabel}>
+				{#each navItems as item}
+					<a
+						href={item.href}
+						onclick={() => {
+							isMobileMenuOpen = false;
+						}}
+					>
+						{item.label}
+					</a>
+				{/each}
+			</div>
+		{/if}
+	</nav>
 
 <style>
 	.nav {
@@ -144,14 +175,10 @@
 		color: var(--color-primary-container);
 	}
 
-	.locale-switcher summary :global(.material-symbols-outlined:first-child) {
-		color: var(--color-primary-container);
-	}
-
 	.actions {
 		display: flex;
 		align-items: center;
-		gap: 2rem;
+		gap: 1.25rem;
 		margin-left: auto;
 	}
 
@@ -182,54 +209,40 @@
 		display: none;
 	}
 
-	.locale-menu {
-		position: absolute;
-		top: calc(100% + 0.9rem);
-		right: 0;
-		display: grid;
-		gap: 0.35rem;
-		min-width: 11rem;
-		padding: 0.45rem;
-		background: color-mix(in srgb, var(--color-surface) 94%, white);
-		border: 1px solid rgba(138, 112, 118, 0.12);
-		border-radius: 1rem;
-		box-shadow: var(--shadow-ambient);
+		.locale-menu {
+			position: absolute;
+			top: calc(100% + 0.9rem);
+			right: 0;
+			display: grid;
+			grid-template-columns: minmax(0, 1fr);
+			gap: 0.35rem;
+			min-width: 3.75rem;
+			padding: 0.45rem;
+			background: color-mix(in srgb, var(--color-surface) 94%, white);
+			border: 1px solid rgba(138, 112, 118, 0.12);
+			border-radius: 1rem;
+			box-shadow: var(--shadow-ambient);
 	}
 
 	.locale-menu a {
 		display: flex;
 		align-items: center;
-		gap: 0.45rem;
-		padding: 0.7rem 0.85rem;
+		justify-content: center;
+		padding: 0.7rem;
 		border-radius: 0.75rem;
-		font-family: var(--font-display);
-		font-size: 0.75rem;
-		font-weight: 700;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
 	}
 
 	.locale-menu a:hover {
 		background: rgba(159, 24, 83, 0.08);
 	}
 
-	.locale-menu a.active {
-		background: var(--color-primary-container);
-		color: white;
-	}
+		.flag {
+			font-size: 1.1rem;
+			line-height: 1;
+		}
 
-	.flag {
-		font-size: 1rem;
-		line-height: 1;
-	}
-
-	.summary-label,
-	.locale-menu span:last-child {
-		font-family: var(--font-display);
-		font-size: 0.75rem;
-		font-weight: 700;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
+	.menu-toggle {
+		display: inline-flex;
 	}
 
 	.theme-toggle {
@@ -237,11 +250,26 @@
 		transform: scale(0.95);
 	}
 
-	@media (max-width: 520px) {
-		.summary-label,
-		.locale-menu span:last-child {
-			display: none;
-		}
+	.mobile-menu {
+		display: grid;
+		gap: 0.4rem;
+		padding-top: 0.25rem;
+		padding-bottom: 1rem;
+		border-top: 1px solid rgba(138, 112, 118, 0.12);
+	}
+
+	.mobile-menu a {
+		padding: 0.9rem 0;
+		font-family: var(--font-display);
+		font-size: 0.9rem;
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: rgba(27, 28, 25, 0.82);
+	}
+
+	.mobile-menu a:hover {
+		color: var(--color-primary-container);
 	}
 
 	@media (min-width: 800px) {
@@ -251,6 +279,11 @@
 
 		.actions {
 			margin-left: 0;
+		}
+
+		.menu-toggle,
+		.mobile-menu {
+			display: none;
 		}
 	}
 </style>

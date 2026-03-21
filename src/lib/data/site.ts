@@ -17,26 +17,16 @@ export type FeatureCardData = {
 
 export type ImageCardData = {
 	title: string;
-	description: string;
 	image: string;
-	meta: string;
-	tag: string;
-};
-
-export type ToolCardData = {
-	title: string;
-	description: string;
-	image: string;
-};
-
-export type ReportCardData = {
-	title: string;
-	description: string;
-	meta: string;
-	tag: string;
 	href: string;
+};
+
+export type ArticleCardData = {
+	publication: string;
+	year: string;
+	headline: string;
 	image: string;
-	cta: string;
+	href: string;
 };
 
 export const buildLocalizedHref = (pathname: string, locale: AppLocale) => localizePath(pathname, locale);

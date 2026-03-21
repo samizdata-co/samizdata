@@ -16,11 +16,11 @@
 			social: 'Social'
 		},
 		ro: {
-			title: 'Ia legatura cu noi',
+			title: 'Ia legătura cu noi',
 			body:
-				'Fie ca ai un set urias de date sau doar germenul unei idei, hai sa construim impreuna ceva riguros.',
+				'Fie că ai un set uriaș de date sau doar germenul unei idei, hai să construim împreună ceva riguros.',
 			email: 'Email direct',
-			locationLabel: 'Locatie',
+			locationLabel: 'Locație',
 			location: 'Londra, Regatul Unit',
 			social: 'Social'
 		}

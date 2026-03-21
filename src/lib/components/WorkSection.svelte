@@ -1,29 +1,55 @@
 <script lang="ts">
+	import cvData from '../../data/cv.json';
 	import { defaultLocale, localizePath, type AppLocale } from '$lib/i18n/locales';
-	import type { FeatureCardData, ImageCardData, ReportCardData, ToolCardData } from '$lib/data/site';
+	import type { ArticleCardData, FeatureCardData, ImageCardData } from '$lib/data/site';
 	import { locale as localeStore } from '$lib/translations';
-	import FeatureCard from './FeatureCard.svelte';
-	import ImageCard from './ImageCard.svelte';
+	import ArticleCard from './cards/ArticleCard.svelte';
+	import FeatureCard from './cards/FeatureCard.svelte';
+	import ImageCard from './cards/ImageCard.svelte';
 	import MaterialIcon from './MaterialIcon.svelte';
-	import ReportCard from './ReportCard.svelte';
-	import ToolCard from './ToolCard.svelte';
 
-	const articleImage =
-		'https://lh3.googleusercontent.com/aida-public/AB6AXuA88f_MTMAVUCI8SANUw-kGWuMgLttTQnabBRe8-aABG68oWemcrS3rTYpINwVCcqdrb5qXsuhGNIASGbV6Kdapk5UQS4dGrNFu3H-Om-pQSfjlnOzH690-kyfohQt76flViGn3DN-jGDPDS-jk-zQDT4lsNvDvseXum0Qj53SqxzVg5b6G1gb0-c_l7tRiQvt4f-7wtDsS0HGLfzik3aFGyeVj0jbnWIHtb88zMf1-gipyewqdBMDLDYYvIeck4oR3cS1DSmTakmU';
-	const toolImage =
-		'https://lh3.googleusercontent.com/aida-public/AB6AXuAqbYLToqJjTzbgBTgDQxXhJaMMquQsTkPQLlkYslPnxUdTYhG1iG4XMWxm06dv_jZqZ0L7LGen_8tF_C77mCYXx3rASkpZD_ob56QhR0PgqJxi8xM_e3uM4jcw5eNw-sRNBqJ76kJBzQesNsaqT6ZAUPw2wcOahKVMez97vQaLEO-xQnWoLBtRD8HMMbEXP7F4yqvovkd1tuYc2CRWR932uh3z4snUsSpdHUNatRRGUaUX2qmCOYp1htcrBjeRjsB0pDalM24dSqU';
-	const reportImage =
-		'https://lh3.googleusercontent.com/aida-public/AB6AXuAaPffUikoJVxHfyAE4acInUhsnDVopfwH1ZgHlv_2vQjHN_xBRJTJg8ztPSefx04slmZ8DmAsh8Iu9yTtBjH8nJIVSP33KYvSCOZ4xcMT0fLyen5gXOFHHFUNBAQx8zUbjpfCpGKhICwqso733tppOaR-uKQuM49vH12rdf-0kNs5YR8YGuiwpFKQV_PH8LZ6GsIlrGH3ndvIdqx8jgwZvDbw9GREJcIPlx3M4Rv9eWahnjPR6y2v750-CoHiI-3dNEqPugzUepvc';
+	type Publication = (typeof cvData.publications)[number];
+	type InvestigationPublication = Publication & {
+		category: 'investigation';
+		publisher: string;
+		img?: string;
+	};
+	type InteractivePublication = Publication & {
+		category: 'interactive';
+		img?: string;
+	};
+	type ImageModule = { default: string };
+
+	const articleImages = import.meta.glob('../../data/img/*', {
+		eager: true
+	}) as Record<string, ImageModule>;
+
+	const investigations = cvData.publications.filter(
+		(publication): publication is InvestigationPublication => publication.category === 'investigation'
+	);
+	const interactiveVisualisations = cvData.publications.filter(
+		(publication): publication is InteractivePublication => publication.category === 'interactive'
+	);
+
+	const getArticleImage = (imageName?: string) =>
+		imageName ? articleImages[`../../data/img/${imageName}`]?.default ?? '' : '';
 
 	const copy = {
 		en: {
 			featureCards: [
 				{
-					title: 'Dashboards',
+					title: 'Investigations and research',
 					description:
-						'Custom analytical interfaces designed for clarity and rapid insight. We turn complex queries into visual narratives that hold up under scrutiny.',
+						'Original reporting, document-heavy research, and data-led investigations built to stand up to scrutiny and publication.',
 					icon: 'dashboard',
-					cta: 'View capability'
+					cta: 'Discuss a project'
+				},
+				{
+					title: 'Interactive visualisations',
+					description:
+						'Calculators, explainers, and maps designed to help readers explore complex stories through direct interaction.',
+					icon: 'dashboard',
+					cta: 'Plan an interactive'
 				},
 				{
 					title: 'Training',
@@ -34,71 +60,33 @@
 					label: 'Enrollment open'
 				}
 			] as Omit<FeatureCardData, 'href'>[],
-			featureArticle: {
-				title: 'The Cost of Inaction: Climate Data Disparities',
-				description:
-					'A deep dive into how shifting weather patterns affect urban infrastructure in the Global South.',
-				meta: 'The Guardian // 2024',
-				tag: 'Journalism',
-				image: articleImage
-			} satisfies ImageCardData,
-			toolCard: {
-				title: 'Archive Engine v2',
-				description: 'Open-source document processing tool for investigative reporters.',
-				image: toolImage
-			} satisfies ToolCardData,
-			reportCard: {
-				title: 'Algorithmic Accountability in Public Housing',
-				description:
-					'Commissioned by the UN to audit automated allocation systems across European capitals.',
-				meta: 'Report // Feb 12',
-				tag: 'Policy',
-				cta: 'Read full report',
-				image: reportImage
-			} satisfies Omit<ReportCardData, 'href'>,
 			moreLabel: 'See more case studies'
 		},
 		ro: {
 			featureCards: [
 				{
-					title: 'Tablouri de bord',
+					title: 'Investigații și cercetare',
 					description:
-						'Interfete analitice personalizate, concepute pentru claritate si perspectiva rapida. Transformam interogari complexe in naratiuni vizuale care rezista verificarii.',
+						'Reportaj original, cercetare bazată pe documente și investigații ghidate de date, pregătite pentru publicare și verificare riguroasă.',
 					icon: 'dashboard',
-					cta: 'Vezi capabilitatea'
+					cta: 'Discutăm despre proiect'
+				},
+				{
+					title: 'Vizualizări interactive',
+					description:
+						'Calculatoare, explainere și hărți care ajută cititorii să exploreze subiecte complexe prin interacțiune directă.',
+					icon: 'dashboard',
+					cta: 'Planificăm un interactiv'
 				},
 				{
 					title: 'Training',
 					description:
-						'Ateliere pentru redactii si ONG-uri despre alfabetizare in date, fluxuri de lucru investigative si tehnici etice de vizualizare.',
+						'Ateliere pentru redacții și ONG-uri despre alfabetizare în date, fluxuri de lucru investigative și tehnici etice de vizualizare.',
 					icon: 'school',
 					variant: 'accent',
 					label: 'Inscrieri deschise'
 				}
 			] as Omit<FeatureCardData, 'href'>[],
-			featureArticle: {
-				title: 'Costul inactiunii: disparitati in datele climatice',
-				description:
-					'O analiza ampla a modului in care schimbarile climatice afecteaza infrastructura urbana din Sudul Global.',
-				meta: 'The Guardian // 2024',
-				tag: 'Jurnalism',
-				image: articleImage
-			} satisfies ImageCardData,
-			toolCard: {
-				title: 'Archive Engine v2',
-				description:
-					'Instrument open-source de procesare a documentelor pentru jurnalisti de investigatie.',
-				image: toolImage
-			} satisfies ToolCardData,
-			reportCard: {
-				title: 'Responsabilitate algoritmica in locuintele publice',
-				description:
-					'Raport comandat de ONU pentru auditarea sistemelor automate de alocare din capitale europene.',
-				meta: 'Raport // 12 feb',
-				tag: 'Politici publice',
-				cta: 'Citeste raportul complet',
-				image: reportImage
-			} satisfies Omit<ReportCardData, 'href'>,
 			moreLabel: 'Vezi mai multe studii de caz'
 		}
 	} as const;
@@ -112,12 +100,28 @@
 			href: contactHref
 		}))
 	);
-	const featureArticle = $derived(strings.featureArticle);
-	const toolCard = $derived(strings.toolCard);
-	const reportCard = $derived({
-		...strings.reportCard,
-		href: contactHref
-	});
+	const investigationCards = $derived(
+		investigations.map(
+			(publication) =>
+				({
+					publication: publication.publisher,
+					year: new Date(publication.releaseDate).getUTCFullYear().toString(),
+					headline: publication.name,
+					image: getArticleImage(publication.img),
+					href: publication.url
+				}) satisfies ArticleCardData
+		)
+	);
+	const interactiveCards = $derived(
+		interactiveVisualisations.map(
+			(publication) =>
+				({
+					title: publication.name,
+					image: getArticleImage(publication.img),
+					href: publication.url
+				}) satisfies ImageCardData
+		)
+	);
 </script>
 
 <section class="work" id="work">
@@ -126,14 +130,20 @@
 			<div class="span-2">
 				<FeatureCard card={featureCards[0]} large />
 			</div>
-			<ImageCard card={featureArticle} tall />
-			<FeatureCard card={featureCards[1]} />
+
+			{#each investigationCards as card}
+				<ArticleCard {card} />
+			{/each}
+
 			<div class="span-2">
-				<ToolCard card={toolCard} />
+				<FeatureCard card={featureCards[1]} large />
 			</div>
-			<div class="span-2">
-				<ReportCard card={reportCard} />
-			</div>
+
+			{#each interactiveCards as card}
+				<ImageCard {card} />
+			{/each}
+
+			<FeatureCard card={featureCards[2]} />
 		</div>
 
 		<div class="more">
@@ -152,9 +162,10 @@
 	}
 
 	.grid {
+		--card-grid-gap: 1.5rem;
 		display: grid;
 		grid-template-columns: 1fr;
-		gap: 1.5rem;
+		gap: var(--card-grid-gap);
 	}
 
 	.more {
@@ -186,19 +197,19 @@
 		transform: translateY(-0.1rem);
 	}
 
-	@media (min-width: 768px) {
+	@media (min-width: 640px) {
 		.grid {
-			grid-template-columns: repeat(3, minmax(0, 1fr));
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (min-width: 1200px) {
+		.grid {
+			grid-template-columns: repeat(4, minmax(0, 1fr));
 		}
 
 		.span-2 {
 			grid-column: span 2;
-		}
-	}
-
-	@media (min-width: 1080px) {
-		.grid {
-			grid-template-columns: repeat(4, minmax(0, 1fr));
 		}
 	}
 </style>
