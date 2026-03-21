@@ -15,6 +15,7 @@
   import FeatureCard from "./cards/FeatureCard.svelte";
   import ImageCard from "./cards/ImageCard.svelte";
   import MaterialIcon from "./MaterialIcon.svelte";
+  import Clients from "./Clients.svelte";
 
   type Publication = (typeof cvData.publications)[number];
   type InvestigationPublication = Publication & {
@@ -48,10 +49,10 @@
 
   const copy = {
     en: {
-      introLead: "With",
-      introHighlight: "16 years",
+      introLead: "SAMIZDATA is an independent data journalism studio led by ",
+      introHighlight: "Nicu Calcea",
       introTail:
-        "of experience in journalism, our team is skilled in data gathering, analysis, visualisation and storytelling. Here are some of the things we have worked on.",
+        ", a journalist with 16 years’ experience. Here are some of the things he has worked on.",
       featureCards: [
         {
           title: "Investigations and research",
@@ -76,13 +77,13 @@
           label: "See our free resources",
         },
       ] as Omit<FeatureCardData, "href">[],
-      moreLabel: "See more case studies",
+      moreLabel: "See more work",
     },
     ro: {
-      introLead: "Cu",
-      introHighlight: "16 ani",
+      introLead: "SAMIZDATA este un studio independent de jurnalism de date condus de ",
+      introHighlight: "Nicu Calcea",
       introTail:
-        "de experiență în jurnalism, echipa noastră este specializată în colectare de date, analiză, vizualizare și storytelling. Iată câteva dintre poveștile la care am lucrat.",
+        ", un jurnalist cu 16 ani de experiență. Iată câteva dintre proiectele la care a lucrat.",
       featureCards: [
         {
           title: "Investigații și cercetare",
@@ -107,7 +108,7 @@
           label: "Vezi resursele noastre gratuite",
         },
       ] as Omit<FeatureCardData, "href">[],
-      moreLabel: "Vezi mai multe studii de caz",
+      moreLabel: "Vezi mai multe proiecte",
     },
   } as const;
 
@@ -150,8 +151,7 @@
   <div class="shell">
     <div class="intro-block">
       <p class="intro">
-        {strings.introLead} <span>{strings.introHighlight}</span>
-        {strings.introTail}
+        {strings.introLead}<span>{strings.introHighlight}</span>{strings.introTail}
       </p>
     </div>
 
@@ -181,6 +181,8 @@
         <MaterialIcon name="add" size="22px" />
       </a>
     </div>
+
+    <Clients />
   </div>
 </section>
 

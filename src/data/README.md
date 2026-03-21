@@ -33,6 +33,3 @@ What we want to show in the portfolio
 
 ## Training
 
-
-
-With 16 years of experience in journalism, our team is skilled in data gathering, analysis, visualisation and storytelling. Here are some of the stories we have worked on.
