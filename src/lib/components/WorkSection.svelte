@@ -80,7 +80,8 @@
       moreLabel: "See more work",
     },
     ro: {
-      introLead: "SAMIZDATA este un studio independent de jurnalism de date condus de ",
+      introLead:
+        "SAMIZDATA este un studio independent de jurnalism de date condus de ",
       introHighlight: "Nicu Calcea",
       introTail:
         ", un jurnalist cu 16 ani de experiență. Iată câteva dintre proiectele la care a lucrat.",
@@ -151,7 +152,8 @@
   <div class="shell">
     <div class="intro-block">
       <p class="intro">
-        {strings.introLead}<span>{strings.introHighlight}</span>{strings.introTail}
+        {strings.introLead}<span>{strings.introHighlight}</span
+        >{strings.introTail}
       </p>
     </div>
 
@@ -255,6 +257,10 @@
   .more-link:hover {
     background: var(--color-surface-highest);
     transform: translateY(-0.1rem);
+  }
+
+  .span-2 {
+    grid-column: span 1;
   }
 
   @media (min-width: 640px) {

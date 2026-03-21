@@ -1,15 +1,15 @@
-import type { LayoutLoad } from './$types';
-import { getLocaleFromParam, stripLocaleFromPathname } from '$lib/i18n/locales';
-import { loadTranslations } from '$lib/translations';
+import type { LayoutLoad } from "./$types";
+import { getLocaleFromParam, stripLocaleFromPathname } from "$lib/i18n/locales";
+import { loadTranslations } from "$lib/translations";
 
 export const load: LayoutLoad = async ({ params, url }) => {
-	const locale = getLocaleFromParam(params.lang);
-	const pathname = stripLocaleFromPathname(url.pathname);
+  const locale = getLocaleFromParam(params.lang);
+  const pathname = stripLocaleFromPathname(url.pathname);
 
-	await loadTranslations(locale, pathname);
+  await loadTranslations(locale, pathname);
 
-	return {
-		locale,
-		pathname
-	};
+  return {
+    locale,
+    pathname,
+  };
 };

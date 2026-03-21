@@ -1,11 +1,11 @@
 <script lang="ts">
-	import ContactSection from '$lib/components/ContactSection.svelte';
-	import HeroSection from '$lib/components/HeroSection.svelte';
-	import WorkSection from '$lib/components/WorkSection.svelte';
+  import ContactSection from "$lib/components/ContactSection.svelte";
+  import HeroSection from "$lib/components/HeroSection.svelte";
+  import WorkSection from "$lib/components/WorkSection.svelte";
 </script>
 
 <main>
-	<HeroSection />
-	<WorkSection />
-	<ContactSection />
+  <HeroSection />
+  <WorkSection />
+  <ContactSection />
 </main>

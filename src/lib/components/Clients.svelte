@@ -1,9 +1,9 @@
 <script lang="ts">
   import bbcNews from "../../data/logos/bbc-news.png";
-  import globalWitness from "../../data/logos/global-witness.png";
+  import globalWitness from "../../data/logos/global-witness.svg";
   import infogr8 from "../../data/logos/infogr8.png";
   import newStatesman from "../../data/logos/new-statesman.png";
-  import transportEnvironment from "../../data/logos/transport-environment.webp";
+  import transportEnvironment from "../../data/logos/transport-environment.png";
   import vice from "../../data/logos/vice.png";
 
   type Logo = {
