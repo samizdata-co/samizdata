@@ -113,6 +113,10 @@
       transform 220ms ease;
   }
 
+  .email-card > div {
+    min-width: 0;
+  }
+
   .email-card:hover {
     background: var(--color-primary-container);
     color: white;
@@ -134,6 +138,7 @@
     font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 900;
     letter-spacing: -0.06em;
+    overflow-wrap: anywhere;
   }
 
   .meta-grid {
@@ -167,6 +172,25 @@
     .contact-grid {
       grid-template-columns: minmax(0, 1fr) minmax(24rem, 36rem);
       gap: 4rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .email-card,
+    .meta-card {
+      padding: 2rem;
+    }
+
+    .email-card {
+      gap: 1rem;
+    }
+
+    .email-card strong {
+      font-size: clamp(1.6rem, 7vw, 2.3rem);
+    }
+
+    .meta-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>
