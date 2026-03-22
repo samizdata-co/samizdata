@@ -8,19 +8,19 @@
   const copy = {
     en: {
       title: "Get in touch",
-      body: "Whether you have a massive dataset or just the seed of an idea, let's build something rigorous together.",
+      body: "Whether you have a massive dataset or just the seed of an idea, let's talk about it.",
       email: "Direct Email",
       locationLabel: "Location",
       location: "London, UK",
-      social: "Social",
+      social: "Social media",
     },
     ro: {
       title: "Ia legătura cu noi",
-      body: "Fie că ai un set uriaș de date sau doar germenul unei idei, hai să construim împreună ceva riguros.",
+      body: "Fie că ai un set uriaș de date sau doar germenul unei idei, hai să vorbim.",
       email: "Email direct",
       locationLabel: "Locație",
       location: "Londra, Regatul Unit",
-      social: "Social",
+      social: "Social media",
     },
   } as const;
 
@@ -48,16 +48,16 @@
 
       <div class="meta-grid">
         <div class="meta-card">
-          <span class="eyebrow muted">{strings.locationLabel}</span>
-          <p>{strings.location}</p>
-        </div>
-        <div class="meta-card">
           <span class="eyebrow muted">{strings.social}</span>
           <p>
             <a href="https://www.linkedin.com/in/nicucalcea/" target="_blank" rel="noreferrer"
               >LinkedIn</a
             >
           </p>
+        </div>
+        <div class="meta-card">
+          <span class="eyebrow muted">{strings.locationLabel}</span>
+          <p>{strings.location}</p>
         </div>
       </div>
     </div>
@@ -135,7 +135,7 @@
 
   .email-card strong {
     font-family: var(--font-display);
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: clamp(2rem, 6vw, 3rem);
     font-weight: 900;
     letter-spacing: -0.06em;
     overflow-wrap: anywhere;

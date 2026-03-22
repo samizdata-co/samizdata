@@ -14,7 +14,7 @@
       title: "Clients and bylines",
     },
     ro: {
-      title: "Clienți și semnături editoriale",
+      title: "Clienți și publicații",
     },
   } as const;
 

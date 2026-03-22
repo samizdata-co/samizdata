@@ -9,8 +9,8 @@
   const copy = {
     en: {
       titleLead: "SAMIZDATA is a",
-      titleAccent: "data-driven storytelling",
-      titleTail: " consultancy.",
+      titleAccent: "data storytelling",
+      titleTail: "consultancy.",
       body: "We research, write and build data tools for media organisations, NGOs and other public-benefit institutions.",
       primaryCta: "Let's talk!",
       secondaryCta: "What we do",
@@ -41,9 +41,8 @@
     <div class="copy">
       <h1 class="display-title">
         <span class="title-lead">{strings.titleLead}</span>
-        <span class="title-accent">{strings.titleAccent}</span><span
-          class="title-tail">{strings.titleTail}</span
-        >
+        <span class="title-accent">{strings.titleAccent}</span>
+        <span class="title-tail">{strings.titleTail}</span>
       </h1>
       <p>{strings.body}</p>
       <div class="button-row">
@@ -144,9 +143,9 @@
 
   .line {
     position: relative;
-    width: 1px;
+    width: 2px;
     height: 3rem;
-    background: rgba(159, 24, 83, 0.3);
+    background: rgba(159, 24, 83, 0.2);
     overflow: hidden;
   }
 
