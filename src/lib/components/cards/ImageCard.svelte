@@ -2,8 +2,17 @@
   import type { ImageCardData } from "$lib/data/site";
   import CardShell from "./CardShell.svelte";
 
-  let { card, tall = false }: { card: ImageCardData; tall?: boolean } =
-    $props();
+  let {
+    card,
+    tall = false,
+    loading = "lazy",
+    decoding = "async",
+  }: {
+    card: ImageCardData;
+    tall?: boolean;
+    loading?: "eager" | "lazy";
+    decoding?: "sync" | "async" | "auto";
+  } = $props();
 </script>
 
 <CardShell
@@ -13,7 +22,13 @@
   rel="noreferrer"
   variant="media"
 >
-  <img src={card.image} alt={card.title} />
+  <img
+    src={card.image}
+    alt={card.title}
+    {loading}
+    {decoding}
+    fetchpriority={loading === "lazy" ? "low" : "high"}
+  />
 </CardShell>
 
 <style>

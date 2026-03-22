@@ -2,7 +2,15 @@
   import type { ArticleCardData } from "$lib/data/site";
   import CardShell from "./CardShell.svelte";
 
-  let { card }: { card: ArticleCardData } = $props();
+  let {
+    card,
+    loading = "lazy",
+    decoding = "async",
+  }: {
+    card: ArticleCardData;
+    loading?: "eager" | "lazy";
+    decoding?: "sync" | "async" | "auto";
+  } = $props();
 </script>
 
 <CardShell
@@ -12,7 +20,13 @@
   rel="noreferrer"
   variant="media"
 >
-  <img src={card.image} alt={card.headline} />
+  <img
+    src={card.image}
+    alt={card.headline}
+    {loading}
+    {decoding}
+    fetchpriority={loading === "lazy" ? "low" : "high"}
+  />
   <div class="overlay">
     <div class="meta eyebrow">
       <span>{card.publication}</span>
