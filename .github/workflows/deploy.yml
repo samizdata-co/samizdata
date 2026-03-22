@@ -38,8 +38,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Fetch RSS feed
-        run: node scripts/fetch-rss.js
+      # - name: Fetch RSS feed
+      #   run: node scripts/fetch-rss.js
 
       - name: build
         run: |
