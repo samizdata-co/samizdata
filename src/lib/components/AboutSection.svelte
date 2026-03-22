@@ -8,7 +8,7 @@
       introLead: "SAMIZDATA is an independent data journalism studio led by ",
       introHighlight: "Nicu Calcea",
       introTail:
-        ", a journalist with 16 years’ experience. Here are some of the things he has worked on.",
+        ", a journalist with 16 years’ experience in media. Here are some of the things he has worked on.",
     },
     ro: {
       introLead:
@@ -29,7 +29,8 @@
   <div class="shell">
     <div class="intro-block">
       <p class="intro">
-        {strings.introLead}<span>{strings.introHighlight}</span
+        {strings.introLead}<span><a href="https://nicu.md/" target="_blank" rel="noreferrer"
+              >{strings.introHighlight}</a></span
         >{strings.introTail}
       </p>
     </div>

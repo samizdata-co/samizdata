@@ -1,4 +1,7 @@
 <script lang="ts">
+  import { defaultLocale, type AppLocale } from "$lib/i18n/locales";
+  import { locale as localeStore } from "$lib/translations";
+
   import bbcNews from "../../data/logos/bbc-news.png";
   import globalWitness from "../../data/logos/global-witness.svg";
   import infogr8 from "../../data/logos/infogr8.png";
@@ -6,10 +9,24 @@
   import transportEnvironment from "../../data/logos/transport-environment.png";
   import vice from "../../data/logos/vice.png";
 
+  const copy = {
+    en: {
+      title: "Clients and bylines",
+    },
+    ro: {
+      title: "Clienți și semnături editoriale",
+    },
+  } as const;
+
   type Logo = {
     src: string;
     alt: string;
   };
+
+  const activeLocale = $derived(
+    ($localeStore as AppLocale | undefined) ?? defaultLocale,
+  );
+  const strings = $derived(copy[activeLocale]);
 
   const logos: Logo[] = [
     { src: bbcNews, alt: "BBC News" },
@@ -22,7 +39,7 @@
 </script>
 
 <section class="clients" aria-labelledby="clients-heading">
-  <h2 id="clients-heading">Clients and bylines</h2>
+  <h2 id="clients-heading">{strings.title}</h2>
 
   <ul class="logos">
     {#each logos as logo}
