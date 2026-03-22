@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&amp;family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface": "#1b1c19",
+              "on-tertiary-fixed-variant": "#7b2948",
+              "on-primary-fixed": "#3f001b",
+              "surface-tint": "#ae265e",
+              "on-tertiary-fixed": "#3e001c",
+              "primary-container": "#9f1853",
+              "outline": "#8a7076",
+              "error": "#ba1a1a",
+              "secondary-fixed": "#e4e2e1",
+              "inverse-surface": "#30312e",
+              "tertiary": "#6d1e3e",
+              "surface-bright": "#fbf9f4",
+              "surface-variant": "#e4e2dd",
+              "surface-dim": "#dbdad5",
+              "tertiary-fixed-dim": "#ffb1c7",
+              "secondary-fixed-dim": "#c8c6c5",
+              "on-secondary-fixed": "#1b1c1c",
+              "secondary-container": "#e4e2e1",
+              "primary": "#7b003c",
+              "on-surface-variant": "#574146",
+              "on-tertiary-container": "#ffb2c8",
+              "surface-container-low": "#f5f3ee",
+              "primary-fixed-dim": "#ffb1c6",
+              "surface-container": "#f0eee9",
+              "on-error": "#ffffff",
+              "on-secondary": "#ffffff",
+              "on-primary-fixed-variant": "#8e0347",
+              "inverse-primary": "#ffb1c6",
+              "surface-container-highest": "#e4e2dd",
+              "surface": "#fbf9f4",
+              "on-secondary-fixed-variant": "#474746",
+              "on-error-container": "#93000a",
+              "surface-container-lowest": "#ffffff",
+              "on-background": "#1b1c19",
+              "secondary": "#5f5e5e",
+              "tertiary-container": "#8b3555",
+              "tertiary-fixed": "#ffd9e2",
+              "background": "#fbf9f4",
+              "surface-container-high": "#eae8e3",
+              "on-secondary-container": "#656464",
+              "on-tertiary": "#ffffff",
+              "error-container": "#ffdad6",
+              "outline-variant": "#debfc5",
+              "on-primary": "#ffffff",
+              "inverse-on-surface": "#f2f1ec",
+              "on-primary-container": "#ffb2c6",
+              "primary-fixed": "#ffd9e1"
+            },
+            fontFamily: {
+              "headline": ["Space Grotesk"],
+              "body": ["Work Sans"],
+              "label": ["Space Grotesk"]
+            },
+            borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-white">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-on-surface/80 backdrop-blur-xl transition-transform border-b border-outline-variant/10">
+<div class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto">
+<div class="flex items-center gap-3 group cursor-pointer">
+<div class="w-10 h-10 bg-primary-container flex items-center justify-center">
+<svg class="w-6 h-6 text-white fill-current" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" width="4" x="2" y="2"></rect>
+<rect height="4" width="4" x="8" y="2"></rect>
+<rect height="4" width="4" x="2" y="8"></rect>
+<path d="M14 2h8v8h-8zM2 14h8v8H2zM14 14h8v8h-8zM14 11h8v2h-8zM11 14h2v8h-2z"></path>
+</svg>
+</div>
+<div class="text-2xl font-black tracking-tighter text-on-surface dark:text-surface font-headline uppercase leading-none">
+                SAMIZDATA
+            </div>
+</div>
+<div class="hidden md:flex gap-12 font-headline font-bold uppercase tracking-widest text-sm items-center ml-auto mr-12">
+<a class="text-on-surface/70 dark:text-surface-variant hover:text-primary-container transition-colors duration-200" href="#">What we do</a>
+<a class="text-on-surface/70 dark:text-surface-variant hover:text-primary-container transition-colors duration-200" href="#">Who we are</a>
+<a class="text-on-surface/70 dark:text-surface-variant hover:text-primary-container transition-colors duration-200" href="#">Contact</a>
+</div>
+<div class="flex items-center gap-8">
+<button class="flex items-center gap-2 group hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined text-primary-container">language</span>
+<span class="font-headline font-bold text-xs uppercase tracking-widest">UK</span>
+</button>
+<button class="scale-95 active:scale-90 transition-transform text-primary-container">
+<span class="material-symbols-outlined">dark_mode</span>
+</button>
+</div>
+</div>
+</nav>
+<main>
+<!-- Hero Section -->
+<section class="relative h-screen flex flex-col justify-between px-8 overflow-hidden bg-surface pt-24">
+<!-- Background Data Pattern Visualization -->
+<div class="absolute inset-0 z-0 opacity-10 pointer-events-none">
+<svg height="100%" width="100%" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern height="40" id="grid" patternunits="userSpaceOnUse" width="40">
+<path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="0.5"></path>
+</pattern>
+</defs>
+<rect class="text-outline" fill="url(#grid)" height="100%" width="100%"></rect>
+</svg>
+</div>
+<div class="max-w-[1440px] mx-auto w-full relative z-10 flex-grow flex flex-col justify-center pt-32">
+<div class="max-w-6xl">
+<h1 class="font-headline font-black text-6xl md:text-8xl lg:text-[10rem] tracking-tighter leading-[0.85] text-on-surface mb-12">
+                    SAMIZDATA is a consultancy for <span class="text-primary-container italic">data-driven</span> storytelling.
+                </h1>
+<p class="font-body text-xl md:text-2xl text-on-surface-variant max-w-2xl mb-12 leading-relaxed">
+                    We research, write and build data tools for media organisations, NGOs and other public benefit organisations.
+                </p>
+<div class="flex flex-wrap gap-6 pb-24">
+<button class="bg-primary hover:bg-primary-container text-on-primary font-headline font-bold uppercase tracking-widest px-10 py-5 transition-all active:scale-95 shadow-lg shadow-primary/10">
+                        Let's talk!
+                    </button>
+<button class="border border-outline/30 hover:border-primary text-on-surface font-headline font-bold uppercase tracking-widest px-10 py-5 transition-all active:scale-95">
+                        What we do
+                    </button>
+</div>
+</div>
+</div>
+<!-- Scroll Indicator -->
+<div class="relative z-10 w-full pb-12 flex flex-col items-center gap-4">
+<span class="font-headline font-black text-sm uppercase tracking-[0.4em] text-primary-container">Portfolio &amp; Expertise</span>
+<div class="w-px h-12 bg-primary-container/30 relative">
+<div class="absolute top-0 left-0 w-full h-1/2 bg-primary-container animate-bounce"></div>
+</div>
+</div>
+</section>
+<!-- Services and Work Grid -->
+<section class="py-24 px-8 bg-surface-container-low">
+<div class="max-w-[1440px] mx-auto">
+<!-- Bento Style Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+<!-- Service Card: Dashboards -->
+<div class="md:col-span-2 lg:col-span-2 p-10 bg-surface-container-lowest flex flex-col justify-between hover:shadow-2xl transition-all duration-500 group border border-outline-variant/10">
+<div>
+<span class="material-symbols-outlined text-4xl text-primary-container mb-8">dashboard_customize</span>
+<h3 class="font-headline font-black text-4xl mb-4 text-on-surface tracking-tighter">Dashboards</h3>
+<p class="text-on-surface-variant leading-relaxed text-lg">Custom analytical interfaces designed for clarity and rapid insight. We turn complex SQL queries into intuitive visual narratives.</p>
+</div>
+<div class="mt-12 flex items-center text-primary-container font-headline font-bold text-sm uppercase tracking-widest group-hover:gap-4 transition-all">
+                        View Capability <span class="material-symbols-outlined ml-2">arrow_forward</span>
+</div>
+</div>
+<!-- Article Card -->
+<div class="relative group overflow-hidden h-[400px] md:h-auto border border-outline-variant/10">
+<img alt="Data visualization report" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA88f_MTMAVUCI8SANUw-kGWuMgLttTQnabBRe8-aABG68oWemcrS3rTYpINwVCcqdrb5qXsuhGNIASGbV6Kdapk5UQS4dGrNFu3H-Om-pQSfjlnOzH690-kyfohQt76flViGn3DN-jGDPDS-jk-zQDT4lsNvDvseXum0Qj53SqxzVg5b6G1gb0-c_l7tRiQvt4f-7wtDsS0HGLfzik3aFGyeVj0jbnWIHtb88zMf1-gipyewqdBMDLDYYvIeck4oR3cS1DSmTakmU"/>
+<div class="absolute inset-0 bg-on-surface/80 group-hover:bg-on-surface/70 transition-colors"></div>
+<div class="absolute inset-0 p-8 flex flex-col justify-end">
+<span class="text-primary-fixed-dim font-label text-xs uppercase tracking-widest mb-2 font-bold">The Guardian // 2024</span>
+<h3 class="text-surface font-headline font-black text-2xl mb-2 tracking-tighter">The Cost of Inaction: Climate Data Disparities</h3>
+<p class="text-surface-variant text-sm line-clamp-2 mb-4">A deep dive into how shifting weather patterns affect urban infrastructure in the Global South.</p>
+<span class="text-primary-fixed-dim font-label text-xs uppercase font-bold">Journalism</span>
+</div>
+</div>
+<!-- Service Card: Training -->
+<div class="p-8 bg-primary-container text-on-primary flex flex-col hover:shadow-xl transition-all shadow-lg shadow-primary-container/10">
+<span class="material-symbols-outlined text-4xl mb-6">school</span>
+<h3 class="font-headline font-black text-3xl mb-4 tracking-tighter">Training</h3>
+<p class="text-primary-fixed-dim text-sm leading-relaxed mb-8">Workshops for newsrooms and NGOs on data literacy, R, and ethical visualization techniques.</p>
+<div class="mt-auto pt-4 border-t border-on-primary/10">
+<span class="font-label text-xs uppercase tracking-widest font-bold">Enrollment Open</span>
+</div>
+</div>
+<!-- Tool Card -->
+<div class="lg:col-span-2 relative group overflow-hidden h-[300px] border border-outline-variant/10">
+<img alt="Software interface" class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqbYLToqJjTzbgBTgDQxXhJaMMquQsTkPQLlkYslPnxUdTYhG1iG4XMWxm06dv_jZqZ0L7LGen_8tF_C77mCYXx3rASkpZD_ob56QhR0PgqJxi8xM_e3uM4jcw5eNw-sRNBqJ76kJBzQesNsaqT6ZAUPw2wcOahKVMez97vQaLEO-xQnWoLBtRD8HMMbEXP7F4yqvovkd1tuYc2CRWR932uh3z4snUsSpdHUNatRRGUaUX2qmCOYp1htcrBjeRjsB0pDalM24dSqU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-surface/90 via-on-surface/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-8">
+<h3 class="text-surface font-headline font-black text-4xl tracking-tighter">Archive Engine v2</h3>
+<p class="text-surface-variant text-sm mt-2">Open-source document processing tool for investigative reporters.</p>
+</div>
+</div>
+<!-- Article Card 2 -->
+<div class="lg:col-span-2 p-10 bg-surface-container-lowest flex items-start gap-8 hover:shadow-xl transition-all border border-outline-variant/10">
+<div class="hidden sm:block w-32 h-32 flex-shrink-0 overflow-hidden bg-surface-container">
+<img alt="Collaboration" class="w-full h-full object-cover grayscale opacity-50" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaPffUikoJVxHfyAE4acInUhsnDVopfwH1ZgHlv_2vQjHN_xBRJTJg8ztPSefx04slmZ8DmAsh8Iu9yTtBjH8nJIVSP33KYvSCOZ4xcMT0fLyen5gXOFHHFUNBAQx8zUbjpfCpGKhICwqso733tppOaR-uKQuM49vH12rdf-0kNs5YR8YGuiwpFKQV_PH8LZ6GsIlrGH3ndvIdqx8jgwZvDbw9GREJcIPlx3M4Rv9eWahnjPR6y2v750-CoHiI-3dNEqPugzUepvc"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label text-xs uppercase tracking-widest text-on-surface-variant font-bold">Report // Feb 12</span>
+<span class="bg-primary-container/10 text-primary-container px-2 py-1 text-[10px] uppercase font-black">Policy</span>
+</div>
+<h3 class="font-headline font-black text-3xl mb-2 text-on-surface tracking-tighter">Algorithmic Accountability in Public Housing</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed mb-4">Commissioned by the UN to audit automated allocation systems across European capitals.</p>
+<a class="text-primary-container font-headline font-bold text-xs uppercase underline underline-offset-4 decoration-primary-container/30 hover:decoration-primary-container transition-all" href="#">Read full report</a>
+</div>
+</div>
+</div>
+<!-- See More Button -->
+<div class="mt-16 flex justify-center">
+<button class="group flex items-center gap-4 px-12 py-5 bg-surface-container-high hover:bg-surface-container-highest transition-all duration-300 border border-outline/10">
+<span class="font-headline font-black text-sm uppercase tracking-[0.2em] text-on-surface">See more case studies</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">add</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section class="py-32 px-8 bg-surface">
+<div class="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+<div>
+<h2 class="font-headline font-black text-7xl md:text-9xl tracking-tighter text-on-surface mb-8 leading-[0.85]">Get in touch</h2>
+<p class="font-body text-xl text-on-surface-variant max-w-md leading-relaxed">
+                    Whether you have a massive dataset or just the seed of an idea, let's build something rigorous together.
+                </p>
+</div>
+<div class="flex flex-col gap-6">
+<a class="group flex items-center justify-between p-10 bg-surface-container-low hover:bg-primary-container transition-all duration-500 border border-outline-variant/10" href="mailto:mail@samizdata.co">
+<div>
+<span class="font-label text-xs uppercase tracking-[0.3em] text-primary-container group-hover:text-primary-fixed transition-colors mb-2 block font-bold">Direct Email</span>
+<span class="font-headline font-black text-3xl md:text-5xl text-on-surface group-hover:text-on-primary transition-colors tracking-tighter">mail@samizdata.co</span>
+</div>
+<span class="material-symbols-outlined text-4xl text-primary-container group-hover:text-on-primary group-hover:translate-x-2 transition-all">north_east</span>
+</a>
+<div class="grid grid-cols-2 gap-6">
+<div class="p-8 bg-surface-container-high border border-outline-variant/10">
+<span class="font-label text-xs uppercase tracking-widest text-on-surface-variant block mb-4 font-bold">Location</span>
+<p class="font-headline font-black text-2xl text-on-surface tracking-tighter">London, UK</p>
+</div>
+<div class="p-8 bg-surface-container-high border border-outline-variant/10">
+<span class="font-label text-xs uppercase tracking-widest text-on-surface-variant block mb-4 font-bold">Social</span>
+<p class="font-headline font-black text-2xl text-on-surface underline underline-offset-8 decoration-primary-container tracking-tighter">LinkedIn</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-outline-variant/20 bg-surface-container-low dark:bg-on-surface">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 px-8 py-16 max-w-[1440px] mx-auto">
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 bg-primary-container flex items-center justify-center">
+<svg class="w-3 h-3 text-white fill-current" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<rect height="4" width="4" x="2" y="2"></rect>
+<rect height="4" width="4" x="8" y="2"></rect>
+<rect height="4" width="4" x="2" y="8"></rect>
+<path d="M14 2h8v8h-8zM2 14h8v8H2zM14 14h8v8h-8zM14 11h8v2h-8zM11 14h2v8h-2z"></path>
+</svg>
+</div>
+<div class="text-xl font-black font-headline text-on-surface dark:text-surface uppercase tracking-tighter">SAMIZDATA</div>
+</div>
+<p class="font-body text-[12px] uppercase tracking-widest text-on-surface-variant font-bold">© 2024 SAMIZDATA.</p>
+</div>
+<div class="flex flex-col gap-4">
+<span class="font-headline text-[12px] uppercase tracking-widest text-on-surface font-black">Connect</span>
+<div class="flex flex-col gap-2">
+<a class="font-body text-[12px] uppercase tracking-widest text-on-surface-variant hover:text-primary-container transition-colors font-medium" href="mailto:mail@samizdata.co">mail@samizdata.co</a>
+<span class="font-body text-[12px] uppercase tracking-widest text-on-surface-variant font-medium">London, UK</span>
+</div>
+</div>
+<div class="flex flex-col gap-4 md:items-end">
+<div class="flex gap-8">
+<a class="font-body text-[12px] uppercase tracking-widest text-on-surface-variant hover:underline decoration-primary-container decoration-2 underline-offset-4 font-bold" href="#">Privacy Policy</a>
+<a class="font-body text-[12px] uppercase tracking-widest text-on-surface-variant hover:underline decoration-primary-container decoration-2 underline-offset-4 font-bold" href="#">Terms</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
