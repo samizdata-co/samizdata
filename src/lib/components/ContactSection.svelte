@@ -186,7 +186,7 @@
     }
 
     .email-card strong {
-      font-size: clamp(1.6rem, 7vw, 2.3rem);
+      font-size: clamp(1.6rem, 6vw, 2.3rem);
     }
 
     .meta-grid {

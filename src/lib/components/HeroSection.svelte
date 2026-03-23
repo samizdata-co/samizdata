@@ -116,7 +116,6 @@
   .title-accent {
     color: var(--color-primary-container);
     font-style: italic;
-    margin-left: 0.18ch;
   }
 
   p {

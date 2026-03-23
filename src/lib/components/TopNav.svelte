@@ -1,14 +1,9 @@
 <script lang="ts">
-  import { ChevronDown, Menu, MoonStar, X } from "@lucide/svelte";
-  import { page } from "$app/state";
-  import {
-    defaultLocale,
-    localeMeta,
-    localizePath,
-    type AppLocale,
-  } from "$lib/i18n/locales";
-  import { locale as localeStore } from "$lib/translations";
+  import { Menu, X } from "@lucide/svelte";
+  import { defaultLocale, localizePath, type AppLocale } from "$lib/i18n/locales";
   import Logo from "./Logo.svelte";
+  import LanguageSwitcher from "./LanguageSwitcher.svelte";
+  import { locale as localeStore } from "$lib/translations";
 
   let { pathname }: { pathname: string } = $props();
   let isMobileMenuOpen = $state(false);
@@ -17,28 +12,22 @@
     en: {
       homeLabel: "SAMIZDATA home",
       primaryLabel: "Primary navigation",
-      languageLabel: "Language",
       mobileMenuOpen: "Open menu",
       mobileMenuClose: "Close menu",
       themeToggle: "Toggle theme",
       work: "What we do",
       about: "Who we are",
       contact: "Contact",
-      languageName: "English",
-      otherLanguageName: "Romanian",
     },
     ro: {
       homeLabel: "Pagina principala SAMIZDATA",
       primaryLabel: "Navigatie principala",
-      languageLabel: "Limba",
       mobileMenuOpen: "Deschide meniul",
       mobileMenuClose: "Inchide meniul",
       themeToggle: "Schimba tema",
       work: "Ce facem",
       about: "Cine suntem",
       contact: "Contact",
-      languageName: "Romana",
-      otherLanguageName: "English",
     },
   } as const;
 
@@ -54,27 +43,6 @@
       href: `${localizePath("/", activeLocale)}#contact`,
     },
   ]);
-  const switcherOptions = $derived([
-    {
-      code: "en" as const,
-      flag: localeMeta.en.flag,
-      label: copy.en.languageName,
-      href: `${localizePath(pathname, "en")}${page.url.hash}`,
-    },
-    {
-      code: "ro" as const,
-      flag: localeMeta.ro.flag,
-      label: copy.ro.languageName,
-      href: `${localizePath(pathname, "ro")}${page.url.hash}`,
-    },
-  ]);
-  const currentOption = $derived(
-    switcherOptions.find((option) => option.code === activeLocale) ??
-      switcherOptions[0],
-  );
-  const alternateOptions = $derived(
-    switcherOptions.filter((option) => option.code !== activeLocale),
-  );
 </script>
 
 <nav class="nav">
@@ -90,25 +58,7 @@
     </div>
 
     <div class="actions">
-      <details class="locale-switcher">
-        <summary aria-label={strings.languageLabel}>
-          <span class="flag" aria-hidden="true">{currentOption.flag}</span>
-          <ChevronDown size={18} strokeWidth={2.25} />
-        </summary>
-        <div class="locale-menu">
-          {#each alternateOptions as option}
-            <a
-              href={option.href}
-              data-sveltekit-preload-data="off"
-              data-sveltekit-preload-code="off"
-              lang={option.code}
-              aria-label={option.label}
-            >
-              <span class="flag" aria-hidden="true">{option.flag}</span>
-            </a>
-          {/each}
-        </div>
-      </details>
+      <LanguageSwitcher {pathname} />
       <!--
       <button
         type="button"
@@ -190,14 +140,14 @@
 
   .links a,
   .actions button,
-  .locale-switcher summary {
+  .actions :global(summary) {
     color: rgba(27, 28, 25, 0.7);
     transition: color 180ms ease;
   }
 
   .links a:hover,
   .actions button:hover,
-  .locale-switcher summary:hover {
+  .actions :global(summary:hover) {
     color: var(--color-primary-container);
   }
 
@@ -208,8 +158,7 @@
     margin-left: auto;
   }
 
-  button,
-  summary {
+  button {
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
@@ -217,54 +166,6 @@
     background: none;
     border: 0;
     cursor: pointer;
-  }
-
-  .locale-switcher {
-    position: relative;
-  }
-
-  .locale-switcher summary {
-    list-style: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.55rem;
-    color: var(--color-ink);
-  }
-
-  .locale-switcher summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .locale-menu {
-    position: absolute;
-    top: calc(100% + 0.9rem);
-    right: 0;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0.35rem;
-    min-width: 3.75rem;
-    padding: 0.45rem;
-    background: color-mix(in srgb, var(--color-surface) 94%, white);
-    border: 1px solid rgba(138, 112, 118, 0.12);
-    border-radius: 1rem;
-    box-shadow: var(--shadow-ambient);
-  }
-
-  .locale-menu a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.7rem;
-    border-radius: 0.75rem;
-  }
-
-  .locale-menu a:hover {
-    background: rgba(159, 24, 83, 0.08);
-  }
-
-  .flag {
-    font-size: 1.1rem;
-    line-height: 1;
   }
 
   .menu-toggle {
