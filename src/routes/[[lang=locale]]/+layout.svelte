@@ -13,7 +13,7 @@
 <svelte:head>
   <title>SAMIZDATA</title>
   <meta name="description" content={descriptions[data.locale]} />
-  <meta property="og:title" content="SAMIZDATA" />
+  <meta property="og:title" content="SAMIZDATA • Data Storytelling Consultancy" />
   <meta property="og:description" content={descriptions[data.locale]} />
 </svelte:head>
 
