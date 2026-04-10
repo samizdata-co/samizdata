@@ -1,19 +1,20 @@
 <script lang="ts">
-  import cvData from "../../data/cv.json";
+  import cvData from "../../../../data/cv.json";
   import {
     defaultLocale,
     localizePath,
     type AppLocale,
   } from "$lib/i18n/locales";
+  import { getMessages } from "$lib/i18n/messages";
+  import { locale as localeStore } from "$lib/translations";
   import type {
     ArticleCardData,
-    ServiceCardData,
     ImageCardData,
+    ServiceCardData,
   } from "$lib/data/site";
-  import { locale as localeStore } from "$lib/translations";
-  import ArticleCard from "./cards/ArticleCard.svelte";
-  import ImageCard from "./cards/ImageCard.svelte";
-  import ServiceCard from "./cards/ServiceCard.svelte";
+  import ArticleCard from "$lib/components/ui/cards/ArticleCard.svelte";
+  import ImageCard from "$lib/components/ui/cards/ImageCard.svelte";
+  import ServiceCard from "$lib/components/ui/cards/ServiceCard.svelte";
 
   type Publication = (typeof cvData.publications)[number];
   type InvestigationPublication = Publication & {
@@ -27,7 +28,7 @@
   };
   type ImageModule = { default: string };
 
-  const articleImages = import.meta.glob("../../data/img/*", {
+  const articleImages = import.meta.glob("../../../../data/img/*", {
     eager: true,
   }) as Record<string, ImageModule>;
 
@@ -41,77 +42,18 @@
   );
 
   const getArticleImage = (imageName?: string) =>
-    imageName
-      ? (articleImages[`../../data/img/${imageName}`]?.default ?? "")
-      : "";
-
-  const copy = {
-    en: {
-      serviceCards: [
-        {
-          title: "Investigations and research",
-          description:
-            "Original reporting, document-heavy research, and data-led investigations built to stand up to scrutiny and publication.",
-          icon: "file-search",
-          cta: "Commission a story",
-        },
-        {
-          title: "Interactive tools",
-          description:
-            "Calculators, explainers, and maps designed to help readers explore complex stories through direct interaction.",
-          icon: "chart-no-axes-combined",
-          cta: "Let's talk about your vision",
-        },
-        {
-          title: "Training",
-          description:
-            "Workshops for newsrooms and NGOs on data literacy, investigative workflows, and ethical visualisation techniques.",
-          icon: "graduation-cap",
-          href: "https://training.nicu.md/",
-          variant: "accent",
-          label: "See our free resources",
-        },
-      ] as (Omit<ServiceCardData, "href"> | ServiceCardData)[],
-    },
-    ro: {
-      serviceCards: [
-        {
-          title: "Investigații și cercetare",
-          description:
-            "Reportaj original, cercetare bazată pe documente și investigații ghidate de date, pregătite pentru publicare și verificare riguroasă.",
-          icon: "file-search",
-          cta: "Discută despre o anchetă",
-        },
-        {
-          title: "Unelte interactive",
-          description:
-            "Calculatoare, explainere și hărți care ajută cititorii să exploreze subiecte complexe prin interacțiune directă.",
-          icon: "chart-no-axes-combined",
-          cta: "Hai să discutăm despre viziunea ta",
-        },
-        {
-          title: "Training",
-          description:
-            "Ateliere pentru redacții și ONG-uri despre alfabetizare în date, fluxuri de lucru investigative și tehnici etice de vizualizare.",
-          icon: "graduation-cap",
-          href: "https://training.nicu.md/",
-          variant: "accent",
-          label: "Vezi resursele noastre gratuite",
-        },
-      ] as (Omit<ServiceCardData, "href"> | ServiceCardData)[],
-    },
-  } as const;
+    imageName ? (articleImages[`../../../../data/img/${imageName}`]?.default ?? "") : "";
 
   const activeLocale = $derived(
     ($localeStore as AppLocale | undefined) ?? defaultLocale,
   );
-  const strings = $derived(copy[activeLocale]);
+  const copy = $derived(getMessages(activeLocale));
   const contactHref = $derived(`${localizePath("/", activeLocale)}#contact`);
   const serviceCards = $derived(
-    strings.serviceCards.map((card) => ({
+    copy.homeWork.serviceCards.map((card: Omit<ServiceCardData, "href"> | ServiceCardData) => ({
       ...card,
       href: "href" in card ? card.href : contactHref,
-    })),
+    })) as ServiceCardData[],
   );
   const investigationCards = $derived(
     investigations.map(
@@ -137,7 +79,7 @@
   );
 </script>
 
-<section class="work" id="work">
+<section class="work section-block-tight" id="work">
   <div class="shell">
     <div class="grid">
       <div class="span-2">
@@ -163,7 +105,6 @@
 
 <style>
   .work {
-    padding: 2rem 0 6rem;
     background: var(--color-surface-low);
   }
 

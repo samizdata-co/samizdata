@@ -345,13 +345,18 @@
     width: 2.5rem;
     height: 2.5rem;
     flex-shrink: 0;
-    color: var(--color-primary);
+    color: var(--color-logo-mark);
   }
 
   svg {
     width: 1.75rem;
     height: 1.75rem;
     overflow: visible;
+  }
+
+  :global(:root[data-theme="dark"]) svg {
+    filter: brightness(1.14) saturate(1.06)
+      drop-shadow(0 0 0.35rem rgba(198, 33, 104, 0.2));
   }
 
   span {

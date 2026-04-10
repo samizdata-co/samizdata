@@ -1,63 +1,46 @@
 <script lang="ts">
   import { ArrowUpRight } from "@lucide/svelte";
   import { defaultLocale, type AppLocale } from "$lib/i18n/locales";
+  import { getMessages } from "$lib/i18n/messages";
   import { locale as localeStore } from "$lib/translations";
+  import { siteConfig } from "$lib/data/site";
 
   let { standalone = false }: { standalone?: boolean } = $props();
-
-  const copy = {
-    en: {
-      title: "Get in touch",
-      body: "Whether you have a massive dataset or just the seed of an idea, let's talk about it.",
-      email: "Direct Email",
-      locationLabel: "Location",
-      location: "London, UK",
-      social: "Social media",
-    },
-    ro: {
-      title: "Ia legătura cu noi",
-      body: "Fie că ai un set uriaș de date sau doar germenul unei idei, hai să vorbim.",
-      email: "Email direct",
-      locationLabel: "Locație",
-      location: "Londra, Regatul Unit",
-      social: "Social media",
-    },
-  } as const;
 
   const activeLocale = $derived(
     ($localeStore as AppLocale | undefined) ?? defaultLocale,
   );
-  const strings = $derived(copy[activeLocale]);
+  const copy = $derived(getMessages(activeLocale));
 </script>
 
-<section class:standalone class="contact" id="contact">
+<section class:standalone class="contact section-block" id="contact">
   <div class="shell contact-grid">
-    <div id="about">
-      <h2 class="section-title">{strings.title}</h2>
-      <p>{strings.body}</p>
+    <div class="intro">
+      <h2 class="section-title">{copy.contactBlock.title}</h2>
+      <p class="body-copy">{copy.contactBlock.body}</p>
     </div>
 
     <div class="stack">
-      <a class="email-card" href="mailto:mail@samizdata.co">
+      <a class="email-card surface-card-muted" href={`mailto:${siteConfig.email}`}>
         <div>
-          <span class="eyebrow">{strings.email}</span>
-          <strong>mail@samizdata.co</strong>
+          <span class="eyebrow">{copy.contactBlock.email}</span>
+          <strong>{siteConfig.email}</strong>
         </div>
         <ArrowUpRight size={36} strokeWidth={2.1} />
       </a>
 
       <div class="meta-grid">
-        <div class="meta-card">
-          <span class="eyebrow muted">{strings.social}</span>
+        <div class="meta-card surface-card-strong">
+          <span class="eyebrow muted">{copy.contactBlock.social}</span>
           <p>
-            <a href="https://www.linkedin.com/in/nicucalcea/" target="_blank" rel="noreferrer"
-              >LinkedIn</a
-            >
+            <a href={siteConfig.linkedinUrl} target="_blank" rel="noreferrer">
+              LinkedIn
+            </a>
           </p>
         </div>
-        <div class="meta-card">
-          <span class="eyebrow muted">{strings.locationLabel}</span>
-          <p>{strings.location}</p>
+        <div class="meta-card surface-card-strong">
+          <span class="eyebrow muted">{copy.contactBlock.locationLabel}</span>
+          <p>{copy.contactBlock.location}</p>
         </div>
       </div>
     </div>
@@ -66,7 +49,6 @@
 
 <style>
   .contact {
-    padding-block: 8rem;
     background: var(--color-surface);
   }
 
@@ -86,12 +68,8 @@
     margin: 0 0 2rem;
   }
 
-  p {
+  .intro p {
     max-width: 32rem;
-    margin: 0;
-    font-size: 1.25rem;
-    line-height: 1.6;
-    color: var(--color-muted);
   }
 
   .stack {
@@ -105,12 +83,11 @@
     align-items: center;
     gap: 1.5rem;
     padding: 2.5rem;
-    background: var(--color-surface-low);
-    border: 1px solid rgba(222, 191, 197, 0.1);
     transition:
       background-color 220ms ease,
       color 220ms ease,
-      transform 220ms ease;
+      transform 220ms ease,
+      border-color 220ms ease;
   }
 
   .email-card > div {
@@ -119,6 +96,7 @@
 
   .email-card:hover {
     background: var(--color-primary-container);
+    border-color: var(--color-primary-container);
     color: white;
     transform: translateY(-0.15rem);
   }
@@ -149,8 +127,7 @@
 
   .meta-card {
     padding: 2rem;
-    background: var(--color-surface-high);
-    border: 1px solid rgba(222, 191, 197, 0.1);
+    color: var(--color-ink);
   }
 
   .meta-card p {

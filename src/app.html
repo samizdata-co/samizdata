@@ -1,8 +1,31 @@
 <!doctype html>
-<html lang="en">
+<html lang="%lang%">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script>
+			(() => {
+				const storageKey = 'samizdata-theme';
+				const root = document.documentElement;
+				let theme = 'light';
+
+				try {
+					const stored = window.localStorage.getItem(storageKey);
+					if (stored === 'light' || stored === 'dark') {
+						theme = stored;
+					} else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+						theme = 'dark';
+					}
+				} catch {
+					if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+						theme = 'dark';
+					}
+				}
+
+				root.dataset.theme = theme;
+				root.style.colorScheme = theme;
+			})();
+		</script>
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">

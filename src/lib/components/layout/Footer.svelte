@@ -1,47 +1,35 @@
 <script lang="ts">
   import { defaultLocale, type AppLocale } from "$lib/i18n/locales";
+  import { getMessages } from "$lib/i18n/messages";
   import { locale as localeStore } from "$lib/translations";
-  import Logo from "./Logo.svelte";
-
-  const copy = {
-    en: {
-      connect: "Connect",
-      rights: "© 2026 SAMIZDATA Ltd.",
-      location: "London, UK",
-    },
-    ro: {
-      connect: "Conectare",
-      rights: "© 2026 SAMIZDATA Ltd.",
-      location: "Londra, Regatul Unit",
-    },
-  } as const;
+  import { siteConfig } from "$lib/data/site";
+  import Logo from "$lib/components/ui/Logo.svelte";
 
   const activeLocale = $derived(
     ($localeStore as AppLocale | undefined) ?? defaultLocale,
   );
-  const strings = $derived(copy[activeLocale]);
+  const copy = $derived(getMessages(activeLocale));
 </script>
 
-<footer class="footer">
+<footer class="footer section-block-tight">
   <div class="shell footer-grid">
     <div class="brand">
       <Logo compact />
-      <p class="eyebrow muted">{strings.rights}</p>
+      <p class="eyebrow muted">{copy.footer.rights}</p>
     </div>
 
     <div class="connect">
-      <p class="eyebrow">{strings.connect}</p>
-      <a href="mailto:mail@samizdata.co">mail@samizdata.co</a>
-      <span>{strings.location}</span>
+      <p class="eyebrow">{copy.footer.connect}</p>
+      <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+      <span>{copy.footer.location}</span>
     </div>
   </div>
 </footer>
 
 <style>
   .footer {
-    padding-block: 2.5rem;
     background: var(--color-surface-low);
-    border-top: 1px solid rgba(222, 191, 197, 0.2);
+    border-top: 1px solid var(--color-border-soft);
   }
 
   .footer-grid {

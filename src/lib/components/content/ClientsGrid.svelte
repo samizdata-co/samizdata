@@ -1,22 +1,14 @@
 <script lang="ts">
   import { defaultLocale, type AppLocale } from "$lib/i18n/locales";
+  import { getMessages } from "$lib/i18n/messages";
   import { locale as localeStore } from "$lib/translations";
 
-  import bbcNews from "../../data/logos/bbc-news.png";
-  import globalWitness from "../../data/logos/global-witness.svg";
-  import infogr8 from "../../data/logos/infogr8.png";
-  import newStatesman from "../../data/logos/new-statesman.png";
-  import transportEnvironment from "../../data/logos/transport-environment.png";
-  import vice from "../../data/logos/vice.png";
-
-  const copy = {
-    en: {
-      title: "Clients and bylines",
-    },
-    ro: {
-      title: "Clienți și publicații",
-    },
-  } as const;
+  import bbcNews from "../../../data/logos/bbc-news.png";
+  import globalWitness from "../../../data/logos/global-witness.svg";
+  import infogr8 from "../../../data/logos/infogr8.png";
+  import newStatesman from "../../../data/logos/new-statesman.png";
+  import transportEnvironment from "../../../data/logos/transport-environment.png";
+  import vice from "../../../data/logos/vice.png";
 
   type Logo = {
     src: string;
@@ -26,7 +18,7 @@
   const activeLocale = $derived(
     ($localeStore as AppLocale | undefined) ?? defaultLocale,
   );
-  const strings = $derived(copy[activeLocale]);
+  const copy = $derived(getMessages(activeLocale));
 
   const logos: Logo[] = [
     { src: bbcNews, alt: "BBC News" },
@@ -39,7 +31,7 @@
 </script>
 
 <section class="clients" aria-labelledby="clients-heading">
-  <h2 id="clients-heading">{strings.title}</h2>
+  <h2 id="clients-heading">{copy.clients.title}</h2>
 
   <ul class="logos">
     {#each logos as logo}
@@ -102,10 +94,19 @@
       transform 180ms ease;
   }
 
+  :global(:root[data-theme="dark"]) img {
+    filter: grayscale(100%) invert(1) brightness(1.15);
+    opacity: 0.82;
+  }
+
   .logos li:hover img {
     filter: grayscale(0%);
     opacity: 1;
     transform: scale(1.02);
+  }
+
+  :global(:root[data-theme="dark"]) .logos li:hover img {
+    filter: grayscale(100%) invert(1) brightness(1.24);
   }
 
   @media (min-width: 700px) {

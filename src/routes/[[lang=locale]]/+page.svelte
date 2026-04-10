@@ -1,13 +1,13 @@
 <script lang="ts">
-  import AboutSection from "$lib/components/AboutSection.svelte";
-  import ContactSection from "$lib/components/ContactSection.svelte";
-  import HeroSection from "$lib/components/HeroSection.svelte";
-  import WorkSection from "$lib/components/WorkSection.svelte";
+  import ContactBlock from "$lib/components/content/ContactBlock.svelte";
+  import HomeAbout from "$lib/components/sections/home/HomeAbout.svelte";
+  import HomeHero from "$lib/components/sections/home/HomeHero.svelte";
+  import HomeWork from "$lib/components/sections/home/HomeWork.svelte";
 </script>
 
 <main>
-  <HeroSection />
-  <AboutSection />
-  <WorkSection />
-  <ContactSection />
+  <HomeHero />
+  <HomeAbout />
+  <HomeWork />
+  <ContactBlock />
 </main>

@@ -29,5 +29,13 @@ export type ArticleCardData = {
   href: string;
 };
 
+export const siteConfig = {
+  name: "SAMIZDATA",
+  legalName: "SAMIZDATA Ltd.",
+  url: "https://samizdata.co",
+  email: "mail@samizdata.co",
+  linkedinUrl: "https://www.linkedin.com/in/nicucalcea/",
+} as const;
+
 export const buildLocalizedHref = (pathname: string, locale: AppLocale) =>
   localizePath(pathname, locale);

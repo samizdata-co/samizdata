@@ -1,53 +1,38 @@
 <script lang="ts">
+  import ClientsGrid from "$lib/components/content/ClientsGrid.svelte";
   import { defaultLocale, type AppLocale } from "$lib/i18n/locales";
+  import { getMessages } from "$lib/i18n/messages";
   import { locale as localeStore } from "$lib/translations";
-  import Clients from "./Clients.svelte";
-
-  const copy = {
-    en: {
-      introLead: "SAMIZDATA is an independent data journalism studio led by ",
-      introHighlight: "Nicu Calcea",
-      introTail:
-        ", a journalist with 16 years’ experience in media. Here are some of the things he has worked on.",
-    },
-    ro: {
-      introLead:
-        "SAMIZDATA este un studio independent de jurnalism de date condus de ",
-      introHighlight: "Nicu Calcea",
-      introTail:
-        ", un jurnalist cu 16 ani de experiență. Iată câteva dintre proiectele la care a lucrat.",
-    },
-  } as const;
 
   const activeLocale = $derived(
     ($localeStore as AppLocale | undefined) ?? defaultLocale,
   );
-  const strings = $derived(copy[activeLocale]);
+  const copy = $derived(getMessages(activeLocale));
 </script>
 
-<section class="about" id="about">
+<section class="about section-block-tight" id="about">
   <div class="shell">
     <div class="intro-block">
       <p class="intro">
-        {strings.introLead}<span><a href="https://nicu.md/" target="_blank" rel="noreferrer"
-              >{strings.introHighlight}</a></span
-        >{strings.introTail}
+        {copy.homeAbout.introLead}<span
+          ><a href="https://nicu.md/" target="_blank" rel="noreferrer"
+            >{copy.homeAbout.introHighlight}</a
+          ></span
+        >{copy.homeAbout.introTail}
       </p>
     </div>
 
-    <Clients />
+    <ClientsGrid />
   </div>
 </section>
 
 <style>
   .about {
-    padding: 6rem 0 2rem;
     background: var(--color-surface-low);
     border-bottom: 1px solid var(--color-outline-ghost);
   }
 
   .intro-block {
-    margin: 0 0 0;
     padding: 0 0 2.5rem;
   }
 
@@ -75,6 +60,6 @@
   }
 
   :global(.about .clients) {
-    margin-top: 0rem;
+    margin-top: 0;
   }
 </style>

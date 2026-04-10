@@ -1,45 +1,28 @@
 <script lang="ts">
   import { Menu, X } from "@lucide/svelte";
-  import { defaultLocale, localizePath, type AppLocale } from "$lib/i18n/locales";
-  import Logo from "./Logo.svelte";
-  import LanguageSwitcher from "./LanguageSwitcher.svelte";
+  import {
+    defaultLocale,
+    localizePath,
+    type AppLocale,
+  } from "$lib/i18n/locales";
+  import { getMessages } from "$lib/i18n/messages";
   import { locale as localeStore } from "$lib/translations";
+  import Logo from "$lib/components/ui/Logo.svelte";
+  import LanguageSwitcher from "./LanguageSwitcher.svelte";
+  import ThemeToggle from "./ThemeToggle.svelte";
 
   let { pathname }: { pathname: string } = $props();
   let isMobileMenuOpen = $state(false);
 
-  const copy = {
-    en: {
-      homeLabel: "SAMIZDATA home",
-      primaryLabel: "Primary navigation",
-      mobileMenuOpen: "Open menu",
-      mobileMenuClose: "Close menu",
-      themeToggle: "Toggle theme",
-      work: "What we do",
-      about: "Who we are",
-      contact: "Contact",
-    },
-    ro: {
-      homeLabel: "Pagina principala SAMIZDATA",
-      primaryLabel: "Navigatie principala",
-      mobileMenuOpen: "Deschide meniul",
-      mobileMenuClose: "Inchide meniul",
-      themeToggle: "Schimba tema",
-      work: "Ce facem",
-      about: "Cine suntem",
-      contact: "Contact",
-    },
-  } as const;
-
   const activeLocale = $derived(
     ($localeStore as AppLocale | undefined) ?? defaultLocale,
   );
-  const strings = $derived(copy[activeLocale]);
+  const copy = $derived(getMessages(activeLocale));
   const navItems = $derived([
-    { label: strings.about, href: `${localizePath("/", activeLocale)}#about` },
-    { label: strings.work, href: `${localizePath("/", activeLocale)}#work` },
+    { label: copy.navigation.about, href: `${localizePath("/", activeLocale)}#about` },
+    { label: copy.navigation.work, href: `${localizePath("/", activeLocale)}#work` },
     {
-      label: strings.contact,
+      label: copy.navigation.contact,
       href: `${localizePath("/", activeLocale)}#contact`,
     },
   ]);
@@ -47,33 +30,25 @@
 
 <nav class="nav">
   <div class="shell nav-inner">
-    <a href={localizePath("/", activeLocale)} aria-label={strings.homeLabel}>
+    <a href={localizePath("/", activeLocale)} aria-label={copy.navigation.homeLabel}>
       <Logo />
     </a>
 
-    <div class="links" aria-label={strings.primaryLabel}>
+    <div class="links" aria-label={copy.navigation.primaryLabel}>
       {#each navItems as item}
         <a href={item.href}>{item.label}</a>
       {/each}
     </div>
 
     <div class="actions">
+      <ThemeToggle />
       <LanguageSwitcher {pathname} />
-      <!--
       <button
         type="button"
-        class="theme-toggle"
-        aria-label={strings.themeToggle}
-      >
-        <MoonStar size={22} strokeWidth={2} />
-      </button>
-      -->
-      <button
-        type="button"
-        class="menu-toggle"
+        class="icon-button menu-toggle"
         aria-label={isMobileMenuOpen
-          ? strings.mobileMenuClose
-          : strings.mobileMenuOpen}
+          ? copy.navigation.mobileMenuClose
+          : copy.navigation.mobileMenuOpen}
         aria-expanded={isMobileMenuOpen}
         aria-controls="mobile-nav"
         onclick={() => {
@@ -93,7 +68,7 @@
     <div
       class="shell mobile-menu"
       id="mobile-nav"
-      aria-label={strings.primaryLabel}
+      aria-label={copy.navigation.primaryLabel}
     >
       {#each navItems as item}
         <a
@@ -114,9 +89,9 @@
     position: fixed;
     inset: 0 0 auto;
     z-index: 50;
-    background: color-mix(in srgb, var(--color-surface) 80%, transparent);
+    background: var(--color-nav-surface);
     backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(222, 191, 197, 0.1);
+    border-bottom: 1px solid var(--color-border-soft);
   }
 
   .nav-inner {
@@ -139,9 +114,9 @@
   }
 
   .links a,
-  .actions button,
+  .actions :global(button),
   .actions :global(summary) {
-    color: rgba(27, 28, 25, 0.7);
+    color: var(--color-ink-soft);
     transition: color 180ms ease;
   }
 
@@ -158,33 +133,16 @@
     margin-left: auto;
   }
 
-  button {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.45rem;
-    padding: 0;
-    background: none;
-    border: 0;
-    cursor: pointer;
-  }
-
   .menu-toggle {
     display: inline-flex;
   }
-
-  /*
-  .theme-toggle {
-    color: var(--color-primary-container);
-    transform: scale(0.95);
-  }
-  */
 
   .mobile-menu {
     display: grid;
     gap: 0.4rem;
     padding-top: 0.25rem;
     padding-bottom: 1rem;
-    border-top: 1px solid rgba(138, 112, 118, 0.12);
+    border-top: 1px solid var(--color-border-soft);
   }
 
   .mobile-menu a {
@@ -194,7 +152,7 @@
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: rgba(27, 28, 25, 0.82);
+    color: var(--color-ink-soft);
   }
 
   .mobile-menu a:hover {

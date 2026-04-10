@@ -4,33 +4,13 @@
     localizePath,
     type AppLocale,
   } from "$lib/i18n/locales";
+  import { getMessages } from "$lib/i18n/messages";
   import { locale as localeStore } from "$lib/translations";
-
-  const copy = {
-    en: {
-      titleLead: "SAMIZDATA is a",
-      titleAccent: "data storytelling",
-      titleTail: "consultancy.",
-      body: "We research, write and build data tools for media organisations, NGOs and other public-benefit institutions.",
-      primaryCta: "Let's talk!",
-      secondaryCta: "What we do",
-      scrollCue: "Portfolio & Expertise",
-    },
-    ro: {
-      titleLead: "SAMIZDATA este o agenție de",
-      titleAccent: "storytelling de date",
-      titleTail: ".",
-      body: "Cercetăm, scriem și construim instrumente de date pentru organizații media, ONG-uri și alte instituții de interes public.",
-      primaryCta: "Hai să vorbim!",
-      secondaryCta: "Ce facem",
-      scrollCue: "Portofoliu și expertiză",
-    },
-  } as const;
 
   const activeLocale = $derived(
     ($localeStore as AppLocale | undefined) ?? defaultLocale,
   );
-  const strings = $derived(copy[activeLocale]);
+  const copy = $derived(getMessages(activeLocale));
   const contactHref = $derived(`${localizePath("/", activeLocale)}#contact`);
   const workHref = $derived(`${localizePath("/", activeLocale)}#work`);
 </script>
@@ -40,19 +20,19 @@
   <div class="shell hero-inner">
     <div class="copy">
       <h1 class="display-title">
-        <span class="title-lead">{strings.titleLead}</span>
-        <span class="title-accent">{strings.titleAccent}</span>
-        <span class="title-tail">{strings.titleTail}</span>
+        <span class="title-lead">{copy.homeHero.titleLead}</span>
+        <span class="title-accent">{copy.homeHero.titleAccent}</span>
+        <span class="title-tail">{copy.homeHero.titleTail}</span>
       </h1>
-      <p>{strings.body}</p>
+      <p class="hero-copy">{copy.homeHero.body}</p>
       <div class="button-row">
-        <a class="btn btn-primary" href={contactHref}>{strings.primaryCta}</a>
-        <a class="btn btn-secondary" href={workHref}>{strings.secondaryCta}</a>
+        <a class="btn btn-primary" href={contactHref}>{copy.homeHero.primaryCta}</a>
+        <a class="btn btn-secondary" href={workHref}>{copy.homeHero.secondaryCta}</a>
       </div>
     </div>
 
     <div class="scroll-cue" aria-hidden="true">
-      <span class="eyebrow">{strings.scrollCue}</span>
+      <span class="eyebrow">{copy.homeHero.scrollCue}</span>
       <div class="line"><i></i></div>
     </div>
   </div>
@@ -118,7 +98,7 @@
     font-style: italic;
   }
 
-  p {
+  .hero-copy {
     max-width: 40rem;
     margin: 0 0 2.25rem;
     font-size: clamp(1.12rem, 1.7vw, 1.35rem);
@@ -180,7 +160,7 @@
       line-height: 0.96;
     }
 
-    p {
+    .hero-copy {
       margin-bottom: 1.5rem;
     }
 
@@ -202,7 +182,7 @@
       line-height: 0.98;
     }
 
-    p {
+    .hero-copy {
       font-size: clamp(1rem, 1.45vw, 1.12rem);
       margin-bottom: 1.15rem;
       line-height: 1.4;

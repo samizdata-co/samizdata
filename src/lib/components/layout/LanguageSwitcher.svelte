@@ -7,37 +7,27 @@
     localizePath,
     type AppLocale,
   } from "$lib/i18n/locales";
+  import { getMessages } from "$lib/i18n/messages";
   import { locale as localeStore } from "$lib/translations";
 
   let { pathname }: { pathname: string } = $props();
   let isOpen = $state(false);
 
-  const copy = {
-    en: {
-      languageLabel: "Language",
-      languageName: "English",
-    },
-    ro: {
-      languageLabel: "Limba",
-      languageName: "Romana",
-    },
-  } as const;
-
   const activeLocale = $derived(
     ($localeStore as AppLocale | undefined) ?? defaultLocale,
   );
-  const strings = $derived(copy[activeLocale]);
+  const copy = $derived(getMessages(activeLocale));
   const switcherOptions = $derived([
     {
       code: "en" as const,
       flag: localeMeta.en.flag,
-      label: copy.en.languageName,
+      label: copy.localeSwitcher.names.en,
       href: `${localizePath(pathname, "en")}${page.url.hash}`,
     },
     {
       code: "ro" as const,
       flag: localeMeta.ro.flag,
-      label: copy.ro.languageName,
+      label: copy.localeSwitcher.names.ro,
       href: `${localizePath(pathname, "ro")}${page.url.hash}`,
     },
   ]);
@@ -51,7 +41,7 @@
 </script>
 
 <details bind:open={isOpen} class="locale-switcher">
-  <summary aria-label={strings.languageLabel}>
+  <summary class="icon-button switcher-trigger" aria-label={copy.localeSwitcher.label}>
     <span class="flag" aria-hidden="true">{currentOption.flag}</span>
     <ChevronDown size={18} strokeWidth={2.25} />
   </summary>
@@ -62,6 +52,7 @@
         data-sveltekit-preload-data="off"
         data-sveltekit-preload-code="off"
         lang={option.code}
+        hreflang={option.code}
         aria-label={option.label}
         onclick={() => {
           isOpen = false;
@@ -83,7 +74,6 @@
     display: inline-flex;
     align-items: center;
     gap: 0.55rem;
-    color: var(--color-ink);
     cursor: pointer;
   }
 
@@ -100,8 +90,8 @@
     gap: 0.35rem;
     min-width: 3.75rem;
     padding: 0.45rem;
-    background: color-mix(in srgb, var(--color-surface) 94%, white);
-    border: 1px solid rgba(138, 112, 118, 0.12);
+    background: var(--color-surface-lowest);
+    border: 1px solid var(--color-border-soft);
     border-radius: 1rem;
     box-shadow: var(--shadow-ambient);
   }
@@ -115,7 +105,13 @@
   }
 
   .locale-menu a:hover {
-    background: rgba(159, 24, 83, 0.08);
+    background: var(--color-primary-glow);
+  }
+
+  .switcher-trigger {
+    width: auto;
+    min-width: 2.75rem;
+    padding-inline: 0.75rem;
   }
 
   .flag {

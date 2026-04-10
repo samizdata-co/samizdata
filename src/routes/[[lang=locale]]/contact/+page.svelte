@@ -1,9 +1,17 @@
 <script lang="ts">
-  import ContactSection from "$lib/components/ContactSection.svelte";
+  import ContactBlock from "$lib/components/content/ContactBlock.svelte";
+
+  let { data } = $props();
 </script>
 
+<svelte:head>
+  <title>{data.meta.title}</title>
+  <meta name="description" content={data.meta.description} />
+  <link rel="canonical" href={data.meta.canonical} />
+</svelte:head>
+
 <main class="contact-page">
-  <ContactSection standalone />
+  <ContactBlock standalone />
 </main>
 
 <style>

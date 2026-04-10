@@ -41,7 +41,7 @@
 <style>
   :global(.article-card) {
     display: flex;
-    color: var(--color-surface);
+    color: white;
   }
 
   img,
@@ -64,8 +64,8 @@
     padding: 1.75rem;
     background: linear-gradient(
       180deg,
-      rgba(12, 13, 12, 0.5) 0%,
-      rgba(12, 13, 12, 0.97) 100%
+      rgba(12, 13, 12, 0.42) 0%,
+      rgba(12, 13, 12, 0.96) 100%
     );
   }
 
@@ -94,6 +94,7 @@
     font-size: clamp(1.25rem, 2vw, 1.8rem);
     font-weight: 900;
     letter-spacing: -0.04em;
+    color: white;
     text-shadow: 0 0.15rem 0.8rem rgba(0, 0, 0, 0.55);
   }
 </style>
