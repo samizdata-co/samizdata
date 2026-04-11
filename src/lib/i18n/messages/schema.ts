@@ -11,6 +11,7 @@ export type LocaleMessages = {
     switchToLight: string;
     about: string;
     work: string;
+    training: string;
     contact: string;
   };
   localeSwitcher: {

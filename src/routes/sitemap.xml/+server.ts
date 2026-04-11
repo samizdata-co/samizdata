@@ -1,14 +1,19 @@
 import type { RequestHandler } from "./$types";
 import { locales, localizePath } from "$lib/i18n/locales";
 import { siteConfig } from "$lib/data/site";
+import { trainingPages } from "$lib/training/content";
 
-const pages = ["/", "/contact"];
+const pages = ["/", "/contact", "/training", ...trainingPages.map((page) => page.href)];
 
 export const prerender = true;
 
 export const GET: RequestHandler = async () => {
   const urls = pages.flatMap((page) =>
     locales.map((locale) => {
+      if (page.startsWith("/training") && locale !== "en") {
+        return null;
+      }
+
       const localizedPath = localizePath(page, locale);
       const href =
         localizedPath === "/"
@@ -17,7 +22,7 @@ export const GET: RequestHandler = async () => {
 
       return `<url><loc>${href}</loc></url>`;
     }),
-  );
+  ).filter(Boolean);
 
   const body = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">

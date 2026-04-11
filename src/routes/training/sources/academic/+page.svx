@@ -1,0 +1,58 @@
+---
+title: Academic Data Sources
+description: A practical guide to finding papers, replication data, and alerts for academic research relevant to journalism.
+navLabel: Academic Data Sources
+section: Resources
+order: 11
+---
+
+This is a small guide on how to use academic papers for your data journalism needs.
+
+## Where to find papers
+
+### Search engines
+
+There are several websites that index all the major journals. That makes it easier to keep track of new publications and to search all academic journals in one place.
+
+- [Google Scholar](https://scholar.google.com/) - The most popular academic search engine.
+- [Lens.org](https://www.lens.org/lens/search/scholar/structured) - Shows aggregated stats such as most cited authors and journals.
+- [Dimensions.ai](https://app.dimensions.ai/discover/publication) - Includes an Altmetric score, useful for weeding out obscure papers if you don't want those.
+- [ArXiv](https://arxiv.org/) - Repository of open-access papers and preprints.
+
+### Data sources
+
+Additionally, there are several repositories of data used in academic research. These are usually replication datasets, meaning you can use them to recreate the study findings or analyse them for new angles.
+
+- [Harvard Dataverse](https://dataverse.harvard.edu/dataverse/harvard?q=&types=dataverses%3Adatasets&sort=dateSort&order=desc&page=1) - Replication data and code, often in Stata, SPSS or R.
+- [Zenodo](https://zenodo.org/) - Similar to Dataverse, though often smaller in scope.
+- [ICPSR](https://www.icpsr.umich.edu/web/ICPSR/search/studies?start=0&sort=DATEUPDATED%20desc&RESTRICTED_DATA_TYPE=Public%20Use&ARCHIVE=ICPSR&PUBLISH_STATUS=PUBLISHED&rows=50&q=) - A large archive of academic data.
+- [Humanitarian Data Exchange](https://data.humdata.org/search?q=&ext_page_size=100) - Frequently updated datasets with a humanitarian focus. Also see [AidData](https://www.aiddata.org/datasets).
+- [OasisHUB](https://oasishub.co/dataset?q=&sort=metadata_modified+desc) - Environmental and risk data.
+- [Papers with Code](https://paperswithcode.com/) - Exactly what it sounds like.
+- [Economic Articles with Data](https://ejd.econ.mathematik.uni-ulm.de/) - Economic articles that have provided data and code for replication.
+
+### Research institutions
+
+- [NBER](https://www.nber.org/) - Has a customizable "New This Week" newsletter and a strong archive of [working papers](https://www.nber.org/papers?page=1&perPage=50&sortBy=public_date).
+
+## How to get alerts for new papers
+
+[Google Scholar](https://academicanswers.waldenu.edu/faq/134432), [Lens.org](https://support.lens.org/knowledge-base/saved-queries/) and [Dimensions.ai](https://plus.dimensions.ai/support/solutions/articles/23000018788-how-can-i-get-alerts-on-new-publications-or-grants-for-my-search-) can all send you alerts for particular topics.
+
+With most of them, you can also use advanced search queries to tweak your search to only get certain keywords. Google Scholar, for example, uses the same operators as normal Google, such as `fdi OR "foreign direct investment" -"flexible display interface"`.
+
+Once you've tuned your search, set an email alert and the new papers will come to you.
+
+## How to access the papers
+
+### Institutional access
+
+If you know someone who's a student or lecturer, they might have access to academic resources through their institution.
+
+### Authors
+
+Authors usually retain copyright and have the legal right to distribute their papers, so you'll often find them on [ResearchGate](https://www.researchgate.net/), [Scribd](https://www.scribd.com/) or their own websites. You can also email them directly and they'll often send over a copy.
+
+### /r/Scholar
+
+There's [a subreddit](https://www.reddit.com/r/Scholar/) where people can request specific papers. Try the other methods first, and if you still can't get the paper, request it there.

@@ -1,0 +1,56 @@
+---
+title: Data Calendar
+description: Release calendars and publication schedules that help reporters plan stories around upcoming datasets.
+navLabel: Data Calendar
+section: Resources
+order: 12
+---
+
+Here's a list of organisations that publish when new data is coming out. You can look ahead and plan stories around those releases.
+
+## United Kingdom
+
+- [Bank of England](https://www.bankofengland.co.uk/news/statistics) - The UK's central bank. Click "Upcoming" for the next releases.
+- [British Film Institute](https://www.bfi.org.uk/industry-data-insights/official-statistics-release-calendar) - Official release calendar for film industry statistics.
+- [Civil Aviation Authority](https://www.caa.co.uk/data-and-analysis/uk-aviation-market/data-publication-dates/) - Aviation data and publication dates.
+- [GOV.UK](https://www.gov.uk/search/research-and-statistics?content_store_document_type=upcoming_statistics&order=updated-newest) - Upcoming official statistics from across government.
+- [Halifax House Price Index](https://www.halifax.co.uk/media-centre/house-price-index.html) - The UK's longest-running monthly house price series.
+- [Higher Education Statistics Agency](https://www.hesa.ac.uk/data-and-analysis/upcoming) - Upcoming releases for UK higher education data.
+- [NHS Digital](https://digital.nhs.uk/search/document-type/publication/publicationStatus/false?sort=date&area=data) - Publication schedule for health and care data.
+- [Nomis](https://www.nomisweb.co.uk/home/release_group.asp) - Labour market and population release schedule.
+- [Ofcom](https://www.ofcom.org.uk/research-and-data/data/statistics/stats23) - Communications and media statistics releases.
+- [Ofgem](https://www.ofgem.gov.uk/publications/ofgem-data-upcoming-release-calendar) - Energy regulator release calendar.
+- [Office for Budget Responsibility](https://obr.uk/publications/) - Budget and public finance publications.
+- [Office for National Statistics](https://www.ons.gov.uk/releasecalendar?view=upcoming&size=50) - The main UK release calendar.
+- [Office for Students](https://www.officeforstudents.org.uk/data-and-analysis/official-statistics/release-schedules/) - English higher education release schedules.
+- [Office of Rail and Road](https://dataportal.orr.gov.uk/publication-dates-for-statistics/) - Rail and road publication dates.
+- [UK Finance](https://www.ukfinance.org.uk/data-research) - Banking and finance data releases.
+- [Universities and Colleges Admissions Service](https://www.ucas.com/data-and-analysis/ucas-timetable-data-and-analysis) - UCAS data and analysis timetable.
+
+## Other countries
+
+- [Australian Bureau of Statistics](https://www.abs.gov.au/release-calendar/future-releases-calendar) - Australia's future release calendar.
+- [Bureau of Labor Statistics](https://www.bls.gov/schedule/) - US labour market and economics schedule.
+- [Central Statistics Office](https://www.cso.ie/en/csolatestnews/releasecalendar/) - Ireland's release calendar.
+- [Economic Research Service](https://www.ers.usda.gov/calendar/) - US agriculture and rural affairs schedule.
+- [Energy Information Administration](https://www.eia.gov/reports/upcoming.php) - Upcoming US energy reports.
+- [MarketWatch Economic Calendar](https://www.marketwatch.com/economy-politics/calendar) - Major US economic reports and central bank speakers.
+- [New York Fed](https://www.newyorkfed.org/research/calendars/nationalecon_cal.html) - Data and research calendar.
+- [Statistics Canada](https://www150.statcan.gc.ca/n1/dai-quo/cal2-eng.htm) - Canada's release calendar.
+- [Statistisches Bundesamt](https://www.destatis.de/SiteGlobals/Forms/Suche/Termine/EN/Terminsuche_Formular.html?queryResultId=null&pageNo=0) - Germany's official statistics calendar.
+
+## International
+
+- [Bank for International Settlements](https://www.bis.org/statistics/relcal.htm) - Release calendar for financial stability and global liquidity datasets.
+- [European Central Bank](https://www.ecb.europa.eu/press/calendars/statscal/html/index.en.html) - ECB statistics calendar.
+- [Eurostat](https://ec.europa.eu/eurostat/web/main/news/release-calendar?type=listMonth&start=1693519200000) - EU release calendar.
+- [International Energy Agency](https://www.iea.org/events) - Events and upcoming releases.
+- [International Monetary Fund](https://data.imf.org/) - International macroeconomic and financial data.
+- [OECD](https://www.oecd.org/sdd/statisticsnewsreleases.htm) - Statistics news releases.
+- [UNdata](http://data.un.org/UpdateCalendar.aspx) - Update calendar for UN datasets.
+
+## Calendar
+
+Here's a view of upcoming business releases that I keep up to date for work.
+
+<iframe src="https://calendar.google.com/calendar/embed?src=p3j1ihatp6f23c3rhp71thvs2175t66l%40import.calendar.google.com&ctz=Europe%2FLondon" style="border: 0" width="100%" height="600" frameborder="0" scrolling="no" title="Upcoming business releases"></iframe>

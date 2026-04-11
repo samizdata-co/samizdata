@@ -1,0 +1,45 @@
+---
+title: AI for Journalists
+description: A practical introduction to what large language models are good at, what they get wrong, and how to think about them as a reporter.
+navLabel: AI for Journalists
+section: Lessons
+order: 40
+---
+
+> These notes are mostly inspired by the Practical AI for investigative journalism sessions.
+
+There are many excellent uses for AI in journalism. You can find a lot of them on [Journalist's Toolbox](https://journaliststoolbox.ai/).
+
+There is one important thing to keep in mind: AI tools are machines that generate text, not facts.
+
+Let's look at an example. I asked [Claude](https://claude.ai/) to tell me `Who is Nicu Calcea?`.
+
+> Nicu Calcea is a Romanian politician who has served as a member of the European Parliament since 2019. He is a member of the National Liberal Party (PNL) which is a center-right liberal-conservative political party in Romania.
+>
+> Some key facts about Nicu Calcea: born in 1968 in Buzau, Romania; background in economics; elected to the European Parliament in 2019; sits with Renew Europe; focused on economic and monetary affairs and the single market.
+
+Claude sounds very confident and provides a detailed answer. However, every single one of those facts is false. I know, because I am [Nicu Calcea](https://nicu.md/) and there is no Romanian politician with the same name.
+
+In the context of large language models, these falsehoods are called hallucinations.
+
+## How AI works
+
+Let's assume I ask you to guess the next word in this sentence: `I'm ...`. The answer could be `hungry`, `confused`, `Nicu`, or something else entirely.
+
+What about `I haven't eaten since yesterday, I'm ...`? Then a better answer is probably `hungry` or `starving`.
+
+Now take: `Dearest friend, I daresay I have not partaken of food in ages. I'm positively...` Based on the style, `famished` is a much better fit.
+
+What we just did was look at the words that came before and choose the most likely continuation. That is broadly how an LLM works.
+
+You can see this in action in the [OpenAI Playground](https://platform.openai.com/playground?mode=complete). Copy that last sentence into the text box, tick `Show probabilities`, and submit it.
+
+You'll notice the completed words are highlighted in different colours. Clicking on them shows alternative tokens and their probabilities. In one run, the sentence ending `I'm positively` had a 91.38% chance of being followed by `fam`, which then had a 99.87% chance of being followed by `ished`, and so on.
+
+![The OpenAI Playground](/training/media/gpt-tokens.png)
+
+To keep responses dynamic, LLMs apply randomness when choosing the next token. That means the same question can give different answers.
+
+You can control that randomness with the `Temperature` setting. Lower values make the reply more predictable; higher values make it more creative. In journalism, you usually want `0`.
+
+In essence, an LLM is a very advanced next-word predictor. That's why you cannot assume its output is true even when it sounds plausible.

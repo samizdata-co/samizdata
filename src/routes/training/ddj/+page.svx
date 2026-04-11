@@ -1,0 +1,55 @@
+---
+title: Introduction to Data Journalism
+description: A concise introduction to what data journalism is, why it matters, and how it changes newsroom work.
+navLabel: Introduction to Data Journalism
+section: Lessons
+order: 30
+---
+
+Data journalism goes by different names. It can be called data-driven journalism, computer-assisted reporting, or CAR in the US. Its history is even older than that: the [first edition of the Manchester Guardian](https://www.theguardian.com/news/datablog/2011/sep/26/data-journalism-guardian) had a data journalism article. So don't focus too much on what you call it.
+
+> In its most simple definition, data journalism is the practice of using numbers and trends to tell a story. - Betsy Ladyzhets
+
+Data journalism does not mean you have to limit yourself to data. You still do everything else reporters do, including developing contacts, interviewing sources, sending FOIs, doing field investigations, checking facts, writing, editing and, when relevant, multimedia.
+
+Data can be hard and complex, and you'll often want to reach out to experts who can help explain it.
+
+> Data journalism is finding, in data, stories that are of interest to the public and presenting them in the most appropriate manner for public use and reuse. - Bahareh Heravi
+
+<div class="embed-shell"><div class="flourish-embed flourish-timeline" data-src="visualisation/14307302?1293534"><script src="https://public.flourish.studio/resources/embed.js"></script></div></div>
+
+Despite newsrooms struggling and reducing in size, data journalism teams are growing.
+
+## Job trends in data journalism
+
+Since the pandemic, nearly every newsroom has prioritised data journalism and has been hiring for data journalism positions. Some teams, like those at the FT and the BBC, are now so large that they need splitting into multiple desks.
+
+Newer tools like **Datawrapper** and **Flourish** let journalists create and publish visual stories more easily and with less technical overhead.
+
+At the same time, the increased supply of data journalists from courses like this means there are often higher entry requirements such as **R**, **Python** and **SQL**.
+
+## Why do we need data journalism?
+
+#### Tell richer stories
+
+An increasing amount of human activity is recorded with data. That means there is a data angle for almost any subject.
+
+#### Be more efficient
+
+Some stories recur every year, month or day. We can simplify or automate those stories and spend more time on deeper reporting.
+
+#### Be more accurate
+
+Though not without data quality issues and ethical considerations, accuracy is central to data journalism.
+
+#### Find unique angles
+
+There are now many stories where a data angle is the main angle. By using data, journalists can create news rather than simply covering it.
+
+#### Personalise news
+
+Readers become more invested when a story can be tied to their postcode, age or socio-economic status.
+
+#### Reach new audiences
+
+Data journalism is engaging. The pandemic showed that readers respond to clear, well-made data stories.

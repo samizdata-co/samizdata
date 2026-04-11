@@ -11,7 +11,7 @@
   import LanguageSwitcher from "./LanguageSwitcher.svelte";
   import ThemeToggle from "./ThemeToggle.svelte";
 
-  let { pathname }: { pathname: string } = $props();
+  let { pathname, showLanguageSwitcher = true }: { pathname: string; showLanguageSwitcher?: boolean } = $props();
   let isMobileMenuOpen = $state(false);
 
   const activeLocale = $derived(
@@ -21,6 +21,7 @@
   const navItems = $derived([
     { label: copy.navigation.about, href: `${localizePath("/", activeLocale)}#about` },
     { label: copy.navigation.work, href: `${localizePath("/", activeLocale)}#work` },
+    { label: copy.navigation.training, href: "/training" },
     {
       label: copy.navigation.contact,
       href: `${localizePath("/", activeLocale)}#contact`,
@@ -42,7 +43,9 @@
 
     <div class="actions">
       <ThemeToggle />
-      <LanguageSwitcher {pathname} />
+      {#if showLanguageSwitcher}
+        <LanguageSwitcher {pathname} />
+      {/if}
       <button
         type="button"
         class="icon-button menu-toggle"

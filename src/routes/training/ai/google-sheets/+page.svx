@@ -1,0 +1,111 @@
+---
+title: AI in Google Sheets
+description: How to use language models inside Google Sheets, where the risks show up, and how to validate outputs before trusting them.
+navLabel: AI in Google Sheets
+section: Lessons
+order: 41
+---
+
+> These notes are mostly inspired by the Practical AI for investigative journalism sessions.
+
+There are [several Google Sheets extensions](https://workspace.google.com/marketplace/search/AI?host=sheets) that let you connect to a large language model, write prompts, and store the results in cells.
+
+Some of those extensions charge extra fees and work opaquely, which means you may not know what is happening to your data.
+
+I wrote a simple Google Sheets script that provides most of the same functionality without charging a subscription or sending your data through a third party. Follow the instructions here:
+
+[nicucalcea/sheets-llm on GitHub](https://github.com/nicucalcea/sheets-llm)
+
+You will still need an OpenAI API key, which costs money. This is separate from ChatGPT Plus.
+
+## A simple example
+
+Make a copy of [this Google Sheet](https://docs.google.com/spreadsheets/d/1OC1NLimTQ2lSLHOl2X6BVHTSJiKtpkPpFj3gabRVNec/copy). It includes the Apps Script code you need.
+
+Click `LLM` in the top menu, open `Settings`, paste your OpenAI key and save.
+
+In cell `B2`, use this formula:
+
+```scala
+=LLM(A2, "Extract the category from the following text. It can be something like crime, environment, education or healthcare. Please respond with just the category.", "gpt-3.5-turbo", 0)
+```
+
+Let's break it down.
+
+1. `LLM` tells Sheets to call the Apps Script function.
+2. `A2` is the first cell with the text you want to analyse.
+3. The prompt tells the model what to extract.
+4. You can optionally specify the model.
+5. The final argument is the temperature. Here it is `0` because we want precision.
+
+You can then drag the formula down for each row.
+
+> Because Google Sheets recalculates cells, it may rerun the formula and incur extra costs. Once you are happy with the result, copy the cells and paste them as values.
+
+### Exercise
+
+Use the `LLM` formula to detect whether each piece of legislation is about retirement. Make sure the output is either `Yes`, `No` or `Don't know`.
+
+## Extracting structured data
+
+Earlier we instructed the model to `respond with just the category`. Without that, it might reply with something verbose like `The category of the text is Schools/High School`, which is harder to aggregate.
+
+Because the models are tuned as chatbots, they often default to conversational answers. We want to constrain them into cleaner structured output.
+
+In the same Google Sheet, go to the `food` tab.
+
+In cell `B2`, use:
+
+```scala
+=LLM(A2, "Extract the name from this email. Respond with just the name, nothing else.", "gpt-3.5-turbo", 0)
+```
+
+Repeat the process for the `product`, `email`, and `email_domain` columns.
+
+For the `emotion` column, use:
+
+```scala
+=LLM(A2, "Extract the emotion from this email. Respond with just 'positive' or 'negative', nothing else.", "gpt-3.5-turbo", 0)
+```
+
+In the last row, the AI may still respond with something like `sad` instead of `positive` or `negative`. That is a form of prompt injection: the source text overrides your instruction.
+
+### Data validation
+
+To catch issues like this, validate the output. In the `emotion_valid` column, use:
+
+```scala
+=IF(ISNUMBER(MATCH(F2, {"positive", "negative"}, 0)), "yes", "no")
+```
+
+That formula checks whether the response is one of the allowed values.
+
+To validate an email address, use:
+
+```scala
+=IF(REGEXMATCH(D2, "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"), "yes", "no")
+```
+
+This checks that the output matches a typical email format. It does not prove the email exists, only that it looks valid.
+
+To check whether the extracted email actually appears in the source text, use:
+
+```scala
+=IF(REGEXMATCH(A2, B2), "yes", "no")
+```
+
+This is a good reminder that LLMs return statistically likely answers, not guaranteed correct ones.
+
+### Summarising text
+
+In the `articles` tab, imagine you have a list of long articles in multiple languages and you want short English summaries.
+
+In the `summary` column, use:
+
+```scala
+=LLM(B2, "Summarise this article in English.")
+```
+
+Drag the formula down and inspect the results.
+
+> LLMs can be good at summarisation, but they are still prone to hallucinations. Double-check any summary you rely on in reporting.

@@ -12,6 +12,7 @@ export const roMessages: LocaleMessages = {
     switchToLight: "Treci la modul luminos",
     about: "Cine suntem",
     work: "Ce facem",
+    training: "Training",
     contact: "Contact",
   },
   localeSwitcher: {
@@ -78,7 +79,7 @@ export const roMessages: LocaleMessages = {
         description:
           "Ateliere pentru redactii si ONG-uri despre alfabetizare in date, fluxuri de lucru investigative si tehnici etice de vizualizare.",
         icon: "graduation-cap",
-        href: "https://training.nicu.md/",
+        href: "/training",
         variant: "accent",
         label: "Vezi resursele noastre gratuite",
       },

@@ -1,0 +1,66 @@
+---
+title: Data Sources
+description: A starting point for finding useful public, official, and international datasets for journalism.
+navLabel: Data Sources
+section: Resources
+order: 10
+---
+
+This is not meant to be an exhaustive list of all data sources, as that would be impossible to put on a page. However, it should give you a starting point and might spark a few ideas.
+
+## United Kingdom
+
+- [Bank of England](https://www.bankofengland.co.uk/news/statistics) - The UK's central bank.
+- [British Film Institute](https://www.bfi.org.uk/industry-data-insights/) - Research data and market intelligence on the UK film industry and other screen sectors.
+- [Civil Aviation Authority](https://www.caa.co.uk/data-and-analysis/) - Aviation data, statistics and reports.
+- [Companies House](http://download.companieshouse.gov.uk/en_output.html) - Downloadable data snapshot containing basic company data of live companies on the Companies House register. Also available as an [API](https://developer.company-information.service.gov.uk/).
+- [Energy Performance of Buildings](https://epc.opendatacommunities.org/) - The official place for all Energy Performance Certificates (EPCs), Display Energy Certificates (DECs) and Air Conditioning Inspection Reports (ACIRs).
+- [Financial Conduct Authority](https://www.fca.org.uk/data) - Official data on financial services firms. See also the [register of firms](https://register.fca.org.uk/s/).
+- [GOV.UK](https://www.gov.uk/search/research-and-statistics) - Official data from various government sources.
+- [Halifax House Price Index](https://www.halifax.co.uk/media-centre/house-price-index.html) - The UK's longest-running monthly house price series, with data going back to January 1983.
+- [Higher Education Statistics Agency](https://www.hesa.ac.uk/data-and-analysis) - Data on all aspects of the UK higher education sector.
+- [HM Land Registry](https://landregistry.data.gov.uk/) - Price paid, transaction and UK House Price Index, updated monthly.
+- [House of Lords Register of Interests](https://members.parliament.uk/members/lords/interests/register-of-lords-interests) - Information on any financial or non-financial benefit received by a Member of the Lords.
+- [House of Commons Library](https://commonslibrary.parliament.uk/research-for-commons-business/) - Information and analysis on legislation, policy areas and topical issues.
+- [Meta Ad Library](https://www.facebook.com/ads/library/) - Search all of the ads currently running across Meta technologies, primarily used for Facebook.
+- [National River Flow Archive](https://nrfa.ceh.ac.uk/) - The UK's official record of river flow data.
+- [NHS Digital](https://digital.nhs.uk/data) - The statutory custodian for health and care data for England.
+- [Nomis](https://www.nomisweb.co.uk/) - Statistics related to population, society and the labour market at national, regional and local levels.
+- [Ofcom](https://www.ofcom.org.uk/research-and-data/data) - The regulator for communications services, including broadband, home phone, mobile services, TV and radio.
+- [Ofgem](https://www.ofgem.gov.uk/energy-data-and-research) - Great Britain's independent energy regulator.
+- [Office for Budget Responsibility](https://obr.uk/publications/) - Publishes analysis on the sustainability of the public finances.
+- [Office for National Statistics](https://www.ons.gov.uk/) - The UK official statistics body.
+- [Office for Students](https://www.officeforstudents.org.uk/data-and-analysis/) - Data-driven analysis and evidence on English higher education.
+- [Office of Rail and Road](https://dataportal.orr.gov.uk/) - Economic and safety regulation data for Britain's railways and National Highways.
+- [Office of the Registrar of Consultant Lobbyists](https://registrarofconsultantlobbyists.org.uk/) - Transparency information on consultant lobbyists and their clients.
+- [Parliament.uk](https://explore.data.parliament.uk/) - Open datasets supported by the Parliamentary Digital Service.
+- [Police.uk](https://data.police.uk/) - Open data about crime and policing in England, Wales and Northern Ireland.
+- [Register of data protection fee payers](https://ico.org.uk/about-the-ico/what-we-do/register-of-fee-payers/) - Organisations and people registered with the ICO.
+- [Register of charities](https://register-of-charities.charitycommission.gov.uk/) - Information about registered charities in England and Wales.
+- [Schools](https://get-information-schools.service.gov.uk/) - The Department for Education's register of schools and related organisations.
+- [Stat-Xplore](https://stat-xplore.dwp.gov.uk/) - Department for Work & Pensions statistics explorer.
+- [UK AIR](https://uk-air.defra.gov.uk/) - Data about air quality and pollution in the UK.
+- [UK Finance](https://www.ukfinance.org.uk/data-research) - Data and analysis of banking and finance industry activity.
+- [Universities and Colleges Admissions Service](https://www.ucas.com/data-and-analysis/) - The UK's shared admissions service for higher education.
+
+## Other countries
+
+- [Australian Bureau of Statistics](https://www.abs.gov.au/) - Australia's national statistical agency.
+- [Bureau of Labor Statistics](https://www.bls.gov/) - The principal fact-finding agency for the US government in labour economics and statistics.
+- [Central Statistics Office](https://www.cso.ie/en/) - Ireland's national statistical office.
+- [Economic Research Service](https://www.ers.usda.gov/) - Trends and emerging issues in agriculture, food, the environment, and rural America.
+- [Energy Information Administration](https://www.eia.gov/) - Energy information and analysis from the US government.
+- [New York Fed](https://www.newyorkfed.org/data-and-statistics) - Economic data releases and research resources.
+- [Statistics Canada](https://www.statcan.gc.ca/en/start) - Canada's national statistical office.
+- [Statistisches Bundesamt](https://www.destatis.de/EN/Home/_node.html) - Official data on the society, economy, environment and state of Germany.
+
+## International sources
+
+- [Bank for International Settlements](https://data.bis.org/) - Data to support analysis of financial stability, spillovers and global liquidity.
+- [European Central Bank](https://www.ecb.europa.eu/pub/html/index.en.html) - Economic research and data for Europe.
+- [Eurostat](https://ec.europa.eu/eurostat/web/main/home) - The statistical office of the European Union.
+- [Inside Airbnb](http://insideairbnb.com/) - Data and advocacy about Airbnb's impact on residential communities.
+- [International Energy Agency](https://www.iea.org/data-and-statistics) - Analysis and data on the global energy sector.
+- [International Monetary Fund](https://data.imf.org/) - International macroeconomic and financial data.
+- [OECD](https://data.oecd.org/) - Data, policy advice and research across the economy, education, environment, health and more.
+- [UNdata](http://data.un.org/) - Statistical resources compiled by the United Nations system and partner agencies.

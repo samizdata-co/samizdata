@@ -12,6 +12,7 @@ export const enMessages: LocaleMessages = {
     switchToLight: "Switch to light mode",
     about: "Who we are",
     work: "What we do",
+    training: "Training",
     contact: "Contact",
   },
   localeSwitcher: {
@@ -77,7 +78,7 @@ export const enMessages: LocaleMessages = {
         description:
           "Workshops for newsrooms and NGOs on data literacy, investigative workflows, and ethical visualisation techniques.",
         icon: "graduation-cap",
-        href: "https://training.nicu.md/",
+        href: "/training",
         variant: "accent",
         label: "See our free resources",
       },

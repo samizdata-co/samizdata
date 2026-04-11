@@ -1,6 +1,7 @@
 <script lang="ts">
   import favicon from "$lib/assets/favicon.svg";
   import "../app.css";
+  import "prismjs/themes/prism.css";
 
   let { children } = $props();
 </script>

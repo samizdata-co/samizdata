@@ -87,6 +87,16 @@
     inset: 0;
   }
 
+  .card-shell.aspect-auto {
+    height: 100%;
+    align-self: stretch;
+  }
+
+  .aspect-auto .card-body {
+    position: relative;
+    height: 100%;
+  }
+
   .has-aspect::before {
     content: "";
     display: block;
