@@ -74,6 +74,13 @@ export const enMessages: LocaleMessages = {
         cta: "Let's talk about your vision",
       },
       {
+        title: "Data explorers",
+        description:
+          "Searchable databases and public-interest lookup tools that turn messy records into something people can actually use.",
+        icon: "database",
+        cta: "Plan a data product",
+      },
+      {
         title: "Training",
         description:
           "Workshops for newsrooms and NGOs on data literacy, investigative workflows, and ethical visualisation techniques.",

@@ -26,6 +26,11 @@
     category: "interactive";
     img?: string;
   };
+  type Project = (typeof cvData.projects)[number];
+  type DataExplorerProject = Project & {
+    category: "data-explorer";
+    img?: string;
+  };
   type ImageModule = { default: string };
 
   const articleImages = import.meta.glob("../../../../data/img/*", {
@@ -39,6 +44,10 @@
   const interactiveVisualisations = cvData.publications.filter(
     (publication): publication is InteractivePublication =>
       publication.category === "interactive",
+  );
+  const dataExplorers = cvData.projects.filter(
+    (project): project is DataExplorerProject =>
+      project.category === "data-explorer",
   );
 
   const getArticleImage = (imageName?: string) =>
@@ -77,6 +86,16 @@
         }) satisfies ImageCardData,
     ),
   );
+  const dataExplorerCards = $derived(
+    dataExplorers.map(
+      (project) =>
+        ({
+          title: project.name,
+          image: getArticleImage(project.img),
+          href: project.url,
+        }) satisfies ImageCardData,
+    ),
+  );
 </script>
 
 <section class="work section-block-tight" id="work">
@@ -98,7 +117,15 @@
         <ImageCard {card} />
       {/each}
 
-      <ServiceCard card={serviceCards[2]} />
+      <ServiceCard card={serviceCards[3]} />
+
+      <div class="span-2">
+        <ServiceCard card={serviceCards[2]} large />
+      </div>
+
+      {#each dataExplorerCards as card}
+        <ImageCard {card} />
+      {/each}
     </div>
   </div>
 </section>

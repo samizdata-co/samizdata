@@ -75,6 +75,13 @@ export const roMessages: LocaleMessages = {
         cta: "Hai sa discutam despre viziunea ta",
       },
       {
+        title: "Exploratoare de date",
+        description:
+          "Baze de date cautabile si instrumente de consultare de interes public care transforma registre haotice in produse utile.",
+        icon: "database",
+        cta: "Planifica un produs de date",
+      },
+      {
         title: "Training",
         description:
           "Ateliere pentru redactii si ONG-uri despre alfabetizare in date, fluxuri de lucru investigative si tehnici etice de vizualizare.",

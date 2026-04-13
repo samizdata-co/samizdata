@@ -2,16 +2,30 @@
   import {
     ArrowRight,
     ChartNoAxesCombined,
+    Database,
     FileSearch,
     GraduationCap,
   } from "@lucide/svelte";
   import type { ServiceCardData } from "$lib/data/site";
   import CardShell from "./CardShell.svelte";
 
+  type ServiceCardIcon =
+    | "file-search"
+    | "chart-no-axes-combined"
+    | "database"
+    | "graduation-cap";
+
   let { card, large = false }: { card: ServiceCardData; large?: boolean } =
     $props();
 
   const external = $derived(card.href.startsWith("http"));
+  const iconComponents = {
+    "file-search": FileSearch,
+    "chart-no-axes-combined": ChartNoAxesCombined,
+    database: Database,
+    "graduation-cap": GraduationCap,
+  } satisfies Record<ServiceCardIcon, typeof FileSearch>;
+  const Icon = $derived(iconComponents[card.icon as ServiceCardIcon]);
 </script>
 
 <CardShell
@@ -24,13 +38,7 @@
 >
   <div class="content">
     <div>
-      {#if card.icon === "file-search"}
-        <FileSearch size={36} class="icon" />
-      {:else if card.icon === "chart-no-axes-combined"}
-        <ChartNoAxesCombined size={36} class="icon" />
-      {:else}
-        <GraduationCap size={36} class="icon" />
-      {/if}
+      <Icon size={36} class="icon" />
       <h3>{card.title}</h3>
       <p>{card.description}</p>
     </div>

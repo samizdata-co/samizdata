@@ -8,7 +8,11 @@ export type NavItem = {
 export type ServiceCardData = {
   title: string;
   description: string;
-  icon: "file-search" | "chart-no-axes-combined" | "graduation-cap";
+  icon:
+    | "file-search"
+    | "chart-no-axes-combined"
+    | "database"
+    | "graduation-cap";
   href: string;
   variant?: "accent";
   label?: string;
