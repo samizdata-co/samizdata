@@ -5,8 +5,10 @@
   import { siteConfig } from "$lib/data/site";
   import Logo from "$lib/components/ui/Logo.svelte";
 
+  let { localeOverride }: { localeOverride?: AppLocale } = $props();
+
   const activeLocale = $derived(
-    ($localeStore as AppLocale | undefined) ?? defaultLocale,
+    localeOverride ?? (($localeStore as AppLocale | undefined) ?? defaultLocale),
   );
   const copy = $derived(getMessages(activeLocale));
 </script>

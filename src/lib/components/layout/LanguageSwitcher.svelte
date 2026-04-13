@@ -10,11 +10,11 @@
   import { getMessages } from "$lib/i18n/messages";
   import { locale as localeStore } from "$lib/translations";
 
-  let { pathname }: { pathname: string } = $props();
+  let { pathname, localeOverride }: { pathname: string; localeOverride?: AppLocale } = $props();
   let isOpen = $state(false);
 
   const activeLocale = $derived(
-    ($localeStore as AppLocale | undefined) ?? defaultLocale,
+    localeOverride ?? (($localeStore as AppLocale | undefined) ?? defaultLocale),
   );
   const copy = $derived(getMessages(activeLocale));
   const switcherOptions = $derived([

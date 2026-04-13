@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>%sveltekit.status% • SAMIZDATA</title>
+    <meta name="robots" content="noindex" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;800;900&family=Work+Sans:wght@400;500;600&display=swap");
+
+      :root {
+        color-scheme: light dark;
+        --color-primary: #9f1853;
+        --color-surface: #fbf9f4;
+        --color-surface-low: #f5f3ee;
+        --color-ink: #1b1c19;
+        --color-muted: #574146;
+        --color-border: rgba(138, 112, 118, 0.18);
+        --color-glow: rgba(159, 24, 83, 0.14);
+        --font-display: "Space Grotesk", sans-serif;
+        --font-body: "Work Sans", sans-serif;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --color-surface: #111311;
+          --color-surface-low: #171a18;
+          --color-ink: #f4efe9;
+          --color-muted: #c2b7b3;
+          --color-border: rgba(255, 255, 255, 0.11);
+          --color-glow: rgba(198, 33, 104, 0.18);
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        padding: 1.5rem;
+        background:
+          radial-gradient(circle at top left, var(--color-glow), transparent 32%),
+          linear-gradient(180deg, var(--color-surface-low), var(--color-surface));
+        color: var(--color-ink);
+        font-family: var(--font-body);
+      }
+
+      main {
+        width: min(100%, 44rem);
+        padding: clamp(1.5rem, 4vw, 2.5rem);
+        background: color-mix(in srgb, var(--color-surface) 90%, transparent);
+        border: 1px solid var(--color-border);
+        box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.08);
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .eyebrow {
+        font-family: var(--font-display);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--color-primary);
+      }
+
+      h1 {
+        margin: 0.75rem 0 1rem;
+        font-family: var(--font-display);
+        font-size: clamp(3rem, 11vw, 6rem);
+        line-height: 0.85;
+        letter-spacing: -0.06em;
+      }
+
+      .message {
+        font-size: 1.05rem;
+        line-height: 1.7;
+        color: var(--color-muted);
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">SAMIZDATA</p>
+      <h1>%sveltekit.status%</h1>
+      <p class="message">%sveltekit.error.message%</p>
+    </main>
+  </body>
+</html>
