@@ -1,8 +1,17 @@
 <script lang="ts">
   import { page } from "$app/state";
   import { trainingNav } from "$lib/training/content";
+  import type { Snippet } from "svelte";
 
-  let { title, description }: { title: string; description?: string } = $props();
+  let {
+    title,
+    description,
+    children,
+  }: {
+    title: string;
+    description?: string;
+    children?: Snippet;
+  } = $props();
 </script>
 
 <section class="training-shell section-block-tight">
@@ -32,7 +41,7 @@
       </aside>
 
       <article class="prose surface-card">
-        <slot />
+        {@render children?.()}
       </article>
     </div>
   </div>
