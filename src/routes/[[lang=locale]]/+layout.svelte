@@ -15,6 +15,8 @@
     email: siteConfig.email,
     sameAs: [siteConfig.linkedinUrl],
   };
+
+  const organizationSchemaJson = JSON.stringify(organizationSchema);
 </script>
 
 <svelte:head>
@@ -36,9 +38,7 @@
   <meta name="twitter:title" content={data.meta.title} />
   <meta name="twitter:description" content={data.meta.description} />
   <meta name="twitter:image" content={icon} />
-  <script type="application/ld+json">
-    {JSON.stringify(organizationSchema)}
-  </script>
+  {@html `<script type="application/ld+json">${organizationSchemaJson}<\/script>`}
 </svelte:head>
 
 <TopNav pathname={data.pathname} />
