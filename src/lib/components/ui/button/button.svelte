@@ -8,7 +8,7 @@
 		variants: {
 			variant: {
 				default:
-					"bg-primary text-primary-foreground shadow-[var(--shadow-ambient)] hover:bg-[var(--color-primary)]",
+					"bg-primary text-white shadow-[var(--shadow-ambient)] hover:bg-[var(--color-primary)] hover:text-white",
 				outline:
 					"border-border bg-background text-foreground hover:border-[var(--color-primary)] hover:bg-background aria-expanded:border-[var(--color-primary)] aria-expanded:bg-background",
 				secondary:

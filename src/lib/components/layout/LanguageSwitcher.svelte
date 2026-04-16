@@ -2,8 +2,11 @@
   import { goto } from "$app/navigation";
   import { ChevronDown } from "@lucide/svelte";
   import { page } from "$app/state";
-  import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
   import { Button } from "$lib/components/ui/button";
+  import DropdownMenuRoot from "$lib/components/ui/dropdown-menu/dropdown-menu.svelte";
+  import DropdownMenuTrigger from "$lib/components/ui/dropdown-menu/dropdown-menu-trigger.svelte";
+  import DropdownMenuContent from "$lib/components/ui/dropdown-menu/dropdown-menu-content.svelte";
+  import DropdownMenuItem from "$lib/components/ui/dropdown-menu/dropdown-menu-item.svelte";
   import {
     defaultLocale,
     localeMeta,
@@ -48,8 +51,8 @@
   }
 </script>
 
-<DropdownMenu.Root bind:open={isOpen}>
-  <DropdownMenu.Trigger>
+<DropdownMenuRoot bind:open={isOpen}>
+  <DropdownMenuTrigger>
     {#snippet child({ props })}
       <Button
         {...props}
@@ -62,15 +65,15 @@
         <ChevronDown class="size-4" size={18} strokeWidth={2.25} />
       </Button>
     {/snippet}
-  </DropdownMenu.Trigger>
+  </DropdownMenuTrigger>
 
-  <DropdownMenu.Content
+  <DropdownMenuContent
     class="w-auto min-w-15 grid-cols-1 gap-[0.35rem] rounded-2xl p-[0.45rem]"
     align="end"
     sideOffset={14}
   >
     {#each alternateOptions as option}
-      <DropdownMenu.Item
+      <DropdownMenuItem
         class="flex items-center justify-center rounded-xl p-[0.7rem]"
         aria-label={option.label}
         textValue={option.label}
@@ -80,7 +83,7 @@
       >
         <span class="text-[1.1rem] leading-none" aria-hidden="true">{option.flag}</span>
         <span class="sr-only">{option.label}</span>
-      </DropdownMenu.Item>
+      </DropdownMenuItem>
     {/each}
-  </DropdownMenu.Content>
-</DropdownMenu.Root>
+  </DropdownMenuContent>
+</DropdownMenuRoot>

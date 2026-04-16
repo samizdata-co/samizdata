@@ -1,7 +1,9 @@
 <script lang="ts">
   import { Menu, X } from "@lucide/svelte";
   import { Button } from "$lib/components/ui/button";
-  import * as Sheet from "$lib/components/ui/sheet";
+  import SheetRoot from "$lib/components/ui/sheet/sheet.svelte";
+  import SheetTrigger from "$lib/components/ui/sheet/sheet-trigger.svelte";
+  import SheetContent from "$lib/components/ui/sheet/sheet-content.svelte";
   import {
     defaultLocale,
     localizePath,
@@ -69,8 +71,8 @@
         <LanguageSwitcher {pathname} localeOverride={activeLocale} />
       {/if}
 
-      <Sheet.Root bind:open={isMobileMenuOpen}>
-        <Sheet.Trigger>
+      <SheetRoot bind:open={isMobileMenuOpen}>
+        <SheetTrigger>
           {#snippet child({ props })}
             <Button
               {...props}
@@ -89,9 +91,9 @@
               {/if}
             </Button>
           {/snippet}
-        </Sheet.Trigger>
+        </SheetTrigger>
 
-        <Sheet.Content
+        <SheetContent
           class="w-[min(100vw,24rem)] border-l border-[var(--color-border-soft)] bg-[var(--color-surface-lowest)] p-0"
           side="right"
         >
@@ -110,8 +112,8 @@
               </a>
             {/each}
           </div>
-        </Sheet.Content>
-      </Sheet.Root>
+        </SheetContent>
+      </SheetRoot>
     </div>
   </div>
 </nav>
