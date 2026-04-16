@@ -1,5 +1,6 @@
 <script lang="ts">
   import { page } from "$app/state";
+  import { Button } from "$lib/components/ui/button";
   import Footer from "$lib/components/layout/Footer.svelte";
   import TopNav from "$lib/components/layout/TopNav.svelte";
   import { siteConfig } from "$lib/data/site";
@@ -73,18 +74,18 @@
       </p>
 
       <div class="button-row cta-row">
-        <a class="btn btn-primary" href={homeHref}>
+        <Button href={homeHref}>
           <ArrowLeft size={18} strokeWidth={2.25} />
           {pageCopy.primaryCta}
-        </a>
-        <a class="btn btn-secondary" href="/training">
+        </Button>
+        <Button href="/training" variant="outline">
           <Compass size={18} strokeWidth={2.25} />
           {pageCopy.secondaryCta}
-        </a>
-        <a class="btn btn-secondary" href={contactHref}>
+        </Button>
+        <Button href={contactHref} variant="outline">
           <Mail size={18} strokeWidth={2.25} />
           {pageCopy.contactCta}
-        </a>
+        </Button>
       </div>
 
       {#if !isNotFound && errorMessage}

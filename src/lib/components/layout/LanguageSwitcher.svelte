@@ -1,6 +1,9 @@
 <script lang="ts">
+  import { goto } from "$app/navigation";
   import { ChevronDown } from "@lucide/svelte";
   import { page } from "$app/state";
+  import * as DropdownMenu from "$lib/components/ui/dropdown-menu";
+  import { Button } from "$lib/components/ui/button";
   import {
     defaultLocale,
     localeMeta,
@@ -38,84 +41,46 @@
   const alternateOptions = $derived(
     switcherOptions.filter((option) => option.code !== activeLocale),
   );
+
+  function selectLanguage(href: string) {
+    isOpen = false;
+    void goto(href);
+  }
 </script>
 
-<details bind:open={isOpen} class="locale-switcher">
-  <summary class="icon-button switcher-trigger" aria-label={copy.localeSwitcher.label}>
-    <span class="flag" aria-hidden="true">{currentOption.flag}</span>
-    <ChevronDown size={18} strokeWidth={2.25} />
-  </summary>
-  <div class="locale-menu">
+<DropdownMenu.Root bind:open={isOpen}>
+  <DropdownMenu.Trigger>
+    {#snippet child({ props })}
+      <Button
+        {...props}
+        variant="ghost"
+        size="icon"
+        class="min-w-11 w-auto gap-[0.55rem] px-3 text-[var(--color-ink-soft)] hover:text-[var(--color-primary-container)]"
+        aria-label={copy.localeSwitcher.label}
+      >
+        <span class="text-[1.1rem] leading-none" aria-hidden="true">{currentOption.flag}</span>
+        <ChevronDown class="size-4" size={18} strokeWidth={2.25} />
+      </Button>
+    {/snippet}
+  </DropdownMenu.Trigger>
+
+  <DropdownMenu.Content
+    class="w-auto min-w-15 grid-cols-1 gap-[0.35rem] rounded-2xl p-[0.45rem]"
+    align="end"
+    sideOffset={14}
+  >
     {#each alternateOptions as option}
-      <a
-        href={option.href}
-        data-sveltekit-preload-data="off"
-        data-sveltekit-preload-code="off"
-        lang={option.code}
-        hreflang={option.code}
+      <DropdownMenu.Item
+        class="flex items-center justify-center rounded-xl p-[0.7rem]"
         aria-label={option.label}
-        onclick={() => {
-          isOpen = false;
+        textValue={option.label}
+        onSelect={() => {
+          selectLanguage(option.href);
         }}
       >
-        <span class="flag" aria-hidden="true">{option.flag}</span>
-      </a>
+        <span class="text-[1.1rem] leading-none" aria-hidden="true">{option.flag}</span>
+        <span class="sr-only">{option.label}</span>
+      </DropdownMenu.Item>
     {/each}
-  </div>
-</details>
-
-<style>
-  .locale-switcher {
-    position: relative;
-  }
-
-  .locale-switcher summary {
-    list-style: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.55rem;
-    cursor: pointer;
-  }
-
-  .locale-switcher summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .locale-menu {
-    position: absolute;
-    top: calc(100% + 0.9rem);
-    right: 0;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0.35rem;
-    min-width: 3.75rem;
-    padding: 0.45rem;
-    background: var(--color-surface-lowest);
-    border: 1px solid var(--color-border-soft);
-    border-radius: 1rem;
-    box-shadow: var(--shadow-ambient);
-  }
-
-  .locale-menu a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.7rem;
-    border-radius: 0.75rem;
-  }
-
-  .locale-menu a:hover {
-    background: var(--color-primary-glow);
-  }
-
-  .switcher-trigger {
-    width: auto;
-    min-width: 2.75rem;
-    padding-inline: 0.75rem;
-  }
-
-  .flag {
-    font-size: 1.1rem;
-    line-height: 1;
-  }
-</style>
+  </DropdownMenu.Content>
+</DropdownMenu.Root>

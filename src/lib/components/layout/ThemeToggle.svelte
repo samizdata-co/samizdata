@@ -1,5 +1,6 @@
 <script lang="ts">
   import { MoonStar, SunMedium } from "@lucide/svelte";
+  import { Button } from "$lib/components/ui/button";
   import { onMount } from "svelte";
   import { defaultLocale, type AppLocale } from "$lib/i18n/locales";
   import { getMessages } from "$lib/i18n/messages";
@@ -31,9 +32,10 @@
   }
 </script>
 
-<button
+<Button
   type="button"
-  class="icon-button"
+  variant="ghost"
+  size="icon"
   aria-label={toggleLabel}
   title={copy.navigation.themeToggle}
   onclick={toggleTheme}
@@ -43,4 +45,4 @@
   {:else}
     <MoonStar size={18} strokeWidth={2.2} />
   {/if}
-</button>
+</Button>

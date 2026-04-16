@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { Button } from "$lib/components/ui/button";
   import ContactBlock from "$lib/components/content/ContactBlock.svelte";
   import TrainingResourceCard from "$lib/components/training/TrainingResourceCard.svelte";
   import { trainingPages } from "$lib/training/content";
@@ -26,14 +27,12 @@
           plus bespoke training for newsrooms, NGOs and journalism schools.
         </p>
         <div class="button-row">
-          <a class="btn btn-primary" href="#contact">
-            Ask about training
-          </a>
-          <a class="btn btn-secondary" href="#library">Browse resources</a>
+          <Button href="#contact">Ask about training</Button>
+          <Button href="#library" variant="outline">Browse resources</Button>
         </div>
       </div>
 
-      <div class="hero-card surface-card-muted">
+      <div class="hero-card">
         <p class="eyebrow muted">What I teach</p>
         <ul>
           {#each topicGroups as topic}
@@ -119,6 +118,8 @@
 
   .hero-card {
     max-width: 28rem;
+    background: var(--color-surface-low);
+    border: 1px solid var(--color-border-soft);
   }
 
   .hero-card ul {

@@ -1,4 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 :root {
   --color-primary: #7b003c;
@@ -24,6 +28,34 @@
   --font-display: "Space Grotesk", sans-serif;
   --font-body: "Work Sans", sans-serif;
   --shadow-ambient: 0 1rem 2rem rgba(123, 0, 60, 0.08);
+  --radius: 0rem;
+  --background: var(--color-surface);
+  --foreground: var(--color-ink);
+  --card: var(--color-surface-lowest);
+  --card-foreground: var(--color-ink);
+  --popover: var(--color-surface-lowest);
+  --popover-foreground: var(--color-ink);
+  --primary: var(--color-primary-container);
+  --primary-foreground: #ffffff;
+  --secondary: var(--color-surface-low);
+  --secondary-foreground: var(--color-ink);
+  --muted: var(--color-surface-low);
+  --muted-foreground: var(--color-muted);
+  --accent: var(--color-surface-high);
+  --accent-foreground: var(--color-ink);
+  --destructive: #c0476b;
+  --destructive-foreground: #ffffff;
+  --border: var(--color-border-soft);
+  --input: var(--color-border-strong);
+  --ring: color-mix(in srgb, var(--color-primary-container) 55%, white 45%);
+  --sidebar: var(--color-surface-lowest);
+  --sidebar-foreground: var(--color-ink);
+  --sidebar-primary: var(--color-primary-container);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: var(--color-surface-high);
+  --sidebar-accent-foreground: var(--color-ink);
+  --sidebar-border: var(--color-border-soft);
+  --sidebar-ring: var(--ring);
 }
 
 :root[data-theme="dark"] {
@@ -48,6 +80,75 @@
   --color-nav-surface: color-mix(in srgb, var(--color-surface) 78%, transparent);
   --color-primary-glow: rgba(198, 33, 104, 0.16);
   --shadow-ambient: 0 1.25rem 2.75rem rgba(0, 0, 0, 0.35);
+  --background: var(--color-surface);
+  --foreground: var(--color-ink);
+  --card: var(--color-surface-lowest);
+  --card-foreground: var(--color-ink);
+  --popover: var(--color-surface-lowest);
+  --popover-foreground: var(--color-ink);
+  --primary: var(--color-primary-container);
+  --primary-foreground: #ffffff;
+  --secondary: var(--color-surface-low);
+  --secondary-foreground: var(--color-ink);
+  --muted: var(--color-surface-low);
+  --muted-foreground: var(--color-muted);
+  --accent: var(--color-surface-high);
+  --accent-foreground: var(--color-ink);
+  --destructive: #d06b8c;
+  --destructive-foreground: #ffffff;
+  --border: var(--color-border-soft);
+  --input: var(--color-border-strong);
+  --ring: color-mix(in srgb, var(--color-primary-container) 58%, white 42%);
+  --sidebar: var(--color-surface-lowest);
+  --sidebar-foreground: var(--color-ink);
+  --sidebar-primary: var(--color-primary-container);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: var(--color-surface-high);
+  --sidebar-accent-foreground: var(--color-ink);
+  --sidebar-border: var(--color-border-soft);
+  --sidebar-ring: var(--ring);
+}
+
+@theme inline {
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
 }
 
 html {
@@ -145,97 +246,12 @@ iframe {
   padding-block: clamp(2rem, 5vw, 4rem);
 }
 
-.surface-card {
-  background: var(--color-surface-lowest);
-  border: 1px solid var(--color-border-soft);
-}
-
-.surface-card-muted {
-  background: var(--color-surface-low);
-  border: 1px solid var(--color-border-soft);
-}
-
-.surface-card-strong {
-  background: var(--color-surface-high);
-  border: 1px solid var(--color-border-soft);
-}
-
 .body-copy {
   margin: 0;
   max-width: 40rem;
   font-size: clamp(1.05rem, 1.6vw, 1.2rem);
   line-height: 1.6;
   color: var(--color-muted);
-}
-
-.icon-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.75rem;
-  height: 2.75rem;
-  padding: 0;
-  border: 1px solid var(--color-border-soft);
-  border-radius: 999px;
-  background: var(--color-surface-lowest);
-  color: var(--color-ink-soft);
-  cursor: pointer;
-  transition:
-    background-color 180ms ease,
-    border-color 180ms ease,
-    color 180ms ease,
-    transform 180ms ease;
-}
-
-.icon-button:hover {
-  background: var(--color-surface-high);
-  border-color: var(--color-border-accent);
-  color: var(--color-primary-container);
-  transform: translateY(-1px);
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 1.5rem;
-  border: 0;
-  border-radius: 0;
-  cursor: pointer;
-  transition:
-    background-color 180ms ease,
-    color 180ms ease,
-    transform 180ms ease;
-  font-family: var(--font-display);
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-.btn:active {
-  transform: scale(0.98);
-}
-
-.btn-primary {
-  background: var(--color-primary-container);
-  color: white;
-  box-shadow: var(--shadow-ambient);
-}
-
-.btn-primary:hover {
-  background: var(--color-primary);
-}
-
-.btn-secondary {
-  background: transparent;
-  color: var(--color-ink);
-  outline: 1px solid var(--color-border-strong);
-  outline-offset: -1px;
-}
-
-.btn-secondary:hover {
-  outline-color: var(--color-primary);
 }
 
 .muted {

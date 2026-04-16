@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { Button } from "$lib/components/ui/button";
   import {
     defaultLocale,
     localizePath,
@@ -26,8 +27,8 @@
       </h1>
       <p class="hero-copy">{copy.homeHero.body}</p>
       <div class="button-row">
-        <a class="btn btn-primary" href={contactHref}>{copy.homeHero.primaryCta}</a>
-        <a class="btn btn-secondary" href={workHref}>{copy.homeHero.secondaryCta}</a>
+        <Button href={contactHref}>{copy.homeHero.primaryCta}</Button>
+        <Button href={workHref} variant="outline">{copy.homeHero.secondaryCta}</Button>
       </div>
     </div>
 

@@ -1,5 +1,7 @@
 <script lang="ts">
   import { Menu, X } from "@lucide/svelte";
+  import { Button } from "$lib/components/ui/button";
+  import * as Sheet from "$lib/components/ui/sheet";
   import {
     defaultLocale,
     localizePath,
@@ -26,7 +28,7 @@
     localeOverride ?? (($localeStore as AppLocale | undefined) ?? defaultLocale),
   );
   const copy = $derived(getMessages(activeLocale));
-  const navItems = $derived([
+	const navItems = $derived([
     { label: copy.navigation.about, href: `${localizePath("/", activeLocale)}#about` },
     { label: copy.navigation.work, href: `${localizePath("/", activeLocale)}#work` },
     { label: copy.navigation.training, href: "/training" },
@@ -34,154 +36,82 @@
       label: copy.navigation.contact,
       href: `${localizePath("/", activeLocale)}#contact`,
     },
-  ]);
+	]);
+
+  function closeMobileMenu() {
+    isMobileMenuOpen = false;
+  }
 </script>
 
-<nav class="nav">
-  <div class="shell nav-inner">
+<nav class="fixed inset-x-0 top-0 z-50 border-b border-[var(--color-border-soft)] bg-[var(--color-nav-surface)] backdrop-blur-[20px]">
+  <div class="shell flex items-center gap-6 py-4">
     <a href={localizePath("/", activeLocale)} aria-label={copy.navigation.homeLabel}>
       <Logo />
     </a>
 
-    <div class="links" aria-label={copy.navigation.primaryLabel}>
-      {#each navItems as item}
-        <a href={item.href}>{item.label}</a>
-      {/each}
-    </div>
-
-    <div class="actions">
-      <ThemeToggle />
-      {#if showLanguageSwitcher}
-        <LanguageSwitcher {pathname} localeOverride={activeLocale} />
-      {/if}
-      <button
-        type="button"
-        class="icon-button menu-toggle"
-        aria-label={isMobileMenuOpen
-          ? copy.navigation.mobileMenuClose
-          : copy.navigation.mobileMenuOpen}
-        aria-expanded={isMobileMenuOpen}
-        aria-controls="mobile-nav"
-        onclick={() => {
-          isMobileMenuOpen = !isMobileMenuOpen;
-        }}
-      >
-        {#if isMobileMenuOpen}
-          <X size={24} strokeWidth={2.25} />
-        {:else}
-          <Menu size={24} strokeWidth={2.25} />
-        {/if}
-      </button>
-    </div>
-  </div>
-
-  {#if isMobileMenuOpen}
     <div
-      class="shell mobile-menu"
-      id="mobile-nav"
+      class="ml-auto mr-12 hidden gap-12 font-[var(--font-display)] text-sm font-bold uppercase tracking-[0.18em] min-[800px]:flex"
       aria-label={copy.navigation.primaryLabel}
     >
       {#each navItems as item}
         <a
+          class="text-[var(--color-ink-soft)] transition-colors duration-180 hover:text-[var(--color-primary-container)]"
           href={item.href}
-          onclick={() => {
-            isMobileMenuOpen = false;
-          }}
         >
           {item.label}
         </a>
       {/each}
     </div>
-  {/if}
+
+    <div class="ml-auto flex items-center gap-5 min-[800px]:ml-0">
+      <ThemeToggle />
+      {#if showLanguageSwitcher}
+        <LanguageSwitcher {pathname} localeOverride={activeLocale} />
+      {/if}
+
+      <Sheet.Root bind:open={isMobileMenuOpen}>
+        <Sheet.Trigger>
+          {#snippet child({ props })}
+            <Button
+              {...props}
+              type="button"
+              variant="ghost"
+              size="icon"
+              class="inline-flex text-[var(--color-ink-soft)] hover:text-[var(--color-primary-container)] min-[800px]:hidden"
+              aria-label={isMobileMenuOpen
+                ? copy.navigation.mobileMenuClose
+                : copy.navigation.mobileMenuOpen}
+            >
+              {#if isMobileMenuOpen}
+                <X size={24} strokeWidth={2.25} />
+              {:else}
+                <Menu size={24} strokeWidth={2.25} />
+              {/if}
+            </Button>
+          {/snippet}
+        </Sheet.Trigger>
+
+        <Sheet.Content
+          class="w-[min(100vw,24rem)] border-l border-[var(--color-border-soft)] bg-[var(--color-surface-lowest)] p-0"
+          side="right"
+        >
+          <div
+            class="shell grid gap-[0.4rem] pb-4 pt-[4.5rem]"
+            id="mobile-nav"
+            aria-label={copy.navigation.primaryLabel}
+          >
+            {#each navItems as item}
+              <a
+                class="py-[0.9rem] font-[var(--font-display)] text-[0.9rem] font-bold uppercase tracking-[0.14em] text-[var(--color-ink-soft)] transition-colors duration-180 hover:text-[var(--color-primary-container)]"
+                href={item.href}
+                onclick={closeMobileMenu}
+              >
+                {item.label}
+              </a>
+            {/each}
+          </div>
+        </Sheet.Content>
+      </Sheet.Root>
+    </div>
+  </div>
 </nav>
-
-<style>
-  .nav {
-    position: fixed;
-    inset: 0 0 auto;
-    z-index: 50;
-    background: var(--color-nav-surface);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--color-border-soft);
-  }
-
-  .nav-inner {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    padding-block: 1rem;
-  }
-
-  .links {
-    display: none;
-    margin-left: auto;
-    margin-right: 3rem;
-    gap: 3rem;
-    font-family: var(--font-display);
-    font-size: 0.875rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-  }
-
-  .links a,
-  .actions :global(button),
-  .actions :global(summary) {
-    color: var(--color-ink-soft);
-    transition: color 180ms ease;
-  }
-
-  .links a:hover,
-  .actions button:hover,
-  .actions :global(summary:hover) {
-    color: var(--color-primary-container);
-  }
-
-  .actions {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-    margin-left: auto;
-  }
-
-  .menu-toggle {
-    display: inline-flex;
-  }
-
-  .mobile-menu {
-    display: grid;
-    gap: 0.4rem;
-    padding-top: 0.25rem;
-    padding-bottom: 1rem;
-    border-top: 1px solid var(--color-border-soft);
-  }
-
-  .mobile-menu a {
-    padding: 0.9rem 0;
-    font-family: var(--font-display);
-    font-size: 0.9rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--color-ink-soft);
-  }
-
-  .mobile-menu a:hover {
-    color: var(--color-primary-container);
-  }
-
-  @media (min-width: 800px) {
-    .links {
-      display: flex;
-    }
-
-    .actions {
-      margin-left: 0;
-    }
-
-    .menu-toggle,
-    .mobile-menu {
-      display: none;
-    }
-  }
-</style>

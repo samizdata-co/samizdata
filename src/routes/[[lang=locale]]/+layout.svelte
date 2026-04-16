@@ -1,5 +1,4 @@
 <script lang="ts">
-  import icon from "$lib/assets/icon.png";
   import Footer from "$lib/components/layout/Footer.svelte";
   import TopNav from "$lib/components/layout/TopNav.svelte";
   import { siteConfig } from "$lib/data/site";
@@ -32,12 +31,12 @@
   <meta property="og:title" content={data.meta.title} />
   <meta property="og:description" content={data.meta.description} />
   <meta property="og:url" content={data.meta.canonical} />
-  <meta property="og:image" content={icon} />
+  <meta property="og:image" content={`${siteConfig.url}/icon-640x640.png`} />
   <meta property="og:locale" content={data.locale === "ro" ? "ro_RO" : "en_GB"} />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content={data.meta.title} />
   <meta name="twitter:description" content={data.meta.description} />
-  <meta name="twitter:image" content={icon} />
+  <meta name="twitter:image" content={`${siteConfig.url}/icon-640x640.png`} />
   {@html `<script type="application/ld+json">${organizationSchemaJson}<\/script>`}
 </svelte:head>
 
