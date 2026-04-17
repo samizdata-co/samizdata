@@ -12,6 +12,7 @@ export const enMessages: LocaleMessages = {
     switchToLight: "Switch to light mode",
     about: "Who we are",
     work: "What we do",
+    services: "Services",
     training: "Training",
     contact: "Contact",
   },
@@ -37,6 +38,11 @@ export const enMessages: LocaleMessages = {
       title: "Contact",
       description:
         "Get in touch with SAMIZDATA about data investigations, interactive tools, newsroom training, and public-interest storytelling projects.",
+    },
+    services: {
+      title: "Services",
+      description:
+        "Explore SAMIZDATA services across investigations, analysis, visualisation, interactive tools, data cleaning, and public-interest data products.",
     },
   },
   homeHero: {
@@ -98,5 +104,22 @@ export const enMessages: LocaleMessages = {
     locationLabel: "Location",
     location: "London, UK",
     social: "Social media",
+  },
+  services: {
+    title: "How we can help.",
+    intro:
+      "We help newsrooms and civil society organisations of all sizes make best use of data, whether that means making sense of messy records or presenting it in the best way.",
+    browseCta: "Explore service",
+    contactCta: "Contact",
+    examplesTitle: "Selected examples",
+    visitService: "View work",
+    publicationsLabel: "Publication",
+    projectsLabel: "Project",
+    noExamples: "Examples are being added to this service page.",
+    allServices: "All services",
+    trainingTitle: "Training",
+    trainingDescription:
+      "Need workshops, newsroom coaching, or practical sessions for teams and students? Visit the training section.",
+    trainingCta: "Go to training",
   },
 };

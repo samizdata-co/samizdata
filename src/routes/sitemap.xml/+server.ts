@@ -1,9 +1,17 @@
 import type { RequestHandler } from "./$types";
 import { locales, localizePath } from "$lib/i18n/locales";
 import { siteConfig } from "$lib/data/site";
+import { getServiceSlugs } from "$lib/data/services";
 import { trainingPages } from "$lib/training/content";
 
-const pages = ["/", "/contact", "/training", ...trainingPages.map((page) => page.href)];
+const pages = [
+  "/",
+  "/contact",
+  "/services",
+  ...getServiceSlugs().map((slug) => `/services/${slug}`),
+  "/training",
+  ...trainingPages.map((page) => page.href),
+];
 
 export const prerender = true;
 

@@ -18,36 +18,46 @@
 
   type Publication = (typeof cvData.publications)[number];
   type InvestigationPublication = Publication & {
-    category: "investigation";
     publisher: string;
-    img?: string;
+    img: string;
   };
   type InteractivePublication = Publication & {
-    category: "interactive";
-    img?: string;
+    img: string;
   };
   type Project = (typeof cvData.projects)[number];
   type DataExplorerProject = Project & {
-    category: "data-explorer";
-    img?: string;
+    img: string;
   };
+  type Skill = (typeof cvData.skills)[number];
   type ImageModule = { default: string };
+  type SkillValue = string | string[] | undefined;
 
   const articleImages = import.meta.glob("../../../../data/img/*", {
     eager: true,
   }) as Record<string, ImageModule>;
 
+  const hasSkill = (skills: SkillValue, expectedSkill: string) =>
+    Array.isArray(skills) ? skills.includes(expectedSkill) : skills === expectedSkill;
+  const featuredSkillNames = [
+    "Investigations and research",
+    "Interactive tools",
+    "Data explorers",
+  ] as const;
+  const skillSummaries = new Map(
+    cvData.skills.map((skill: Skill) => [skill.name, skill.summary] as const),
+  );
+
   const investigations = cvData.publications.filter(
     (publication): publication is InvestigationPublication =>
-      publication.category === "investigation",
+      Boolean(publication.img) && hasSkill(publication.skills, "Investigations and research"),
   );
   const interactiveVisualisations = cvData.publications.filter(
     (publication): publication is InteractivePublication =>
-      publication.category === "interactive",
+      Boolean(publication.img) && hasSkill(publication.skills, "Interactive tools"),
   );
   const dataExplorers = cvData.projects.filter(
     (project): project is DataExplorerProject =>
-      project.category === "data-explorer",
+      Boolean(project.img) && hasSkill(project.skills, "Data explorers"),
   );
 
   const getArticleImage = (imageName?: string) =>
@@ -59,10 +69,14 @@
   const copy = $derived(getMessages(activeLocale));
   const contactHref = $derived(`${localizePath("/", activeLocale)}#contact`);
   const serviceCards = $derived(
-    copy.homeWork.serviceCards.map((card: Omit<ServiceCardData, "href"> | ServiceCardData) => ({
-      ...card,
-      href: "href" in card ? card.href : contactHref,
-    })) as ServiceCardData[],
+    copy.homeWork.serviceCards.map(
+      (card: Omit<ServiceCardData, "href"> | ServiceCardData, index) => ({
+        ...card,
+        description:
+          skillSummaries.get(featuredSkillNames[index as 0 | 1 | 2]) ?? card.description,
+        href: "href" in card ? card.href : contactHref,
+      }),
+    ) as ServiceCardData[],
   );
   const investigationCards = $derived(
     investigations.map(

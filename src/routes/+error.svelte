@@ -19,16 +19,16 @@
   const pageCopy = $derived(
     locale === "ro"
       ? {
-          title: "Pagina cautata nu exista.",
+          title: "Pagina căutată nu există.",
           body:
-            "Linkul poate fi invechit, mutat sau introdus gresit. Incearca una dintre rutele utile de mai jos.",
+            "Linkul poate fi învechit, mutat sau introdus greșit. Încearcă una dintre rutele utile de mai jos.",
           eyebrow: "Eroare 404",
-          primaryCta: "Inapoi la homepage",
+          primaryCta: "Înapoi la homepage",
           secondaryCta: "Vezi training",
           contactCta: "Contact",
-          genericTitle: "A aparut o problema neasteptata.",
+          genericTitle: "A apărut o problemă neașteptată.",
           genericBody:
-            "Pagina nu a putut fi afisata corect. Poti reveni la homepage sau incerca din nou peste cateva momente.",
+            "Pagina nu a putut fi afișată corect. Poți reveni la homepage sau încerca din nou peste câteva momente.",
         }
       : {
           title: "The page you were looking for is not here.",

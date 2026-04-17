@@ -33,6 +33,7 @@
 	const navItems = $derived([
     { label: copy.navigation.about, href: `${localizePath("/", activeLocale)}#about` },
     { label: copy.navigation.work, href: `${localizePath("/", activeLocale)}#work` },
+    { label: copy.navigation.services, href: localizePath("/services", activeLocale) },
     { label: copy.navigation.training, href: "/training" },
     {
       label: copy.navigation.contact,

@@ -3,15 +3,16 @@ import type { LocaleMessages } from "./schema";
 
 export const roMessages: LocaleMessages = {
   navigation: {
-    homeLabel: "Pagina principala SAMIZDATA",
-    primaryLabel: "Navigatie principala",
+    homeLabel: "Pagina principală SAMIZDATA",
+    primaryLabel: "Navigație principală",
     mobileMenuOpen: "Deschide meniul",
-    mobileMenuClose: "Inchide meniul",
-    themeToggle: "Schimba tema",
-    switchToDark: "Treci la modul intunecat",
+    mobileMenuClose: "Închide meniul",
+    themeToggle: "Schimbă tema",
+    switchToDark: "Treci la modul întunecat",
     switchToLight: "Treci la modul luminos",
     about: "Cine suntem",
     work: "Ce facem",
+    services: "Servicii",
     training: "Training",
     contact: "Contact",
   },
@@ -19,7 +20,7 @@ export const roMessages: LocaleMessages = {
     label: "Limba",
     names: {
       en: "English",
-      ro: "Romana",
+      ro: "Română",
     },
   },
   footer: {
@@ -29,62 +30,67 @@ export const roMessages: LocaleMessages = {
   },
   seo: {
     home: {
-      title: "Consultanta de storytelling bazat pe date",
+      title: "Consultanță de storytelling bazat pe date",
       description:
-        "SAMIZDATA cerceteaza, scrie si construieste povesti si instrumente bazate pe date pentru organizatii media, ONG-uri si institutii de interes public.",
+        "SAMIZDATA cercetează, scrie și construiește povești și instrumente bazate pe date pentru organizații media, ONG-uri și instituții de interes public.",
     },
     contact: {
       title: "Contact",
       description:
-        "Ia legatura cu SAMIZDATA pentru investigatii bazate pe date, unelte interactive, training pentru redactii si proiecte jurnalistice de interes public.",
+        "Ia legătura cu SAMIZDATA pentru investigații bazate pe date, unelte interactive, training pentru redacții și proiecte jurnalistice de interes public.",
+    },
+    services: {
+      title: "Servicii",
+      description:
+        "Descoperă serviciile SAMIZDATA pentru investigații, analiză, vizualizare, unelte interactive, curățare de date și produse de interes public.",
     },
   },
   homeHero: {
     titleLead: "SAMIZDATA este o agenție de",
     titleAccent: "storytelling de date",
     titleTail: ".",
-    body: "Cercetam, scriem si construim instrumente de date pentru organizatii media, ONG-uri si alte institutii de interes public.",
-    primaryCta: "Hai sa vorbim!",
+    body: "Cercetăm, scriem și construim instrumente de date pentru organizații media, ONG-uri și alte instituții de interes public.",
+    primaryCta: "Hai să vorbim!",
     secondaryCta: "Ce facem",
-    scrollCue: "Portofoliu si expertiza",
+    scrollCue: "Portofoliu și expertiză",
   },
   homeAbout: {
     introLead:
       "SAMIZDATA este un studio independent de jurnalism de date condus de ",
     introHighlight: "Nicu Calcea",
     introTail:
-      ", un jurnalist cu 16 ani de experienta. Iata cateva dintre proiectele la care a lucrat.",
+      ", un jurnalist cu 16 ani de experiență. Iată câteva dintre proiectele la care a lucrat.",
   },
   clients: {
-    title: "Clienti si publicatii",
+    title: "Clienți și publicații",
   },
   homeWork: {
     serviceCards: [
       {
-        title: "Investigatii si cercetare",
+        title: "Investigații și cercetare",
         description:
-          "Reportaj original, cercetare bazata pe documente si investigatii ghidate de date, pregatite pentru publicare si verificare riguroasa.",
+          "Reportaj original, cercetare bazată pe documente și investigații ghidate de date, pregătite pentru publicare și verificare riguroasă.",
         icon: "file-search",
-        cta: "Discuta despre o ancheta",
+        cta: "Discută despre o anchetă",
       },
       {
         title: "Unelte interactive",
         description:
-          "Calculatoare, explainere si harti care ajuta cititorii sa exploreze subiecte complexe prin interactiune directa.",
+          "Calculatoare, explainere și hărți care ajută cititorii să exploreze subiecte complexe prin interacțiune directă.",
         icon: "chart-no-axes-combined",
-        cta: "Hai sa discutam despre viziunea ta",
+        cta: "Hai să discutăm despre viziunea ta",
       },
       {
         title: "Exploratoare de date",
         description:
-          "Baze de date cautabile si instrumente de consultare de interes public care transforma registre haotice in produse utile.",
+          "Baze de date căutabile și instrumente de consultare de interes public care transformă registre haotice în produse utile.",
         icon: "database",
-        cta: "Planifica un produs de date",
+        cta: "Planifică un produs de date",
       },
       {
         title: "Training",
         description:
-          "Ateliere pentru redactii si ONG-uri despre alfabetizare in date, fluxuri de lucru investigative si tehnici etice de vizualizare.",
+          "Ateliere pentru redacții și ONG-uri despre alfabetizare în date, fluxuri de lucru investigative și tehnici etice de vizualizare.",
         icon: "graduation-cap",
         href: "/training",
         variant: "accent",
@@ -93,11 +99,28 @@ export const roMessages: LocaleMessages = {
     ] as (Omit<ServiceCardData, "href"> | ServiceCardData)[],
   },
   contactBlock: {
-    title: "Ia legatura cu noi",
-    body: "Fie ca ai un set urias de date sau doar germenul unei idei, hai sa vorbim.",
+    title: "Ia legătura cu noi",
+    body: "Fie că ai un set uriaș de date sau doar germenul unei idei, hai să vorbim.",
     email: "Email direct",
-    locationLabel: "Locatie",
+    locationLabel: "Locație",
     location: "Londra, Regatul Unit",
     social: "Social media",
+  },
+  services: {
+    title: "Cum te putem ajuta.",
+    intro:
+      "Ajutăm redacții și organizații ale societății civile de orice dimensiune să folosească datele cât mai eficient, fie că asta înseamnă să dăm sens unor registre haotice, fie să le prezentăm în cea mai bună formă.",
+    browseCta: "Explorează serviciul",
+    contactCta: "Contact",
+    examplesTitle: "Exemple selectate",
+    visitService: "Vezi lucrarea",
+    publicationsLabel: "Publicație",
+    projectsLabel: "Proiect",
+    noExamples: "Adăugăm în curând exemple pentru această pagină de serviciu.",
+    allServices: "Toate serviciile",
+    trainingTitle: "Training",
+    trainingDescription:
+      "Ai nevoie de workshopuri, coaching pentru redacție sau sesiuni practice pentru echipe și studenți? Vizitează secțiunea de training.",
+    trainingCta: "Mergi la training",
   },
 };

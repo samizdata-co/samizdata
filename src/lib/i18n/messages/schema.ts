@@ -11,6 +11,7 @@ export type LocaleMessages = {
     switchToLight: string;
     about: string;
     work: string;
+    services: string;
     training: string;
     contact: string;
   };
@@ -32,6 +33,10 @@ export type LocaleMessages = {
       description: string;
     };
     contact: {
+      title: string;
+      description: string;
+    };
+    services: {
       title: string;
       description: string;
     };
@@ -63,5 +68,20 @@ export type LocaleMessages = {
     locationLabel: string;
     location: string;
     social: string;
+  };
+  services: {
+    title: string;
+    intro: string;
+    browseCta: string;
+    contactCta: string;
+    examplesTitle: string;
+    visitService: string;
+    publicationsLabel: string;
+    projectsLabel: string;
+    noExamples: string;
+    allServices: string;
+    trainingTitle: string;
+    trainingDescription: string;
+    trainingCta: string;
   };
 };
