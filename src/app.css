@@ -29,6 +29,7 @@
   --font-body: "Work Sans", sans-serif;
   --shadow-ambient: 0 1rem 2rem rgba(123, 0, 60, 0.08);
   --radius: 0rem;
+  --scroll-target-offset: 5.5rem;
   --background: var(--color-surface);
   --foreground: var(--color-ink);
   --card: var(--color-surface-lowest);
@@ -246,6 +247,10 @@ iframe {
   padding-block: clamp(2rem, 5vw, 4rem);
 }
 
+section[id] {
+  scroll-margin-top: var(--scroll-target-offset);
+}
+
 .body-copy {
   margin: 0;
   max-width: 40rem;
@@ -276,13 +281,13 @@ iframe {
 .prose h2 {
   margin: 2.5rem 0 1rem;
   font-size: clamp(1.7rem, 3vw, 2.4rem);
-  scroll-margin-top: 7rem;
+  scroll-margin-top: var(--scroll-target-offset);
 }
 
 .prose h3 {
   margin: 2rem 0 0.85rem;
   font-size: clamp(1.25rem, 2vw, 1.6rem);
-  scroll-margin-top: 7rem;
+  scroll-margin-top: var(--scroll-target-offset);
 }
 
 .prose h4 {
@@ -290,7 +295,7 @@ iframe {
   font-size: 1.05rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  scroll-margin-top: 7rem;
+  scroll-margin-top: var(--scroll-target-offset);
 }
 
 .prose p,

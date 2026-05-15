@@ -1797,7 +1797,7 @@
       "releaseDate": "2019-12-08",
       "url": "https://retailinsights.gold/",
       "summary": "A scrollable story highlighting the key insights in the World Gold Council’s new Gold retail market insights report.",
-      "skills": ["Visualisation", "Interactive tools"],
+      "skills": "Visualisation",
       "img": "world-gold-council.png"
     },
     {
@@ -1805,7 +1805,7 @@
       "publisher": "infogr8",
       "releaseDate": "2019-10-01",
       "summary": "A dashboard of Kinship's data lake.",
-      "skills": ["Visualisation", "Interactive tools"],
+      "skills": "Visualisation",
       "img": "kinship.png"
     },
     {

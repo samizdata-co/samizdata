@@ -30,7 +30,7 @@
     localeOverride ?? (($localeStore as AppLocale | undefined) ?? defaultLocale),
   );
   const copy = $derived(getMessages(activeLocale));
-	const navItems = $derived([
+  const navItems = $derived([
     { label: copy.navigation.about, href: `${localizePath("/", activeLocale)}#about` },
     { label: copy.navigation.work, href: `${localizePath("/", activeLocale)}#work` },
     { label: copy.navigation.services, href: localizePath("/services", activeLocale) },
@@ -39,7 +39,7 @@
       label: copy.navigation.contact,
       href: `${localizePath("/", activeLocale)}#contact`,
     },
-	]);
+  ]);
 
   function closeMobileMenu() {
     isMobileMenuOpen = false;

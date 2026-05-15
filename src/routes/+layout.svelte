@@ -1,8 +1,27 @@
 <script lang="ts">
+  import { disableScrollHandling, onNavigate } from "$app/navigation";
   import "../app.css";
   import "prismjs/themes/prism.css";
 
   let { children } = $props();
+
+  onNavigate(({ from, to, type }) => {
+    if (
+      type !== "link" ||
+      !from ||
+      !to ||
+      from.url.pathname === to.url.pathname ||
+      to.url.hash
+    ) {
+      return;
+    }
+
+    disableScrollHandling();
+
+    return () => {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    };
+  });
 </script>
 
 <svelte:head>
