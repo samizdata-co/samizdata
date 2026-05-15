@@ -22,7 +22,7 @@ export type ServiceCardData = {
 export type ImageCardData = {
   title: string;
   image: string;
-  href: string;
+  href?: string;
 };
 
 export type ArticleCardData = {
@@ -30,7 +30,7 @@ export type ArticleCardData = {
   year: string;
   headline: string;
   image: string;
-  href: string;
+  href?: string;
 };
 
 export const siteConfig = {

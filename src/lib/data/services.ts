@@ -12,7 +12,7 @@ export type ServiceExample = {
   kind: "publication" | "project";
   title: string;
   summary: string;
-  href: string;
+  href?: string;
   source?: string;
   year?: string;
   image: string;

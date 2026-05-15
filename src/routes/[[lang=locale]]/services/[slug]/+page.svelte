@@ -3,6 +3,7 @@
   import { Button } from "$lib/components/ui/button";
   import ContactBlock from "$lib/components/content/ContactBlock.svelte";
   import ServiceExampleCard from "$lib/components/services/ServiceExampleCard.svelte";
+  import ServiceExampleMasonry from "$lib/components/services/ServiceExampleMasonry.svelte";
   import { defaultLocale, localizePath, type AppLocale } from "$lib/i18n/locales";
   import { getMessages } from "$lib/i18n/messages";
   import { locale as localeStore } from "$lib/translations";
@@ -52,18 +53,22 @@
       </div>
 
       {#if data.service.examples.length > 0}
-        <div class="example-grid">
-          {#each data.service.examples as example}
-            <ServiceExampleCard
-              {example}
-              labels={{
-                publication: copy.services.publicationsLabel,
-                project: copy.services.projectsLabel,
-                visit: copy.services.visitService,
-              }}
-            />
-          {/each}
-        </div>
+        {#if data.service.sourceName === "Visualisation"}
+          <ServiceExampleMasonry examples={data.service.examples} />
+        {:else}
+          <div class="example-grid">
+            {#each data.service.examples as example}
+              <ServiceExampleCard
+                {example}
+                labels={{
+                  publication: copy.services.publicationsLabel,
+                  project: copy.services.projectsLabel,
+                  visit: copy.services.visitService,
+                }}
+              />
+            {/each}
+          </div>
+        {/if}
       {:else}
         <p class="empty-state">{copy.services.noExamples}</p>
       {/if}

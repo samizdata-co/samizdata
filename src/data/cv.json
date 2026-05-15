@@ -381,7 +381,7 @@
       "releaseDate": "2025-09-17",
       "url": "https://globalwitness.org/en/campaigns/land-and-environmental-defenders/roots-of-resistance/",
       "summary": "Documenting the global struggles of defenders protecting land and environmental rights.",
-      "skills": "Interactive tools",
+      "skills": ["Interactive tools", "Visualisation"],
       "img": "led-report.png"
     },
     {
@@ -436,7 +436,8 @@
       "releaseDate": "2025-06-21",
       "url": "https://blog.samizdata.co/p/how-hot-has-eastern-europe-become",
       "summary": "The world is getting warmer, and Eastern Europe is no exception.",
-      "skills": "Visualisation"
+      "skills": "Visualisation",
+      "img": "climate-stripes.png"
     },
     {
       "name": "Trump's lies about Ukraine, fact-checked",
@@ -503,7 +504,8 @@
       "releaseDate": "2024-10-28",
       "url": "https://blog.samizdata.co/p/what-happened-in-the-moldovan-election",
       "summary": "A controversial election and a razor-thin referendum result. What can we learn from the data?",
-      "skills": ["Data analysis", "Visualisation"]
+      "skills": ["Data analysis", "Visualisation"],
+      "img": "sandu-voters.png"
     },
     {
       "name": "Eastern European press increasingly under attack",
@@ -549,7 +551,8 @@
       "releaseDate": "2024-04-17",
       "url": "https://blog.samizdata.co/p/russias-tech-brain-drain-in-numbers",
       "summary": "Many Russian software engineers have left the country, GitHub data shows. Where did they go, and who do Russians code with now?",
-      "skills": ["Data analysis", "Visualisation"]
+      "skills": ["Data analysis", "Visualisation"],
+      "img": "tech-brain-drain.png"
     },
     {
       "name": "US new-biz spotlight: Creative activity more than doubles but media slows",
@@ -584,7 +587,8 @@
           "url": "https://diez.md/2024/01/26/o-zi-din-viata-unui-moldovean-mai-mult-prasit-si-mai-putina-socializare/"
         }
       ],
-      "skills": "Visualisation"
+      "skills": "Visualisation",
+      "img": "human-day.png"
     },
     {
       "name": "Christmas dinner: How much will it cost this year?",
@@ -1326,6 +1330,15 @@
       "summary": "Few people in Norway had even heard of heat pumps at the beginning of the millennium. By 2019, some 1.4 million units had been sold in the country, figures from the European Heat Pump Association (EHPA) show. Norway’s rapid adoption of heat pumps was spurred by a series of cold winters, an increase in electricity prices, grants and bans on old boilers. While heat pumps are yet to become widespread around the world, they offer a series of advantages compared with traditional heating solutions."
     },
     {
+      "name": "Dumplings unwrapped: what Georgia’s national dish reveals about the country",
+      "publisher": "New Statesman",
+      "releaseDate": "2020-09-23",
+      "url": "https://www.newstatesman.com/world/2020/09/dumplings-unwrapped-what-georgias-national-dish-reveals-about-the-country",
+      "summary": "The irony of Georgian food is that it is almost unknown in the West, which the country looks to politically, but popular in Russia.",
+      "skills": "Visualisation",
+      "img": "dumplings.svg"
+    },
+    {
       "name": "Data analysis: How the poorest countries are losing out on Covid-19 relief funds",
       "publisher": "New Statesman",
       "releaseDate": "2020-09-21",
@@ -1427,7 +1440,7 @@
     },
     {
       "name": "Business Benchmark on Farm Animal Welfare report 2022",
-      "publisher": "Business Benchmark on Farm Animal Welfare",
+      "publisher": "infogr8",
       "releaseDate": "2020-05-20",
       "url": "https://www.bbfaw.com/benchmark/",
       "summary": "The BBFAW analyses the farm animal welfare policies, management systems, reporting and performance of 150 of the world’s largest food companies",
@@ -1746,7 +1759,9 @@
       "publisher": "Zoopla",
       "releaseDate": "2020-03-13",
       "url": "https://www.zoopla.co.uk/discover/renting/top-20-features-on-renters-wishlist-revealed/",
-      "summary": "Our latest analysis reveals the most popular keywords renters use to find their next home. By Nicu Calcea March 1, 2020 Zoopla What makes a perfect rental home? For some people, it’s having a cosy fireplace to warm up next to and for others, it’s having a nice view of the sea. We looked at the most common terms people used in our keyword search tool&nbsp;between August 2019 and February 2020&nbsp;to identify the most sought-after features renters are searching for."
+      "summary": "Our latest analysis reveals the most popular keywords renters use to find their next home. By Nicu Calcea March 1, 2020 Zoopla What makes a perfect rental home? For some people, it’s having a cosy fireplace to warm up next to and for others, it’s having a nice view of the sea. We looked at the most common terms people used in our keyword search tool&nbsp;between August 2019 and February 2020&nbsp;to identify the most sought-after features renters are searching for.",
+      "skills": "Visualisation",
+      "img": "zoopla-search.jpeg"
     },
     {
       "name": "Long-distance family: First-time-buyers are moving away from their parents - Zoopla",
@@ -1775,6 +1790,41 @@
       "releaseDate": "2020-02-10",
       "url": "https://www.zoopla.co.uk/discover/property-news/what-do-people-do-after-moving-into-a-new-home/",
       "summary": "We asked over 2,000 people, both existing homeowners and first-time buyers, to find out. By Nicu Calcea February 10, 2020 Zoopla Moving into your first property can be a long, complex and emotional process. For some, it can take a while to finally settle into their new home."
+    },
+    {
+      "name": "World Gold Council: Retail Market Insights",
+      "publisher": "infogr8",
+      "releaseDate": "2019-12-08",
+      "url": "https://retailinsights.gold/",
+      "summary": "A scrollable story highlighting the key insights in the World Gold Council’s new Gold retail market insights report.",
+      "skills": ["Visualisation", "Interactive tools"],
+      "img": "world-gold-council.png"
+    },
+    {
+      "name": "Mars Kinship: Data Lake",
+      "publisher": "infogr8",
+      "releaseDate": "2019-10-01",
+      "summary": "A dashboard of Kinship's data lake.",
+      "skills": ["Visualisation", "Interactive tools"],
+      "img": "kinship.png"
+    },
+    {
+      "name": "Spotify: Early streaming campaign",
+      "publisher": "infogr8",
+      "releaseDate": "2019-09-17",
+      "url": "https://infogr8.com/our-work/spotify/",
+      "summary": "As part of several work streams, Spotify challenged infogr8 with an initial set of its proprietary data to establish whether its theory of early streaming consumption habits hold true.",
+      "skills": "Visualisation",
+      "img": "spotify-results.jpg"
+    },
+    {
+      "name": "Oracle: Where are the IT jobs?",
+      "publisher": "infogr8",
+      "releaseDate": "2019-09-16",
+      "url": "https://www.oracle.com/corporate/pressrelease/oow19-oracle-academy-autonomous-091619.html",
+      "summary": "A series of infographics containing data about the IT job market.",
+      "skills": "Visualisation",
+      "img": "oracle-infographic.png"
     },
     {
       "name": "Grade inflation means too many Firsts being awarded, finds OfS report",
@@ -9197,13 +9247,14 @@
     },
     {
       "name": "Visualisation",
-      "summary": "Charts, dashboards, scrollable stories. If you can imagine it, we can build it.",
+      "summary": "Charts, dashboards, scrollable stories, data visualisation guidelines. If you can imagine it, we can build it.",
       "level": "Expert",
       "keywords": [
         "ggplot2",
         "D3.js",
         "Datawrapper",
-        "Flourish"
+        "Flourish",
+        "Adobe Illustrator"
       ]
     },
     {
