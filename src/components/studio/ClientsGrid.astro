@@ -1,0 +1,107 @@
+---
+// Clients / bylines logo grid — ported from ClientsGrid.svelte. Logos are
+// grayscale and warm up to full colour on hover (dark-safe).
+import bbcNews from '../../portfolio/logos/bbc-news.png?url';
+import globalWitness from '../../portfolio/logos/global-witness.svg?url';
+import infogr8 from '../../portfolio/logos/infogr8.png?url';
+import newStatesman from '../../portfolio/logos/new-statesman.png?url';
+import transportEnvironment from '../../portfolio/logos/transport-environment.png?url';
+import vice from '../../portfolio/logos/vice.png?url';
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+
+const logos = [
+	{ src: bbcNews, alt: 'BBC News' },
+	{ src: newStatesman, alt: 'New Statesman' },
+	{ src: vice, alt: 'VICE' },
+	{ src: globalWitness, alt: 'Global Witness' },
+	{ src: transportEnvironment, alt: 'Transport & Environment' },
+	{ src: infogr8, alt: 'Infogr8' },
+];
+---
+
+<section class="clients" aria-labelledby="clients-heading">
+	<h2 id="clients-heading">{title}</h2>
+
+	<ul class="logos">
+		{logos.map((logo) => (
+			<li>
+				<img src={logo.src} alt={logo.alt} loading="lazy" decoding="async" />
+			</li>
+		))}
+	</ul>
+</section>
+
+<style>
+	.clients {
+		margin-top: 4rem;
+		padding-top: 2rem;
+		border-top: 1px solid var(--color-outline-ghost);
+	}
+	h2 {
+		margin: 0 0 1.5rem;
+		font-family: var(--font-display);
+		font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+		font-weight: 800;
+		letter-spacing: -0.03em;
+		color: var(--color-ink);
+	}
+	.logos {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	.logos li {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 5.5rem;
+		padding: 0.5rem 0.75rem;
+		transition: transform 180ms ease;
+	}
+	.logos li:hover {
+		transform: translateY(-0.125rem);
+	}
+	img {
+		display: block;
+		width: 100%;
+		max-width: 12rem;
+		max-height: 3rem;
+		object-fit: contain;
+		filter: grayscale(100%);
+		opacity: 0.76;
+		transition:
+			filter 180ms ease,
+			opacity 180ms ease,
+			transform 180ms ease;
+	}
+	:global(:root[data-theme='dark']) img {
+		filter: grayscale(100%) invert(1) brightness(1.15);
+		opacity: 0.82;
+	}
+	.logos li:hover img {
+		filter: grayscale(0%);
+		opacity: 1;
+		transform: scale(1.02);
+	}
+	:global(:root[data-theme='dark']) .logos li:hover img {
+		filter: grayscale(100%) invert(1) brightness(1.24);
+	}
+	@media (min-width: 700px) {
+		.logos {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+	}
+	@media (min-width: 1100px) {
+		.logos {
+			grid-template-columns: repeat(6, minmax(0, 1fr));
+		}
+	}
+</style>

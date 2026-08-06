@@ -40,70 +40,82 @@ const posts = (await getCollection('blog'))
 </main>
 <style>
 	main {
-		width: 960px;
+		max-width: 1080px;
 	}
 	ul {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 2rem;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: var(--grid-gap);
 		list-style-type: none;
 		margin: 0;
 		padding: 0;
 	}
 	ul li {
-		width: calc(50% - 1rem);
-	}
-	ul li * {
-		text-decoration: none;
-		transition: 0.2s ease;
-	}
-	ul li:first-child {
 		width: 100%;
-		margin-bottom: 1rem;
-		text-align: center;
-	}
-	ul li:first-child img {
-		width: 100%;
-	}
-	ul li:first-child .title {
-		font-size: 2.369rem;
-	}
-	ul li img {
-		margin-bottom: 0.5rem;
-		border-radius: 12px;
 	}
 	ul li a {
-		display: block;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		padding: 1rem;
+		background: var(--surface-lowest);
+		border: 1px solid var(--border-soft);
+		border-radius: 0;
+		text-decoration: none;
+		color: var(--ink);
+		transition:
+			transform 0.2s ease,
+			box-shadow 0.2s ease,
+			border-color 0.2s ease;
 	}
-	.title {
-		margin: 0;
-		color: rgb(var(--black));
-		line-height: 1;
-	}
-	.date {
-		margin: 0;
-		color: rgb(var(--gray));
+	ul li a:hover {
+		transform: translateY(-0.2rem);
+		box-shadow: var(--shadow-ambient);
+		border-color: var(--border-accent);
+		color: var(--ink);
 	}
 	ul li a:hover h4,
 	ul li a:hover .date {
-		color: rgb(var(--accent));
+		color: var(--primary-container);
 	}
-	ul a:hover img {
-		box-shadow: var(--box-shadow);
+	ul li img {
+		width: 100%;
+		height: auto;
+		display: block;
+		/* keep the intended 2:1 card crop at any card width */
+		aspect-ratio: 2 / 1;
+		object-fit: cover;
+	}
+	ul li:first-child {
+		grid-column: 1 / -1;
+	}
+	ul li:first-child .title {
+		font-size: var(--text-card-title);
+	}
+	.title {
+		margin: 0;
+		color: var(--ink);
+		font-family: var(--font-display);
+		font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+		font-weight: 900;
+		line-height: 1.04;
+		letter-spacing: -0.04em;
+		transition: color 0.2s ease;
+	}
+	.date {
+		margin: 0;
+		color: var(--muted);
+		font-family: var(--font-display);
+		font-size: var(--text-label-sm);
+		font-weight: 700;
+		line-height: 1;
+		letter-spacing: 0.22em;
+		text-transform: uppercase;
+		transition: color 0.2s ease;
 	}
 	@media (max-width: 720px) {
 		ul {
-			gap: 0.5em;
-		}
-		ul li {
-			width: 100%;
-			text-align: center;
-		}
-		ul li:first-child {
-			margin-bottom: 0;
-		}
-		ul li:first-child .title {
-			font-size: 1.563em;
+			grid-template-columns: 1fr;
 		}
 	}
 </style>

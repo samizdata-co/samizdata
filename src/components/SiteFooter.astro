@@ -1,0 +1,73 @@
+---
+// Site footer — ONE footer for the whole site. Brand logo + rights,
+// connect/email + location. Self-contained i18n + config, no props.
+import { defaultLang, useTranslations } from '../i18n';
+import { siteConfig } from '../lib/site';
+import Logo from './Logo.astro';
+
+const lang = Astro.currentLocale ?? defaultLang;
+const t = useTranslations(lang);
+---
+
+<footer class="site-footer section-block-tight">
+	<div class="shell footer-grid">
+		<div class="brand">
+			<Logo compact />
+			<p class="eyebrow muted">{t('studio.footer.rights')}</p>
+		</div>
+
+		<div class="connect">
+			<p class="eyebrow">{t('studio.footer.connect')}</p>
+			<a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+			<span>{t('studio.footer.location')}</span>
+		</div>
+	</div>
+</footer>
+
+<style>
+	.site-footer {
+		background: var(--color-surface-low);
+		border-top: 1px solid var(--color-border-soft);
+	}
+
+	.footer-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1.25rem;
+	}
+
+	.brand,
+	.connect {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.connect a,
+	.connect span {
+		font-size: 0.75rem;
+		font-weight: 500;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--color-muted);
+	}
+
+	.connect .eyebrow {
+		color: var(--color-ink);
+		font-weight: 900;
+	}
+
+	.connect a:hover {
+		text-decoration: underline;
+		text-decoration-color: var(--color-primary);
+		text-underline-offset: 0.3rem;
+	}
+
+	@media (min-width: 820px) {
+		.footer-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			align-items: end;
+			gap: 2rem;
+		}
+	}
+</style>

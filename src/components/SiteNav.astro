@@ -1,0 +1,310 @@
+---
+// Site navigation — ONE nav for the whole site (blog + studio). Fixed,
+// blurred surface backdrop, animated logo, uppercase tracked links, theme
+// toggle, language dropdown and a mobile slide-in sheet. Self-contained
+// i18n: only the page-route links are passed in, so nothing drifts.
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { defaultLang, useTranslations, type Language } from '../i18n';
+import Logo from './Logo.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import Icon from './Icon.astro';
+
+interface Props {
+	navItems: { label: string; href: string }[];
+}
+
+const { navItems } = Astro.props;
+const lang: Language = Astro.currentLocale ?? defaultLang;
+const t = useTranslations(lang);
+const otherLang: Language = lang === 'ro' ? 'en' : 'ro';
+const homeHref = getRelativeLocaleUrl(lang, '/');
+
+// Active-link detection (route links only, e.g. /, /about, /studio).
+const norm = (s: string) => s.replace(/\/+$/, '');
+const currentPath = norm(Astro.url.pathname);
+---
+
+<nav class="site-nav">
+	<div class="shell nav-inner">
+		<a href={homeHref} aria-label={t('studio.nav.homeLabel')} class="site-nav-logo">
+			<Logo />
+		</a>
+
+		<div class="nav-links" aria-label={t('studio.nav.primary')}>
+			{
+				navItems.map((item) => {
+					const active = currentPath === norm(item.href);
+					return (
+						<a href={item.href} aria-current={active ? 'page' : undefined} class:list={['nav-link', { active }]}>
+							{item.label}
+						</a>
+					);
+				})
+			}
+		</div>
+
+		<div class="nav-actions">
+			<ThemeToggle
+				switchToDark={t('studio.nav.switchToDark')}
+				switchToLight={t('studio.nav.switchToLight')}
+			/>
+			<LanguageSwitcher
+				lang={lang}
+				label={t('studio.lang.label')}
+				altLabel={t('studio.lang.label')}
+				flag={lang === 'ro' ? '🇷🇴' : '🇬🇧'}
+				altFlag={otherLang === 'ro' ? '🇷🇴' : '🇬🇧'}
+			/>
+
+			<button
+				type="button"
+				class="sheet-trigger"
+				data-sheet-trigger
+				aria-label={t('studio.nav.menuOpen')}
+				aria-expanded="false"
+				aria-controls="mobile-nav"
+				data-open-label={t('studio.nav.menuOpen')}
+				data-close-label={t('studio.nav.menuClose')}
+			>
+				<Icon name="menu" size={24} strokeWidth={2.25} class="icon-open" />
+				<Icon name="x" size={24} strokeWidth={2.25} class="icon-close hidden" />
+			</button>
+		</div>
+	</div>
+</nav>
+
+<div class="sheet-backdrop" data-sheet-backdrop hidden></div>
+<aside
+	id="mobile-nav"
+	class="sheet"
+	data-sheet
+	aria-label={t('studio.nav.primary')}
+>
+	<div class="shell sheet-links">
+		{
+			navItems.map((item) => {
+				const active = currentPath === norm(item.href);
+				return (
+					<a
+						href={item.href}
+						data-sheet-link
+						class:list={['sheet-link', { active }]}
+						aria-current={active ? 'page' : undefined}
+					>
+						{item.label}
+					</a>
+				);
+			})
+		}
+	</div>
+</aside>
+
+<style>
+	.site-nav {
+		position: fixed;
+		inset: 0 0 auto 0;
+		z-index: 50;
+		border-bottom: 1px solid var(--color-border-soft);
+		background: var(--color-nav-surface);
+		backdrop-filter: blur(20px);
+		-webkit-backdrop-filter: blur(20px);
+	}
+
+	.nav-inner {
+		display: flex;
+		align-items: center;
+		gap: 1.5rem;
+		padding-block: 1rem;
+	}
+
+	.site-nav-logo {
+		flex-shrink: 0;
+		text-decoration: none;
+		color: inherit;
+	}
+
+	.nav-links {
+		display: none;
+		align-items: center;
+		gap: 3rem;
+		margin-left: auto;
+		margin-right: 3rem;
+	}
+
+	.nav-link {
+		padding: 0.25em 0;
+		color: var(--color-ink-soft);
+		text-decoration: none;
+		font-family: var(--font-display);
+		font-size: 0.875rem;
+		font-weight: 700;
+		line-height: 1;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		transition: color 0.18s ease;
+	}
+
+	.nav-link:hover {
+		color: var(--color-primary);
+	}
+
+	.nav-link.active {
+		color: var(--color-primary);
+	}
+
+	.nav-actions {
+		display: flex;
+		align-items: center;
+		gap: 1.25rem;
+		margin-left: auto;
+	}
+
+	.sheet-trigger {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 44px;
+		height: 44px;
+		flex-shrink: 0;
+		padding: 0;
+		border: 1px solid var(--color-border-soft);
+		border-radius: 9999px;
+		background: var(--color-surface-lowest);
+		color: var(--color-ink-soft);
+		cursor: pointer;
+		transition:
+			color 0.18s ease,
+			border-color 0.18s ease,
+			background-color 0.18s ease;
+	}
+
+	.sheet-trigger:hover {
+		color: var(--color-primary);
+		border-color: var(--color-border-accent);
+		background: var(--color-surface-high);
+	}
+
+	.sheet-backdrop {
+		position: fixed;
+		inset: 0;
+		z-index: 40;
+		background: rgba(0, 0, 0, 0.4);
+		backdrop-filter: blur(2px);
+		-webkit-backdrop-filter: blur(2px);
+	}
+
+	.sheet {
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 50;
+		width: min(100vw, 24rem);
+		overflow-y: auto;
+		border-left: 1px solid var(--color-border-soft);
+		background: var(--color-surface-lowest);
+		/* closed by default: parked off-screen to the right */
+		transform: translateX(100%);
+		transition: transform 0.3s ease-out;
+	}
+
+	.hidden {
+		display: none;
+	}
+
+	.sheet-links {
+		display: grid;
+		gap: 0.4rem;
+		padding-top: 4.5rem;
+		padding-bottom: 1rem;
+	}
+
+	.sheet-link {
+		padding: 0.9rem 0;
+		color: var(--color-ink-soft);
+		text-decoration: none;
+		font-family: var(--font-display);
+		font-size: 0.9rem;
+		font-weight: 700;
+		line-height: 1;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		transition: color 0.18s ease;
+	}
+
+	.sheet-link:hover {
+		color: var(--color-primary);
+	}
+
+	.sheet-link.active {
+		color: var(--color-primary);
+	}
+
+	/* Dark-mode tweak for the logo inside the nav link */
+	:global(html[data-theme='dark']) .site-nav-logo .logo .mark {
+		filter: brightness(1.14) saturate(1.06)
+			drop-shadow(0 0 0.35rem rgba(198, 33, 104, 0.2));
+	}
+
+	@media (min-width: 800px) {
+		.nav-links {
+			display: flex;
+		}
+
+		.nav-actions {
+			margin-left: 0;
+		}
+
+		.sheet-trigger {
+			display: none;
+		}
+
+		/* mobile sheet is desktop-irrelevant */
+		.sheet,
+		.sheet-backdrop {
+			display: none;
+		}
+	}
+</style>
+
+<script>
+	const trigger = document.querySelector('[data-sheet-trigger]');
+	const sheet = document.querySelector('[data-sheet]');
+	const backdrop = document.querySelector('[data-sheet-backdrop]');
+	const closeIcon = trigger?.querySelector('.icon-close');
+	const openIcon = trigger?.querySelector('.icon-open');
+
+	if (trigger && sheet && backdrop) {
+		const open = () => {
+			sheet.style.transform = 'translateX(0)';
+			backdrop.hidden = false;
+			document.body.style.overflow = 'hidden';
+			trigger.setAttribute('aria-expanded', 'true');
+			trigger.setAttribute('aria-label', trigger.dataset.closeLabel || '');
+			openIcon?.classList.add('hidden');
+			closeIcon?.classList.remove('hidden');
+		};
+		const close = () => {
+			sheet.style.transform = 'translateX(100%)';
+			backdrop.hidden = true;
+			document.body.style.overflow = '';
+			trigger.setAttribute('aria-expanded', 'false');
+			trigger.setAttribute('aria-label', trigger.dataset.openLabel || '');
+			openIcon?.classList.remove('hidden');
+			closeIcon?.classList.add('hidden');
+		};
+
+		trigger.addEventListener('click', () => {
+			if (trigger.getAttribute('aria-expanded') === 'true') close();
+			else open();
+		});
+		backdrop.addEventListener('click', close);
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape') close();
+		});
+		document.querySelectorAll('[data-sheet-link]').forEach((a) => {
+			a.addEventListener('click', close);
+		});
+	}
+</script>

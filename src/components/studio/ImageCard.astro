@@ -1,0 +1,48 @@
+---
+// Image card — ported from ImageCard.svelte. Media card with a contained
+// image and gentle zoom on hover.
+import CardShell from './CardShell.astro';
+import type { ImageCardData } from '../../lib/portfolio';
+
+interface Props {
+	card: ImageCardData;
+	tall?: boolean;
+	loading?: 'eager' | 'lazy';
+	decoding?: 'sync' | 'async' | 'auto';
+}
+
+const { card, tall = false, loading = 'lazy', decoding = 'async' } = Astro.props;
+---
+
+<CardShell
+	class:list={['image-card', tall && 'tall']}
+	href={card.href}
+	target="_blank"
+	rel="noreferrer"
+	variant="media"
+>
+	<img src={card.image} alt={card.title} {loading} {decoding} fetchpriority={loading === 'lazy' ? 'low' : 'high'} />
+</CardShell>
+
+<style>
+	:global(.image-card) {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: var(--color-surface-high);
+	}
+	img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+		transition: transform 600ms ease;
+	}
+	:global(.card-shell:hover .image-card) img {
+		transform: scale(1.05);
+	}
+	:global(.image-card.tall) {
+		aspect-ratio: auto;
+		min-height: 100%;
+	}
+</style>

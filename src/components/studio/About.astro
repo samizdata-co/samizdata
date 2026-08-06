@@ -1,0 +1,61 @@
+---
+// About — ported from HomeAbout.svelte. Oversized intro paragraph with an
+// italic raspberry highlight, then the clients/bylines logo grid.
+import ClientsGrid from './ClientsGrid.astro';
+
+interface Props {
+	introLead: string;
+	introHighlight: string;
+	introTail: string;
+	clientsTitle: string;
+}
+
+const { introLead, introHighlight, introTail, clientsTitle } = Astro.props;
+---
+
+<section class="about section-block-tight" id="about">
+	<div class="shell">
+		<div class="intro-block">
+			<p class="intro">
+				{introLead}<a href="https://nicu.md/" target="_blank" rel="noreferrer"
+					><span>{introHighlight}</span></a
+				>{introTail}
+			</p>
+		</div>
+
+		<ClientsGrid title={clientsTitle} />
+	</div>
+</section>
+
+<style>
+	.about {
+		background: var(--color-surface-low);
+		border-bottom: 1px solid var(--color-outline-ghost);
+	}
+	.intro-block {
+		padding: 0 0 2.5rem;
+	}
+	.intro {
+		max-width: min(66rem, 66vw);
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: clamp(1.5rem, 2.8vw, 2.35rem);
+		font-weight: 700;
+		letter-spacing: -0.04em;
+		line-height: 1.08;
+		text-wrap: balance;
+		color: var(--color-muted);
+	}
+	.intro span {
+		color: var(--color-primary-container);
+		font-style: italic;
+	}
+	:global(.about .clients) {
+		margin-top: 0;
+	}
+	@media (max-width: 900px) {
+		.intro {
+			max-width: 100%;
+		}
+	}
+</style>

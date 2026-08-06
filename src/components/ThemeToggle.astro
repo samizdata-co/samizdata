@@ -1,0 +1,81 @@
+---
+// Theme toggle — vanilla JS, no framework. Reads/writes the shared
+// `samizdata-theme` key and the `data-theme` attribute on <html> (set
+// before paint in BaseHead). Works on every page of the site.
+import Icon from './Icon.astro';
+
+interface Props {
+	switchToDark: string;
+	switchToLight: string;
+	class?: string;
+}
+
+const { switchToDark, switchToLight, class: className = '' } = Astro.props;
+---
+
+<button
+	type="button"
+	class:list={['theme-toggle', className]}
+	data-theme-toggle
+	aria-label={switchToDark}
+	data-label-dark={switchToDark}
+	data-label-light={switchToLight}
+>
+	<Icon name="sun" size={18} strokeWidth={2.2} class="icon-sun" />
+	<Icon name="moon" size={18} strokeWidth={2.2} class="icon-moon" />
+</button>
+
+<style>
+	.theme-toggle {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 44px;
+		height: 44px;
+		flex-shrink: 0;
+		padding: 0;
+		border: 1px solid var(--color-border-soft);
+		border-radius: 9999px;
+		background: var(--color-surface-lowest);
+		color: var(--color-ink-soft);
+		cursor: pointer;
+		transition:
+			color 0.18s ease,
+			border-color 0.18s ease,
+			background-color 0.18s ease;
+	}
+	.theme-toggle:hover {
+		color: var(--color-primary);
+		border-color: var(--color-border-accent);
+		background: var(--color-surface-high);
+	}
+	.icon-sun {
+		display: none;
+	}
+	:global(html[data-theme='dark']) .icon-sun {
+		display: block;
+	}
+	:global(html[data-theme='dark']) .icon-moon {
+		display: none;
+	}
+</style>
+
+<script>
+	const buttons = document.querySelectorAll('[data-theme-toggle]');
+	for (const btn of buttons) {
+		btn.addEventListener('click', () => {
+			const root = document.documentElement;
+			const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+			root.dataset.theme = next;
+			try {
+				localStorage.setItem('samizdata-theme', next);
+			} catch {
+				/* private mode */
+			}
+			btn.setAttribute(
+				'aria-label',
+				next === 'dark' ? btn.dataset.labelDark : btn.dataset.labelLight
+			);
+		});
+	}
+</script>

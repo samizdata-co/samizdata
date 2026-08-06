@@ -1,0 +1,54 @@
+---
+// Inline Lucide icon set (ISC-licensed paths, ported from @lucide/svelte 1.8.0
+// as used by the original website). No icon dependency needed.
+interface Props {
+	name:
+		| 'file-search'
+		| 'chart-no-axes-combined'
+		| 'database'
+		| 'graduation-cap'
+		| 'arrow-right'
+		| 'arrow-up-right'
+		| 'menu'
+		| 'x'
+		| 'moon'
+		| 'sun'
+		| 'chevron-down';
+	size?: number;
+	strokeWidth?: number;
+	class?: string;
+}
+
+const { name, size = 24, strokeWidth = 2, class: className = '' } = Astro.props;
+
+const paths: Record<Props['name'], string> = {
+	'file-search':
+		'<path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M4.268 21a2 2 0 0 0 1.727 1H18a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v3"/><path d="m9 18-1.5-1.5"/><circle cx="5" cy="14" r="3"/>',
+	'chart-no-axes-combined':
+		'<path d="M12 16v5"/><path d="M16 14v7"/><path d="M20 10v11"/><path d="m22 3-8.646 8.646a.5.5 0 0 1-.708 0L9.354 8.354a.5.5 0 0 0-.707 0L2 15"/><path d="M4 18v3"/><path d="M8 14v7"/>',
+	database: '<path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/>',
+	'graduation-cap':
+		'<path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/>',
+	'arrow-right': '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+	'arrow-up-right': '<path d="M7 7h10v10"/><path d="M7 17 17 7"/>',
+	menu: '<line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/>',
+	x: '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
+	moon: '<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>',
+	sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/>',
+	'chevron-down': '<path d="m6 9 6 6 6-6"/>',
+};
+---
+
+<svg
+	viewBox="0 0 24 24"
+	width={size}
+	height={size}
+	fill="none"
+	stroke="currentColor"
+	stroke-width={strokeWidth}
+	stroke-linecap="round"
+	stroke-linejoin="round"
+	aria-hidden="true"
+	class:list={className}
+	set:html={paths[name]}
+></svg>

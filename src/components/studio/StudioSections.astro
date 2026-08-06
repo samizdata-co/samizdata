@@ -1,0 +1,93 @@
+---
+// The four Studio homepage sections, wired to i18n + portfolio data.
+import Hero from './Hero.astro';
+import About from './About.astro';
+import Work from './Work.astro';
+import ContactBlock from './ContactBlock.astro';
+import { defaultLang, useTranslations } from '../../i18n';
+import {
+	investigationCards,
+	interactiveCards,
+	dataExplorerCards,
+	featuredSkillSummaries,
+	type ServiceCardData,
+} from '../../lib/portfolio';
+
+const t = useTranslations(Astro.currentLocale ?? defaultLang);
+
+const featuredNames = [
+	'Investigations and research',
+	'Interactive tools',
+	'Data explorers',
+] as const;
+
+const rawServiceCards: { title: string; description: string; icon: NonNullable<ServiceCardData['icon']>; cta: string }[] = [
+	{
+		title: t('studio.work.s1.title'),
+		description: t('studio.work.s1.description'),
+		icon: 'file-search',
+		cta: t('studio.work.s1.cta'),
+	},
+	{
+		title: t('studio.work.s2.title'),
+		description: t('studio.work.s2.description'),
+		icon: 'chart-no-axes-combined',
+		cta: t('studio.work.s2.cta'),
+	},
+	{
+		title: t('studio.work.s3.title'),
+		description: t('studio.work.s3.description'),
+		icon: 'database',
+		cta: t('studio.work.s3.cta'),
+	},
+];
+
+const serviceCards: ServiceCardData[] = [
+	...rawServiceCards.map((card, i) => ({
+		title: card.title,
+		description: featuredSkillSummaries.get(featuredNames[i]) ?? card.description,
+		icon: card.icon,
+		cta: card.cta,
+		href: '#contact',
+	})),
+	{
+		title: t('studio.work.s4.title'),
+		description: t('studio.work.s4.description'),
+		icon: 'graduation-cap',
+		variant: 'accent' as const,
+		label: t('studio.work.s4.label'),
+	},
+];
+---
+
+<Hero
+	titleLead={t('studio.hero.titleLead')}
+	titleAccent={t('studio.hero.titleAccent')}
+	titleTail={t('studio.hero.titleTail')}
+	body={t('studio.hero.body')}
+	primaryCta={t('studio.hero.primaryCta')}
+	secondaryCta={t('studio.hero.secondaryCta')}
+	scrollCue={t('studio.hero.scrollCue')}
+	contactHref="#contact"
+	workHref="#work"
+/>
+<About
+	introLead={t('studio.about.introLead')}
+	introHighlight={t('studio.about.introHighlight')}
+	introTail={t('studio.about.introTail')}
+	clientsTitle={t('studio.clients.title')}
+/>
+<Work
+	serviceCards={serviceCards}
+	investigationCards={investigationCards}
+	interactiveCards={interactiveCards}
+	dataExplorerCards={dataExplorerCards}
+/>
+<ContactBlock
+	title={t('studio.contact.title')}
+	body={t('studio.contact.body')}
+	emailLabel={t('studio.contact.email')}
+	locationLabel={t('studio.contact.locationLabel')}
+	location={t('studio.contact.location')}
+	socialLabel={t('studio.contact.social')}
+/>

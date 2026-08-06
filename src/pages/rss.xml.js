@@ -1,18 +1,5 @@
-import { getCollection } from 'astro:content';
-import rss from '@astrojs/rss';
-import { useTranslations } from '../i18n';
+import { rssFeed } from '../lib/blog';
 
-export async function GET(context) {
-	const t = useTranslations('en');
-	const posts = (await getCollection('blog')).filter((post) => post.id.startsWith('en/'));
-	return rss({
-		title: t('site.title'),
-		description: t('site.description'),
-		site: context.site,
-		items: posts.map((post) => ({
-			...post.data,
-			link: `/blog/${post.id.replace('en/', '')}/`,
-		})),
-		customData: '<language>en</language>',
-	});
+export function GET(context) {
+	return rssFeed(context, 'en');
 }

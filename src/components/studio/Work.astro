@@ -1,0 +1,81 @@
+---
+// Work grid — ported from HomeWork.svelte. 1 → 2 → 4 column grid with
+// span-2 service cards; media cards derived from cv.json.
+import ServiceCard from './ServiceCard.astro';
+import ArticleCard from './ArticleCard.astro';
+import ImageCard from './ImageCard.astro';
+import type {
+	ArticleCardData,
+	ImageCardData,
+	ServiceCardData,
+} from '../../lib/portfolio';
+
+interface Props {
+	serviceCards: ServiceCardData[];
+	investigationCards: ArticleCardData[];
+	interactiveCards: ImageCardData[];
+	dataExplorerCards: ImageCardData[];
+}
+
+const { serviceCards, investigationCards, interactiveCards, dataExplorerCards } = Astro.props;
+---
+
+<section class="work section-block-tight" id="work">
+	<div class="shell">
+		<div class="grid">
+			<div class="span-2">
+				<ServiceCard card={serviceCards[0]} large />
+			</div>
+
+			{investigationCards.map((card) => (
+				<ArticleCard card={card} />
+			))}
+
+			<div class="span-2">
+				<ServiceCard card={serviceCards[1]} large />
+			</div>
+
+			{interactiveCards.map((card) => (
+				<ImageCard card={card} />
+			))}
+
+			<ServiceCard card={serviceCards[3]} />
+
+			<div class="span-2">
+				<ServiceCard card={serviceCards[2]} large />
+			</div>
+
+			{dataExplorerCards.map((card) => (
+				<ImageCard card={card} />
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.work {
+		background: var(--color-surface-low);
+	}
+	.grid {
+		--card-grid-gap: 1.5rem;
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--card-grid-gap);
+	}
+	.span-2 {
+		grid-column: span 1;
+	}
+	@media (min-width: 640px) {
+		.grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+	@media (min-width: 1200px) {
+		.grid {
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+		}
+		.span-2 {
+			grid-column: span 2;
+		}
+	}
+</style>

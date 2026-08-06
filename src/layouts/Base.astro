@@ -1,0 +1,38 @@
+---
+// Base — THE site shell, used by every page (blog, about, studio, posts).
+// One nav + one footer + one head. Page content goes in the default slot;
+// pages opt into the full-bleed studio look by adding their own wrappers.
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import BaseHead from '../components/BaseHead.astro';
+import SiteNav from '../components/SiteNav.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { defaultLang, useTranslations, type Language } from '../i18n';
+
+interface Props {
+	title: string;
+	description: string;
+}
+
+const { title, description } = Astro.props;
+const lang: Language = Astro.currentLocale ?? defaultLang;
+const t = useTranslations(lang);
+
+const navItems = [
+	{ label: t('nav.home'), href: getRelativeLocaleUrl(lang, '/') },
+	{ label: t('nav.about'), href: getRelativeLocaleUrl(lang, '/about') },
+	{ label: t('nav.studio'), href: getRelativeLocaleUrl(lang, '/studio') },
+];
+---
+
+<!doctype html>
+<html lang={lang}>
+	<head>
+		<BaseHead title={title} description={description} />
+		<slot name="head" />
+	</head>
+	<body>
+		<SiteNav navItems={navItems} />
+		<slot />
+		<SiteFooter />
+	</body>
+</html>

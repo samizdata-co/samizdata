@@ -1,0 +1,308 @@
+---
+// Animated SAMIZDATA logo — ported 1:1 from Logo.svelte (vanilla DOM, no deps).
+// Bars scan in on load; hover morphs the bars into a scatter plot with axes,
+// then back. Respects prefers-reduced-motion.
+interface Props {
+	compact?: boolean;
+	class?: string;
+}
+
+const { compact = false, class: className = '' } = Astro.props;
+---
+
+<div
+	class:list={['logo', compact ? 'compact' : '', className]}
+	role="img"
+	aria-label="SAMIZDATA"
+>
+	<div class="mark" aria-hidden="true">
+		<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"></svg>
+	</div>
+	<span>SAMIZDATA</span>
+</div>
+
+<style>
+	.logo {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.25rem;
+		cursor: default;
+	}
+	.logo a {
+		cursor: pointer;
+	}
+	.mark {
+		display: grid;
+		place-items: center;
+		width: 2.5rem;
+		height: 2.5rem;
+		flex-shrink: 0;
+		color: var(--color-logo-mark);
+	}
+	.mark svg {
+		width: 1.75rem;
+		height: 1.75rem;
+		overflow: visible;
+	}
+	.logo span {
+		font-family: var(--font-display);
+		font-size: 1.5rem;
+		font-weight: 900;
+		letter-spacing: -0.06em;
+		line-height: 1;
+		text-transform: uppercase;
+	}
+	.logo.compact span {
+		font-size: 1.25rem;
+	}
+	:global(html[data-theme='dark']) .mark {
+		filter: brightness(1.14) saturate(1.06)
+			drop-shadow(0 0 0.35rem rgba(198, 33, 104, 0.2));
+	}
+</style>
+
+<script>
+	// Bar/axis geometry (mirrors Logo.svelte)
+	const BARS = [
+		{ x: 0, y: 2, w: 24, h: 5, op: 0.25, dot: { cx: 18, cy: 4.5, s: 2.2 } },
+		{ x: 0, y: 10, w: 24, h: 5, op: 1, dot: { cx: 7, cy: 12.5, s: 2.2 } },
+		{ x: 0, y: 18, w: 16, h: 5, op: 0.25, dot: { cx: 13, cy: 19.5, s: 2.2 } },
+	];
+	const AXES = [
+		{ x1: 0.5, y1: 23.5, x2: 23.5, y2: 23.5 },
+		{ x1: 0.5, y1: 0.5, x2: 0.5, y2: 23.5 },
+	];
+	const NS = 'http://www.w3.org/2000/svg';
+
+	function boot(svgEl) {
+		let state = 'bars';
+		let idleTimer = 0;
+		let animFrame = 0;
+		let driftActive = false;
+		let motionToken = 0;
+		const barEls = [];
+		const axisEls = [];
+
+		let container = svgEl.closest('.logo');
+
+		const easeInOut = (t) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
+		const lerp = (a, b, t) => a + (b - a) * t;
+		const mkEl = (tag, attrs) => {
+			const e = document.createElementNS(NS, tag);
+			for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, String(v));
+			return e;
+		};
+		const tween = (ms, onTick, token = motionToken) =>
+			new Promise((resolve) => {
+				const start = performance.now();
+				const frame = (now) => {
+					if (token !== motionToken) return resolve(false);
+					const raw = Math.min((now - start) / ms, 1);
+					onTick(easeInOut(raw));
+					if (raw < 1) animFrame = requestAnimationFrame(frame);
+					else resolve(true);
+				};
+				animFrame = requestAnimationFrame(frame);
+			});
+		const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+
+		const buildAxes = () =>
+			AXES.forEach((a) => {
+				const line = mkEl('line', {
+					x1: a.x1,
+					y1: a.y1,
+					x2: a.x2,
+					y2: a.y2,
+					stroke: 'currentColor',
+					'stroke-width': 0.6,
+					'stroke-linecap': 'round',
+					opacity: 0,
+				});
+				svgEl.appendChild(line);
+				axisEls.push(line);
+			});
+
+		const buildBars = () =>
+			BARS.forEach((d) => {
+				const r = mkEl('rect', {
+					x: d.x,
+					y: d.y,
+					width: d.w,
+					height: d.h,
+					rx: 1,
+					fill: 'currentColor',
+					opacity: d.op,
+				});
+				svgEl.appendChild(r);
+				barEls.push(r);
+			});
+
+		const scheduleIdle = () => {
+			clearTimeout(idleTimer);
+			idleTimer = setTimeout(doIdle, 20000);
+		};
+
+		async function doIdle() {
+			if (state !== 'bars') return scheduleIdle();
+			state = 'transitioning';
+			const alt = [18, 24, 20];
+			const orig = BARS.map((d) => d.w);
+			const token = ++motionToken;
+			const w = await tween(800, (t) => {
+				barEls.forEach((r, i) => r.setAttribute('width', String(lerp(orig[i], alt[i], t))));
+			}, token);
+			if (!w || token !== motionToken) return;
+			await wait(500);
+			await tween(800, (t) => {
+				barEls.forEach((r, i) => r.setAttribute('width', String(lerp(alt[i], orig[i], t))));
+			}, token);
+			state = 'bars';
+			scheduleIdle();
+		}
+
+		function startDrift() {
+			driftActive = true;
+			const offsets = BARS.map((_, i) => ({ dx: 0, dy: 0 }));
+			const PERIOD = 2600;
+			let start = null;
+			const frame = (now) => {
+				if (!driftActive) return;
+				if (start == null) start = now;
+				const t = Math.sin((((now - start) % PERIOD) / PERIOD) * Math.PI);
+				barEls.forEach((r, i) => {
+					const dot = BARS[i].dot;
+					const s = parseFloat(r.getAttribute('width') || String(dot.s));
+					const cx = dot.cx + offsets[i].dx * t;
+					const cy = dot.cy + offsets[i].dy * t;
+					r.setAttribute('x', String(cx - s / 2));
+					r.setAttribute('y', String(cy - s / 2));
+				});
+				animFrame = requestAnimationFrame(frame);
+			};
+			animFrame = requestAnimationFrame(frame);
+		}
+
+		async function toScatter() {
+			if (state === 'scatter') return;
+			driftActive = false;
+			cancelAnimationFrame(animFrame);
+			clearTimeout(idleTimer);
+			state = 'transitioning';
+			const token = ++motionToken;
+			const done = await tween(480, (t) => {
+				barEls.forEach((r, i) => {
+					const d = BARS[i];
+					const dot = d.dot;
+					const w = lerp(d.w, dot.s, t);
+					const h = lerp(d.h, dot.s, t);
+					const cx = lerp(d.x + d.w / 2, dot.cx, t);
+					const cy = lerp(d.y + d.h / 2, dot.cy, t);
+					r.setAttribute('x', String(cx - w / 2));
+					r.setAttribute('y', String(cy - h / 2));
+					r.setAttribute('width', String(w));
+					r.setAttribute('height', String(h));
+					r.setAttribute('rx', String(lerp(1, dot.s / 2, t)));
+					r.setAttribute('opacity', String(lerp(d.op, 0.85, t)));
+				});
+				const xAxis = AXES[0];
+				axisEls[0].setAttribute('x2', String(lerp(xAxis.x1, xAxis.x2, t)));
+				axisEls[0].setAttribute('opacity', String(lerp(0, 0.3, t)));
+				const yAxis = AXES[1];
+				axisEls[1].setAttribute('y2', String(lerp(yAxis.y1, yAxis.y2, t)));
+				axisEls[1].setAttribute('opacity', String(lerp(0, 0.3, t)));
+			}, token);
+			if (!done || token !== motionToken) return;
+			state = 'scatter';
+			startDrift();
+		}
+
+		async function toBars() {
+			if (state === 'bars') return;
+			driftActive = false;
+			cancelAnimationFrame(animFrame);
+			state = 'transitioning';
+			const token = ++motionToken;
+			const snap = barEls.map((r) => ({
+				cx: parseFloat(r.getAttribute('x') || '0') + parseFloat(r.getAttribute('width') || '0') / 2,
+				cy: parseFloat(r.getAttribute('y') || '0') + parseFloat(r.getAttribute('height') || '0') / 2,
+			}));
+			const done = await tween(480, (t) => {
+				barEls.forEach((r, i) => {
+					const d = BARS[i];
+					const w = lerp(d.dot.s, d.w, t);
+					const h = lerp(d.dot.s, d.h, t);
+					const cx = lerp(snap[i].cx, d.x + d.w / 2, t);
+					const cy = lerp(snap[i].cy, d.y + d.h / 2, t);
+					r.setAttribute('x', String(cx - w / 2));
+					r.setAttribute('y', String(cy - h / 2));
+					r.setAttribute('width', String(w));
+					r.setAttribute('height', String(h));
+					r.setAttribute('rx', String(lerp(dot.s / 2, 1, t)));
+					r.setAttribute('opacity', String(lerp(0.85, d.op, t)));
+				});
+				axisEls[0].setAttribute('opacity', String(lerp(0.3, 0, t)));
+				axisEls[1].setAttribute('opacity', String(lerp(0.3, 0, t)));
+			}, token);
+			if (!done || token !== motionToken) return;
+			barEls.forEach((r, i) => {
+				const d = BARS[i];
+				r.setAttribute('x', String(d.x));
+				r.setAttribute('y', String(d.y));
+				r.setAttribute('width', String(d.w));
+				r.setAttribute('height', String(d.h));
+				r.setAttribute('rx', '1');
+				r.setAttribute('opacity', String(d.op));
+			});
+			axisEls[0].setAttribute('x2', String(AXES[0].x1));
+			axisEls[1].setAttribute('y2', String(AXES[1].y1));
+			state = 'bars';
+			scheduleIdle();
+		}
+
+		async function scanIn() {
+			barEls.forEach((r) => {
+				r.setAttribute('width', '0');
+				r.setAttribute('opacity', '0');
+			});
+			for (let i = 0; i < barEls.length; i++) {
+				if (i === 0) await wait(100);
+				else await wait(160);
+				const d = BARS[i];
+				await tween(400, (t) => {
+					barEls[i].setAttribute('width', String(lerp(0, d.w, t)));
+					barEls[i].setAttribute('opacity', String(lerp(0, d.op, t)));
+				});
+			}
+			scheduleIdle();
+		}
+
+		if (!container) container = svgEl.parentElement;
+		container.addEventListener('mouseenter', toScatter);
+		container.addEventListener('mouseleave', toBars);
+
+		buildAxes();
+		buildBars();
+		scanIn();
+	}
+
+	const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	const svgs = document.querySelectorAll('.logo svg');
+	if (reduceMotion) {
+		// Static filled bars, no animation
+		svgs.forEach((svg) => {
+			BARS.forEach((d) => {
+				const r = document.createElementNS(NS, 'rect');
+				r.setAttribute('x', String(d.x));
+				r.setAttribute('y', String(d.y));
+				r.setAttribute('width', String(d.w));
+				r.setAttribute('height', String(d.h));
+				r.setAttribute('rx', '1');
+				r.setAttribute('fill', 'currentColor');
+				r.setAttribute('opacity', String(d.op));
+				svg.appendChild(r);
+			});
+		});
+	} else {
+		svgs.forEach((svg) => boot(svg));
+	}
+</script>
