@@ -57,6 +57,7 @@
 	/* ── blog port tokens (aliases to the canonical colors) ──────────── */
 	--on-primary: #ffffff;
 	--primary-deep: var(--color-primary-deep);
+	--primary-container: var(--color-primary-container);
 	--surface: var(--color-surface);
 	--surface-low: var(--color-surface-low);
 	--surface-container: var(--color-surface-container);
@@ -295,19 +296,23 @@ hr {
 	text-transform: uppercase;
 }
 
-/* Buttons — sharp 0 radius, fixed uppercase tracked label */
+/* Buttons — ported from the original shadcn `Button` (base + default size +
+   primary variant): Work Sans 12.8px, 24px horizontal padding, 0 radius,
+   uppercase tracked. Colors stay 0the brand tokens. */
 .btn {
 	display: inline-flex;
+	flex-shrink: 0;
 	align-items: center;
 	justify-content: center;
-	gap: 0.5rem;
-	padding: 1rem 2rem;
+	gap: 0.75rem;
+	white-space: nowrap;
+	padding: 1rem 1.5rem;
 	border: 1px solid var(--border-soft);
 	border-radius: 0;
 	background: var(--surface-lowest);
 	color: var(--ink);
-	font-family: var(--font-display);
-	font-size: var(--text-button);
+	font-family: var(--font-body);
+	font-size: 0.8rem;
 	font-weight: 700;
 	line-height: 1;
 	letter-spacing: 0.18em;

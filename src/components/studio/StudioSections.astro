@@ -4,6 +4,7 @@ import Hero from './Hero.astro';
 import About from './About.astro';
 import Work from './Work.astro';
 import ContactBlock from './ContactBlock.astro';
+import { getRelativeLocaleUrl } from 'astro:i18n';
 import { defaultLang, useTranslations } from '../../i18n';
 import {
 	investigationCards,
@@ -12,8 +13,17 @@ import {
 	featuredSkillSummaries,
 	type ServiceCardData,
 } from '../../lib/portfolio';
+import { getServices } from '../../lib/services';
 
-const t = useTranslations(Astro.currentLocale ?? defaultLang);
+const lang = Astro.currentLocale ?? defaultLang;
+const t = useTranslations(lang);
+
+const serviceLinks = new Map(getServices(lang).map((s) => [s.sourceName, s.slug]));
+const serviceHref = (sourceName: string) => {
+	const slug = serviceLinks.get(sourceName);
+	if (!slug) throw new Error(`No service for ${sourceName}`);
+	return getRelativeLocaleUrl(lang, `/services/${slug}`);
+};
 
 const featuredNames = [
 	'Investigations and research',
@@ -48,7 +58,7 @@ const serviceCards: ServiceCardData[] = [
 		description: featuredSkillSummaries.get(featuredNames[i]) ?? card.description,
 		icon: card.icon,
 		cta: card.cta,
-		href: '#contact',
+		href: serviceHref(featuredNames[i]),
 	})),
 	{
 		title: t('studio.work.s4.title'),

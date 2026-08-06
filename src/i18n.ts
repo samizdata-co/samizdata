@@ -65,6 +65,26 @@ export const ui = {
 		'studio.work.s4.description':
 			'Workshops for newsrooms and NGOs on data literacy, investigative workflows, and ethical visualisation techniques.',
 		'studio.work.s4.label': 'See our free resources',
+
+		// Services pages
+		'services.seo.title': 'Services',
+		'services.seo.description':
+			'Explore SAMIZDATA services across investigations, analysis, visualisation, interactive tools, data cleaning, and public-interest data products.',
+		'services.title': 'How we can help.',
+		'services.intro':
+			'We help newsrooms and civil society organisations of all sizes make best use of data, whether that means making sense of messy records or presenting it in the best way.',
+		'services.browseCta': 'Explore service',
+		'services.contactCta': 'Contact',
+		'services.examplesTitle': 'Selected examples',
+		'services.visitService': 'View work',
+		'services.publicationsLabel': 'Publication',
+		'services.projectsLabel': 'Project',
+		'services.noExamples': 'Examples are being added to this service page.',
+		'services.allServices': 'All services',
+		'services.trainingTitle': 'Training',
+		'services.trainingDescription':
+			'Need workshops, newsroom coaching, or practical sessions for teams and students? Visit the training section.',
+		'services.trainingCta': 'Go to training',
 	},
 	ro: {
 		'site.title': 'SAMIZDATA',
@@ -124,6 +144,26 @@ export const ui = {
 		'studio.work.s4.description':
 			'Ateliere pentru redacții și ONG-uri despre alfabetizare în date, fluxuri de lucru investigative și tehnici etice de vizualizare.',
 		'studio.work.s4.label': 'Vezi resursele noastre gratuite',
+
+		// Services pages
+		'services.seo.title': 'Servicii',
+		'services.seo.description':
+			'Descoperă serviciile SAMIZDATA pentru investigații, analiză, vizualizare, unelte interactive, curățare de date și produse de interes public.',
+		'services.title': 'Cum te putem ajuta.',
+		'services.intro':
+			'Ajutăm redacții și organizații ale societății civile de orice dimensiune să folosească datele cât mai eficient, fie că asta înseamnă să dăm sens unor registre haotice, fie să le prezentăm în cea mai bună formă.',
+		'services.browseCta': 'Explorează serviciul',
+		'services.contactCta': 'Contact',
+		'services.examplesTitle': 'Exemple selectate',
+		'services.visitService': 'Vezi lucrarea',
+		'services.publicationsLabel': 'Publicație',
+		'services.projectsLabel': 'Proiect',
+		'services.noExamples': 'Adăugăm în curând exemple pentru această pagină de serviciu.',
+		'services.allServices': 'Toate serviciile',
+		'services.trainingTitle': 'Training',
+		'services.trainingDescription':
+			'Ai nevoie de workshopuri, coaching pentru redacție sau sesiuni practice pentru echipe și studenți? Vizitează secțiunea de training.',
+		'services.trainingCta': 'Mergi la training',
 	},
 } as const;
 
