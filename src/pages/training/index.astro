@@ -1,0 +1,65 @@
+---
+import Base from '../../layouts/Base.astro';
+import ContactBlock from '../../components/studio/ContactBlock.astro';
+import TrainingResourceCard from '../../components/training/TrainingResourceCard.astro';
+import { getTrainingPages } from '../../lib/training';
+import { useTranslations } from '../../i18n';
+import '../../styles/training.css';
+
+const t = useTranslations('en');
+const pages = await getTrainingPages();
+const topicGroups = ['Data analysis', 'Visualisation', 'AI workflows', 'Storytelling'];
+const title = 'Training';
+const description = 'Open training resources on data journalism, AI workflows, sourcing, and investigative reporting from SAMIZDATA.';
+---
+
+<Base title={`${t('site.title')} • ${title}`} description={description}>
+	<main class="training-main training-home">
+		<section class="hero section-block-tight">
+			<div class="grid-pattern" aria-hidden="true"></div>
+			<div class="shell hero-grid">
+				<div class="hero-copy">
+					<p class="eyebrow">Open Training Library</p>
+					<h1 class="display-title">Tell stories with data.</h1>
+					<p class="intro">
+						Free practical resources on data journalism, sourcing, spreadsheets and responsible AI,
+						plus bespoke training for newsrooms, NGOs and journalism schools.
+					</p>
+					<div class="button-row">
+						<a class="btn btn-primary" href="#contact">Ask about training</a>
+						<a class="btn" href="#library">Browse resources</a>
+					</div>
+				</div>
+
+				<div class="hero-card">
+					<p class="eyebrow muted">What I teach</p>
+					<ul>
+						{topicGroups.map((topic) => <li>{topic}</li>)}
+					</ul>
+					<p>
+						Since 2021 I have taught data journalism to postgraduate students at City, University of
+						London and run newsroom workshops at conferences including Climate Arena and Dataharvest.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="library section-block-tight" id="library">
+			<div class="shell library-shell">
+				<p class="eyebrow muted">Library</p>
+				<div class="library-grid">
+					{pages.map((page) => <TrainingResourceCard page={page} />)}
+				</div>
+			</div>
+		</section>
+
+		<ContactBlock
+			title={t('studio.contact.title')}
+			body={t('studio.contact.body')}
+			emailLabel={t('studio.contact.email')}
+			locationLabel={t('studio.contact.locationLabel')}
+			location={t('studio.contact.location')}
+			socialLabel={t('studio.contact.social')}
+		/>
+	</main>
+</Base>

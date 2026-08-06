@@ -1,0 +1,21 @@
+---
+import type { TrainingPage } from '../../lib/training';
+
+interface Props {
+	page: TrainingPage;
+}
+
+const { page } = Astro.props;
+---
+
+<a class="block h-full no-underline" href={page.href}>
+	<article class="resource-card h-full min-h-56 border border-[var(--color-border-soft)] bg-[var(--color-surface-lowest)] p-[clamp(1.3rem,3vw,2rem)] transition hover:-translate-y-[0.2rem] hover:border-[var(--color-border-accent)] hover:shadow-[var(--shadow-ambient)]">
+		<div class="flex h-full flex-col justify-between gap-5 p-[1.4rem]">
+			<p class="eyebrow muted">{page.data.section}</p>
+			<h2 class="training-card-title m-0 text-[clamp(1.45rem,2vw,1.9rem)] leading-none font-black tracking-[-0.04em] text-[var(--color-ink)]">
+				{page.data.title}
+			</h2>
+			<p class="m-0 leading-[1.6] text-[var(--color-muted)]">{page.data.description}</p>
+		</div>
+	</article>
+</a>

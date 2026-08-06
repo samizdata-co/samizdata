@@ -1,0 +1,229 @@
+@import './studio.css';
+
+.training-main {
+	width: auto;
+	max-width: none;
+	margin: 0;
+	padding: 0;
+}
+
+.training-home {
+	background: var(--color-surface);
+}
+
+.training-home .hero {
+	position: relative;
+	padding-top: 6rem;
+	overflow: hidden;
+	background:
+		radial-gradient(circle at top left, var(--color-primary-glow), transparent 36%),
+		var(--color-surface);
+}
+
+.training-home .grid-pattern {
+	position: absolute;
+	inset: 0;
+	opacity: 0.1;
+	background-image: linear-gradient(var(--color-outline) 1px, transparent 1px),
+		linear-gradient(90deg, var(--color-outline) 1px, transparent 1px);
+	background-size: 2.5rem 2.5rem;
+	pointer-events: none;
+}
+
+.training-home .hero-grid,
+.training-home .library-grid {
+	position: relative;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 1.5rem;
+}
+
+.training-home .hero-grid {
+	align-items: center;
+	padding-top: clamp(1.5rem, 4vw, 3rem);
+	padding-bottom: 1rem;
+}
+
+.training-home .hero-copy h1 {
+	margin: 0.25rem 0 1rem;
+}
+
+.training-home .intro {
+	max-width: 41rem;
+	margin: 0 0 1.25rem;
+	font-size: clamp(1.1rem, 1.7vw, 1.3rem);
+	line-height: 1.55;
+	color: var(--color-muted);
+}
+
+.training-home .hero-card,
+.training-home .resource-card {
+	padding: clamp(1.3rem, 3vw, 2rem);
+}
+
+.training-home .hero-card {
+	max-width: 28rem;
+	background: var(--color-surface-low);
+	border: 1px solid var(--color-border-soft);
+}
+
+.training-home .hero-card ul {
+	margin: 1rem 0;
+	padding-left: 1rem;
+	display: grid;
+	gap: 0.4rem;
+}
+
+.training-home .hero-card p:last-child {
+	margin: 0;
+	color: var(--color-muted);
+	line-height: 1.6;
+}
+
+.training-home .library-shell {
+	padding-top: 0;
+}
+
+.training-home .library-shell > p {
+	margin: 0 0 0.85rem;
+}
+
+.training-home .library-grid {
+	--card-grid-gap: 1rem;
+	gap: 1rem;
+}
+
+.training-link-nav {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+.training-article-title {
+	font-family: var(--font-display);
+}
+
+.training-card-title,
+.training-nav-heading {
+	font-family: var(--font-display);
+}
+
+.prose h2,
+.prose h3,
+.prose h4 {
+	font-family: var(--font-display);
+	font-weight: 800;
+	letter-spacing: -0.04em;
+	color: var(--color-ink);
+}
+
+.prose h2 {
+	margin: 2.5rem 0 1rem;
+	font-size: clamp(1.7rem, 3vw, 2.4rem);
+	scroll-margin-top: var(--scroll-target-offset);
+}
+
+.prose h3 {
+	margin: 2rem 0 0.85rem;
+	font-size: clamp(1.25rem, 2vw, 1.6rem);
+	scroll-margin-top: var(--scroll-target-offset);
+}
+
+.prose h4 {
+	margin: 1.5rem 0 0.65rem;
+	font-size: 1.05rem;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	scroll-margin-top: var(--scroll-target-offset);
+}
+
+.prose p,
+.prose li,
+.prose blockquote {
+	font-size: 1rem;
+	line-height: 1.75;
+	color: var(--color-muted);
+}
+
+.prose p,
+.prose ul,
+.prose ol,
+.prose blockquote {
+	margin: 1rem 0;
+}
+
+.prose ul,
+.prose ol {
+	padding-left: 1.3rem;
+}
+
+.prose ul {
+	list-style: disc;
+}
+
+.prose ol {
+	list-style: decimal;
+}
+
+.prose li + li {
+	margin-top: 0.4rem;
+}
+
+.prose a {
+	color: var(--color-primary-container);
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.18rem;
+}
+
+.prose blockquote {
+	margin-inline: 0;
+	padding: 1rem 1.2rem;
+	border-left: 3px solid var(--color-primary-container);
+	background: var(--color-surface-low);
+}
+
+.prose pre {
+	overflow-x: auto;
+	margin: 1.25rem 0;
+	padding: 1rem 1.1rem;
+	border: 1px solid var(--color-border-soft);
+	background: var(--color-surface-low);
+	color: var(--color-ink);
+}
+
+.prose pre code {
+	white-space: pre;
+}
+
+.prose :not(pre) > code {
+	padding: 0.15rem 0.35rem;
+	border: 1px solid var(--color-border-soft);
+	background: var(--color-surface-low);
+}
+
+.prose img {
+	margin: 1.5rem 0;
+	border: 1px solid var(--color-border-soft);
+}
+
+.prose .embed-shell {
+	margin: 1.5rem 0;
+}
+
+@media (min-width: 900px) {
+	.training-home .hero-grid {
+		grid-template-columns: minmax(0, 1fr) minmax(18rem, 24rem);
+		align-items: start;
+	}
+
+	.training-home .library-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (min-width: 1200px) {
+	.training-home .library-grid {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+}

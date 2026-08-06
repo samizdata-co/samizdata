@@ -23,6 +23,11 @@ const homeHref = getRelativeLocaleUrl(lang, '/');
 // Active-link detection (route links only, e.g. /, /about, /studio).
 const norm = (s: string) => s.replace(/\/+$/, '');
 const currentPath = norm(Astro.url.pathname);
+const isActive = (href: string) => {
+	const itemPath = norm(href);
+	return currentPath === itemPath || (itemPath !== '' && itemPath !== '/' && currentPath.startsWith(`${itemPath}/`));
+};
+const showLanguageSwitcher = !currentPath.startsWith('/training');
 ---
 
 <nav class="site-nav">
@@ -34,7 +39,7 @@ const currentPath = norm(Astro.url.pathname);
 		<div class="nav-links" aria-label={t('studio.nav.primary')}>
 			{
 				navItems.map((item) => {
-					const active = currentPath === norm(item.href);
+					const active = isActive(item.href);
 					return (
 						<a href={item.href} aria-current={active ? 'page' : undefined} class:list={['nav-link', { active }]}>
 							{item.label}
@@ -49,11 +54,15 @@ const currentPath = norm(Astro.url.pathname);
 				switchToDark={t('studio.nav.switchToDark')}
 				switchToLight={t('studio.nav.switchToLight')}
 			/>
-			<LanguageSwitcher
-				lang={lang}
-				altLabel={otherLang === 'ro' ? 'Română' : 'English'}
-				altFlag={otherLang === 'ro' ? '🇷🇴' : '🇬🇧'}
-			/>
+			{
+				showLanguageSwitcher && (
+					<LanguageSwitcher
+						lang={lang}
+						altLabel={otherLang === 'ro' ? 'Română' : 'English'}
+						altFlag={otherLang === 'ro' ? '🇷🇴' : '🇬🇧'}
+					/>
+				)
+			}
 
 			<button
 				type="button"
@@ -82,7 +91,7 @@ const currentPath = norm(Astro.url.pathname);
 	<div class="shell sheet-links">
 		{
 			navItems.map((item) => {
-				const active = currentPath === norm(item.href);
+				const active = isActive(item.href);
 				return (
 					<a
 						href={item.href}

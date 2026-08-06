@@ -21,6 +21,7 @@ const navItems = [
 	{ label: t('nav.home'), href: getRelativeLocaleUrl(lang, '/') },
 	{ label: t('nav.about'), href: getRelativeLocaleUrl(lang, '/about') },
 	{ label: t('nav.studio'), href: getRelativeLocaleUrl(lang, '/studio') },
+	...(lang === 'en' ? [{ label: t('nav.training'), href: '/training' }] : []),
 ];
 ---
 

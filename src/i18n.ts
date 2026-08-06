@@ -13,6 +13,7 @@ export const ui = {
 		'nav.home': 'Home',
 		'nav.about': 'About',
 		'nav.studio': 'Studio',
+		'nav.training': 'Training',
 		'last.updated': 'Last updated on',
 
 		// Studio (portfolio) page
@@ -45,8 +46,8 @@ export const ui = {
 		'studio.contact.body':
 			"Whether you have a massive dataset or just the seed of an idea, let's talk about it.",
 		'studio.contact.email': 'Direct email',
-		'studio.contact.locationLabel': 'Location',
-		'studio.contact.location': 'London 🇬🇧 and Chișinău 🇲🇩',
+		'studio.contact.locationLabel': 'Locations',
+		'studio.contact.location': 'London, UK & Chișinău, MD',
 		'studio.contact.social': 'Social media',
 		'studio.work.s1.title': 'Investigations and research',
 		'studio.work.s1.description':
@@ -91,6 +92,7 @@ export const ui = {
 		'nav.home': 'Acasă',
 		'nav.about': 'Despre',
 		'nav.studio': 'Studio',
+		'nav.training': 'Training',
 		'last.updated': 'Ultima actualizare:',
 
 		'studio.nav.homeLabel': 'Pagina principală SAMIZDATA',
@@ -123,8 +125,8 @@ export const ui = {
 		'studio.contact.body':
 			'Fie că ai un set uriaș de date sau doar germenul unei idei, hai să vorbim.',
 		'studio.contact.email': 'Email direct',
-		'studio.contact.locationLabel': 'Locație',
-		'studio.contact.location': 'Chișinău 🇲🇩 și Londra 🇬🇧',
+		'studio.contact.locationLabel': 'Locații',
+		'studio.contact.location': 'Chișinău, MD & Londra, UK',
 		'studio.contact.social': 'Social media',
 		'studio.work.s1.title': 'Investigații și cercetare',
 		'studio.work.s1.description':

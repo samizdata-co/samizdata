@@ -1,0 +1,29 @@
+---
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import TrainingArticleLayout from '../../components/training/TrainingArticleLayout.astro';
+import { useTranslations } from '../../i18n';
+import '../../styles/training.css';
+
+export async function getStaticPaths() {
+	const pages = await getCollection('training');
+	return pages.map((entry) => ({
+		params: { slug: entry.id },
+		props: { entry },
+	}));
+}
+
+type Props = { entry: CollectionEntry<'training'> };
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const t = useTranslations('en');
+---
+
+<Base title={`${t('site.title')} • ${entry.data.title}`} description={entry.data.description}>
+	<main class="training-main">
+		<TrainingArticleLayout title={entry.data.title} description={entry.data.description}>
+			<Content />
+		</TrainingArticleLayout>
+	</main>
+</Base>

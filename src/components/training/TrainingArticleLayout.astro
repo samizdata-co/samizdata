@@ -1,0 +1,64 @@
+---
+import { getTrainingNav, getTrainingPages } from '../../lib/training';
+
+interface Props {
+	title: string;
+	description: string;
+}
+
+const { title, description } = Astro.props;
+const nav = getTrainingNav(await getTrainingPages());
+const norm = (path: string) => path.replace(/\/+$/, '');
+const currentPath = norm(Astro.url.pathname);
+---
+
+<section class="section-block-tight bg-[var(--color-surface-low)] pb-[clamp(3rem,6vw,5rem)] pt-[clamp(8rem,12vw,10rem)]">
+	<div class="shell">
+		<div class="mx-auto min-w-0 w-[min(100%,56rem)]">
+			<header class="mb-4 pt-2">
+				<p class="eyebrow muted">Open Training Library</p>
+				<h1 class="training-article-title mt-[0.35rem] mb-0 text-[clamp(2.5rem,5vw,4.5rem)] leading-[0.92] font-black tracking-[-0.06em] text-[var(--color-ink)]">
+					{title}
+				</h1>
+				<p class="mt-[0.85rem] max-w-[42rem] text-[1.1rem] leading-[1.6] text-[var(--color-muted)]">
+					{description}
+				</p>
+			</header>
+
+			<aside class="mb-5 border border-[var(--color-border-soft)] bg-[var(--color-surface-low)] p-5">
+				{
+					nav.map((section, index) => (
+						<div class:list={[index === 0 ? '' : 'mt-[1.4rem] border-t border-[var(--color-border-soft)] pt-[1.4rem]']}>
+							<h2 class="training-nav-heading mb-[0.7rem] mt-0 text-base font-extrabold tracking-[-0.03em] text-[var(--color-ink)]">
+								{section.title}
+							</h2>
+							<nav aria-label={section.title} class="training-link-nav">
+								{section.items.map((item) => {
+									const active = currentPath === norm(item.href);
+									return (
+										<a
+											class:list={[
+												'inline-flex min-h-9 items-center border px-[0.7rem] py-[0.35rem] text-sm leading-5 no-underline transition',
+												active
+													? 'border-[var(--color-border-accent)] bg-[var(--color-primary-glow)] font-bold text-[var(--color-primary-container)]'
+													: 'border-[var(--color-border-soft)] bg-[var(--color-surface-lowest)] text-[var(--color-muted)] hover:border-[var(--color-border-accent)] hover:text-[var(--color-primary-container)]',
+											]}
+											href={item.href}
+											aria-current={active ? 'page' : undefined}
+										>
+											{item.title}
+										</a>
+									);
+								})}
+							</nav>
+						</div>
+					))
+				}
+			</aside>
+
+			<article class="prose border border-[var(--color-border-soft)] bg-[var(--color-surface-lowest)] p-[clamp(1.5rem,3vw,3rem)]">
+				<slot />
+			</article>
+		</div>
+	</div>
+</section>
