@@ -1,15 +1,22 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { canonicalPath, defaultLang } from '../i18n';
 
 type Props = HTMLAttributes<'a'>;
 
+// `href` is the canonical (unprefixed) path, e.g. "/", "/blog", "/about".
+// The locale prefix is added here, and the active state is computed by
+// comparing against the locale-stripped current path.
 const { href, class: className, ...props } = Astro.props;
-const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
-const subpath = pathname.match(/[^\/]+/g);
-const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
+const lang = Astro.currentLocale ?? defaultLang;
+const localizedHref = getRelativeLocaleUrl(lang, href);
+const canonical = canonicalPath(Astro.url.pathname, lang);
+const subpath = canonical.match(/[^\/]+/g);
+const isActive = href === canonical || href === '/' + (subpath?.[0] || '');
 ---
 
-<a href={href} class:list={[className, { active: isActive }]} {...props}>
+<a href={localizedHref} class:list={[className, { active: isActive }]} {...props}>
 	<slot />
 </a>
 <style>

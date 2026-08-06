@@ -3,7 +3,7 @@ title: "What will the world do today?"
 description: "We get 24 hours a day. A new study calculates how we spend them."
 geography: 'Eastern Europe'
 pubDate: '2024-01-25T13:27:15.999Z'
-heroImage: '../../assets/posts/9ebc418e-98fa-418a-8099-f7f7d87d3f0a_4444x5000.png'
+heroImage: '../../../assets/posts/9ebc418e-98fa-418a-8099-f7f7d87d3f0a_4444x5000.png'
 ---
 
 My goal to churn out a newsletter about once a month has fallen to the wayside. There are, after all, not enough hours in a day to sleep, work, eat, drink and also write a newsletter. Or are there?
@@ -18,7 +18,7 @@ These figures come from a 2023 paper with the catchy title of *“[The global hu
 
 The data is available on a country-by-country basis so, naturally, we can aggregate them to wider regions as well.
 
-![A donut showing the daily time spent on each activity in both Eastern Europe and Central Asia, as well as Western Europe. The chart reveals the distribution of time spent on different activities in the two regions, highlighting differences in daily routines.](../../assets/posts/9ebc418e-98fa-418a-8099-f7f7d87d3f0a_4444x5000.png)
+![A donut showing the daily time spent on each activity in both Eastern Europe and Central Asia, as well as Western Europe. The chart reveals the distribution of time spent on different activities in the two regions, highlighting differences in daily routines.](../../../assets/posts/9ebc418e-98fa-418a-8099-f7f7d87d3f0a_4444x5000.png)
 
 A few things are immediately obvious.
 
@@ -34,7 +34,7 @@ Let’s take this comparison up a notch.
 
 The chart below shows the differences in time spent on different activities in Eastern Europe and Central Asia compared with the rest of the world, although I’ve removed activities that take less than half an hour for simplicity.
 
-![Bar chart showing the largest and smallest differences in time spent between Eastern Europe and Central Asia on one hand, and the rest of the world on the other.](../../assets/posts/cfcc1df6-75df-44cb-a941-529bf0c5c084_4444x3819.png)
+![Bar chart showing the largest and smallest differences in time spent between Eastern Europe and Central Asia on one hand, and the rest of the world on the other.](../../../assets/posts/cfcc1df6-75df-44cb-a941-529bf0c5c084_4444x3819.png)
 
 Eastern Europeans and Central Asians spend a third more time on “artifacts” which, in this study, means the manufacture of everything that’s not nailed down to the ground (textiles, medicine, cars, electronics, etc).
 
@@ -72,4 +72,4 @@ Nevertheless, Estonians may have other reasons to celebrate. *The Economist* [ha
 
 Finally, I stumbled upon [this lovely geography textbook from 1930s Czechoslovakia](https://www.davidrumsey.com/luna/servlet/s/781mzh) courtesy of [David Rumsey](https://twitter.com/DavidRumseyMaps/status/1737297332960690393). Some really good-looking charts in there!
 
-![Print of Czechoslovak geography textbook.](../../assets/posts/4a10a42b-198c-4248-9342-875723aea59d_1536x562.jpeg)
+![Print of Czechoslovak geography textbook.](../../../assets/posts/4a10a42b-198c-4248-9342-875723aea59d_1536x562.jpeg)

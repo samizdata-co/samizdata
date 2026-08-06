@@ -1,15 +1,43 @@
 ---
-import { SITE_TITLE } from '../consts';
+import { getCollection } from 'astro:content';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { canonicalPath, defaultLang, useTranslations } from '../i18n';
 import HeaderLink from './HeaderLink.astro';
+
+const lang = Astro.currentLocale ?? defaultLang;
+const t = useTranslations(lang);
+const otherLang = lang === 'ro' ? 'en' : 'ro';
+const otherLabel = otherLang === 'ro' ? 'Română' : 'English';
+
+// Language switcher: link to the equivalent page in the other language when
+// it exists (static pages are always translated; blog posts only when a post
+// with the same slug exists there). Otherwise fall back to the other home.
+const canonical = canonicalPath(Astro.url.pathname, lang);
+const norm = canonical.replace(/\/$/, '') || '/';
+const isStatic = ['/', '/about'].includes(norm);
+let switchHref = '';
+if (isStatic) {
+	switchHref = getRelativeLocaleUrl(otherLang, norm);
+} else if (canonical.startsWith('/blog/')) {
+	const slug = norm.replace(/^\/blog\//, '');
+	const posts = await getCollection('blog', (p) => p.id.startsWith(`${otherLang}/`));
+	switchHref = posts.some((p) => p.id === `${otherLang}/${slug}`)
+		? getRelativeLocaleUrl(otherLang, norm)
+		: getRelativeLocaleUrl(otherLang, '');
+} else {
+	switchHref = getRelativeLocaleUrl(otherLang, '');
+}
 ---
 
 <header>
 	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
+		<h2><a href={getRelativeLocaleUrl(lang, '')}>{t('site.title')}</a></h2>
 		<div class="internal-links">
-			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/blog">Blog</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
+			<HeaderLink href="/">{t('nav.home')}</HeaderLink>
+			<HeaderLink href="/about">{t('nav.about')}</HeaderLink>
+		</div>
+		<div class="lang-switch">
+			<a href={switchHref} lang={otherLang}>{otherLabel}</a>
 		</div>
 		<div class="social-links">
 			<a href="https://m.webtoo.ls/@astro" target="_blank">
@@ -71,6 +99,14 @@ import HeaderLink from './HeaderLink.astro';
 	}
 	nav a.active {
 		text-decoration: none;
+		border-bottom-color: var(--accent);
+	}
+	.lang-switch a {
+		text-transform: uppercase;
+		font-size: 0.85em;
+		letter-spacing: 0.05em;
+	}
+	.lang-switch a:hover {
 		border-bottom-color: var(--accent);
 	}
 	.social-links,

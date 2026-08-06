@@ -3,7 +3,7 @@ title: "Hoppin' around: Where to find the best beer in Eastern Europe?"
 description: "Eastern Europe is not particularly known for its strong beer tradition. Has the \"craft revolution\" changed that?"
 geography: 'Eastern Europe'
 pubDate: '2023-08-29T12:08:07.313Z'
-heroImage: '../../assets/posts/9d1abd2f-950c-480b-ac25-553adcb7c85e_4444x3472.png'
+heroImage: '../../../assets/posts/9d1abd2f-950c-480b-ac25-553adcb7c85e_4444x3472.png'
 ---
 
 This newsletter comes to you a bit later than planned. That’s partially down to my laziness, and partially because I was on holiday.
@@ -14,7 +14,7 @@ Wikipedia [has a map](https://commons.wikimedia.org/wiki/File:Alcohol_belts_of_E
 
 Considering that, it won’t surprise you to find that Czechia is Eastern Europe’s biggest beer exporter. According to the UN’s Comtrade database, the country exported 567.5 million litres of beer in 2022 alone.
 
-![Bar chart showing Eastern European countries ordered by the volume of beer they export. The top five are Czechia, Poland, Russia, Serbia, and Lithuania.](../../assets/posts/9d1abd2f-950c-480b-ac25-553adcb7c85e_4444x3472.png)
+![Bar chart showing Eastern European countries ordered by the volume of beer they export. The top five are Czechia, Poland, Russia, Serbia, and Lithuania.](../../../assets/posts/9d1abd2f-950c-480b-ac25-553adcb7c85e_4444x3472.png)
 
 But if my newsletter-writing habits are of any indication, it’s not about the quantity. While a cold *Staropramen* was [just what I needed on a morning pit stop in Bucharest](https://untappd.com/user/nicu/checkin/1302579518), it was not the best beer on my holiday.
 
@@ -32,7 +32,7 @@ The next three best beers come our way from Estonia as well, all from the *Püha
 
 One thing immediately stands out. All the beers listed above, as well as many of the other best-rated beers, are Imperial Stouts. Let’s crunch the numbers.
 
-![Stacked bar chart showing the distribution of beer styles at different rating brackets. Stouts and sours are most popular among best-rated beers, IPAs are common around 3-4 stars, and lagers are most common at the lower end.](../../assets/posts/190682cf-72d2-4201-a288-784fcb0440fe_4444x2083.png)
+![Stacked bar chart showing the distribution of beer styles at different rating brackets. Stouts and sours are most popular among best-rated beers, IPAs are common around 3-4 stars, and lagers are most common at the lower end.](../../../assets/posts/190682cf-72d2-4201-a288-784fcb0440fe_4444x2083.png)
 
 As you can see in the chart above, stouts (and porters) make up 36.9% of the beers produced in Eastern Europe or Central Asia rated between four and five stars. That drops to 13.6% of beers rated between three and four, and a negligible 1.2% of beers rated between two and three.
 
@@ -48,7 +48,7 @@ As we saw earlier, Estonia is a big one, but stouts were also the dominant style
 
 Sours were particularly well-rated in Ukraine, Georgia, Latvia, Croatia and Russia, while IPAs were the most common choice among top drinks in much of the Balkans, Lithuania, Belarus, Slovakia and Hungary.
 
-![Map showing the popularity of different beer styles in Eastern Europe and Central Asia. Roughly, stouts are most popular in Central Europe, Romania and Bulgaria. Sours are highly-rated in Ukraine and Russia. Lagers are most popular in Central Asia.](../../assets/posts/d944d4b4-c825-4d33-8e91-3ae23c6b1f96_4444x3618.png)
+![Map showing the popularity of different beer styles in Eastern Europe and Central Asia. Roughly, stouts are most popular in Central Europe, Romania and Bulgaria. Sours are highly-rated in Ukraine and Russia. Lagers are most popular in Central Asia.](../../../assets/posts/d944d4b4-c825-4d33-8e91-3ae23c6b1f96_4444x3618.png)
 
 This, of course, is just a snapshot in time and things are likely to shift around. It should also be noted that some drinkers, particularly those in Central Asian countries like Turkmenistan, [don’t have much choice](https://www.rferl.org/a/29687544.html) in terms of beer in general, while beer amateurs in Czechia are spoiled with thousands of brews.
 

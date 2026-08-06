@@ -3,7 +3,7 @@ title: 'What is Eastern Europe?'
 description: 'A somewhat meaningful answer to a somewhat meaningless question.'
 geography: 'Eastern Europe'
 pubDate: '2023-05-01T10:47:45.463Z'
-heroImage: '../../assets/posts/477515bb-c175-4ebf-abee-3e684e901df3_1280x1042.png'
+heroImage: '../../../assets/posts/477515bb-c175-4ebf-abee-3e684e901df3_1280x1042.png'
 ---
 
 Welcome to the first edition of the SAMIZDATA newsletter.
@@ -54,13 +54,13 @@ I’ve looked at 12 different classifications to see the extent to which they ov
 
 Four countries have made an appearance in each one of those lists: Moldova, Ukraine, Belarus and Russia. On the other end, Kosovo (not a UN member, so likely underrepresented) and Turkey made it onto just two of them.
 
-![Map showing the 30 countries considered part of Eastern Europe in international classifications. These countries are Albania, Armenia, Azerbaijan, Belarus, Bosnia & Herzegovina, Bulgaria, Croatia, Czechia, Estonia, Georgia, Hungary, Kazakhstan, Kosovo, Kyrgyzstan, Latvia, Lithuania, Moldova, Montenegro, North Macedonia, Poland, Romania, Russia, Serbia, Slovakia, Slovenia, Tajikistan, Turkey, Turkmenistan, Ukraine, Uzbekistan.](../../assets/posts/477515bb-c175-4ebf-abee-3e684e901df3_1280x1042.png)
+![Map showing the 30 countries considered part of Eastern Europe in international classifications. These countries are Albania, Armenia, Azerbaijan, Belarus, Bosnia & Herzegovina, Bulgaria, Croatia, Czechia, Estonia, Georgia, Hungary, Kazakhstan, Kosovo, Kyrgyzstan, Latvia, Lithuania, Moldova, Montenegro, North Macedonia, Poland, Romania, Russia, Serbia, Slovakia, Slovenia, Tajikistan, Turkey, Turkmenistan, Ukraine, Uzbekistan.](../../../assets/posts/477515bb-c175-4ebf-abee-3e684e901df3_1280x1042.png)
 
 Note that a few of the classifications I’ve used include “Eastern Europe and Central Asia” rather than purely Eastern Europe. But that’s good enough for me.
 
 So what is Eastern Europe according to the international community?
 
-![Bar chart showing Eastern European countries, ordered by how often they show up in international classifications.](../../assets/posts/78857cfc-c3e0-4735-83b7-03aa3a3d23ba_1280x1600.png)
+![Bar chart showing Eastern European countries, ordered by how often they show up in international classifications.](../../../assets/posts/78857cfc-c3e0-4735-83b7-03aa3a3d23ba_1280x1600.png)
 
 There is no correct answer to that question, and there are many wrong ones. I don’t expect everyone to agree with this list. You might not either, or you might not care.
 

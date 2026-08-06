@@ -3,7 +3,7 @@ title: 'The best place to live in Eastern Europe'
 description: 'The world is more liveable than at any point in the past 15 years. What about Eastern Europe and Central Asia?'
 geography: 'Eastern Europe'
 pubDate: '2023-07-12T11:38:32.147Z'
-heroImage: '../../assets/posts/311317d6-6636-4770-9e99-b75e7dc4ee15_4444x5902.png'
+heroImage: '../../../assets/posts/311317d6-6636-4770-9e99-b75e7dc4ee15_4444x5902.png'
 ---
 
 *The Economist*’s Intelligence Unit has recently published an update to its “Global Liveability Index”. You can read a [summary PDF here](https://pages.eiu.com/rs/753-RIQ-438/images/Jun-Global-Liveability-Index-2023.pdf) or, if you’ve got an extra **$10,995** stashed in your Swiss bank account, you can [buy a 12-month subscription to the data](https://store.eiu.com/product/global-liveability-matrix/).
@@ -18,13 +18,13 @@ We’re not quite as good as the developed Western Europe, North America and Aus
 
 In the chart below, each dot is a city, and the further right they are, the better.
 
-![Chart showing liveability scores of cities around the world in 2023, grouped by region. Overall, the average scores are 92.3 for Western Europe, 73.4 for Asia & Australasia, 90.1 for North America, 70.8 for Eastern Europe, 67.2 for Latin America & the Caribbean, 61.4 for Middle East & North Africa, 53.8 for Sub-Saharan Africa.](../../assets/posts/311317d6-6636-4770-9e99-b75e7dc4ee15_4444x5902.png)
+![Chart showing liveability scores of cities around the world in 2023, grouped by region. Overall, the average scores are 92.3 for Western Europe, 73.4 for Asia & Australasia, 90.1 for North America, 70.8 for Eastern Europe, 67.2 for Latin America & the Caribbean, 61.4 for Middle East & North Africa, 53.8 for Sub-Saharan Africa.](../../../assets/posts/311317d6-6636-4770-9e99-b75e7dc4ee15_4444x5902.png)
 
 While most cities in Western Europe (save for Athens) and North America are crowded at the top of the rankings, there’s a fairly wide range in quality of life in Eastern Europe.
 
 Budapest came out as the most “liveable” city in Eastern Europe, scoring a nice 91.1 out of 100. This puts it at 39th out of 173, with the same score as Chicago, Miami and Madrid. Prague, Bratislava and Warsaw also scored above average.
 
-![Bar chart showing Eastern European and Central Asian cities and their liveability scores. On a scale up to 100, Budapest scored the most at 91.1 and Kyiv the least at 44.](../../assets/posts/0f1dcda5-f09b-486b-812a-6362246562f6_4444x4513.png)
+![Bar chart showing Eastern European and Central Asian cities and their liveability scores. On a scale up to 100, Budapest scored the most at 91.1 and Kyiv the least at 44.](../../../assets/posts/0f1dcda5-f09b-486b-812a-6362246562f6_4444x4513.png)
 
 The further east you go, the worse it gets. Almaty, Baku and Tashkent are all in the bottom 30% of worst places to live, according to *the Economist*.
 
@@ -52,7 +52,7 @@ We have further confirmation of that from [some recent Gallup survey data](https
 
 The survey also shows that approval of Russia’s leadership has been declining in every single post-Soviet country, including among ethnic Russians. More than half of Kazakhstan, Moldova and Armenia now disapprove of Putin’s regime.
 
-![Line chart showing post-Soviet countries and their approval rating of Russian leadership. In each one of those countries, approval is going down and dissaproval is going up.](../../assets/posts/3c95333a-7525-4541-84e0-0ed73c4bdc40_1400x1596.png)
+![Line chart showing post-Soviet countries and their approval rating of Russian leadership. In each one of those countries, approval is going down and dissaproval is going up.](../../../assets/posts/3c95333a-7525-4541-84e0-0ed73c4bdc40_1400x1596.png)
 
 And speaking of post-Soviet countries, the *Associated Press* Stylebook, the go-to English style guide for journalism, [is now recommending](https://twitter.com/APStylebook/status/1676630291090112512) writers avoid the “former Soviet republic” cliché when introducing one of the 14 independent republics, unless it’s relevant to the story. Here’s to seeing less and less of that dreadful phrase in the future.
 

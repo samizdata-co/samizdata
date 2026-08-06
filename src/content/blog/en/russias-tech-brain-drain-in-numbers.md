@@ -3,7 +3,7 @@ title: "Russia's tech brain drain in numbers"
 description: "Many Russian software engineers have left the country, GitHub data shows. Where did they go, and who do Russians code with now?"
 geography: 'Eastern Europe'
 pubDate: '2024-04-17T11:45:17.406Z'
-heroImage: '../../assets/posts/ecc733bb-0e0e-4a53-9ea5-eb5c7c7ac5ba_4444x4166.png'
+heroImage: '../../../assets/posts/ecc733bb-0e0e-4a53-9ea5-eb5c7c7ac5ba_4444x4166.png'
 ---
 
 This February, Yandex, one of Russia’s best-known tech companies, [announced it would pull out of the country](https://www.bbc.co.uk/news/business-68213191).
@@ -26,7 +26,7 @@ While the number of developers in all Eastern European and Central Asian countri
 
 Russia has seen a slowdown from the second quarter of 2022, while countries like Georgia and Armenia have experienced an unexpected surge.
 
-![Line chart showing the change in the number of developers on GitHub from Q4 2021 to Q4 2023. The number of developers in Georgia and Armenia has increased significantly since the invasion of Ukraine, while the number of developers in Russia, Ukraine and Belarus has decreased.](../../assets/posts/ecc733bb-0e0e-4a53-9ea5-eb5c7c7ac5ba_4444x4166.png)
+![Line chart showing the change in the number of developers on GitHub from Q4 2021 to Q4 2023. The number of developers in Georgia and Armenia has increased significantly since the invasion of Ukraine, while the number of developers in Russia, Ukraine and Belarus has decreased.](../../../assets/posts/ecc733bb-0e0e-4a53-9ea5-eb5c7c7ac5ba_4444x4166.png)
 
 Some of this may be natural evolution in developing countries such as Uzbekistan. Tools are becoming more accessible and AI makes coding easier.
 
@@ -34,7 +34,7 @@ But if we look at “git pushes” — a technical term that indicates how many 
 
 The level of activity in Georgia quadrupled in just two years since the end of 2021, while Russian, Ukrainian and Belorussian activity remained relatively flat. In Armenia, the number of pushes more than doubled.
 
-![Line chart showing the change in the number of git pushes from Q4 2021 to Q4 2023. There is a clear spike in Georgia and Armenia right after the invasion of Ukraine.](../../assets/posts/088eb1a4-970e-420f-bada-d996bb817fbf_4444x4166.png)
+![Line chart showing the change in the number of git pushes from Q4 2021 to Q4 2023. There is a clear spike in Georgia and Armenia right after the invasion of Ukraine.](../../../assets/posts/088eb1a4-970e-420f-bada-d996bb817fbf_4444x4166.png)
 
 What does that tell us?
 
@@ -48,7 +48,7 @@ Since GitHub is a platform that enables collaboration between developers, let’
 
 The chart below shows the number of contributions (pushes and pulls) from developers outside Russia to Russian projects. For clarity and simplicity, I’ve combined some of the countries into bigger groups.
 
-![Alluvial chart showing the volume of inbound collaborations from other countries to Russian projects. The volume of collaborations from Georgia, Armenia and Kazakhstan has increased significantly since the invasion of Ukraine.](../../assets/posts/ab84efcd-e9a7-46b7-8764-aab32aa2ddde_4444x3819.png)
+![Alluvial chart showing the volume of inbound collaborations from other countries to Russian projects. The volume of collaborations from Georgia, Armenia and Kazakhstan has increased significantly since the invasion of Ukraine.](../../../assets/posts/ab84efcd-e9a7-46b7-8764-aab32aa2ddde_4444x3819.png)
 
 We can see that code contributions from Georgia, Armenia and Kazakhstan to Russian projects have increased significantly since the invasion.
 
@@ -64,7 +64,7 @@ Before the war, the US was typically the largest destination for Russian-written
 
 Since the war, however, the number of Russian contributions to American projects has declined significantly, accounting for just a quarter by the end of 2023. Meanwhile, contributions to “other” markets have increased.
 
-![Alluvial chart showing the volume of outbound collaborations from Russia to other economies' code. The volume of collaborations with the US has halved since the invasion of Ukraine. The volume of collaborations with the EU has also decreased, but not as much.](../../assets/posts/991a630a-11a1-4bd5-bcbf-281dbcdc8f2f_4444x3819.png)
+![Alluvial chart showing the volume of outbound collaborations from Russia to other economies' code. The volume of collaborations with the US has halved since the invasion of Ukraine. The volume of collaborations with the EU has also decreased, but not as much.](../../../assets/posts/991a630a-11a1-4bd5-bcbf-281dbcdc8f2f_4444x3819.png)
 
 Perhaps the Russians who left the country were the ones most likely to work on US projects. Or perhaps Russians are now less likely to contribute to American projects, and Americans are less likely to welcome the contributions.
 
@@ -74,13 +74,13 @@ Let’s turn our attention away from Russia for a minute.
 
 Bangladesh has seen a sustained growth in recent years. In the last year alone, the number of developers surged from 616,000 to almost 1.1 million. There were just 216,000 Bangladeshi developers on GitHub at the beginning of 2020.
 
-![Bar chart showing the change in the number of developers on GitHub from Q4 2022 to Q4 2023. Bangladesh has seen a 74% in the number of developers. Yemen, Rwanda and Uzbekistan are behind.](../../assets/posts/cbf2036c-8aab-4498-9b33-27e036a3e589_4444x5694.png)
+![Bar chart showing the change in the number of developers on GitHub from Q4 2022 to Q4 2023. Bangladesh has seen a 74% in the number of developers. Yemen, Rwanda and Uzbekistan are behind.](../../../assets/posts/cbf2036c-8aab-4498-9b33-27e036a3e589_4444x5694.png)
 
 While Bangladesh’s tech scene is booming, it’s important to note that those 1.1m developers are still just a small fraction of its population of about 174m.
 
 On a GitHub accounts per capita basis, Hong Kong, Singapore and Iceland lead the chart.
 
-![Bar chart showing the number of GitHub accounts per 100 people in 2024. Hong Kong, Singapore and Iceland lead the chart.](../../assets/posts/b26b5962-fa28-45bf-be07-ea5aa61858eb_4444x5694.png)
+![Bar chart showing the number of GitHub accounts per 100 people in 2024. Hong Kong, Singapore and Iceland lead the chart.](../../../assets/posts/b26b5962-fa28-45bf-be07-ea5aa61858eb_4444x5694.png)
 
 Among Eastern European countries, Estonia, Latvia and Lithuania lead with around 5-7 GitHub accounts for every 100 people in the country.
 
@@ -100,6 +100,6 @@ I've been busy with [my new job](https://www.globalwitness.org/en/), so I’ve a
 
 In the meantime, check out this *Economist* story on the [ever-changing borders of Russia and Ukraine](https://www.economist.com/graphic-detail/2024/01/29/a-short-history-of-russia-and-ukraine).
 
-![Screenshot of an Economist map showing the Cossack Hetmanate as of 1650.](../../assets/posts/8a780e95-6c12-483a-b3ab-05e35be13e6a_700x495.png)
+![Screenshot of an Economist map showing the Cossack Hetmanate as of 1650.](../../../assets/posts/8a780e95-6c12-483a-b3ab-05e35be13e6a_700x495.png)
 
 And if you liked this article, you can always share it with someone else!

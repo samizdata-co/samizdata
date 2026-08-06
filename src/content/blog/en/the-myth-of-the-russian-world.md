@@ -3,7 +3,7 @@ title: 'The myth of the Russian World'
 description: '"Russkiy mir" is arguably smaller than Russia itself'
 geography: 'Eastern Europe'
 pubDate: '2023-06-06T13:40:24.372Z'
-heroImage: '../../assets/posts/0a1f3055-9cd7-4452-bda8-c209bf3f438f_1280x2012.png'
+heroImage: '../../../assets/posts/0a1f3055-9cd7-4452-bda8-c209bf3f438f_1280x2012.png'
 ---
 
 When Russia invaded Ukraine in February 2022, one of its excuses was that it wanted to [protect ethnic Russians](https://www.usip.org/publications/2022/04/how-kremlin-distorts-responsibility-protect-principle) living in the eastern part of the country.
@@ -14,7 +14,7 @@ Last year, my colleague [Michael Goodier](https://twitter.com/michaelgoodier/) a
 
 Today, as Russia [destroys civilian infrastructure](https://www.bbc.co.uk/news/world-europe-65818705) and [floods Ukraine](https://www.bbc.co.uk/news/live/world-europe-65816109), the UN marks the Russian Language Day “in order to celebrate cultural diversity and multilingualism”.
 
-[![](../../assets/posts/f0e4f27d-3c46-4ed6-9211-e72ceb387d5c_598x313.png)](https://twitter.com/UN/status/1665932022160965632)
+[![](../../../assets/posts/f0e4f27d-3c46-4ed6-9211-e72ceb387d5c_598x313.png)](https://twitter.com/UN/status/1665932022160965632)
 
 So, who will be celebrating? For the most part, those who live in Russia.
 
@@ -22,7 +22,7 @@ While there are significant Russian populations across the ex-Soviet states, par
 
 Scroll on for close-ups of specific regions for more detail.
 
-![Map of ex-Soviet states, showing the share of Russians in each one of their regions according to the latest censuses.](../../assets/posts/355b407f-1916-43c7-b64f-09af272f573c_1280x906.png)
+![Map of ex-Soviet states, showing the share of Russians in each one of their regions according to the latest censuses.](../../../assets/posts/355b407f-1916-43c7-b64f-09af272f573c_1280x906.png)
 
 To my knowledge, this is the most complete map of Russians in Eastern Europe and Central Asia. It comes with some caveats, but more on those at the bottom of the page.
 
@@ -34,7 +34,7 @@ Let’s start with a big ol’ disclaimer. The data for Ukraine is old. Its most
 
 There’s some anecdotal evidence that things have shifted significantly since then, and the share of Ukrainian residents who think of themselves as Russians is much smaller, but we’ll only know when Ukraine [finally sets a date](https://en.wikipedia.org/wiki/Next_Ukrainian_Census) for the next census.
 
-![Map of Ukraine and Moldova, showing the share of Russians in each one of their regions according to the latest censuses.](../../assets/posts/d5e2accf-bb3f-49f1-bba8-c8de6fcd83aa_1280x1034.png)
+![Map of Ukraine and Moldova, showing the share of Russians in each one of their regions according to the latest censuses.](../../../assets/posts/d5e2accf-bb3f-49f1-bba8-c8de6fcd83aa_1280x1034.png)
 
 In Moldova, the census doesn’t cover the separatist region of Transnistria, so I used their own unofficial figures instead.
 
@@ -44,7 +44,7 @@ As is the case with Transnistria above, it’s a bit of a struggle to get reliab
 
 That is the case in Georgia as well, where the latest figures for Abkhazia come from an unrecognised referendum in 2014, which puts Russians at 9.1% of the population.
 
-![Map of Armenia, Azerbaijan and Georgia, showing the share of Russians in each one of their regions according to the latest censuses.](../../assets/posts/700ac648-f938-402f-92d9-3442db2782b9_1280x1014.png)
+![Map of Armenia, Azerbaijan and Georgia, showing the share of Russians in each one of their regions according to the latest censuses.](../../../assets/posts/700ac648-f938-402f-92d9-3442db2782b9_1280x1014.png)
 
 Elsewhere in Azerbaijan, Baku’s population was 5.3% Russian, with every other region under 3%. Please note that the scale on this map is much smaller than the ones above or below.
 
@@ -52,7 +52,7 @@ Elsewhere in Azerbaijan, Baku’s population was 5.3% Russian, with every other 
 
 Kazakhstan’s border towns still have a significant Russian presence. The city of Ridder in East Kazakhstan is 73.8% Russian, while over 60% of the people of Shemonaikha, Altay and Glubokoe considered themselves Russian.
 
-![Map of Kazakhstan, Kyrgyzstan, Tajikistan, Turkmenistan and Uzbekistan, showing the share of Russians in each one of their regions according to the latest censuses.](../../assets/posts/f6a40a8b-7f6e-4703-a215-18f195e1dfad_1280x1084.png)
+![Map of Kazakhstan, Kyrgyzstan, Tajikistan, Turkmenistan and Uzbekistan, showing the share of Russians in each one of their regions according to the latest censuses.](../../../assets/posts/f6a40a8b-7f6e-4703-a215-18f195e1dfad_1280x1084.png)
 
 Outside Kazakhstan, Kyrgyzstan’s Bishkek has a significant Russian minority of 15.1%.
 
@@ -60,7 +60,7 @@ Outside Kazakhstan, Kyrgyzstan’s Bishkek has a significant Russian minority of
 
 Around 87% of the people living in Narva and in Sillamäe in the eastern tip of Estonia are Russians. More than a third are Russian citizens.
 
-![Map of Estonia, Latvia and Lithuania, showing the share of Russians in each one of their regions according to the latest censuses.](../../assets/posts/0a1f3055-9cd7-4452-bda8-c209bf3f438f_1280x2012.png)
+![Map of Estonia, Latvia and Lithuania, showing the share of Russians in each one of their regions according to the latest censuses.](../../../assets/posts/0a1f3055-9cd7-4452-bda8-c209bf3f438f_1280x2012.png)
 
 The invasion of Ukraine has prompted a reckoning in Narva, with Russians living there split on the issue. The number of those applying for Estonian citizenship has doubled since then.
 
@@ -72,7 +72,7 @@ While Russia is launching invasion campaigns to protect Russians abroad, its own
 
 Of the 83 federal subjects of Russia — its Republics and oblasts — 14 have a share of Russians smaller than 50%.
 
-![Map of Russia and Belarus, showing the share of Russians in each one of their regions according to the latest censuses.](../../assets/posts/8cc58d01-5dcb-4caa-aa26-968da4f0d348_1280x874.png)
+![Map of Russia and Belarus, showing the share of Russians in each one of their regions according to the latest censuses.](../../../assets/posts/8cc58d01-5dcb-4caa-aa26-968da4f0d348_1280x874.png)
 
 In fact, the North Caucasus area is remarkably non-Russian. Ingushetia is less Russian than the US, for example, while Chechnya is less Russian than Germany.
 

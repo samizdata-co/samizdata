@@ -3,7 +3,7 @@ title: "Trump's lies about Ukraine, fact-checked"
 description: "The US president is wrong, and the data proves it."
 geography: 'Eastern Europe'
 pubDate: '2025-03-01T17:00:39.910Z'
-heroImage: '../../assets/posts/a583ed9f-bbbd-4d0c-9cc0-d827a0e39d40_4444x3472.png'
+heroImage: '../../../assets/posts/a583ed9f-bbbd-4d0c-9cc0-d827a0e39d40_4444x3472.png'
 ---
 
 US president Donald ~~Krasnov~~ Trump hosted Ukrainian president Volodymyr Zelenskyy at the White House on Friday, if you can call it that.
@@ -24,7 +24,7 @@ According to the [US government's Ukraine oversight working group](https://www.u
 
 Another set of figures comes from the [Kiel Institute for the World Economy](https://www.ifw-kiel.de/topics/war-against-ukraine/ukraine-support-tracker), a German think tank. They put the total US spending at $123bn, nearly three times less than Trump's claim. Europe, on the other hand, has spent $142bn, more than the US.
 
-![Line chart showing the cumulative aid to Ukraine by the US and Europe. Europe has spent $132bn by the end of 2024, more than the US ($123bn).](../../assets/posts/a583ed9f-bbbd-4d0c-9cc0-d827a0e39d40_4444x3472.png)
+![Line chart showing the cumulative aid to Ukraine by the US and Europe. Europe has spent $132bn by the end of 2024, more than the US ($123bn).](../../../assets/posts/a583ed9f-bbbd-4d0c-9cc0-d827a0e39d40_4444x3472.png)
 
 Like so many of the other Trump claims, the $350bn figure has no basis in reality. He now [wants to cut all aid to Ukraine](https://www.washingtonpost.com/politics/2025/02/28/trump-presidency-news/#link-U4SPRIDWBNBPZBXDLEHMNTMD7E).
 
@@ -40,7 +40,7 @@ While the exact numbers aren't publically known, the Ukrainian government, Weste
 
 None of those estimates put the deaths in the millions. Even adding up the highest estimates of civilian and military fatalities, the total number would still be in the low hundreds of thousands.
 
-![A dot plot showing the estimated number of deaths in the Russian invasion of Ukraine. The majority of deaths are Russian invaders, followed by Ukrainian soldiers and civilians. All are in the low hundreds of thousands.](../../assets/posts/e093b713-36c3-4a60-8bf5-17fd9968f84f_4444x3125.png)
+![A dot plot showing the estimated number of deaths in the Russian invasion of Ukraine. The majority of deaths are Russian invaders, followed by Ukrainian soldiers and civilians. All are in the low hundreds of thousands.](../../../assets/posts/e093b713-36c3-4a60-8bf5-17fd9968f84f_4444x3125.png)
 
 Arguably, the deaths of Russian forces shouldn't even be counted as a reason to stop supporting Ukraine. In fact, they should be a reason to continue supporting Ukraine.
 
@@ -58,7 +58,7 @@ This is, again, false. Hope you're catching on to the pattern here.
 
 According to two polling agencies in Ukraine, Zelenskyy's approval rating has risen sharply since the full-scale Russian invasion of his country, and remains significantly higher than before 2022. In [recent polls](https://www.kiis.com.ua/?lang=eng&cat=reports&id=1497&page=1), his approval rating is on an upward trend, sitting at 63% in February.
 
-![Line chart showing the approval rating of Volodymyr Zelenskyy in Ukraine. His approval rating has risen sharply since the Russian invasion, and sits at 63% in February.](../../assets/posts/527baf3d-c734-4a19-a671-b879270247cf_4444x4166.png)
+![Line chart showing the approval rating of Volodymyr Zelenskyy in Ukraine. His approval rating has risen sharply since the Russian invasion, and sits at 63% in February.](../../../assets/posts/527baf3d-c734-4a19-a671-b879270247cf_4444x4166.png)
 
 Meanwhile, Trump's approval rating sits 15 points lower at 47.7%. Perhaps that explains some of his deranged behaviour?
 

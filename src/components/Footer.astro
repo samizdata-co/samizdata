@@ -1,9 +1,11 @@
 ---
+import { defaultLang, useTranslations } from '../i18n';
 const today = new Date();
+const t = useTranslations(Astro.currentLocale ?? defaultLang);
 ---
 
 <footer>
-	&copy; {today.getFullYear()} Your name here. All rights reserved.
+	&copy; {today.getFullYear()} SAMIZDATA. {t('footer.rights')}
 	<div class="social-links">
 		<a href="https://m.webtoo.ls/@astro" target="_blank">
 			<span class="sr-only">Follow Astro on Mastodon</span>

@@ -3,7 +3,7 @@ title: "What happened in the Moldovan election, and what's next?"
 description: "A controversial election and the razor-thin referendum result. What can we learn from the data?"
 geography: 'Moldova'
 pubDate: '2024-10-28T12:10:12.876Z'
-heroImage: '../../assets/posts/6b922cad-29ea-4972-b8c1-0648ba6d1751_4444x2083.png'
+heroImage: '../../../assets/posts/6b922cad-29ea-4972-b8c1-0648ba6d1751_4444x2083.png'
 ---
 
 Hey there, it’s been a minute. Glad you’re still here 🥰.
@@ -40,7 +40,7 @@ Populist Renato Usatîi (13.8%) has lately positioned himself as an independent,
 
 Together, all these candidates managed to win over half of the votes.
 
-![Bar chart showing the share of votes in the 2024 Moldovan presidential election. Pro-Russian candidates received more than 50% of the votes.](../../assets/posts/6b922cad-29ea-4972-b8c1-0648ba6d1751_4444x2083.png)
+![Bar chart showing the share of votes in the 2024 Moldovan presidential election. Pro-Russian candidates received more than 50% of the votes.](../../../assets/posts/6b922cad-29ea-4972-b8c1-0648ba6d1751_4444x2083.png)
 
 Does that mean we know the results of the second round? Not necessarily.
 
@@ -50,7 +50,7 @@ Regardless, the results still paint a pretty grim picture. They are particularly
 
 The chart below shows the vote split by the different districts of Moldova, as well as the voters abroad. The height of each bar is proportional to the number of people who voted there.
 
-![Share of vote in 2024 Moldovan presidential election by district. Maia Sandu overwhelmingly won the diaspora vote, but failed to win in the north and south of Moldova.](../../assets/posts/129528cf-cb56-41ce-b4fc-e8d93159ddef_4444x6944.png)
+![Share of vote in 2024 Moldovan presidential election by district. Maia Sandu overwhelmingly won the diaspora vote, but failed to win in the north and south of Moldova.](../../../assets/posts/129528cf-cb56-41ce-b4fc-e8d93159ddef_4444x6944.png)
 
 What do the numbers tell us?
 
@@ -66,7 +66,7 @@ Sandu had a poor performance in other districts in the south and north of the co
 
 As a general rule, Sandu was more popular in cities, while Usatîi’s campaign resonated more in the countryside.
 
-![Share of vote in 2024 Moldovan presidential election by settlement type, not including the diaspora. Sandu received more votes in urban areas, though still under 50%.](../../assets/posts/f53b8f05-2998-4ed1-9414-47287c036ff5_4444x2777.png)
+![Share of vote in 2024 Moldovan presidential election by settlement type, not including the diaspora. Sandu received more votes in urban areas, though still under 50%.](../../../assets/posts/f53b8f05-2998-4ed1-9414-47287c036ff5_4444x2777.png)
 
 #### What does this mean for next Sunday’s election?
 
@@ -88,7 +88,7 @@ That plan backfired. If those who boycotted the referendum (some 57k people) vot
 
 Here, again, the diaspora (👋) was instrumental in making it happen.
 
-![Share of vote in 2024 Moldovan referendum by district. It largely follows the pattern of the presidential vote.](../../assets/posts/ef00bf98-1e6a-41a6-ad3f-b8068c3e12b9_4444x6944.png)
+![Share of vote in 2024 Moldovan referendum by district. It largely follows the pattern of the presidential vote.](../../../assets/posts/ef00bf98-1e6a-41a6-ad3f-b8068c3e12b9_4444x6944.png)
 
 The regional vote largely follows the same patter as the presidential election, except shifted slightly to the right (because of the boycott from the candidates on the left), so we won’t dwell on it too much.
 

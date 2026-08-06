@@ -3,7 +3,7 @@ title: "Eastern European press increasingly under attack"
 description: "Russian influence spreads throughout the region, but situation in some countries improves."
 geography: 'Eastern Europe'
 pubDate: '2024-07-02T13:22:36.486Z'
-heroImage: '../../assets/posts/cd6a4b66-1339-477b-a055-0adaae0a1dda_4444x11805.png'
+heroImage: '../../../assets/posts/cd6a4b66-1339-477b-a055-0adaae0a1dda_4444x11805.png'
 ---
 
 Reporters Without Borders (RSF) have published their annual [World Press Freedom Index](https://rsf.org/en/map-2024-world-press-freedom-index) a couple of months ago.
@@ -16,7 +16,7 @@ But what about Eastern Europe and Central Asia? Here’s a paragraph from the RS
 
 Here’s each country’s progress for the past 10 years.
 
-![](../../assets/posts/cd6a4b66-1339-477b-a055-0adaae0a1dda_4444x11805.png)
+![](../../../assets/posts/cd6a4b66-1339-477b-a055-0adaae0a1dda_4444x11805.png)
 
 What this spaghetti-looking chart shows us is that the Baltics have taken the top three spots as the countries with the most press freedom, followed by the Czech Republic and Slovakia.
 
