@@ -3,7 +3,7 @@ title: "How hot has Eastern Europe become?"
 description: "The world is getting warmer, and Eastern Europe is no exception."
 geography: 'Eastern Europe'
 pubDate: '2025-06-21T12:06:38.790Z'
-heroImage: '../../../assets/posts/05fe2809-3844-4d82-ad45-7dcc6aa5730b_4444x3472.png'
+heroImage: '../../../assets/posts/ff7dca6f-18eb-4ddb-9f50-4dfe4dfb1cc2_4444x2083.png'
 ---
 
 As this newsletter is going out, London is an unsufferable 33°C, [about 11°C degrees warmer than usual](https://istheukhotrightnow.com/).

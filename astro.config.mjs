@@ -7,7 +7,7 @@ import { defineConfig, fontProviders } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://example.com',
+	site: 'https://samizdata.co',
 	i18n: {
 		locales: ['en', 'ro'],
 		defaultLocale: 'en',
@@ -31,6 +31,8 @@ export default defineConfig({
 			cssVariable: '--font-space-grotesk',
 			fallbacks: ['ui-sans-serif', 'sans-serif'],
 			weights: [700, 900],
+			// latin-ext so Romanian diacritics (a-breve, s/t comma-below) render in the web font
+			subsets: ['latin', 'latin-ext'],
 		},
 		{
 			provider: fontProviders.google(),
@@ -38,6 +40,7 @@ export default defineConfig({
 			cssVariable: '--font-work-sans',
 			fallbacks: ['ui-sans-serif', 'sans-serif'],
 			weights: [400, 500],
+			subsets: ['latin', 'latin-ext'],
 		},
 	],
 });

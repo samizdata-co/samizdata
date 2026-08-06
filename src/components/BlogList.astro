@@ -19,13 +19,19 @@ const posts = (await getCollection('blog'))
 	<section>
 		<ul>
 			{
-				posts.map((post) => (
+				posts.map((post, i) => (
 					<li>
 						<a
 							href={`/${locale === 'ro' ? 'ro/' : ''}blog/${post.id.replace(`${locale}/`, '')}/`}
 						>
 							{post.data.heroImage && (
-								<Image width={720} height={360} src={post.data.heroImage} alt="" />
+								<Image
+									width={i === 0 ? 1020 : 720}
+									height={i === 0 ? 510 : 360}
+									src={post.data.heroImage}
+									alt=""
+									priority={i === 0}
+								/>
 							)}
 							<h4 class="title">{post.data.title}</h4>
 							<p class="date">

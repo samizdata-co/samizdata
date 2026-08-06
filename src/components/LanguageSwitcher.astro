@@ -22,7 +22,8 @@ const altLang: Language = lang === 'ro' ? 'en' : 'ro';
 // but a blog post not translated there would be a 404 link -
 // so fall back to the other-language home in that case.
 const norm = Astro.url.pathname.replace(/\/+$/, '') || '/';
-const path = norm.startsWith(`/${lang}/`) ? norm.slice(lang.length + 1) : norm;
+// The home route, e.g. `/ro/`, reduces to `/ro` with no trailing slash — treat it as '/'
+const path = norm === `/${lang}` ? '/' : norm.startsWith(`/${lang}/`) ? norm.slice(lang.length + 1) : norm;
 let altHref = path === '/' ? getRelativeLocaleUrl(altLang, '/') : getRelativeLocaleUrl(altLang, path);
 
 if (path.startsWith('/blog/')) {
@@ -107,6 +108,7 @@ if (path.startsWith('/blog/')) {
 		padding: 0.7rem;
 		border-radius: 0.75rem;
 		color: var(--color-ink-soft);
+		text-decoration: none;
 		transition:
 			color 0.18s ease,
 			background-color 0.18s ease;

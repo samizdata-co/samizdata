@@ -3,7 +3,7 @@ title: "The British sitcom that swept through the Balkans"
 description: "How a show about swindlers in London took off in Belgrade"
 geography: 'Eastern Europe'
 pubDate: '2023-10-24T12:22:28.183Z'
-heroImage: '../../../assets/posts/618506af-9748-4061-97cf-f0f5e274fd31_4444x3472.png'
+heroImage: '../../../assets/posts/b76e8a56-5006-4e23-a342-831dbe0a527a_4444x3472.png'
 ---
 
 If you were in Britain on Christmas Day in 1992, chances are you sat in front of the TV to watch an episode of one of the most-beloved series in the country, *Only Fools and Horses*.

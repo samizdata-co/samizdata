@@ -3,7 +3,7 @@ title: 'The myth of the Russian World'
 description: '"Russkiy mir" is arguably smaller than Russia itself'
 geography: 'Eastern Europe'
 pubDate: '2023-06-06T13:40:24.372Z'
-heroImage: '../../../assets/posts/0a1f3055-9cd7-4452-bda8-c209bf3f438f_1280x2012.png'
+heroImage: '../../../assets/posts/355b407f-1916-43c7-b64f-09af272f573c_1280x906.png'
 ---
 
 When Russia invaded Ukraine in February 2022, one of its excuses was that it wanted to [protect ethnic Russians](https://www.usip.org/publications/2022/04/how-kremlin-distorts-responsibility-protect-principle) living in the eastern part of the country.

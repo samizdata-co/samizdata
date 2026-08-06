@@ -49,13 +49,15 @@ const { switchToDark, switchToLight, class: className = '' } = Astro.props;
 		border-color: var(--color-border-accent);
 		background: var(--color-surface-high);
 	}
-	.icon-sun {
+	/* Icons render inside the child <Icon> component (own Astro scope), so the
+	   classes aren't reachable via a locally-scoped selector here — scope globally. */
+	:global(.theme-toggle .icon-sun) {
 		display: none;
 	}
-	:global(html[data-theme='dark']) .icon-sun {
+	:global(html[data-theme='dark']) :global(.theme-toggle .icon-sun) {
 		display: block;
 	}
-	:global(html[data-theme='dark']) .icon-moon {
+	:global(html[data-theme='dark']) :global(.theme-toggle .icon-moon) {
 		display: none;
 	}
 </style>
@@ -63,19 +65,25 @@ const { switchToDark, switchToLight, class: className = '' } = Astro.props;
 <script>
 	const buttons = document.querySelectorAll('[data-theme-toggle]');
 	for (const btn of buttons) {
+		// The label states the theme this toggle switches *to*, based on the
+		// theme already applied to <html> before paint (in BaseHead).
+		const syncLabel = () =>
+			btn.setAttribute(
+				'aria-label',
+				document.documentElement.dataset.theme === 'dark'
+					? btn.dataset.labelLight || ''
+					: btn.dataset.labelDark || ''
+			);
+		syncLabel();
 		btn.addEventListener('click', () => {
 			const root = document.documentElement;
-			const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
-			root.dataset.theme = next;
+			root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
 			try {
-				localStorage.setItem('samizdata-theme', next);
+				localStorage.setItem('samizdata-theme', root.dataset.theme);
 			} catch {
 				/* private mode */
 			}
-			btn.setAttribute(
-				'aria-label',
-				next === 'dark' ? btn.dataset.labelDark : btn.dataset.labelLight
-			);
+			syncLabel();
 		});
 	}
 </script>

@@ -29,9 +29,9 @@ export const ui = {
 		'studio.seo.title': 'Data Storytelling Consultancy',
 		'studio.seo.description':
 			'SAMIZDATA researches, writes, and builds data-led stories and tools for media organisations, NGOs, and public-interest institutions.',
-		'studio.hero.titleLead': 'SAMIZDATA is a',
+		'studio.hero.titleLead': 'SAMIZDATA is a ',
 		'studio.hero.titleAccent': 'data storytelling',
-		'studio.hero.titleTail': 'consultancy.',
+		'studio.hero.titleTail': ' consultancy.',
 		'studio.hero.body':
 			'We research, write and build data tools for media organisations, NGOs and other public-benefit institutions.',
 		'studio.hero.primaryCta': "Let's talk!",

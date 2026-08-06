@@ -3,7 +3,7 @@ title: "What happened in the Moldovan election, and what's next?"
 description: "A controversial election and the razor-thin referendum result. What can we learn from the data?"
 geography: 'Moldova'
 pubDate: '2024-10-28T12:10:12.876Z'
-heroImage: '../../../assets/posts/6b922cad-29ea-4972-b8c1-0648ba6d1751_4444x2083.png'
+heroImage: '../../../assets/posts/129528cf-cb56-41ce-b4fc-e8d93159ddef_4444x6944.png'
 ---
 
 Hey there, it’s been a minute. Glad you’re still here 🥰.

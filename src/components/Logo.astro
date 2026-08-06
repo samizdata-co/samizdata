@@ -28,7 +28,7 @@ const { compact = false, class: className = '' } = Astro.props;
 		gap: 0.25rem;
 		cursor: default;
 	}
-	.logo a {
+	:global(a) .logo {
 		cursor: pointer;
 	}
 	.mark {
@@ -162,7 +162,10 @@ const { compact = false, class: className = '' } = Astro.props;
 
 		function startDrift() {
 			driftActive = true;
-			const offsets = BARS.map((_, i) => ({ dx: 0, dy: 0 }));
+			const offsets = BARS.map((_, i) => ({
+				dx: (((i * 7 + 3) % 5) - 2) * 0.6,
+				dy: (((i * 11 + 5) % 5) - 2) * 0.6,
+			}));
 			const PERIOD = 2600;
 			let start = null;
 			const frame = (now) => {
@@ -237,7 +240,7 @@ const { compact = false, class: className = '' } = Astro.props;
 					r.setAttribute('y', String(cy - h / 2));
 					r.setAttribute('width', String(w));
 					r.setAttribute('height', String(h));
-					r.setAttribute('rx', String(lerp(dot.s / 2, 1, t)));
+					r.setAttribute('rx', String(lerp(d.dot.s / 2, 1, t)));
 					r.setAttribute('opacity', String(lerp(0.85, d.op, t)));
 				});
 				axisEls[0].setAttribute('opacity', String(lerp(0.3, 0, t)));

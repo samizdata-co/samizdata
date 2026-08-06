@@ -3,7 +3,7 @@ title: "Russia's tech brain drain in numbers"
 description: "Many Russian software engineers have left the country, GitHub data shows. Where did they go, and who do Russians code with now?"
 geography: 'Eastern Europe'
 pubDate: '2024-04-17T11:45:17.406Z'
-heroImage: '../../../assets/posts/ecc733bb-0e0e-4a53-9ea5-eb5c7c7ac5ba_4444x4166.png'
+heroImage: '../../../assets/posts/ab84efcd-e9a7-46b7-8764-aab32aa2ddde_4444x3819.png'
 ---
 
 This February, Yandex, one of Russia’s best-known tech companies, [announced it would pull out of the country](https://www.bbc.co.uk/news/business-68213191).
