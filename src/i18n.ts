@@ -22,10 +22,9 @@ export const ui = {
 		'studio.nav.primary': 'Primary navigation',
 		'studio.nav.switchToDark': 'Switch to dark mode',
 		'studio.nav.switchToLight': 'Switch to light mode',
-		'studio.lang.label': 'Language',
 		'studio.footer.connect': 'Connect',
 		'studio.footer.rights': '© 2026 SAMIZDATA Ltd.',
-		'studio.footer.location': 'London, UK',
+		'studio.footer.location': 'London 🇬🇧 and Chișinău 🇲🇩',
 		'studio.seo.title': 'Data Storytelling Consultancy',
 		'studio.seo.description':
 			'SAMIZDATA researches, writes, and builds data-led stories and tools for media organisations, NGOs, and public-interest institutions.',
@@ -47,7 +46,7 @@ export const ui = {
 			"Whether you have a massive dataset or just the seed of an idea, let's talk about it.",
 		'studio.contact.email': 'Direct email',
 		'studio.contact.locationLabel': 'Location',
-		'studio.contact.location': 'London, UK',
+		'studio.contact.location': 'London 🇬🇧 and Chișinău 🇲🇩',
 		'studio.contact.social': 'Social media',
 		'studio.work.s1.title': 'Investigations and research',
 		'studio.work.s1.description':
@@ -100,14 +99,13 @@ export const ui = {
 		'studio.nav.primary': 'Navigație principală',
 		'studio.nav.switchToDark': 'Treci la modul întunecat',
 		'studio.nav.switchToLight': 'Treci la modul luminos',
-		'studio.lang.label': 'Limba',
 		'studio.footer.connect': 'Conectare',
 		'studio.footer.rights': '© 2026 SAMIZDATA Ltd.',
-		'studio.footer.location': 'Londra, Regatul Unit',
+		'studio.footer.location': 'Chișinău 🇲🇩 și Londra 🇬🇧',
 		'studio.seo.title': 'Consultanță de storytelling bazat pe date',
 		'studio.seo.description':
 			'SAMIZDATA cercetează, scrie și construiește povești și instrumente bazate pe date pentru organizații media, ONG-uri și instituții de interes public.',
-		'studio.hero.titleLead': 'SAMIZDATA este o agenție de',
+		'studio.hero.titleLead': 'SAMIZDATA este o agenție de ',
 		'studio.hero.titleAccent': 'storytelling de date',
 		'studio.hero.titleTail': '.',
 		'studio.hero.body':
@@ -126,7 +124,7 @@ export const ui = {
 			'Fie că ai un set uriaș de date sau doar germenul unei idei, hai să vorbim.',
 		'studio.contact.email': 'Email direct',
 		'studio.contact.locationLabel': 'Locație',
-		'studio.contact.location': 'Londra, Regatul Unit',
+		'studio.contact.location': 'Chișinău 🇲🇩 și Londra 🇬🇧',
 		'studio.contact.social': 'Social media',
 		'studio.work.s1.title': 'Investigații și cercetare',
 		'studio.work.s1.description':

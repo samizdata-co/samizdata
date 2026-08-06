@@ -1,28 +1,23 @@
 ---
-// Language dropdown — ported from LanguageSwitcher.svelte (bits-ui dropdown
-// replaced with a zero-JS <details> popover, rounded-2xl to signal it's a
-// detached floating layer). Preserves the current #anchor on switch.
+// Single-button language switcher — mirrors the theme toggle (44px circular
+// icon button) and navigates to the other-locale page for the same route.
+// Shows the flag of the language you'll switch *to*, with an accessible
+// label naming the target. A blog post not translated there falls back to
+// the other-language home instead of a 404 link.
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { getPosts } from '../lib/blog';
-import Icon from './Icon.astro';
 import type { Language } from '../i18n';
 
 interface Props {
 	lang: Language;
-	label: string;
 	altLabel: string;
-	flag: string;
 	altFlag: string;
 }
 
-const { lang, label, altLabel, flag, altFlag } = Astro.props;
+const { lang, altLabel, altFlag } = Astro.props;
 const altLang: Language = lang === 'ro' ? 'en' : 'ro';
 
-// Mirror the other-language page for the *same* route,
-// but a blog post not translated there would be a 404 link -
-// so fall back to the other-language home in that case.
 const norm = Astro.url.pathname.replace(/\/+$/, '') || '/';
-// The home route, e.g. `/ro/`, reduces to `/ro` with no trailing slash — treat it as '/'
 const path = norm === `/${lang}` ? '/' : norm.startsWith(`/${lang}/`) ? norm.slice(lang.length + 1) : norm;
 let altHref = path === '/' ? getRelativeLocaleUrl(altLang, '/') : getRelativeLocaleUrl(altLang, path);
 
@@ -35,47 +30,31 @@ if (path.startsWith('/blog/')) {
 }
 ---
 
-<details class="lang-switcher" data-lang-switcher>
-	<summary aria-label={label}>
-		<span aria-hidden="true" class="flag">{flag}</span>
-		<Icon name="chevron-down" size={18} strokeWidth={2.25} class="chevron" />
-	</summary>
-	<div class="menu">
-		<a href={altHref} data-lang-href lang={altLang} aria-label={altLabel}>
-			<span aria-hidden="true" class="flag">{altFlag}</span>
-			<span class="sr-only">{altLabel}</span>
-		</a>
-	</div>
-</details>
+<a href={altHref} data-lang-href class="lang-switcher" lang={altLang} aria-label={altLabel}>
+	<span aria-hidden="true" class="flag">{altFlag}</span>
+</a>
 
 <style>
 	.lang-switcher {
-		position: relative;
-		display: inline-flex;
-	}
-	.lang-switcher summary {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		gap: 0.55rem;
-		min-width: 44px;
+		width: 44px;
 		height: 44px;
-		padding: 0 0.75rem;
+		flex-shrink: 0;
+		padding: 0;
 		border: 1px solid var(--color-border-soft);
 		border-radius: 9999px;
 		background: var(--color-surface-lowest);
 		color: var(--color-ink-soft);
-		list-style: none;
+		text-decoration: none;
 		cursor: pointer;
 		transition:
 			color 0.18s ease,
 			border-color 0.18s ease,
 			background-color 0.18s ease;
 	}
-	.lang-switcher summary::-webkit-details-marker {
-		display: none;
-	}
-	.lang-switcher summary:hover {
+	.lang-switcher:hover {
 		color: var(--color-primary);
 		border-color: var(--color-border-accent);
 		background: var(--color-surface-high);
@@ -84,50 +63,15 @@ if (path.startsWith('/blog/')) {
 		font-size: 1.1rem;
 		line-height: 1;
 	}
-	.chevron {
-		transition: transform 0.18s ease;
-	}
-	.lang-switcher[open] .chevron {
-		transform: rotate(180deg);
-	}
-	.menu {
-		position: absolute;
-		top: calc(100% + 0.875rem);
-		right: 0;
-		min-width: 4rem;
-		padding: 0.45rem;
-		border: 1px solid var(--color-border-soft);
-		border-radius: 1rem;
-		background: var(--color-surface-lowest);
-		box-shadow: var(--shadow-ambient);
-	}
-	.menu a {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: 0.7rem;
-		border-radius: 0.75rem;
-		color: var(--color-ink-soft);
-		text-decoration: none;
-		transition:
-			color 0.18s ease,
-			background-color 0.18s ease;
-	}
-	.menu a:hover {
-		color: var(--color-primary);
-		background: var(--color-surface-high);
-	}
 </style>
 
 <script>
 	// Keep the current #anchor when switching language
 	document.querySelectorAll('[data-lang-href]').forEach((a) => {
-		a.addEventListener('click', () => {
-			const hash = window.location.hash;
-			if (hash) {
-				const href = a.getAttribute('href') || '';
-				a.setAttribute('href', href.replace(/#.*$/, '') + hash);
-			}
-		});
+		const href = a.getAttribute('href') || '';
+		const hash = window.location.hash;
+		if (hash) {
+			a.setAttribute('href', href.replace(/#.*$/, '') + hash);
+		}
 	});
 </script>

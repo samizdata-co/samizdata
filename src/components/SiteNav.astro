@@ -51,9 +51,7 @@ const currentPath = norm(Astro.url.pathname);
 			/>
 			<LanguageSwitcher
 				lang={lang}
-				label={t('studio.lang.label')}
-				altLabel={t('studio.lang.label')}
-				flag={lang === 'ro' ? '🇷🇴' : '🇬🇧'}
+				altLabel={otherLang === 'ro' ? 'Română' : 'English'}
 				altFlag={otherLang === 'ro' ? '🇷🇴' : '🇬🇧'}
 			/>
 

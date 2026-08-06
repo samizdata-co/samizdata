@@ -1,27 +1,35 @@
 ---
 // Image card — ported from ImageCard.svelte. Media card with a contained
 // image and gentle zoom on hover.
+import { Image } from 'astro:assets';
 import CardShell from './CardShell.astro';
 import type { ImageCardData } from '../../lib/portfolio';
 
 interface Props {
 	card: ImageCardData;
-	tall?: boolean;
-	loading?: 'eager' | 'lazy';
-	decoding?: 'sync' | 'async' | 'auto';
 }
 
-const { card, tall = false, loading = 'lazy', decoding = 'async' } = Astro.props;
+const { card } = Astro.props;
 ---
 
 <CardShell
-	class:list={['image-card', tall && 'tall']}
+	class="image-card"
 	href={card.href}
 	target="_blank"
 	rel="noreferrer"
 	variant="media"
 >
-	<img src={card.image} alt={card.title} {loading} {decoding} fetchpriority={loading === 'lazy' ? 'low' : 'high'} />
+	{card.image && (
+		<Image
+			src={card.image}
+			alt={card.title}
+			loading="lazy"
+			decoding="async"
+			fetchpriority="low"
+			widths={[320, 640, 960, 1280]}
+			sizes="(min-width: 1200px) 25vw, (min-width: 640px) 50vw, 100vw"
+		/>
+	)}
 </CardShell>
 
 <style>
@@ -40,9 +48,5 @@ const { card, tall = false, loading = 'lazy', decoding = 'async' } = Astro.props
 	}
 	:global(.card-shell:hover .image-card) img {
 		transform: scale(1.05);
-	}
-	:global(.image-card.tall) {
-		aspect-ratio: auto;
-		min-height: 100%;
 	}
 </style>

@@ -1,16 +1,15 @@
 ---
 // Article card — ported from ArticleCard.svelte. Media card with a dark
 // gradient overlay: eyebrow meta (publication · year) + headline.
+import { Image } from 'astro:assets';
 import CardShell from './CardShell.astro';
 import type { ArticleCardData } from '../../lib/portfolio';
 
 interface Props {
 	card: ArticleCardData;
-	loading?: 'eager' | 'lazy';
-	decoding?: 'sync' | 'async' | 'auto';
 }
 
-const { card, loading = 'lazy', decoding = 'async' } = Astro.props;
+const { card } = Astro.props;
 ---
 
 <CardShell
@@ -20,7 +19,17 @@ const { card, loading = 'lazy', decoding = 'async' } = Astro.props;
 	rel="noreferrer"
 	variant="media"
 >
-	<img src={card.image} alt={card.headline} {loading} {decoding} fetchpriority={loading === 'lazy' ? 'low' : 'high'} />
+	{card.image && (
+		<Image
+			src={card.image}
+			alt={card.headline}
+			loading="lazy"
+			decoding="async"
+			fetchpriority="low"
+			widths={[320, 640, 960, 1280]}
+			sizes="(min-width: 1200px) 25vw, (min-width: 640px) 50vw, 100vw"
+		/>
+	)}
 	<div class="overlay">
 		<div class="meta eyebrow">
 			<span>{card.publication}</span>

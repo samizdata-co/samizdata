@@ -2,6 +2,7 @@
 // original website. cv.json + images live in src/portfolio/ (copied from the
 // Svelte project so the derivation stays identical).
 
+import type { ImageMetadata } from 'astro';
 import cvData from '../portfolio/cv.json';
 
 type Publication = (typeof cvData.publications)[number];
@@ -14,24 +15,23 @@ const hasSkill = (skills: SkillValue, expectedSkill: string) =>
 
 const articleImages = import.meta.glob('../portfolio/img/*', {
 	eager: true,
-	query: '?url',
 	import: 'default',
-}) as Record<string, string>;
+}) as Record<string, ImageMetadata>;
 
 const getArticleImage = (imageName?: string) =>
-	imageName ? (articleImages[`../portfolio/img/${imageName}`] ?? '') : '';
+	imageName ? articleImages[`../portfolio/img/${imageName}`] : undefined;
 
 export type ArticleCardData = {
 	publication: string;
 	year: string;
 	headline: string;
-	image: string;
+	image: ImageMetadata | undefined;
 	href?: string;
 };
 
 export type ImageCardData = {
 	title: string;
-	image: string;
+	image: ImageMetadata | undefined;
 	href?: string;
 };
 
