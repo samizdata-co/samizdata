@@ -2,35 +2,20 @@
 // Single-button language switcher — mirrors the theme toggle (44px circular
 // icon button) and navigates to the other-locale page for the same route.
 // Shows the flag of the language you'll switch *to*, with an accessible
-// label naming the target. A blog post not translated there falls back to
-// the other-language home instead of a 404 link.
-import { getRelativeLocaleUrl } from 'astro:i18n';
-import { getPosts } from '../lib/blog';
-import type { Language } from '../i18n';
+// label naming the target. It is only rendered when an equivalent page exists.
+import type { LocaleAlternate } from '../lib/metadata';
 
 interface Props {
-	lang: Language;
+	alternate: LocaleAlternate;
 	altLabel: string;
 	altFlag: string;
 }
 
-const { lang, altLabel, altFlag } = Astro.props;
-const altLang: Language = lang === 'ro' ? 'en' : 'ro';
-
-const norm = Astro.url.pathname.replace(/\/+$/, '') || '/';
-const path = norm === `/${lang}` ? '/' : norm.startsWith(`/${lang}/`) ? norm.slice(lang.length + 1) : norm;
-let altHref = path === '/' ? getRelativeLocaleUrl(altLang, '/') : getRelativeLocaleUrl(altLang, path);
-
-if (path.startsWith('/blog/')) {
-	const slug = path.split('/blog/')[1];
-	const posts = await getPosts(altLang);
-	if (!slug || !posts.some((p) => p.id === `${altLang}/${slug}`)) {
-		altHref = getRelativeLocaleUrl(altLang, '/');
-	}
-}
+const { alternate, altLabel, altFlag } = Astro.props;
+const alternatePath = new URL(alternate.href).pathname;
 ---
 
-<a href={altHref} data-lang-href class="lang-switcher" lang={altLang} aria-label={altLabel}>
+<a href={alternatePath} data-lang-href class="lang-switcher" lang={alternate.lang} hreflang={alternate.lang} aria-label={altLabel}>
 	<span aria-hidden="true" class="flag">{altFlag}</span>
 </a>
 
@@ -55,7 +40,7 @@ if (path.startsWith('/blog/')) {
 			background-color 0.18s ease;
 	}
 	.lang-switcher:hover {
-		color: var(--color-primary);
+		color: var(--color-accent-text);
 		border-color: var(--color-border-accent);
 		background: var(--color-surface-high);
 	}

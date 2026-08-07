@@ -5,6 +5,7 @@ description: Portfolio and studio site for data journalist Nicu Calcea — edito
 colors:
   primary: "#7b003c"
   primary-container: "#9f1853"
+  accent-text: "#7b003c"
   on-primary: "#ffffff"
   logo-mark: "#7b003c"
   surface: "#fbf9f4"
@@ -156,7 +157,7 @@ components:
     textColor: "{colors.ink-soft}"
     typography: "{typography.label-md}"
   nav-link-active:
-    textColor: "{colors.primary-container}"
+    textColor: "{colors.accent-text}"
 ---
 
 # SAMIZDATA DESIGN
@@ -174,7 +175,8 @@ The site is fully bilingual (English / Romanian), theme-adaptive between light a
 The palette is **warm and paper-like**, rooted in high-contrast neutral surfaces with a single, evocative raspberry accent used with restraint. The low saturation and warm undertones make the accent feel editorial rather than corporate.
 
 - **Primary (#7b003c):** A deep dried-raspberry ink used for hover states, strong emphasis, and the logo. It reads as serious and slightly archival.
-- **Primary-container (#9f1853):** The brighter raspberry — the *sole* driver of interaction and emphasis. Reserved for links, primary buttons, active nav states, italic title accents, focus rings, and the "accent" service card.
+- **Primary-container (#9f1853):** The brighter raspberry used for primary-button and accent-card fills, focus rings, borders, and large display accents.
+- **Accent text (#7b003c light / #f078a6 dark):** The accessible raspberry used for links, active navigation, CTAs, and small accent labels. Keep it separate from fill colors so all text remains WCAG AA across the surface ramp.
 - **Surface (#fbf9f4):** A warm limestone. The foundation of every page; softer than pure white.
 - **Surface-low (#f5f3ee):** A solid, slightly deeper backdrop used as a tonal step-up for the work, about, and training sections and the footer.
 - **Surface-lowest (#ffffff):** Pure white reserved for cards that sit *on* a tonal surface, giving them crisp contrast.
@@ -186,7 +188,7 @@ The palette is **warm and paper-like**, rooted in high-contrast neutral surfaces
 
 The palette is subdivided into a **tonal surface ramp** (`surface-low`, `surface-container`, `surface-high`, `surface-highest`, `surface-dim`) that carries elevation without heavy shadows, and a **border ramp** (`border-soft`, `border-strong`, `border-accent`, `outline`, `outline-ghost`) that keeps structure quiet and warm.
 
-**Dark mode** flips to near-black warm charcoal surfaces (`#111311`), a brighter raspberry that lifts contrast (**primary #a31552**, **primary-container #c62168**, **logo-mark #d14a7b**), and a warm bone-white ink (`#f4efe9`). Dark counterparts for muted = `#c2b7b3`, destructive = `#d06b8c`, and all rgba borders/outlines shift toward white at a matching low alpha (e.g. `border-soft` becomes `rgba(255,255,255,0.11)`).
+**Dark mode** flips to near-black warm charcoal surfaces (`#111311`), keeps **primary-container #c62168** for fills and non-text controls, uses **accent-text #f078a6** for links and small accent labels, and uses **logo-mark #d14a7b** with warm bone-white ink (`#f4efe9`). The text accent maintains at least 4.5:1 contrast across the dark surface ramp; do not substitute the darker fill token for small text. Dark counterparts for muted = `#c2b7b3`, destructive = `#d06b8c`, and all rgba borders/outlines shift toward white at a matching low alpha (e.g. `border-soft` becomes `rgba(255,255,255,0.11)`).
 
 ## Typography
 

@@ -1,8 +1,8 @@
 ---
 import Layout from '../layouts/BlogPost.astro';
-import { defaultLang, useTranslations } from '../i18n';
+import { getLanguage, useTranslations } from '../i18n';
 
-const t = useTranslations(Astro.currentLocale ?? defaultLang);
+const t = useTranslations(getLanguage(Astro.currentLocale));
 ---
 
 <Layout title={t('nav.about')} description={t('site.description')}>
@@ -21,10 +21,10 @@ const t = useTranslations(Astro.currentLocale ?? defaultLang);
 	<h2>Who am I?</h2>
 	<p>
 		My name is <a href="https://nicu.md/">Nicu Calcea</a>, and I’m a journalist
-		based in London, UK. I’m currently a Senior Data Investigator at
-		<em><a href="https://www.globalwitness.org/en/">Global Witness</a></em>, and
-		before that I worked at <em>BBC News</em> and the New Statesman. I also teach
-		data journalism at City, University of London.
+		based in London, UK. My work has included data investigations at
+		<em><a href="https://www.globalwitness.org/en/">Global Witness</a></em>, reporting
+		for <em>BBC News</em> and the New Statesman, and teaching data journalism at
+		City, University of London.
 	</p>
 	<p>
 		For the purposes of this newsletter, I’m just a guy with a computer and too much

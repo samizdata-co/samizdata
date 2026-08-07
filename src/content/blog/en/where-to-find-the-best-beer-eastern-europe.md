@@ -62,7 +62,7 @@ Because you made it so far down the article, here’s a bonus: [an interactive t
 
 ---
 
-#### Postscriptum
+## Postscriptum
 
 If you’d like to keep up with my ~~alcoholism~~ beer tasting habits, you can send me a friend request on Untappd. I don’t always remember to rate the beers I’m drinking (especially towards the end of a session), but I’ve been trying to expand my palette.
 

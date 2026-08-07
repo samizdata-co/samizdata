@@ -17,6 +17,7 @@ const external = card.href?.startsWith('http') ?? false;
 <CardShell
 	class:list={['service-card', card.variant === 'accent' && 'accent', large && 'large']}
 	href={card.href}
+	hreflang={card.hreflang}
 	target={external ? '_blank' : undefined}
 	rel={external ? 'noreferrer' : undefined}
 	aspect="square"
@@ -93,7 +94,7 @@ const external = card.href?.startsWith('http') ?? false;
 		overflow: hidden;
 	}
 	:global(.service-card.accent) p {
-		color: rgba(255, 255, 255, 0.84);
+		color: #fff;
 	}
 	:global(.service-card.accent) h3 {
 		color: #fff;
@@ -111,7 +112,7 @@ const external = card.href?.startsWith('http') ?? false;
 		font-weight: 700;
 		letter-spacing: 0.14em;
 		text-transform: uppercase;
-		color: var(--color-primary-container);
+		color: var(--color-accent-text);
 	}
 	.footer-label {
 		padding-top: 0.9rem;

@@ -3,7 +3,7 @@ title: "Russia's tech brain drain in numbers"
 description: "Many Russian software engineers have left the country, GitHub data shows. Where did they go, and who do Russians code with now?"
 geography: 'Eastern Europe'
 pubDate: '2024-04-17T11:45:17.406Z'
-heroImage: '../../../assets/posts/ab84efcd-e9a7-46b7-8764-aab32aa2ddde_4444x3819.png'
+heroImage: '../../../assets/shared/tech-brain-drain.png'
 ---
 
 This February, Yandex, one of Russia’s best-known tech companies, [announced it would pull out of the country](https://www.bbc.co.uk/news/business-68213191).
@@ -48,7 +48,7 @@ Since GitHub is a platform that enables collaboration between developers, let’
 
 The chart below shows the number of contributions (pushes and pulls) from developers outside Russia to Russian projects. For clarity and simplicity, I’ve combined some of the countries into bigger groups.
 
-![Alluvial chart showing the volume of inbound collaborations from other countries to Russian projects. The volume of collaborations from Georgia, Armenia and Kazakhstan has increased significantly since the invasion of Ukraine.](../../../assets/posts/ab84efcd-e9a7-46b7-8764-aab32aa2ddde_4444x3819.png)
+![Alluvial chart showing the volume of inbound collaborations from other countries to Russian projects. The volume of collaborations from Georgia, Armenia and Kazakhstan has increased significantly since the invasion of Ukraine.](../../../assets/shared/tech-brain-drain.png)
 
 We can see that code contributions from Georgia, Armenia and Kazakhstan to Russian projects have increased significantly since the invasion.
 

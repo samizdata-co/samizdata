@@ -6,6 +6,10 @@ export const defaultLang = 'en';
 export const languages = ['en', 'ro'] as const;
 export type Language = (typeof languages)[number];
 
+export function getLanguage(locale: string | undefined): Language {
+	return languages.find((language) => language === locale) ?? defaultLang;
+}
+
 export const ui = {
 	en: {
 		'site.title': 'SAMIZDATA',
@@ -14,6 +18,7 @@ export const ui = {
 		'nav.about': 'About',
 		'nav.studio': 'Studio',
 		'nav.training': 'Training',
+		'nav.skip': 'Skip to content',
 		'last.updated': 'Last updated on',
 
 		// Studio (portfolio) page
@@ -49,6 +54,9 @@ export const ui = {
 		'studio.contact.locationLabel': 'Locations',
 		'studio.contact.location': 'London, UK & Chișinău, MD',
 		'studio.contact.social': 'Social media',
+		'contact.seo.title': 'Contact',
+		'contact.seo.description':
+			'Get in touch with SAMIZDATA about data investigations, interactive tools, newsroom training, and public-interest storytelling projects.',
 		'studio.work.s1.title': 'Investigations and research',
 		'studio.work.s1.description':
 			'Original reporting, document-heavy research, and data-led investigations built to stand up to scrutiny and publication.',
@@ -93,6 +101,7 @@ export const ui = {
 		'nav.about': 'Despre',
 		'nav.studio': 'Studio',
 		'nav.training': 'Training',
+		'nav.skip': 'Sari la conținut',
 		'last.updated': 'Ultima actualizare:',
 
 		'studio.nav.homeLabel': 'Pagina principală SAMIZDATA',
@@ -128,10 +137,13 @@ export const ui = {
 		'studio.contact.locationLabel': 'Locații',
 		'studio.contact.location': 'Chișinău, MD & Londra, UK',
 		'studio.contact.social': 'Social media',
+		'contact.seo.title': 'Contact',
+		'contact.seo.description':
+			'Ia legătura cu SAMIZDATA pentru investigații bazate pe date, unelte interactive, training pentru redacții și proiecte jurnalistice de interes public.',
 		'studio.work.s1.title': 'Investigații și cercetare',
 		'studio.work.s1.description':
 			'Reportaj original, cercetare bazată pe documente și investigații ghidate de date, pregătite pentru publicare și verificare riguroasă.',
-		'studio.work.s1.cta': 'Discuță despre o anchetă',
+		'studio.work.s1.cta': 'Discută despre o anchetă',
 		'studio.work.s2.title': 'Unelte interactive',
 		'studio.work.s2.description':
 			'Calculatoare, explainere și hărți care ajută cititorii să exploreze subiecte complexe prin interacțiune directă.',
@@ -162,8 +174,8 @@ export const ui = {
 		'services.allServices': 'Toate serviciile',
 		'services.trainingTitle': 'Training',
 		'services.trainingDescription':
-			'Ai nevoie de workshopuri, coaching pentru redacție sau sesiuni practice pentru echipe și studenți? Vizitează secțiunea de training.',
-		'services.trainingCta': 'Mergi la training',
+			'Ai nevoie de workshopuri, coaching pentru redacție sau sesiuni practice pentru echipe și studenți? Resursele de training sunt disponibile momentan doar în limba engleză.',
+		'services.trainingCta': 'Vezi resursele în engleză',
 	},
 } as const;
 

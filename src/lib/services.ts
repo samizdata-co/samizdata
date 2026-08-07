@@ -6,14 +6,17 @@
 // the original so results never drift.
 
 import type { ImageMetadata } from 'astro';
-import cvData from '../portfolio/cv.json';
 import type { Language } from '../i18n';
 import type { ServiceCardData } from './portfolio';
-
-type Skill = (typeof cvData.skills)[number];
-type Publication = (typeof cvData.publications)[number];
-type Project = (typeof cvData.projects)[number];
-type SkillValue = string | string[] | undefined;
+import {
+	cvData,
+	getPortfolioImage,
+	hasSkill,
+	yearOf,
+	type CvProject,
+	type CvPublication,
+	type CvSkill,
+} from './cv';
 
 export type ServiceExample = {
 	kind: 'publication' | 'project';
@@ -31,7 +34,7 @@ export type Service = {
 	name: string;
 	summary: string;
 	keywords: string[];
-	level: Skill['level'];
+	level: CvSkill['level'];
 	icon: NonNullable<ServiceCardData['icon']>;
 	examples: ServiceExample[];
 };
@@ -56,70 +59,61 @@ const serviceIcons: Record<(typeof serviceOrder)[number], Service['icon']> = {
 
 // Romanian names/summaries/keywords (from the original translation map).
 // English pulls the live cv.json values; only `ro` is overridden.
-const serviceTranslations: {
+type LocalizedService = {
 	name: string;
 	summary: string;
 	keywords: string[];
-} = {
+};
+
+const serviceTranslations: Record<(typeof serviceOrder)[number], LocalizedService> = {
 		'Investigations and research': {
-			name: 'Investigatii si cercetare',
+			name: 'Investigații și cercetare',
 			summary:
-				'Nicu este un jurnalist cu experienta in investigatii aprofundate despre clima, politica si Big Tech. Apeleaza la noi daca ai nevoie de cercetare si investigatii bazate pe date, pregatite pentru publicare.',
+				'Nicu este un jurnalist cu experiență în investigații aprofundate despre climă, politică și Big Tech. Apelează la noi dacă ai nevoie de cercetare și investigații bazate pe date, pregătite pentru publicare.',
 			keywords: [
 				'Jurnalism de date',
-				'Jurnalism de investigatie',
+				'Jurnalism de investigație',
 				'Cercetare',
-				'Solicitari FOI',
+				'Solicitări FOI',
 			],
 		},
 		'Data analysis': {
-			name: 'Analiza de date',
+			name: 'Analiză de date',
 			summary:
-				'SAMIZDATA transforma datele tale in concluzii utile, clare si usor de publicat. Scriem cod in R, Python si JavaScript si folosim instrumente specializate precum DuckDB si QGIS pentru a aborda chiar si cele mai dificile seturi de date.',
+				'SAMIZDATA transformă datele tale în concluzii utile, clare și ușor de publicat. Scriem cod în R, Python și JavaScript și folosim instrumente specializate precum DuckDB și QGIS pentru a aborda chiar și cele mai dificile seturi de date.',
 			keywords: ['R', 'Python', 'JavaScript', 'SQL'],
 		},
 		'Data wrangling and cleaning': {
-			name: 'Curatare si pregatire de date',
+			name: 'Curățare și pregătire de date',
 			summary:
-				'Folosim tehnici avansate de AI si machine learning pentru a extrage, lega si formata date dezordonate sau nestructurate in seturi curate si fiabile.',
+				'Folosim tehnici avansate de AI și machine learning pentru a extrage, corela și formata date dezordonate sau nestructurate în seturi curate și fiabile.',
 			keywords: [
 				'Deduplicare',
-				'Legare de inregistrari',
-				'Recunoasterea entitatilor numite',
+				'Corelare de înregistrări',
+				'Recunoașterea entităților numite',
 			],
 		},
 		Visualisation: {
 			name: 'Vizualizare',
 			summary:
-				'Grafice, dashboarduri si povesti vizuale pe scroll. Daca iti poti imagina ceva, noi il putem construi.',
+				'Grafice, dashboarduri și povești vizuale derulate pe ecran. Dacă îți poți imagina ceva, noi îl putem construi.',
 			keywords: ['ggplot2', 'D3.js', 'Datawrapper', 'Flourish'],
 		},
 		'Interactive tools': {
 			name: 'Unelte interactive',
 			summary:
-				'Calculatoare, instrumente de cautare, harti si explainere concepute pentru a ajuta publicul sa inteleaga subiecte complexe prin interactiune directa.',
+				'Calculatoare, instrumente de căutare, hărți și explainere concepute pentru a ajuta publicul să înțeleagă subiecte complexe prin interacțiune directă.',
 			keywords: ['Svelte', 'SvelteKit'],
 		},
 		'Data explorers': {
 			name: 'Exploratoare de date',
 			summary:
-				'Baze de date cautabile si instrumente publice de explorare care transforma registrele dezordonate in produse ce pot fi folosite concret.',
+				'Baze de date căutabile și instrumente publice de explorare care transformă registrele dezordonate în produse ce pot fi folosite concret.',
 			keywords: ['Svelte', 'SvelteKit', 'PostgreSQL'],
 		},
 };
 
-const articleImages = import.meta.glob('../portfolio/img/*', {
-	eager: true,
-	import: 'default',
-}) as Record<string, ImageMetadata>;
-
-const getArticleImage = (imageName?: string) =>
-	imageName ? (articleImages[`../portfolio/img/${imageName}`] ?? undefined) : undefined;
-
-const skillLookup = new Map(cvData.skills.map((s: Skill) => [s.name, s] as const));
-
-const hasSkill = (skills: SkillValue, expectedSkill: string) =>
-	Array.isArray(skills) ? skills.includes(expectedSkill) : skills === expectedSkill;
+const skillLookup = new Map(cvData.skills.map((skill: CvSkill) => [skill.name, skill] as const));
 
 const slugifyService = (value: string) =>
 	value
@@ -128,34 +122,31 @@ const slugifyService = (value: string) =>
 		.replace(/[^a-z0-9]+/g, '-')
 		.replace(/^-+|-+$/g, '');
 
-const yearOf = (date?: string) =>
-	date ? new Date(date).getUTCFullYear().toString() : undefined;
-
 const compareExamples = (a: ServiceExample, b: ServiceExample) =>
 	(Number.parseInt(b.year ?? '0', 10) || 0) - (Number.parseInt(a.year ?? '0', 10) || 0);
 
 const getExamplesForSkill = (skillName: string): ServiceExample[] => {
 	const fromPublications: ServiceExample[] = cvData.publications
-		.filter((p: Publication) => hasSkill(p.skills, skillName))
-		.map((p: Publication) => ({
+		.filter((publication: CvPublication) => hasSkill(publication.skills, skillName))
+		.map((publication: CvPublication) => ({
 			kind: 'publication',
-			title: p.name,
-			summary: p.summary ?? '',
-			href: p.url,
-			source: p.publisher,
-			year: yearOf(p.releaseDate),
-			image: getArticleImage(p.img),
+			title: publication.name,
+			summary: publication.summary ?? '',
+			href: publication.url,
+			source: publication.publisher,
+			year: yearOf(publication.releaseDate),
+			image: getPortfolioImage(publication.img),
 		}));
 
 	const fromProjects: ServiceExample[] = cvData.projects
-		.filter((p: Project) => hasSkill(p.skills, skillName))
-		.map((p: Project) => ({
+		.filter((project: CvProject) => hasSkill(project.skills, skillName))
+		.map((project: CvProject) => ({
 			kind: 'project',
-			title: p.name,
-			summary: p.description,
-			href: p.url,
-			year: yearOf(p.startDate),
-			image: getArticleImage(p.img),
+			title: project.name,
+			summary: project.description,
+			href: project.url,
+			year: yearOf(project.startDate),
+			image: getPortfolioImage(project.img),
 		}));
 
 	return [...fromPublications, ...fromProjects].sort(compareExamples);
@@ -168,7 +159,7 @@ const buildService = (skillName: (typeof serviceOrder)[number], lang: Language):
 		throw new Error(`Unknown service skill: ${skillName}`);
 	}
 
-	const localized = lang === 'ro' ? serviceTranslations[skillName as keyof typeof serviceTranslations] : null;
+	const localized = lang === 'ro' ? serviceTranslations[skillName] : null;
 
 	return {
 		slug: slugifyService(skill.name),

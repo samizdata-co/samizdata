@@ -19,17 +19,27 @@ const { card } = Astro.props;
 	rel="noreferrer"
 	variant="media"
 >
-	{card.image && (
+	{card.image && (card.image.format === 'gif' || card.image.format === 'svg' ? (
+		<img
+			src={card.image.src}
+			width={card.image.width}
+			height={card.image.height}
+			alt={card.title}
+			loading="lazy"
+			decoding="async"
+			fetchpriority="low"
+		/>
+	) : (
 		<Image
 			src={card.image}
 			alt={card.title}
 			loading="lazy"
 			decoding="async"
 			fetchpriority="low"
-			widths={[320, 640, 960, 1280]}
-			sizes="(min-width: 1200px) 25vw, (min-width: 640px) 50vw, 100vw"
+			widths={[320, 640, 960]}
+			sizes="(min-width: 1200px) 22rem, (min-width: 640px) 50vw, 100vw"
 		/>
-	)}
+	))}
 </CardShell>
 
 <style>

@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
-import { getCollection } from 'astro:content';
 import type { Language } from '../i18n';
+import { getPosts, postPath } from '../lib/blog';
 import FormattedDate from './FormattedDate.astro';
 
 interface Props {
@@ -10,20 +10,17 @@ interface Props {
 
 const { locale } = Astro.props;
 
-const posts = (await getCollection('blog'))
-	.filter((post) => post.id.startsWith(`${locale}/`))
-	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const posts = await getPosts(locale);
 ---
 
 <main>
-	<section>
+	<section aria-labelledby="blog-heading">
+		<h1 id="blog-heading">{locale === 'ro' ? 'Ultimele articole' : 'Latest stories'}</h1>
 		<ul>
 			{
 				posts.map((post, i) => (
 					<li>
-						<a
-							href={`/${locale === 'ro' ? 'ro/' : ''}blog/${post.id.replace(`${locale}/`, '')}/`}
-						>
+						<a href={postPath(post.id)}>
 							{post.data.heroImage && (
 								<Image
 									width={i === 0 ? 1020 : 720}
@@ -33,7 +30,7 @@ const posts = (await getCollection('blog'))
 									priority={i === 0}
 								/>
 							)}
-							<h4 class="title">{post.data.title}</h4>
+							<h2 class="title">{post.data.title}</h2>
 							<p class="date">
 								<FormattedDate date={post.data.pubDate} locale={locale} />
 							</p>
@@ -47,6 +44,9 @@ const posts = (await getCollection('blog'))
 <style>
 	main {
 		max-width: 1080px;
+	}
+	h1 {
+		margin-bottom: 2rem;
 	}
 	ul {
 		display: grid;
@@ -80,9 +80,9 @@ const posts = (await getCollection('blog'))
 		border-color: var(--border-accent);
 		color: var(--ink);
 	}
-	ul li a:hover h4,
+	ul li a:hover h2,
 	ul li a:hover .date {
-		color: var(--primary-container);
+		color: var(--accent-text);
 	}
 	ul li img {
 		width: 100%;

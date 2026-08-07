@@ -45,7 +45,7 @@ const { switchToDark, switchToLight, class: className = '' } = Astro.props;
 			background-color 0.18s ease;
 	}
 	.theme-toggle:hover {
-		color: var(--color-primary);
+		color: var(--color-accent-text);
 		border-color: var(--color-border-accent);
 		background: var(--color-surface-high);
 	}
@@ -63,7 +63,7 @@ const { switchToDark, switchToLight, class: className = '' } = Astro.props;
 </style>
 
 <script>
-	const buttons = document.querySelectorAll('[data-theme-toggle]');
+	const buttons = document.querySelectorAll<HTMLElement>('[data-theme-toggle]');
 	for (const btn of buttons) {
 		// The label states the theme this toggle switches *to*, based on the
 		// theme already applied to <html> before paint (in BaseHead).

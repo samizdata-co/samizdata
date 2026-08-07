@@ -17,8 +17,10 @@ const ariaLabel = (example: ServiceExample) =>
 ---
 
 <div class="example-masonry">
-	{examples.map((example) => (
-		<a
+	{examples.map((example) => {
+		const Tag = example.href ? 'a' : 'article';
+		return (
+		<Tag
 			class="gallery-item"
 			href={example.href ?? undefined}
 			target={example.href ? '_blank' : undefined}
@@ -27,14 +29,25 @@ const ariaLabel = (example: ServiceExample) =>
 		>
 			{example.image ? (
 				<>
-					<Image
-						src={example.image}
-						alt={example.title}
-						loading="lazy"
-						decoding="async"
-						widths={[480, 768, 1280]}
-						sizes="(min-width: 1120px) 33vw, (min-width: 760px) 50vw, 100vw"
-					/>
+					{example.image.format === 'gif' || example.image.format === 'svg' ? (
+						<img
+							src={example.image.src}
+							width={example.image.width}
+							height={example.image.height}
+							alt={example.title}
+							loading="lazy"
+							decoding="async"
+						/>
+					) : (
+						<Image
+							src={example.image}
+							alt={example.title}
+							loading="lazy"
+							decoding="async"
+							widths={[320, 480, 720, 960]}
+							sizes="(min-width: 1120px) 30rem, (min-width: 760px) 50vw, 100vw"
+						/>
+					)}
 					<div class="overlay">
 						<div class="meta eyebrow">
 							{example.source && <span>{example.source}</span>}
@@ -52,8 +65,9 @@ const ariaLabel = (example: ServiceExample) =>
 					<h3>{example.title}</h3>
 				</div>
 			)}
-		</a>
-	))}
+		</Tag>
+		);
+	})}
 </div>
 
 <style>
@@ -105,17 +119,7 @@ const ariaLabel = (example: ServiceExample) =>
 			rgba(12, 13, 12, 0.2) 0%,
 			rgba(12, 13, 12, 0.84) 100%
 		);
-		opacity: 0;
-		transform: translateY(0.35rem);
-		transition:
-			opacity 220ms ease,
-			transform 220ms ease;
 		pointer-events: none;
-	}
-	.gallery-item:hover .overlay,
-	.gallery-item:focus-visible .overlay {
-		opacity: 1;
-		transform: translateY(0);
 	}
 	.gallery-item:hover img,
 	.gallery-item:focus-visible img {
@@ -147,7 +151,7 @@ const ariaLabel = (example: ServiceExample) =>
 		background: var(--color-surface-lowest);
 	}
 	.fallback-copy .meta {
-		color: var(--color-primary-container);
+		color: var(--color-accent-text);
 		text-shadow: none;
 	}
 	.fallback-copy h3 {

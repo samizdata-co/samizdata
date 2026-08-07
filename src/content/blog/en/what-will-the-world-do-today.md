@@ -3,7 +3,7 @@ title: "What will the world do today?"
 description: "We get 24 hours a day. A new study calculates how we spend them."
 geography: 'Eastern Europe'
 pubDate: '2024-01-25T13:27:15.999Z'
-heroImage: '../../../assets/posts/9ebc418e-98fa-418a-8099-f7f7d87d3f0a_4444x5000.png'
+heroImage: '../../../assets/shared/human-day.png'
 ---
 
 My goal to churn out a newsletter about once a month has fallen to the wayside. There are, after all, not enough hours in a day to sleep, work, eat, drink and also write a newsletter. Or are there?
@@ -18,7 +18,7 @@ These figures come from a 2023 paper with the catchy title of *“[The global hu
 
 The data is available on a country-by-country basis so, naturally, we can aggregate them to wider regions as well.
 
-![A donut showing the daily time spent on each activity in both Eastern Europe and Central Asia, as well as Western Europe. The chart reveals the distribution of time spent on different activities in the two regions, highlighting differences in daily routines.](../../../assets/posts/9ebc418e-98fa-418a-8099-f7f7d87d3f0a_4444x5000.png)
+![A donut showing the daily time spent on each activity in both Eastern Europe and Central Asia, as well as Western Europe. The chart reveals the distribution of time spent on different activities in the two regions, highlighting differences in daily routines.](../../../assets/shared/human-day.png)
 
 A few things are immediately obvious.
 
@@ -28,7 +28,7 @@ We also spend an extra six minutes cooking, so we’re either less efficient, or
 
 But we also spend 28 fewer minutes on passive activities (meaning watching TV, listening to the radio, that sort of thing) and 10 fewer minutes driving or using public transportation.
 
-### It’s us against the world
+## It’s us against the world
 
 Let’s take this comparison up a notch.
 

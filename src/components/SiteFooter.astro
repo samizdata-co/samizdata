@@ -1,11 +1,11 @@
 ---
 // Site footer — ONE footer for the whole site. Brand logo + rights,
 // connect/email + location. Self-contained i18n + config, no props.
-import { defaultLang, useTranslations } from '../i18n';
+import { getLanguage, useTranslations } from '../i18n';
 import { siteConfig } from '../lib/site';
 import Logo from './Logo.astro';
 
-const lang = Astro.currentLocale ?? defaultLang;
+const lang = getLanguage(Astro.currentLocale);
 const t = useTranslations(lang);
 ---
 

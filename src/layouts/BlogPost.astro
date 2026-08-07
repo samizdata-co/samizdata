@@ -4,7 +4,8 @@ import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import Base from './Base.astro';
 import FormattedDate from '../components/FormattedDate.astro';
-import { defaultLang, useTranslations } from '../i18n';
+import { getLanguage, useTranslations } from '../i18n';
+import { blogAlternates } from '../lib/blog';
 
 interface Props {
 	title: string;
@@ -12,14 +13,25 @@ interface Props {
 	pubDate?: Date;
 	updatedDate?: Date;
 	heroImage?: ImageMetadata;
+	translationGroup?: string;
 }
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
-const lang = Astro.currentLocale ?? defaultLang;
+const { title, description, pubDate, updatedDate, heroImage, translationGroup } = Astro.props;
+const lang = getLanguage(Astro.currentLocale);
+const alternates = pubDate ? await blogAlternates(translationGroup) : undefined;
 const t = useTranslations(lang);
 ---
 
-<Base title={title} description={description}>
+<Base
+	{title}
+	{description}
+	image={heroImage}
+	imageAlt={title}
+	type={pubDate ? 'article' : 'website'}
+	publishedTime={pubDate}
+	updatedTime={updatedDate}
+	{alternates}
+>
 	<main>
 		<article>
 			<div class="hero-image">

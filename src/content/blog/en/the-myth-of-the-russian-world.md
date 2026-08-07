@@ -14,7 +14,7 @@ Last year, my colleague [Michael Goodier](https://twitter.com/michaelgoodier/) a
 
 Today, as Russia [destroys civilian infrastructure](https://www.bbc.co.uk/news/world-europe-65818705) and [floods Ukraine](https://www.bbc.co.uk/news/live/world-europe-65816109), the UN marks the Russian Language Day “in order to celebrate cultural diversity and multilingualism”.
 
-[![](../../../assets/posts/f0e4f27d-3c46-4ed6-9211-e72ceb387d5c_598x313.png)](https://twitter.com/UN/status/1665932022160965632)
+[![United Nations post marking Russian Language Day on 6 June 2023.](../../../assets/posts/f0e4f27d-3c46-4ed6-9211-e72ceb387d5c_598x313.png)](https://twitter.com/UN/status/1665932022160965632)
 
 So, who will be celebrating? For the most part, those who live in Russia.
 

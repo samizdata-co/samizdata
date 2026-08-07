@@ -9,8 +9,10 @@
 
 :root {
 	/* ── Canonical color tokens (site vocabulary) ────────────────────── */
-	--color-primary: #9f1853;               /* interactive accent */
+	--color-primary: #9f1853;               /* interactive fills and controls */
 	--color-primary-container: #9f1853;
+	--color-accent-text: #7b003c;
+	--color-accent-text-hover: #9f1853;
 	--color-logo-mark: var(--color-primary);
 	--color-surface: #fbf9f4;
 	--color-surface-low: #f5f3ee;
@@ -58,6 +60,8 @@
 	--on-primary: #ffffff;
 	--primary-deep: var(--color-primary-deep);
 	--primary-container: var(--color-primary-container);
+	--accent-text: var(--color-accent-text);
+	--accent-text-hover: var(--color-accent-text-hover);
 	--surface: var(--color-surface);
 	--surface-low: var(--color-surface-low);
 	--surface-container: var(--color-surface-container);
@@ -104,6 +108,8 @@
 :root[data-theme='dark'] {
 	--color-primary: #c62168;
 	--color-primary-container: #c62168;
+	--color-accent-text: #f078a6;
+	--color-accent-text-hover: #ff9bc1;
 	--color-logo-mark: #d14a7b;
 	--color-surface: #111311;
 	--color-surface-low: #171a18;
@@ -222,13 +228,13 @@ b {
 }
 
 a {
-	color: var(--primary-container);
+	color: var(--accent-text);
 	text-decoration-thickness: 1px;
 	text-underline-offset: 0.2em;
 }
 
 a:hover {
-	color: var(--primary-deep);
+	color: var(--accent-text-hover);
 }
 
 p {
@@ -349,6 +355,40 @@ hr {
 
 	main {
 		padding: var(--nav-offset) 1rem var(--section-block-tight);
+	}
+}
+
+.skip-link {
+	position: fixed;
+	top: 0.75rem;
+	left: 0.75rem;
+	z-index: 100;
+	padding: 0.75rem 1rem;
+	background: var(--color-surface-lowest);
+	color: var(--color-accent-text);
+	font-family: var(--font-display);
+	font-size: var(--text-button);
+	font-weight: 700;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	transform: translateY(calc(-100% - 1rem));
+}
+
+.skip-link:focus {
+	transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		scroll-behavior: auto !important;
+		transition-duration: 0.01ms !important;
 	}
 }
 

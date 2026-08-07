@@ -3,23 +3,7 @@
 // Svelte project so the derivation stays identical).
 
 import type { ImageMetadata } from 'astro';
-import cvData from '../portfolio/cv.json';
-
-type Publication = (typeof cvData.publications)[number];
-type Project = (typeof cvData.projects)[number];
-type Skill = (typeof cvData.skills)[number];
-type SkillValue = string | string[] | undefined;
-
-const hasSkill = (skills: SkillValue, expectedSkill: string) =>
-	Array.isArray(skills) ? skills.includes(expectedSkill) : skills === expectedSkill;
-
-const articleImages = import.meta.glob('../portfolio/img/*', {
-	eager: true,
-	import: 'default',
-}) as Record<string, ImageMetadata>;
-
-const getArticleImage = (imageName?: string) =>
-	imageName ? articleImages[`../portfolio/img/${imageName}`] : undefined;
+import { cvData, getPortfolioImage, hasSkill, type CvProject, type CvPublication } from './cv';
 
 export type ArticleCardData = {
 	publication: string;
@@ -40,21 +24,22 @@ export type ServiceCardData = {
 	description: string;
 	icon: 'file-search' | 'chart-no-axes-combined' | 'database' | 'graduation-cap';
 	href?: string;
+	hreflang?: string;
 	variant?: 'accent';
 	label?: string;
 	cta?: string;
 };
 
 const investigations = cvData.publications.filter(
-	(p): p is Publication & { publisher: string; img: string } =>
+	(p): p is CvPublication & { publisher: string; img: string } =>
 		Boolean(p.img) && hasSkill(p.skills, 'Investigations and research'),
 );
 const interactiveVisualisations = cvData.publications.filter(
-	(p): p is Publication & { img: string } =>
+	(p): p is CvPublication & { img: string } =>
 		Boolean(p.img) && hasSkill(p.skills, 'Interactive tools'),
 );
 const dataExplorers = cvData.projects.filter(
-	(p): p is Project & { img: string } =>
+	(p): p is CvProject & { img: string } =>
 		Boolean(p.img) && hasSkill(p.skills, 'Data explorers'),
 );
 
@@ -62,23 +47,18 @@ export const investigationCards: ArticleCardData[] = investigations.map((p) => (
 	publication: p.publisher,
 	year: new Date(p.releaseDate).getUTCFullYear().toString(),
 	headline: p.name,
-	image: getArticleImage(p.img),
+	image: getPortfolioImage(p.img),
 	href: p.url,
 }));
 
 export const interactiveCards: ImageCardData[] = interactiveVisualisations.map((p) => ({
 	title: p.name,
-	image: getArticleImage(p.img),
+	image: getPortfolioImage(p.img),
 	href: p.url,
 }));
 
 export const dataExplorerCards: ImageCardData[] = dataExplorers.map((p) => ({
 	title: p.name,
-	image: getArticleImage(p.img),
+	image: getPortfolioImage(p.img),
 	href: p.url,
 }));
-
-// Featured service skills (order matches the original serviceCards copy).
-export const featuredSkillSummaries = new Map(
-	cvData.skills.map((skill: Skill) => [skill.name, skill.summary] as const),
-);

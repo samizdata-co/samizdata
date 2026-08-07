@@ -3,7 +3,7 @@ title: "What happened in the Moldovan election, and what's next?"
 description: "A controversial election and the razor-thin referendum result. What can we learn from the data?"
 geography: 'Moldova'
 pubDate: '2024-10-28T12:10:12.876Z'
-heroImage: '../../../assets/posts/129528cf-cb56-41ce-b4fc-e8d93159ddef_4444x6944.png'
+heroImage: '../../../assets/shared/sandu-voters.png'
 ---
 
 Hey there, it’s been a minute. Glad you’re still here 🥰.
@@ -50,7 +50,7 @@ Regardless, the results still paint a pretty grim picture. They are particularly
 
 The chart below shows the vote split by the different districts of Moldova, as well as the voters abroad. The height of each bar is proportional to the number of people who voted there.
 
-![Share of vote in 2024 Moldovan presidential election by district. Maia Sandu overwhelmingly won the diaspora vote, but failed to win in the north and south of Moldova.](../../../assets/posts/129528cf-cb56-41ce-b4fc-e8d93159ddef_4444x6944.png)
+![Share of vote in 2024 Moldovan presidential election by district. Maia Sandu overwhelmingly won the diaspora vote, but failed to win in the north and south of Moldova.](../../../assets/shared/sandu-voters.png)
 
 What do the numbers tell us?
 
@@ -68,7 +68,7 @@ As a general rule, Sandu was more popular in cities, while Usatîi’s campaign 
 
 ![Share of vote in 2024 Moldovan presidential election by settlement type, not including the diaspora. Sandu received more votes in urban areas, though still under 50%.](../../../assets/posts/f53b8f05-2998-4ed1-9414-47287c036ff5_4444x2777.png)
 
-#### What does this mean for next Sunday’s election?
+### What does this mean for next Sunday’s election?
 
 The pro-Russian candidates seem to have the edge for now. The police have raided and arrested several of Shor’s lieutenants for voter corruption, somewhat disrupting his network.
 

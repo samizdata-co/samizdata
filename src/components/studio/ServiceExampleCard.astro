@@ -32,14 +32,25 @@ const kindLabel = example.kind === 'publication' ? labels.publication : labels.p
 	<div class:list={['example-body', Boolean(example.image) && 'with-image']}>
 		{example.image && (
 			<div class="media-frame">
-				<Image
-					src={example.image}
-					alt={example.title}
-					loading="lazy"
-					decoding="async"
-					widths={[320, 640, 960, 1280]}
-					sizes="(min-width: 900px) 16rem, 100vw"
-				/>
+				{example.image.format === 'gif' || example.image.format === 'svg' ? (
+					<img
+						src={example.image.src}
+						width={example.image.width}
+						height={example.image.height}
+						alt={example.title}
+						loading="lazy"
+						decoding="async"
+					/>
+				) : (
+					<Image
+						src={example.image}
+						alt={example.title}
+						loading="lazy"
+						decoding="async"
+						widths={[320, 480, 640]}
+						sizes="(min-width: 900px) 16rem, 100vw"
+					/>
+				)}
 			</div>
 		)}
 
@@ -97,7 +108,7 @@ const kindLabel = example.kind === 'publication' ? labels.publication : labels.p
 		gap: 0.45rem;
 	}
 	.meta-kind {
-		color: var(--color-primary-container);
+		color: var(--color-accent-text);
 	}
 	.meta-details {
 		display: flex;
@@ -135,7 +146,7 @@ const kindLabel = example.kind === 'publication' ? labels.publication : labels.p
 		font-weight: 700;
 		letter-spacing: 0.12em;
 		text-transform: uppercase;
-		color: var(--color-primary-container);
+		color: var(--color-accent-text);
 	}
 	@media (min-width: 900px) {
 		.example-body.with-image {

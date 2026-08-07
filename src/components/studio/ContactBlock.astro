@@ -11,52 +11,37 @@ interface Props {
 	locationLabel: string;
 	location: string;
 	socialLabel: string;
+	standalone?: boolean;
 }
 
-const { title, body, emailLabel, locationLabel, location, socialLabel } = Astro.props;
+const { title, body, emailLabel, locationLabel, location, socialLabel, standalone = false } = Astro.props;
+const Heading = standalone ? 'h1' : 'h2';
 ---
 
 <section class="contact section-block" id="contact">
-	<div class="shell grid grid-cols-1 items-start gap-12 min-[900px]:grid-cols-[minmax(0,1fr)_minmax(24rem,36rem)] min-[900px]:gap-16">
+	<div class="shell contact-grid">
 		<div class="intro">
-			<h2 class="section-title mb-8">{title}</h2>
-			<p class="body-copy max-w-128">{body}</p>
+			<Heading class="section-title">{title}</Heading>
+			<p class="body-copy">{body}</p>
 		</div>
 
-		<div class="grid gap-5">
-			<a
-				class="email-tile group"
-				href={`mailto:${siteConfig.email}`}
-			>
-				<div class="min-w-0">
-					<span class="eyebrow mb-[0.6rem] block text-[var(--color-primary-container)] group-hover:text-white/76">
-						{emailLabel}
-					</span>
-					<strong class="font-[var(--font-display)] text-[clamp(1.6rem,6vw,3rem)] font-black tracking-[-0.06em] break-words text-inherit">
-						{siteConfig.email}
-					</strong>
+		<div class="contact-links">
+			<a class="email-tile" href={`mailto:${siteConfig.email}`}>
+				<div class="email-copy">
+					<span class="eyebrow email-label">{emailLabel}</span>
+					<strong>{siteConfig.email}</strong>
 				</div>
 				<Icon name="arrow-up-right" size={36} strokeWidth={2.1} />
 			</a>
 
-			<div class="grid grid-cols-1 gap-5 min-[641px]:grid-cols-2">
+			<div class="info-grid">
 				<div class="info-tile">
 					<span class="eyebrow muted">{socialLabel}</span>
-					<p class="mt-[0.9rem] font-[var(--font-display)] text-[2rem] font-black tracking-[-0.04em] text-[var(--color-ink)]">
-						<a
-							class="underline decoration-[var(--color-primary-container)] underline-offset-[0.5rem]"
-							href={siteConfig.linkedinUrl}
-							target="_blank"
-							rel="noreferrer"
-							>LinkedIn</a
-						>
-					</p>
+					<p><a href={siteConfig.linkedinUrl} target="_blank" rel="noreferrer">LinkedIn</a></p>
 				</div>
 				<div class="info-tile">
 					<span class="eyebrow muted">{locationLabel}</span>
-					<p class="mt-[0.9rem] font-[var(--font-display)] text-[2rem] font-black tracking-[-0.04em] text-[var(--color-ink)]">
-						{location}
-					</p>
+					<p>{location}</p>
 				</div>
 			</div>
 		</div>
@@ -66,6 +51,22 @@ const { title, body, emailLabel, locationLabel, location, socialLabel } = Astro.
 <style>
 	.contact {
 		background: var(--color-surface);
+	}
+	.contact-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		align-items: start;
+		gap: 3rem;
+	}
+	.intro .section-title {
+		margin-bottom: 2rem;
+	}
+	.intro .body-copy {
+		max-width: 32rem;
+	}
+	.contact-links {
+		display: grid;
+		gap: 1.25rem;
 	}
 	.email-tile {
 		display: flex;
@@ -83,11 +84,35 @@ const { title, body, emailLabel, locationLabel, location, socialLabel } = Astro.
 			transform 0.22s ease,
 			border-color 0.22s ease;
 	}
+	.email-copy {
+		min-width: 0;
+	}
+	.email-label {
+		display: block;
+		margin-bottom: 0.6rem;
+		color: var(--color-accent-text);
+	}
+	.email-tile strong {
+		color: inherit;
+		font-family: var(--font-display);
+		font-size: clamp(1.6rem, 6vw, 3rem);
+		font-weight: 900;
+		letter-spacing: -0.06em;
+		overflow-wrap: anywhere;
+	}
 	.email-tile:hover {
 		transform: translateY(-0.15rem);
 		border-color: var(--color-primary);
 		background: var(--color-primary-container);
 		color: #fff;
+	}
+	.email-tile:hover .email-label {
+		color: #fff;
+	}
+	.info-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1.25rem;
 	}
 	.info-tile {
 		padding: 2rem;
@@ -95,9 +120,29 @@ const { title, body, emailLabel, locationLabel, location, socialLabel } = Astro.
 		background: var(--color-surface-high);
 		color: var(--color-ink);
 	}
+	.info-tile p {
+		margin-top: 0.9rem;
+		color: var(--color-ink);
+		font-family: var(--font-display);
+		font-size: 2rem;
+		font-weight: 900;
+		letter-spacing: -0.04em;
+	}
 	.info-tile a {
+		text-decoration: underline;
 		text-decoration-color: var(--color-primary-container);
 		text-underline-offset: 0.5rem;
+	}
+	@media (min-width: 641px) {
+		.info-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+	@media (min-width: 900px) {
+		.contact-grid {
+			grid-template-columns: minmax(0, 1fr) minmax(24rem, 36rem);
+			gap: 4rem;
+		}
 	}
 	@media (max-width: 640px) {
 		.email-tile,

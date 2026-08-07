@@ -1,9 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
 import BlogList from '../components/BlogList.astro';
-import { defaultLang, useTranslations } from '../i18n';
+import { getLanguage, useTranslations } from '../i18n';
 
-const lang = Astro.currentLocale ?? defaultLang;
+const lang = getLanguage(Astro.currentLocale);
 const t = useTranslations(lang);
 ---
 

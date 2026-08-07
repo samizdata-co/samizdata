@@ -51,9 +51,25 @@ const { compact = false, class: className = '' } = Astro.props;
 		letter-spacing: -0.06em;
 		line-height: 1;
 		text-transform: uppercase;
+		animation: fade-up 0.5s ease-out 0.75s both;
 	}
 	.logo.compact span {
 		font-size: 1.25rem;
+	}
+	@keyframes fade-up {
+		from {
+			opacity: 0;
+			transform: translateY(3px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.logo span {
+			animation: none;
+		}
 	}
 	:global(html[data-theme='dark']) .mark {
 		filter: brightness(1.14) saturate(1.06)
@@ -74,28 +90,30 @@ const { compact = false, class: className = '' } = Astro.props;
 	];
 	const NS = 'http://www.w3.org/2000/svg';
 
-	function boot(svgEl) {
+	function boot(svgEl: SVGSVGElement) {
 		let state = 'bars';
-		let idleTimer = 0;
+		let idleTimer: ReturnType<typeof setTimeout> | undefined;
 		let animFrame = 0;
 		let driftActive = false;
 		let motionToken = 0;
-		const barEls = [];
-		const axisEls = [];
+		const barEls: SVGRectElement[] = [];
+		const axisEls: SVGLineElement[] = [];
+		const container = svgEl.closest<HTMLElement>('.logo') ?? svgEl.parentElement!;
 
-		let container = svgEl.closest('.logo');
-
-		const easeInOut = (t) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
-		const lerp = (a, b, t) => a + (b - a) * t;
-		const mkEl = (tag, attrs) => {
-			const e = document.createElementNS(NS, tag);
-			for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, String(v));
-			return e;
+		const easeInOut = (t: number) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
+		const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+		const mkEl = <K extends keyof SVGElementTagNameMap>(
+			tag: K,
+			attrs: Record<string, string | number>,
+		) => {
+			const element = document.createElementNS(NS, tag);
+			for (const [name, value] of Object.entries(attrs)) element.setAttribute(name, String(value));
+			return element;
 		};
-		const tween = (ms, onTick, token = motionToken) =>
-			new Promise((resolve) => {
+		const tween = (ms: number, onTick: (progress: number) => void, token = motionToken) =>
+			new Promise<boolean>((resolve) => {
 				const start = performance.now();
-				const frame = (now) => {
+				const frame = (now: number) => {
 					if (token !== motionToken) return resolve(false);
 					const raw = Math.min((now - start) / ms, 1);
 					onTick(easeInOut(raw));
@@ -104,7 +122,7 @@ const { compact = false, class: className = '' } = Astro.props;
 				};
 				animFrame = requestAnimationFrame(frame);
 			});
-		const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+		const wait = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
 
 		const buildAxes = () =>
 			AXES.forEach((a) => {
@@ -167,8 +185,8 @@ const { compact = false, class: className = '' } = Astro.props;
 				dy: (((i * 11 + 5) % 5) - 2) * 0.6,
 			}));
 			const PERIOD = 2600;
-			let start = null;
-			const frame = (now) => {
+			let start: number | null = null;
+			const frame = (now: number) => {
 				if (!driftActive) return;
 				if (start == null) start = now;
 				const t = Math.sin((((now - start) % PERIOD) / PERIOD) * Math.PI);
@@ -279,7 +297,6 @@ const { compact = false, class: className = '' } = Astro.props;
 			scheduleIdle();
 		}
 
-		if (!container) container = svgEl.parentElement;
 		container.addEventListener('mouseenter', toScatter);
 		container.addEventListener('mouseleave', toBars);
 
@@ -289,7 +306,7 @@ const { compact = false, class: className = '' } = Astro.props;
 	}
 
 	const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-	const svgs = document.querySelectorAll('.logo svg');
+	const svgs = document.querySelectorAll<SVGSVGElement>('.logo svg');
 	if (reduceMotion) {
 		// Static filled bars, no animation
 		svgs.forEach((svg) => {

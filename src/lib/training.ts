@@ -9,7 +9,7 @@ export type TrainingNavSection = {
 
 export async function getTrainingPages(): Promise<TrainingPage[]> {
 	return (await getCollection('training'))
-		.map((page) => ({ ...page, href: `/training/${page.id}` }))
+		.map((page) => ({ ...page, href: `/training/${page.id}/` }))
 		.sort((a, b) => a.data.order - b.data.order || a.data.title.localeCompare(b.data.title));
 }
 

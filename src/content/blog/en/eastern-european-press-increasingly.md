@@ -16,7 +16,7 @@ But what about Eastern Europe and Central Asia? Here’s a paragraph from the RS
 
 Here’s each country’s progress for the past 10 years.
 
-![](../../../assets/posts/cd6a4b66-1339-477b-a055-0adaae0a1dda_4444x11805.png)
+![Rankings of Eastern European and Central Asian countries in the World Press Freedom Index from 2014 to 2024, with the Baltic states leading and Turkmenistan last.](../../../assets/posts/cd6a4b66-1339-477b-a055-0adaae0a1dda_4444x11805.png)
 
 What this spaghetti-looking chart shows us is that the Baltics have taken the top three spots as the countries with the most press freedom, followed by the Czech Republic and Slovakia.
 

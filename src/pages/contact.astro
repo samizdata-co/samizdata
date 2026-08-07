@@ -1,0 +1,30 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactBlock from '../components/studio/ContactBlock.astro';
+import '../styles/studio.css';
+import { useTranslations } from '../i18n';
+
+const t = useTranslations('en');
+---
+
+<Base title={t('contact.seo.title')} description={t('contact.seo.description')}>
+	<main class="studio-main contact-page">
+		<ContactBlock
+			title={t('studio.contact.title')}
+			body={t('studio.contact.body')}
+			emailLabel={t('studio.contact.email')}
+			locationLabel={t('studio.contact.locationLabel')}
+			location={t('studio.contact.location')}
+			socialLabel={t('studio.contact.social')}
+			standalone
+		/>
+	</main>
+</Base>
+
+<style>
+	.contact-page {
+		min-height: 100vh;
+		padding-top: var(--nav-offset);
+		background: var(--color-surface);
+	}
+</style>

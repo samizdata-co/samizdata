@@ -6,34 +6,56 @@ import { getRelativeLocaleUrl } from 'astro:i18n';
 import BaseHead from '../components/BaseHead.astro';
 import SiteNav from '../components/SiteNav.astro';
 import SiteFooter from '../components/SiteFooter.astro';
-import { defaultLang, useTranslations, type Language } from '../i18n';
+import type { ImageMetadata } from 'astro';
+import { getLanguage, useTranslations } from '../i18n';
+import { pageAlternates, type LocaleAlternate } from '../lib/metadata';
 
 interface Props {
 	title: string;
 	description: string;
+	image?: ImageMetadata;
+	imageAlt?: string;
+	type?: 'website' | 'article';
+	publishedTime?: Date;
+	updatedTime?: Date;
+	alternates?: LocaleAlternate[];
 }
 
-const { title, description } = Astro.props;
-const lang: Language = Astro.currentLocale ?? defaultLang;
+const { title, description, image, imageAlt, type, publishedTime, updatedTime } = Astro.props;
+const alternates = Astro.props.alternates ?? pageAlternates(Astro.url.pathname);
+const lang = getLanguage(Astro.currentLocale);
 const t = useTranslations(lang);
 
 const navItems = [
 	{ label: t('nav.home'), href: getRelativeLocaleUrl(lang, '/') },
 	{ label: t('nav.about'), href: getRelativeLocaleUrl(lang, '/about') },
 	{ label: t('nav.studio'), href: getRelativeLocaleUrl(lang, '/studio') },
-	...(lang === 'en' ? [{ label: t('nav.training'), href: '/training' }] : []),
+	...(lang === 'en' ? [{ label: t('nav.training'), href: '/training/' }] : []),
 ];
 ---
 
 <!doctype html>
 <html lang={lang}>
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead
+			{title}
+			{description}
+			{image}
+			{imageAlt}
+			{type}
+			{publishedTime}
+			{updatedTime}
+			{alternates}
+		/>
 		<slot name="head" />
 	</head>
 	<body>
-		<SiteNav navItems={navItems} />
-		<slot />
+		<a class="skip-link" href="#main-content">{t('nav.skip')}</a>
+		<SiteNav navItems={navItems} alternate={alternates.find(({ lang: alternateLang }) => alternateLang !== lang)} />
+		<div id="main-content" tabindex="-1">
+			<slot />
+		</div>
 		<SiteFooter />
+		<script is:inline async src="https://analytics.samizdata.co/proxy.js"></script>
 	</body>
 </html>

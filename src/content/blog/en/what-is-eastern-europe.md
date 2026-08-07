@@ -22,7 +22,7 @@ What started as an attempt to place Moldova on the mental map of my interlocutor
 
 But what is Eastern Europe? For most people, it boils down to a Cold War stereotype of “Soviet” or “communist” countries. More than 30 years after the fall of the Soviet Union, many countries in the east are still introduced as “post-Soviet” or “ex-communist” in English-language newspapers. Is there more to it?
 
-### Geography or cultural space?
+## Geography or cultural space?
 
 When I went to the Czech Republic, some of the locals made a point of explaining that their country would be more accurately described as being in Central Europe, rather than Eastern Europe.
 
@@ -32,7 +32,7 @@ On the other hand, people in Georgia, Armenia or Kazakhstan will claim to be in 
 
 In the *Balkan Spirit* documentary, Slavoj Žižek jokes about how Austrians will claim the Balkans start in Slovenia, Slovenians will tell you that they start in Croatia, Croatians will point to Serbia, [and so on and so on](https://www.youtube.com/watch?v=SVXbQGZE-lI). Eastern Europe follows a similar approach.
 
-<iframe src="https://www.youtube-nocookie.com/embed/3rpEQmtkstM?rel=0&autoplay=0&showinfo=0&enablejsapi=0" frameborder="0" loading="lazy" gesture="media" allow="autoplay; fullscreen" allowautoplay="true" allowfullscreen="true" width="728" height="409"></iframe>
+<iframe src="https://www.youtube-nocookie.com/embed/3rpEQmtkstM?rel=0&autoplay=0&showinfo=0&enablejsapi=0" title="Slavoj Žižek discusses where the Balkans begin" loading="lazy" allow="autoplay; fullscreen" allowfullscreen width="728" height="409"></iframe>
 
 Or, as author Francis Tapon [puts it](https://francistapon.com/Books/The-Hidden-Europe/Where-is-Eastern-Europe-and-what-countries-are-in-it):
 

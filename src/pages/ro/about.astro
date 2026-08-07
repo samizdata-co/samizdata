@@ -1,8 +1,8 @@
 ---
 import Layout from '../../layouts/BlogPost.astro';
-import { defaultLang, useTranslations } from '../../i18n';
+import { getLanguage, useTranslations } from '../../i18n';
 
-const t = useTranslations(Astro.currentLocale ?? defaultLang);
+const t = useTranslations(getLanguage(Astro.currentLocale));
 ---
 
 <Layout title={t('nav.about')} description={t('site.description')}>
@@ -21,10 +21,10 @@ const t = useTranslations(Astro.currentLocale ?? defaultLang);
 	<h2>Cine sunt eu?</h2>
 	<p>
 		Mă numesc <a href="https://nicu.md/">Nicu Calcea</a> și sunt jurnalist stabilit
-		la Londra, Marea Britanie. În prezent sunt „Senior Data Investigator” la
-		<em><a href="https://www.globalwitness.org/en/">Global Witness</a></em>, iar
-		înainte am lucrat la <em>BBC News</em> și la New Statesman. De asemenea, predau
-		jurnalism de date la City, University of London.
+		la Londra, Marea Britanie. Experiența mea include investigații de date la
+		<em><a href="https://www.globalwitness.org/en/">Global Witness</a></em>, jurnalism
+		la <em>BBC News</em> și New Statesman, precum și predarea jurnalismului de date
+		la City, University of London.
 	</p>
 	<p>
 		Pentru scopurile acestui newsletter, sunt doar un tip cu un calculator și prea
