@@ -2,8 +2,8 @@
 title: "What will the world do today?"
 description: "We get 24 hours a day. A new study calculates how we spend them."
 geography: 'Eastern Europe'
-pubDate: '2024-01-25T13:27:15.999Z'
-heroImage: '../../../assets/shared/human-day.png'
+date: '2024-01-25T13:27:15.999Z'
+image: '../../../assets/shared/human-day.png'
 ---
 
 My goal to churn out a newsletter about once a month has fallen to the wayside. There are, after all, not enough hours in a day to sleep, work, eat, drink and also write a newsletter. Or are there?

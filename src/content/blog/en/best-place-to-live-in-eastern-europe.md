@@ -2,8 +2,8 @@
 title: 'The best place to live in Eastern Europe'
 description: 'The world is more liveable than at any point in the past 15 years. What about Eastern Europe and Central Asia?'
 geography: 'Eastern Europe'
-pubDate: '2023-07-12T11:38:32.147Z'
-heroImage: '../../../assets/posts/311317d6-6636-4770-9e99-b75e7dc4ee15_4444x5902.png'
+date: '2023-07-12T11:38:32.147Z'
+image: '../../../assets/posts/311317d6-6636-4770-9e99-b75e7dc4ee15_4444x5902.png'
 ---
 
 *The Economist*’s Intelligence Unit has recently published an update to its “Global Liveability Index”. You can read a [summary PDF here](https://pages.eiu.com/rs/753-RIQ-438/images/Jun-Global-Liveability-Index-2023.pdf) or, if you’ve got an extra **$10,995** stashed in your Swiss bank account, you can [buy a 12-month subscription to the data](https://store.eiu.com/product/global-liveability-matrix/).

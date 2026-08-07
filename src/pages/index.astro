@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import BlogList from '../components/BlogList.astro';
+import HomepageStudioPromo from '../components/HomepageStudioPromo.astro';
 import { getLanguage, useTranslations } from '../i18n';
 
 const lang = getLanguage(Astro.currentLocale);
@@ -8,5 +9,8 @@ const t = useTranslations(lang);
 ---
 
 <Base title={t('site.title')} description={t('site.description')}>
-	<BlogList locale="en" />
+	<main>
+		<BlogList locale="en" />
+		<HomepageStudioPromo />
+	</main>
 </Base>

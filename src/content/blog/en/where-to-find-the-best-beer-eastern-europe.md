@@ -2,8 +2,8 @@
 title: "Hoppin' around: Where to find the best beer in Eastern Europe?"
 description: "Eastern Europe is not particularly known for its strong beer tradition. Has the \"craft revolution\" changed that?"
 geography: 'Eastern Europe'
-pubDate: '2023-08-29T12:08:07.313Z'
-heroImage: '../../../assets/posts/d944d4b4-c825-4d33-8e91-3ae23c6b1f96_4444x3618.png'
+date: '2023-08-29T12:08:07.313Z'
+image: '../../../assets/posts/d944d4b4-c825-4d33-8e91-3ae23c6b1f96_4444x3618.png'
 ---
 
 This newsletter comes to you a bit later than planned. That’s partially down to my laziness, and partially because I was on holiday.

@@ -21,6 +21,12 @@ export const ui = {
 		'nav.skip': 'Skip to content',
 		'last.updated': 'Last updated on',
 
+		// Homepage studio promotion
+		'home.studio.eyebrow': 'Data storytelling studio',
+		'home.studio.title': 'Let\'s work together.',
+		'home.studio.cta': 'Visit the studio',
+		'home.studio.servicesLabel': 'Studio services',
+
 		// Studio (portfolio) page
 		'studio.nav.homeLabel': 'SAMIZDATA home',
 		'studio.nav.menuOpen': 'Open menu',
@@ -31,12 +37,12 @@ export const ui = {
 		'studio.footer.connect': 'Connect',
 		'studio.footer.rights': '© 2026 SAMIZDATA Ltd.',
 		'studio.footer.location': 'London 🇬🇧 and Chișinău 🇲🇩',
-		'studio.seo.title': 'Data Storytelling Consultancy',
+		'studio.seo.title': 'Data Storytelling Studio',
 		'studio.seo.description':
 			'SAMIZDATA researches, writes, and builds data-led stories and tools for media organisations, NGOs, and public-interest institutions.',
 		'studio.hero.titleLead': 'SAMIZDATA is a ',
 		'studio.hero.titleAccent': 'data storytelling',
-		'studio.hero.titleTail': ' consultancy.',
+		'studio.hero.titleTail': ' studio.',
 		'studio.hero.body':
 			'We research, write and build data tools for media organisations, NGOs and other public-benefit institutions.',
 		'studio.hero.primaryCta': "Let's talk!",
@@ -103,6 +109,12 @@ export const ui = {
 		'nav.training': 'Training',
 		'nav.skip': 'Sari la conținut',
 		'last.updated': 'Ultima actualizare:',
+
+		// Promovarea studioului pe pagina principală
+		'home.studio.eyebrow': 'Studio de storytelling de date',
+		'home.studio.title': 'Hai să lucrăm împreună.',
+		'home.studio.cta': 'Descoperă studioul',
+		'home.studio.servicesLabel': 'Serviciile studioului',
 
 		'studio.nav.homeLabel': 'Pagina principală SAMIZDATA',
 		'studio.nav.menuOpen': 'Deschide meniul',

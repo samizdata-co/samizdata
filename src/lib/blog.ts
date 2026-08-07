@@ -14,7 +14,7 @@ export const postPath = (id: string) => {
 export async function getPosts(locale: Language) {
 	return (await getCollection('blog'))
 		.filter((post) => post.id.startsWith(`${locale}/`))
-		.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+		.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 }
 
 export async function blogAlternates(translationGroup?: string): Promise<LocaleAlternate[]> {
@@ -46,7 +46,7 @@ export async function rssFeed(context: { site: string }, locale: Language) {
 		items: posts.map((post) => ({
 			title: post.data.title,
 			description: post.data.description,
-			pubDate: post.data.pubDate,
+			pubDate: post.data.date,
 			link: postPath(post.id),
 		})),
 		customData: `<language>${locale}</language>`,

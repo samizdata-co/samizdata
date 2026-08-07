@@ -10,48 +10,49 @@ import { blogAlternates } from '../lib/blog';
 interface Props {
 	title: string;
 	description: string;
-	pubDate?: Date;
-	updatedDate?: Date;
-	heroImage?: ImageMetadata;
+	date?: Date;
+	'date-modified'?: Date;
+	image?: ImageMetadata;
 	translationGroup?: string;
 }
 
-const { title, description, pubDate, updatedDate, heroImage, translationGroup } = Astro.props;
+const { title, description, date, 'date-modified': dateModified, image, translationGroup } = Astro.props;
 const lang = getLanguage(Astro.currentLocale);
-const alternates = pubDate ? await blogAlternates(translationGroup) : undefined;
+const alternates = date ? await blogAlternates(translationGroup) : undefined;
 const t = useTranslations(lang);
 ---
 
 <Base
 	{title}
 	{description}
-	image={heroImage}
+	image={image}
 	imageAlt={title}
-	type={pubDate ? 'article' : 'website'}
-	publishedTime={pubDate}
-	updatedTime={updatedDate}
+	type={date ? 'article' : 'website'}
+	publishedTime={date}
+	updatedTime={dateModified}
 	{alternates}
 >
 	<main>
 		<article>
 			<div class="hero-image">
-				{heroImage && <Image width={1020} height={510} src={heroImage} alt="" priority />}
+				{image && <Image width={1020} height={510} src={image} alt="" priority />}
 			</div>
 			<div class="prose">
 				<div class="title">
-					{pubDate && (
+					{date && (
 						<div class="date">
-							<FormattedDate date={pubDate} locale={lang} />
+							<FormattedDate date={date} locale={lang} />
 							{
-								updatedDate && (
+								dateModified && (
 									<div class="last-updated-on">
-										{t('last.updated')} <FormattedDate date={updatedDate} locale={lang} />
+										{t('last.updated')} <FormattedDate date={dateModified} locale={lang} />
 									</div>
 								)
 							}
 						</div>
 					)}
 					<h1>{title}</h1>
+					<p class="description">{description}</p>
 					<hr />
 				</div>
 				<slot />
@@ -84,6 +85,16 @@ const t = useTranslations(lang);
 	}
 	.title h1 {
 		margin: 0 0 1rem;
+	}
+	.description {
+		max-width: 38rem;
+		margin: 0 auto 1.5rem;
+		color: var(--muted);
+		font-family: var(--font-display);
+		font-size: clamp(1.25rem, 3vw, 1.5rem);
+		font-weight: 700;
+		line-height: 1.2;
+		letter-spacing: -0.03em;
 	}
 	.date {
 		margin-bottom: 1.5rem;

@@ -13,38 +13,34 @@ const { locale } = Astro.props;
 const posts = await getPosts(locale);
 ---
 
-<main>
-	<section aria-labelledby="blog-heading">
-		<h1 id="blog-heading">{locale === 'ro' ? 'Ultimele articole' : 'Latest stories'}</h1>
-		<ul>
-			{
-				posts.map((post, i) => (
-					<li>
-						<a href={postPath(post.id)}>
-							{post.data.heroImage && (
-								<Image
-									width={i === 0 ? 1020 : 720}
-									height={i === 0 ? 510 : 360}
-									src={post.data.heroImage}
-									alt=""
-									priority={i === 0}
-								/>
-							)}
-							<h2 class="title">{post.data.title}</h2>
-							<p class="date">
-								<FormattedDate date={post.data.pubDate} locale={locale} />
-							</p>
-						</a>
-					</li>
-				))
-			}
-		</ul>
-	</section>
-</main>
+<section aria-labelledby="blog-heading">
+	<h1 id="blog-heading">{locale === 'ro' ? 'Ultimele articole' : 'Latest stories'}</h1>
+	<ul>
+		{
+			posts.map((post, i) => (
+				<li>
+					<a href={postPath(post.id)}>
+						{post.data.image && (
+							<Image
+								width={i === 0 ? 1020 : 720}
+								height={i === 0 ? 510 : 360}
+								src={post.data.image}
+								alt=""
+								priority={i === 0}
+							/>
+						)}
+						<h2 class="title">{post.data.title}</h2>
+						<p class="description">{post.data.description}</p>
+						<p class="date">
+							<FormattedDate date={post.data.date} locale={locale} />
+						</p>
+					</a>
+				</li>
+			))
+		}
+	</ul>
+</section>
 <style>
-	main {
-		max-width: 1080px;
-	}
 	h1 {
 		margin-bottom: 2rem;
 	}
@@ -107,6 +103,12 @@ const posts = await getPosts(locale);
 		line-height: 1.04;
 		letter-spacing: -0.04em;
 		transition: color 0.2s ease;
+	}
+	.description {
+		margin: 0;
+		color: var(--muted);
+		font-size: var(--text-body-md);
+		line-height: 1.6;
 	}
 	.date {
 		margin: 0;

@@ -2,8 +2,8 @@
 title: 'Ce este Europa de Est? (articol de probă)'
 description: 'Un articol de probă în limba română, pentru testarea internaționalizării.'
 geography: 'Europa de Est'
-pubDate: '2026-08-06T10:00:00.000Z'
-heroImage: '../../../assets/posts/477515bb-c175-4ebf-abee-3e684e901df3_1280x1042.png'
+date: '2026-08-06T10:00:00.000Z'
+image: '../../../assets/posts/477515bb-c175-4ebf-abee-3e684e901df3_1280x1042.png'
 ---
 
 Acesta este un articol de probă scris în limba română.

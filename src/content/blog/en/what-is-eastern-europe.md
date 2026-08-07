@@ -2,8 +2,8 @@
 title: 'What is Eastern Europe?'
 description: 'A somewhat meaningful answer to a somewhat meaningless question.'
 geography: 'Eastern Europe'
-pubDate: '2023-05-01T10:47:45.463Z'
-heroImage: '../../../assets/posts/477515bb-c175-4ebf-abee-3e684e901df3_1280x1042.png'
+date: '2023-05-01T10:47:45.463Z'
+image: '../../../assets/posts/477515bb-c175-4ebf-abee-3e684e901df3_1280x1042.png'
 ---
 
 Welcome to the first edition of the SAMIZDATA newsletter.

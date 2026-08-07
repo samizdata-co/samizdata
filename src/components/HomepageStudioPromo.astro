@@ -1,0 +1,125 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getLanguage, useTranslations } from '../i18n';
+
+const lang = getLanguage(Astro.currentLocale);
+const t = useTranslations(lang);
+
+const services = [
+	t('studio.work.s1.title'),
+	t('studio.work.s2.title'),
+	t('studio.work.s3.title'),
+];
+---
+
+<section class="studio-promo" aria-labelledby="studio-promo-title">
+	<div class="promo-copy">
+		<p class="eyebrow">{t('home.studio.eyebrow')}</p>
+		<h2 id="studio-promo-title">{t('home.studio.title')}</h2>
+		<p class="body-copy">{t('studio.hero.body')}</p>
+		<a class="btn btn-primary" href={getRelativeLocaleUrl(lang, '/studio')}>
+			{t('home.studio.cta')} <span aria-hidden="true">→</span>
+		</a>
+	</div>
+
+	<ol class="services" aria-label={t('home.studio.servicesLabel')}>
+		{services.map((service, index) => (
+			<li>
+				<span class="number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+				<span>{service}</span>
+			</li>
+		))}
+	</ol>
+</section>
+
+<style>
+	.studio-promo {
+		display: grid;
+		grid-template-columns: minmax(0, 1.25fr) minmax(16rem, 0.75fr);
+		gap: clamp(2rem, 6vw, 4rem);
+		margin-top: var(--section-block);
+		padding: clamp(2rem, 5vw, 4rem);
+		background: var(--surface-low);
+		border: 1px solid var(--border-soft);
+	}
+
+	.promo-copy {
+		display: flex;
+		align-items: flex-start;
+		flex-direction: column;
+	}
+
+	.eyebrow {
+		margin: 0 0 1rem;
+		color: var(--accent-text);
+	}
+
+	h2 {
+		max-width: 12ch;
+		margin-bottom: 1.5rem;
+		font-size: clamp(2.25rem, 5vw, 4rem);
+	}
+
+	.body-copy {
+		margin-bottom: 2rem;
+	}
+
+	.btn {
+		font-family: var(--font-display);
+	}
+
+	.btn span {
+		font-size: 1rem;
+		transition: transform 0.2s ease;
+	}
+
+	.btn:hover span {
+		transform: translateX(0.25rem);
+	}
+
+	.services {
+		align-self: center;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		border-top: 1px solid var(--border-strong);
+	}
+
+	.services li {
+		display: grid;
+		grid-template-columns: 2rem 1fr;
+		gap: 1rem;
+		align-items: baseline;
+		padding: 1.5rem 0;
+		border-bottom: 1px solid var(--border-strong);
+		color: var(--ink);
+		font-family: var(--font-display);
+		font-size: clamp(1.125rem, 2vw, 1.5rem);
+		font-weight: 700;
+		line-height: 1.2;
+		letter-spacing: -0.02em;
+	}
+
+	.number {
+		color: var(--accent-text);
+		font-size: var(--text-label-sm);
+		letter-spacing: 0.14em;
+	}
+
+	@media (max-width: 800px) {
+		.studio-promo {
+			grid-template-columns: 1fr;
+		}
+
+		h2 {
+			max-width: 14ch;
+		}
+	}
+
+	@media (max-width: 480px) {
+		.studio-promo {
+			padding: 2rem 1rem;
+		}
+	}
+</style>

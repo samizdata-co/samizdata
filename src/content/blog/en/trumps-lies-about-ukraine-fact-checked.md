@@ -2,8 +2,8 @@
 title: "Trump's lies about Ukraine, fact-checked"
 description: "The US president is wrong, and the data proves it."
 geography: 'Eastern Europe'
-pubDate: '2025-03-01T17:00:39.910Z'
-heroImage: '../../../assets/posts/a583ed9f-bbbd-4d0c-9cc0-d827a0e39d40_4444x3472.png'
+date: '2025-03-01T17:00:39.910Z'
+image: '../../../assets/posts/a583ed9f-bbbd-4d0c-9cc0-d827a0e39d40_4444x3472.png'
 ---
 
 US president Donald ~~Krasnov~~ Trump hosted Ukrainian president Volodymyr Zelenskyy at the White House on Friday, if you can call it that.
