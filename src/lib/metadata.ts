@@ -11,7 +11,7 @@ const absolute = (pathname: string) => new URL(pathname, siteConfig.url).href;
 /** Return reciprocal locale URLs for routes that have equivalent EN/RO pages. */
 export function pageAlternates(pathname: string): LocaleAlternate[] {
 	const normalized = pathname.replace(/\/+$/, '') || '/';
-	if (normalized.startsWith('/training') || normalized.includes('/blog/')) return [];
+	if (normalized.startsWith('/training') || normalized.includes('/story/')) return [];
 
 	const unprefixed = normalized === '/ro' ? '/' : normalized.replace(/^\/ro(?=\/)/, '') || '/';
 	return [

@@ -110,7 +110,7 @@ for (const file of htmlFiles) {
 	} else if (html.includes('class="lang-switcher"')) {
 		fail(`${pathname}: language switch exists without an equivalent-page alternate`);
 	}
-	if (pathname.includes('/blog/')) {
+	if (pathname.includes('/story/')) {
 		if (!html.includes('<meta property="og:type" content="article">')) fail(`${pathname}: must use article metadata`);
 		if (!html.includes('"@type":"BlogPosting"')) fail(`${pathname}: missing BlogPosting JSON-LD`);
 		if (!html.includes('<meta property="article:published_time"')) fail(`${pathname}: missing publication date metadata`);
@@ -242,7 +242,7 @@ for (const locale of ['en', 'ro']) {
 	const home = await read(locale === 'en' ? 'dist/index.html' : 'dist/ro/index.html');
 	for (const post of posts) {
 		const slug = relative(sourceDir, post).split(sep).join('/').replace(/\.(?:md|mdx)$/, '');
-		const pathname = `/${locale === 'en' ? '' : 'ro/'}blog/${slug}/`;
+		const pathname = `/${locale === 'en' ? '' : 'ro/'}story/${slug}/`;
 		const output = outputPath(pathname);
 		if (!has(output)) {
 			fail(`missing route for ${relative(root, post)}: ${pathname}`);

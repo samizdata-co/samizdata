@@ -32,7 +32,7 @@ async function request(path, redirect = 'follow') {
 const pages = [
 	'/',
 	'/ro/',
-	'/blog/what-is-eastern-europe/',
+	'/story/what-is-eastern-europe/',
 	'/studio/',
 	'/contact/',
 	'/services/',

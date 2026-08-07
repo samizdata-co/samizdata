@@ -46,7 +46,7 @@ As to why this even exists, *the Economist* wants companies to use this as a gui
 
 ## Postscriptum
 
-Last month, I showed you that Russia’s claims of a “Russian World” outside its borders is often overstated, and that the number of people identifying as “Russian” is falling across Eastern Europe and Central Asia. Go read it if you haven’t: [The myth of the Russian World](/blog/the-myth-of-the-russian-world/).
+Last month, I showed you that Russia’s claims of a “Russian World” outside its borders is often overstated, and that the number of people identifying as “Russian” is falling across Eastern Europe and Central Asia. Go read it if you haven’t: [The myth of the Russian World](/story/the-myth-of-the-russian-world/).
 
 We have further confirmation of that from [some recent Gallup survey data](https://news.gallup.com/poll/505793/empire-twilight-russia-loses-support-own-backyard.aspx), which shows that increasingly fewer people in the countries with the largest Russian diasporas identify as Russian, with the trend accelerating in 2022.
 

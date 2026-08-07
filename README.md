@@ -54,7 +54,7 @@ The public route contract is:
 | Area | English | Romanian |
 | --- | --- | --- |
 | Editorial index | `/` | `/ro/` |
-| Posts | `/blog/{slug}/` | `/ro/blog/{slug}/` |
+| Stories | `/story/{slug}/` | `/ro/story/{slug}/` |
 | Studio | `/studio/` | `/ro/studio/` |
 | Services | `/services/` | `/ro/services/` |
 | Contact | `/contact/` | `/ro/contact/` |

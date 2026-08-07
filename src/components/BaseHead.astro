@@ -3,7 +3,7 @@
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
 import type { ImageMetadata } from 'astro';
-import FallbackImage from '../assets/shared/climate-stripes.png';
+import FallbackImage from '../assets/samizdata-social.jpg';
 import { getLanguage, useTranslations } from '../i18n';
 import { Font, getImage } from 'astro:assets';
 import { siteConfig } from '../lib/site';
@@ -37,7 +37,6 @@ const {
 	updatedTime,
 	alternates = [],
 } = Astro.props;
-if (Astro.url.pathname === '/') console.log('SOCIAL DEBUG', Astro.props.image, FallbackImage);
 const brandedTitle = title === siteConfig.name ? title : `${title} • ${siteConfig.name}`;
 const socialImage = await getImage({ src: image, width: 1200, height: 630, fit: 'cover', format: 'webp' });
 const socialImageURL = new URL(socialImage.src, Astro.site);

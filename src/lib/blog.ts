@@ -8,7 +8,7 @@ import type { LocaleAlternate } from './metadata';
 
 export const postPath = (id: string) => {
 	const [locale, ...slug] = id.split('/');
-	return `/${locale === 'en' ? '' : `${locale}/`}blog/${slug.join('/')}/`;
+	return `/${locale === 'en' ? '' : `${locale}/`}story/${slug.join('/')}/`;
 };
 
 export async function getPosts(locale: Language) {

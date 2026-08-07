@@ -18,7 +18,26 @@ const t = useTranslations('ro');
 			socialLabel={t('studio.contact.social')}
 			standalone
 		/>
+		<section class="cal-booking section-block" aria-labelledby="booking-title">
+			<div class="shell">
+				<header class="booking-header">
+					<div>
+						<p class="eyebrow booking-eyebrow">Consultație de 30 de minute</p>
+						<h2 class="booking-title" id="booking-title">Programează o discuție</h2>
+					</div>
+					<p class="body-copy booking-copy">
+						Alege un interval potrivit. Putem discuta despre proiectul tău, o investigație, cursuri sau
+						o altă formă de colaborare.
+					</p>
+				</header>
+				<div class="cal-frame">
+					<div style="width:100%;height:100%;overflow:scroll" id="my-cal-inline-30min"></div>
+				</div>
+			</div>
+		</section>
 	</main>
+
+	<script is:inline src="/cal-embed.js"></script>
 </Base>
 
 <style>
@@ -26,5 +45,38 @@ const t = useTranslations('ro');
 		min-height: 100vh;
 		padding-top: var(--nav-offset);
 		background: var(--color-surface);
+	}
+	.cal-booking {
+		background: var(--color-surface-low);
+	}
+	.booking-header {
+		display: grid;
+		gap: 2rem;
+		margin-bottom: 4rem;
+		padding-bottom: 2rem;
+		border-bottom: 1px solid var(--color-border-strong);
+	}
+	.booking-eyebrow {
+		margin-bottom: 1rem;
+		color: var(--color-accent-text);
+	}
+	.booking-title {
+		font-family: var(--font-display);
+		font-size: clamp(2.5rem, 6vw, 4.5rem);
+		font-weight: 900;
+		letter-spacing: -0.05em;
+		line-height: 0.92;
+	}
+	.booking-copy {
+		align-self: end;
+	}
+	.cal-frame {
+		border: 1px solid var(--color-border-soft);
+		background: var(--color-surface);
+	}
+	@media (min-width: 900px) {
+		.booking-header {
+			grid-template-columns: minmax(0, 5fr) minmax(20rem, 7fr);
+		}
 	}
 </style>

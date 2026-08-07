@@ -41,7 +41,7 @@ The original type-checking, stale-check, migration-map, and automated-accessibil
 |---|---:|---:|---:|---:|---:|
 | `/` | 99 | 100 | 100 | 100 | 379 KiB |
 | `/studio/` | 100 | 100 | 100 | 100 | 614 KiB |
-| `/blog/what-is-eastern-europe/` | 99 | 100 | 100 | 100 | 1,207 KiB |
+| `/story/what-is-eastern-europe/` | 99 | 100 | 100 | 100 | 1,207 KiB |
 | `/training/ai/` | 99 | 100 | 100 | 100 | 139 KiB |
 
 These are production-preview Lighthouse runs. Preserve the strong runtime baseline while reducing deployment/build waste; do not optimize blindly.
@@ -136,10 +136,10 @@ Acceptance met: `astro check --minimumFailingSeverity warning` exits successfull
 | `/rss.xml`, `/ro/rss.xml` | Same | 200 file route | Locale-specific feed URLs; no slash |
 | `/sitemap.xml` | Same compatibility sitemap index | 200 XML route pointing to `/sitemap-0.xml` | `/sitemap-index.xml` remains the generated primary sitemap index |
 
-Blog routes introduced by the blog-first port and covered by the distribution check:
+Story routes introduced by the blog-first port and covered by the distribution check:
 
-- English: `/blog/best-place-to-live-in-eastern-europe/`, `/blog/eastern-european-press-increasingly/`, `/blog/how-a-british-sitcom-swept-through-the-balkans/`, `/blog/how-hot-has-eastern-europe-become/`, `/blog/russias-tech-brain-drain-in-numbers/`, `/blog/the-myth-of-the-russian-world/`, `/blog/trumps-lies-about-ukraine-fact-checked/`, `/blog/what-happened-in-the-moldovan-election/`, `/blog/what-is-eastern-europe/`, `/blog/what-will-the-world-do-today/`, and `/blog/where-to-find-the-best-beer-eastern-europe/`.
-- Romanian: `/ro/blog/ce-este-europa-de-est/`.
+- English: `/story/best-place-to-live-in-eastern-europe/`, `/story/eastern-european-press-increasingly/`, `/story/how-a-british-sitcom-swept-through-the-balkans/`, `/story/how-hot-has-eastern-europe-become/`, `/story/russias-tech-brain-drain-in-numbers/`, `/story/the-myth-of-the-russian-world/`, `/story/trumps-lies-about-ukraine-fact-checked/`, `/story/what-happened-in-the-moldovan-election/`, `/story/what-is-eastern-europe/`, `/story/what-will-the-world-do-today/`, and `/story/where-to-find-the-best-beer-eastern-europe/`.
+- Romanian: `/ro/story/ce-este-europa-de-est/`.
 
 All mapped routes, internal links, fragments, redirect destinations, feeds, and generated sitemap entries pass the local distribution check. Static meta redirects are not HTTP 301 responses; test them and slash normalization on GitHub Pages before launch.
 
@@ -171,7 +171,7 @@ All mapped routes, internal links, fragments, redirect destinations, feeds, and 
 - Visualisation masonry titles are always visible, including touch, and non-linked items render as `<article>`.
 - A global reduced-motion rule disables smooth scrolling and collapses transitions/animations.
 
-Acceptance status: `/`, `/studio/`, `/blog/what-is-eastern-europe/`, and `/training/ai/` score 100 for Lighthouse accessibility in both light and dark themes. Automated and browser keyboard checks pass; a final manual screen-reader and 200–400% zoom review remains a pre-launch task.
+Acceptance status: `/`, `/studio/`, `/story/what-is-eastern-europe/`, and `/training/ai/` score 100 for Lighthouse accessibility in both light and dark themes. Automated and browser keyboard checks pass; a final manual screen-reader and 200–400% zoom review remains a pre-launch task.
 
 ## Phase 4 — SEO, feeds, and metadata parity
 
@@ -290,7 +290,7 @@ Avoid adding authors/tags/categories until the site has a real second author or 
 
 ### 7.4 Rationalize static icons
 
-The project ships many favicon sizes and duplicate apple-touch declarations. Keep the compatibility set that is actually referenced by the manifest/head, remove redundant declarations/files after testing, and ensure the social preview image is a suitable 1200×630 asset rather than a favicon or generic starter placeholder.
+The project ships many favicon sizes and duplicate apple-touch declarations. Keep the compatibility set that is actually referenced by the manifest/head and remove redundant declarations/files after testing. The generic starter placeholder has been replaced with a branded 1200×630 SAMIZDATA social image.
 
 ## Phase 8 — operational maintenance
 
@@ -323,7 +323,7 @@ For long-term sustainability, explicitly avoid these until required:
 
 The port is on solid ground when all of the following are true:
 
-- [x] Product owner has approved the blog-first root/blog/studio URL map.
+- [x] Product owner has approved the blog-first root/story/studio URL map.
 - [x] Romanian pages identify and link to English-only Training resources accurately.
 - [x] Every mapped old public URL has a locally tested destination or an intentional replacement.
 - [x] The trailing-slash policy is explicit and consistent in the local production artifact.
