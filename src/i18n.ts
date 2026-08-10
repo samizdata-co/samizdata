@@ -20,6 +20,7 @@ export const ui = {
 		'nav.training': 'Training',
 		'nav.skip': 'Skip to content',
 		'last.updated': 'Last updated on',
+		'blog.moreStories': 'More stories',
 
 		// Homepage studio promotion
 		'home.studio.eyebrow': 'Data storytelling studio',
@@ -109,6 +110,7 @@ export const ui = {
 		'nav.training': 'Training',
 		'nav.skip': 'Sari la conținut',
 		'last.updated': 'Ultima actualizare:',
+		'blog.moreStories': 'Mai multe articole',
 
 		// Promovarea studioului pe pagina principală
 		'home.studio.eyebrow': 'Studio de storytelling de date',

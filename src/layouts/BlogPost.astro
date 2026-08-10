@@ -4,8 +4,9 @@ import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import Base from './Base.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import MoreStories from '../components/MoreStories.astro';
 import { getLanguage, useTranslations } from '../i18n';
-import { blogAlternates } from '../lib/blog';
+import { blogAlternates, getPosts } from '../lib/blog';
 
 interface Props {
 	title: string;
@@ -14,11 +15,15 @@ interface Props {
 	'date-modified'?: Date;
 	image?: ImageMetadata;
 	translationGroup?: string;
+	postId?: string;
 }
 
-const { title, description, date, 'date-modified': dateModified, image, translationGroup } = Astro.props;
+const { title, description, date, 'date-modified': dateModified, image, translationGroup, postId } = Astro.props;
 const lang = getLanguage(Astro.currentLocale);
 const alternates = date ? await blogAlternates(translationGroup) : undefined;
+const morePosts = date && postId
+	? (await getPosts(lang)).filter((post) => post.id !== postId).slice(0, 3)
+	: [];
 const t = useTranslations(lang);
 ---
 
@@ -33,7 +38,7 @@ const t = useTranslations(lang);
 	{alternates}
 >
 	<main>
-		<article>
+		<article class:list={{ 'has-more-stories': morePosts.length > 0 }}>
 			<div class="hero-image">
 				{image && <Image width={1020} height={510} src={image} alt="" priority />}
 			</div>
@@ -58,6 +63,7 @@ const t = useTranslations(lang);
 				<slot />
 			</div>
 		</article>
+		{morePosts.length > 0 && <MoreStories posts={morePosts} locale={lang} />}
 	</main>
 </Base>
 
@@ -76,6 +82,9 @@ const t = useTranslations(lang);
 		margin: 0 auto;
 		padding: 2rem 1rem var(--section-block);
 		color: var(--muted);
+	}
+	.has-more-stories .prose {
+		padding-bottom: var(--section-block-tight);
 	}
 	.title {
 		margin-bottom: 2rem;

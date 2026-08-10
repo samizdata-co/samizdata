@@ -279,6 +279,21 @@ for (const locale of ['en', 'ro']) {
 		}
 		if (!home.includes(`href="${pathname}"`)) fail(`${pathname} is missing from the ${locale} home page`);
 	}
+
+	const storyPaths = [...new Set(
+		[...home.matchAll(/href="(\/(?:ro\/)?story\/[^\"]+\/)"/g)].map((match) => match[1]),
+	)];
+	for (const pathname of storyPaths) {
+		const html = await read(outputPath(pathname));
+		const section = html.match(/<section class="more-stories"[\s\S]*?<\/section>/)?.[0];
+		const rendered = section
+			? [...section.matchAll(/href="([^\"]+)"/g)].map((match) => match[1])
+			: [];
+		const expected = storyPaths.filter((candidate) => candidate !== pathname).slice(0, 3);
+		if (JSON.stringify(rendered) !== JSON.stringify(expected)) {
+			fail(`${pathname}: expected more stories ${expected.join(', ') || 'none'}, got ${rendered.join(', ') || 'none'}`);
+		}
+	}
 }
 
 // Service routes and example counts come from generated index links and cv.json.
