@@ -49,6 +49,7 @@ function hasSkill(value, skill) {
 if (!has('dist/index.html')) throw new Error('dist is missing; run astro build before test:dist');
 
 const htmlFiles = (await walk(dist)).filter((path) => extname(path) === '.html');
+const searchablePages = { en: 0, ro: 0 };
 const homeDocument = await read('dist/index.html');
 const fallbackSocialImage = homeDocument.match(/<meta property="og:image" content="([^"]+)"/)?.[1];
 for (const file of htmlFiles) {
@@ -82,6 +83,12 @@ for (const file of htmlFiles) {
 
 	const expectedLang = pathname.startsWith('/ro/') ? 'ro' : 'en';
 	if (!html.includes(`<html lang="${expectedLang}"`)) fail(`${pathname}: expected html lang="${expectedLang}"`);
+	if (html.includes('data-pagefind-body')) searchablePages[expectedLang] += 1;
+	if (!is404) {
+		if (!html.includes('bundle-path="/pagefind/"')) fail(`${pathname}: missing Pagefind client configuration`);
+		if (!html.includes('<pagefind-modal-trigger')) fail(`${pathname}: missing Pagefind search trigger`);
+		if (!html.includes('<pagefind-modal')) fail(`${pathname}: missing Pagefind search modal`);
+	}
 	const title = html.match(/<title>([^<]+)<\/title>/)?.[1];
 	if (!title) fail(`${pathname}: missing title`);
 	if (title !== 'SAMIZDATA' && !title?.endsWith(' • SAMIZDATA')) fail(`${pathname}: title is not consistently branded`);
@@ -147,6 +154,21 @@ for (const file of htmlFiles) {
 			}
 		}
 	}
+}
+
+if (!has('dist/pagefind/pagefind-entry.json')) {
+	fail('Pagefind search index is missing');
+} else {
+	const pagefind = JSON.parse(await read('dist/pagefind/pagefind-entry.json'));
+	for (const language of ['en', 'ro']) {
+		const indexed = pagefind.languages?.[language]?.page_count;
+		if (indexed !== searchablePages[language]) {
+			fail(`Pagefind ${language} index has ${indexed ?? 0} pages; expected ${searchablePages[language]}`);
+		}
+	}
+}
+for (const asset of ['pagefind-component-ui.css', 'pagefind-component-ui.js', 'pagefind.js', 'pagefind-worker.js']) {
+	if (!has(`dist/pagefind/${asset}`)) fail(`Pagefind asset is missing: ${asset}`);
 }
 
 if ((await read('dist/CNAME')).trim() !== 'samizdata.co') fail('dist/CNAME must preserve the GitHub Pages custom domain');

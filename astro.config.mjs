@@ -2,6 +2,7 @@
 
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
+import pagefind from 'astro-pagefind';
 import { defineConfig, fontProviders } from 'astro/config';
 import { legacyTrainingRedirects } from './redirects.mjs';
 
@@ -24,6 +25,7 @@ export default defineConfig({
 	},
 	integrations: [
 		mdx(),
+		pagefind(),
 		sitemap({
 			i18n: {
 				defaultLocale: 'en',

@@ -3,6 +3,7 @@
 // One nav + one footer + one head. Page content goes in the default slot;
 // pages opt into the full-bleed studio look by adding their own wrappers.
 import { getRelativeLocaleUrl } from 'astro:i18n';
+import PagefindConfig from 'astro-pagefind/components/PagefindConfig.astro';
 import BaseHead from '../components/BaseHead.astro';
 import SiteNav from '../components/SiteNav.astro';
 import SiteFooter from '../components/SiteFooter.astro';
@@ -48,11 +49,13 @@ const navItems = [
 			{alternates}
 		/>
 		<slot name="head" />
+		<PagefindConfig />
 	</head>
 	<body>
 		<a class="skip-link" href="#main-content">{t('nav.skip')}</a>
 		<SiteNav navItems={navItems} alternate={alternates.find(({ lang: alternateLang }) => alternateLang !== lang)} />
-		<div id="main-content" tabindex="-1">
+		<pagefind-modal class="pagefind-search"></pagefind-modal>
+		<div id="main-content" tabindex="-1" data-pagefind-body>
 			<slot />
 		</div>
 		<SiteFooter />

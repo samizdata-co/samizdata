@@ -138,6 +138,40 @@
 	--shadow-ambient: 0 1.25rem 2.75rem rgba(0, 0, 0, 0.35);
 }
 
+/* Pagefind's generated stylesheet supplies the component structure; these
+   local aliases keep its modal and trigger on the shared site theme. */
+.pagefind-search {
+	--pf-text: var(--color-ink);
+	--pf-text-secondary: var(--color-muted);
+	--pf-text-muted: var(--color-ink-soft);
+	--pf-background: var(--color-surface-lowest);
+	--pf-border: var(--color-border-soft);
+	--pf-border-focus: var(--color-border-accent);
+	--pf-skeleton: var(--color-surface-high);
+	--pf-skeleton-shine: var(--color-surface-highest);
+	--pf-hover: var(--color-surface-high);
+	--pf-mark: var(--color-accent-text);
+	--pf-scroll-shadow: var(--color-outline-ghost);
+	--pf-shadow-sm: var(--shadow-ambient);
+	--pf-shadow-md: var(--shadow-ambient);
+	--pf-shadow-lg: var(--shadow-ambient);
+	--pf-error-bg: var(--color-surface-high);
+	--pf-error-border: var(--color-border-accent);
+	--pf-error-text: var(--destructive);
+	--pf-error-text-secondary: var(--destructive);
+	--pf-outline-focus: var(--color-primary);
+	--pf-outline-width: 2px;
+	--pf-outline-offset: 3px;
+	--pf-font: var(--font-body);
+	--pf-input-height: 44px;
+	--pf-input-font-size: 16px;
+	--pf-result-title-font-size: 16px;
+	--pf-result-excerpt-font-size: 14px;
+	--pf-border-radius: 0;
+	--pf-modal-backdrop: rgba(12, 14, 13, 0.72);
+	--pf-modal-max-width: 720px;
+}
+
 * {
 	box-sizing: border-box;
 }

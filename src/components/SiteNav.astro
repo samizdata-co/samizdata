@@ -50,6 +50,7 @@ const isActive = (href: string) => {
 		</div>
 
 		<div class="nav-actions">
+			<pagefind-modal-trigger class="pagefind-search" compact hide-shortcut></pagefind-modal-trigger>
 			<ThemeToggle
 				switchToDark={t('studio.nav.switchToDark')}
 				switchToLight={t('studio.nav.switchToLight')}
@@ -152,6 +153,31 @@ const isActive = (href: string) => {
 		margin-left: auto;
 	}
 
+	pagefind-modal-trigger {
+		width: 44px;
+		height: 44px;
+		flex-shrink: 0;
+	}
+
+	pagefind-modal-trigger :global(.pf-trigger-btn) {
+		padding: 0 !important;
+		justify-content: center !important;
+		border-radius: 9999px !important;
+		transition:
+			color 0.18s ease,
+			border-color 0.18s ease,
+			background-color 0.18s ease !important;
+	}
+
+	pagefind-modal-trigger :global(.pf-trigger-btn:hover) {
+		background: var(--color-surface-high);
+	}
+
+	pagefind-modal-trigger :global(.pf-trigger-icon) {
+		width: 18px;
+		height: 18px;
+	}
+
 	.mobile-nav {
 		position: relative;
 	}
@@ -245,6 +271,17 @@ const isActive = (href: string) => {
 	:global(html[data-theme='dark']) .site-nav-logo .logo .mark {
 		filter: brightness(1.14) saturate(1.06)
 			drop-shadow(0 0 0.35rem rgba(198, 33, 104, 0.2));
+	}
+
+	@media (max-width: 459px) {
+		.nav-inner,
+		.nav-actions {
+			gap: 0.5rem;
+		}
+
+		:global(.site-nav-logo .logo span) {
+			display: none;
+		}
 	}
 
 	@media (min-width: 800px) {
