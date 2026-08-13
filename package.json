@@ -12,6 +12,8 @@
     "build": "npm run check && astro build",
     "test:dist": "node scripts/check-dist.mjs",
     "verify": "npm run build && npm run test:dist",
+    "brand:sync": "cp ../brand/css/tokens.css src/styles/vendor/samizdata/tokens.css",
+    "brand:check": "cmp ../brand/css/tokens.css src/styles/vendor/samizdata/tokens.css",
     "smoke": "node scripts/smoke-deployment.mjs",
     "preview": "astro preview",
     "astro": "astro"

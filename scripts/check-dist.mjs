@@ -238,10 +238,16 @@ for (const path of contentFiles) {
 	if (/!\[\]\(/.test(source)) fail(`${relative(root, path)}: informative image has empty alt text`);
 }
 
-// The dedicated dark text accent must pass AA on every dark surface.
+// The vendored v1.0.0 tokens must remain pinned, imported, and accessible in dark mode.
 const globalCss = await read('src/styles/global.css');
-const darkTokens = globalCss.match(/:root\[data-theme='dark'\]\s*{([\s\S]*?)\n}/)?.[1] ?? '';
-const color = (name) => darkTokens.match(new RegExp(`--${name}:\\s*(#[0-9a-f]{6})`, 'i'))?.[1];
+const tokenCss = await read('src/styles/vendor/samizdata/tokens.css');
+const tokenHash = createHash('sha256').update(tokenCss).digest('hex');
+if (tokenHash !== '2e87cfce2026134ff61b49cade912b50e31d37b5fa1f5867a294979c0966627f') {
+	fail('vendored SAMIZDATA tokens differ from brand v1.0.0; sync or update the pinned hash deliberately');
+}
+if (!globalCss.includes("@import './vendor/samizdata/tokens.css';")) fail('global.css must import the vendored SAMIZDATA tokens');
+const darkTokens = tokenCss.match(/:root\[data-theme=["']dark["']\][^{]*{([\s\S]*?)\n}/)?.[1] ?? '';
+const color = (name) => darkTokens.match(new RegExp(`--sz-color-${name}:\\s*(#[0-9a-f]{6})`, 'i'))?.[1];
 const luminance = (hex) => {
 	const channels = hex.match(/[0-9a-f]{2}/gi).map((value) => Number.parseInt(value, 16) / 255)
 		.map((value) => value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4);
@@ -251,8 +257,8 @@ const contrast = (foreground, background) => {
 	const values = [luminance(foreground), luminance(background)].sort((a, b) => b - a);
 	return (values[0] + 0.05) / (values[1] + 0.05);
 };
-const accentText = color('color-accent-text');
-for (const surface of ['color-surface', 'color-surface-low', 'color-surface-container', 'color-surface-high', 'color-surface-highest', 'color-surface-lowest']) {
+const accentText = color('accent-text');
+for (const surface of ['surface', 'surface-low', 'surface-container', 'surface-high', 'surface-highest', 'surface-lowest']) {
 	const background = color(surface);
 	if (!accentText || !background || contrast(accentText, background) < 4.5) fail(`dark ${surface}: accent text does not meet 4.5:1 contrast`);
 }

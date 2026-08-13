@@ -1,3 +1,7 @@
+## SAMIZDATA design
+
+Use the `samizdata-design` skill for visual implementation or review. It is loaded in Pi from the canonical sibling checkout at `../brand/skills`; consult the canonical resources rather than adding local brand values.
+
 ## Development
 
 When starting the dev server, use background mode:

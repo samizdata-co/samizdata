@@ -1,63 +1,41 @@
+/* Vendored from samizdata-co/brand v1.0.0; refresh with `npm run brand:sync`. */
+@import './vendor/samizdata/tokens.css';
+
 /*
-	SAMIZDATA — global design tokens + base styles.
-	This file is the SINGLE source of colour/typography values for the whole
-	site (portfolio/studio + blog). Values and naming mirror the `app.css`
-	token set from the original Svelte website, plus data-theme dark mode.
-	Theme is driven by the `data-theme` attribute on <html> (set in BaseHead)
-	so every page shares one switch — no prefers-color-scheme drift.
+	SAMIZDATA website aliases + base styles.
+	Canonical foundations come from the vendored brand tokens above. Theme is
+	driven by data-theme on <html>, so every page shares one explicit switch.
  */
 
 :root {
-	/* ── Canonical color tokens (site vocabulary) ────────────────────── */
-	--color-primary: #9f1853;               /* interactive fills and controls */
-	--color-primary-container: #9f1853;
-	--color-accent-text: #7b003c;
-	--color-accent-text-hover: #9f1853;
-	--color-logo-mark: var(--color-primary);
-	--color-surface: #fbf9f4;
-	--color-surface-low: #f5f3ee;
-	--color-surface-container: #f0eee9;
-	--color-surface-high: #eae8e3;
-	--color-surface-highest: #e4e2dd;
-	--color-surface-lowest: #ffffff;
-	--color-surface-dim: #dbdad5;
-	--color-ink: #1b1c19;
-	--color-muted: #574146;
-	--color-ink-soft: rgba(27, 28, 25, 0.72);
-	--color-outline: rgba(138, 112, 118, 0.3);
-	--color-outline-ghost: rgba(222, 191, 197, 0.2);
-	--color-border-soft: rgba(138, 112, 118, 0.18);
-	--color-border-strong: rgba(138, 112, 118, 0.28);
-	--color-border-accent: rgba(159, 24, 83, 0.26);
+	/* Website vocabulary mapped to canonical tokens. */
+	--color-primary: var(--sz-color-primary);
+	--color-primary-container: var(--sz-color-primary-container);
+	--color-accent-text: var(--sz-color-accent-text);
+	--color-accent-text-hover: var(--sz-color-accent-text-hover);
+	--color-logo-mark: var(--sz-color-logo-mark);
+	--color-surface: var(--sz-color-surface);
+	--color-surface-low: var(--sz-color-surface-low);
+	--color-surface-container: var(--sz-color-surface-container);
+	--color-surface-high: var(--sz-color-surface-high);
+	--color-surface-highest: var(--sz-color-surface-highest);
+	--color-surface-lowest: var(--sz-color-surface-lowest);
+	--color-surface-dim: var(--sz-color-surface-dim);
+	--color-ink: var(--sz-color-ink);
+	--color-muted: var(--sz-color-muted);
+	--color-ink-soft: var(--sz-color-ink-soft);
+	--color-outline: var(--sz-color-outline);
+	--color-outline-ghost: var(--sz-color-outline-ghost);
+	--color-border-soft: var(--sz-color-border-soft);
+	--color-border-strong: var(--sz-color-border-strong);
+	--color-border-accent: var(--sz-color-border-accent);
+	--color-primary-glow: var(--sz-color-primary-glow);
+	--color-primary-deep: var(--sz-color-primary);
 	--color-nav-surface: color-mix(in srgb, var(--color-surface) 84%, transparent);
-	--color-primary-glow: rgba(123, 0, 60, 0.1);
+	--destructive-text: var(--sz-color-destructive-text);
 
-	/* deep raspberry ink (brand mark / hover emphasis) */
-	--color-primary-deep: #7b003c;
-
-	/* ── semantic (shadcn-style) aliases ─────────────────────────────── */
-	--background: var(--color-surface);
-	--foreground: var(--color-ink);
-	--card: var(--color-surface-lowest);
-	--card-foreground: var(--color-ink);
-	--popover: var(--color-surface-lowest);
-	--popover-foreground: var(--color-ink);
-	--primary: var(--color-primary);
-	--primary-foreground: #ffffff;
-	--secondary: var(--color-surface-low);
-	--secondary-foreground: var(--color-ink);
-	--muted: var(--color-surface-low);
-	--muted-foreground: var(--color-muted);
-	--accent: var(--color-surface-high);
-	--accent-foreground: var(--color-ink);
-	--destructive: #c0476b;
-	--destructive-foreground: #ffffff;
-	--border: var(--color-border-soft);
-	--input: var(--color-border-strong);
-	--ring: color-mix(in srgb, var(--color-primary) 55%, white 45%);
-
-	/* ── blog port tokens (aliases to the canonical colors) ──────────── */
-	--on-primary: #ffffff;
+	/* Legacy website aliases retained while local styles use them. */
+	--on-primary: var(--sz-color-on-primary);
 	--primary-deep: var(--color-primary-deep);
 	--primary-container: var(--color-primary-container);
 	--accent-text: var(--color-accent-text);
@@ -77,20 +55,18 @@
 	--border-accent: var(--color-border-accent);
 	--primary-glow: var(--color-primary-glow);
 
-	/* ── elevation ───────────────────────────────────────────────────── */
-	--shadow-ambient: 0 1rem 2rem rgba(123, 0, 60, 0.08);
-
-	/* ── layout ──────────────────────────────────────────────────────── */
-	--shell-max: 1440px;
+	/* Website layout aliases. */
+	--shadow-ambient: var(--sz-shadow-ambient);
+	--shell-max: var(--sz-shell-max);
 	--shell-pad: 1rem;
-	--section-block: clamp(4rem, 9vw, 8rem);
-	--section-block-tight: clamp(2rem, 5vw, 4rem);
-	--grid-gap: 24px;
-	--nav-offset: 88px;
-	--scroll-target-offset: 5.5rem;
-	--radius: 0rem;
+	--section-block: var(--sz-section-block);
+	--section-block-tight: var(--sz-section-block-tight);
+	--grid-gap: var(--sz-grid-gap);
+	--nav-offset: var(--sz-nav-offset);
+	--scroll-target-offset: var(--sz-nav-offset);
+	--radius: var(--sz-radius-structural);
 
-	/* ── typography ──────────────────────────────────────────────────── */
+	/* Astro supplies generated font-family names through these variables. */
 	--font-display: var(--font-space-grotesk), ui-sans-serif, sans-serif;
 	--font-body: var(--font-work-sans), ui-sans-serif, sans-serif;
 
@@ -106,36 +82,7 @@
 }
 
 :root[data-theme='dark'] {
-	--color-primary: #c62168;
-	--color-primary-container: #c62168;
-	--color-accent-text: #f078a6;
-	--color-accent-text-hover: #ff9bc1;
-	--color-logo-mark: #d14a7b;
-	--color-surface: #111311;
-	--color-surface-low: #171a18;
-	--color-surface-container: #1f211f;
-	--color-surface-high: #2a2c29;
-	--color-surface-highest: #353733;
-	--color-surface-lowest: #1b1f1c;
-	--color-surface-dim: #0c0e0d;
-	--color-ink: #f4efe9;
-	--color-muted: #c2b7b3;
-	--color-ink-soft: rgba(244, 239, 233, 0.76);
-	--color-outline: rgba(160, 140, 144, 0.24);
-	--color-outline-ghost: rgba(255, 255, 255, 0.1);
-	--color-border-soft: rgba(255, 255, 255, 0.11);
-	--color-border-strong: rgba(255, 255, 255, 0.18);
-	--color-border-accent: rgba(198, 33, 104, 0.4);
 	--color-nav-surface: color-mix(in srgb, var(--color-surface) 78%, transparent);
-	--color-primary-glow: rgba(198, 33, 104, 0.16);
-
-	/* deep raspberry ink — dark counterpart */
-	--color-primary-deep: #a31552;
-
-	--destructive: #d06b8c;
-	--ring: color-mix(in srgb, var(--color-primary) 58%, white 42%);
-
-	--shadow-ambient: 0 1.25rem 2.75rem rgba(0, 0, 0, 0.35);
 }
 
 /* Pagefind's generated stylesheet supplies the component structure; these
@@ -157,9 +104,9 @@
 	--pf-shadow-lg: var(--shadow-ambient);
 	--pf-error-bg: var(--color-surface-high);
 	--pf-error-border: var(--color-border-accent);
-	--pf-error-text: var(--destructive);
-	--pf-error-text-secondary: var(--destructive);
-	--pf-outline-focus: var(--color-primary);
+	--pf-error-text: var(--destructive-text);
+	--pf-error-text-secondary: var(--destructive-text);
+	--pf-outline-focus: var(--color-accent-text);
 	--pf-outline-width: 2px;
 	--pf-outline-offset: 3px;
 	--pf-font: var(--font-body);
@@ -196,13 +143,13 @@ body {
 }
 
 ::selection {
-	background: var(--color-primary);
+	background: var(--color-primary-container);
 	color: #fff;
 }
 
 :focus-visible {
-	outline: 2px solid var(--color-primary);
-	outline-offset: 3px;
+	outline: var(--sz-focus-width) solid var(--sz-focus-color);
+	outline-offset: var(--sz-focus-offset);
 }
 
 img {
@@ -298,7 +245,7 @@ code {
 	padding: 2px 5px;
 	background-color: var(--surface-container);
 	border-radius: 2px;
-	font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+	font-family: var(--sz-font-monospace);
 	font-size: 0.875em;
 }
 
@@ -445,7 +392,7 @@ hr {
    ───────────────────────────────────────────────────────────────────── */
 
 .shell {
-	width: min(100% - 4rem, 90rem);
+	width: min(100% - 4rem, var(--shell-max));
 	margin: 0 auto;
 }
 
@@ -480,11 +427,11 @@ hr {
 }
 
 .section-block {
-	padding-block: clamp(4rem, 9vw, 8rem);
+	padding-block: var(--section-block);
 }
 
 .section-block-tight {
-	padding-block: clamp(2rem, 5vw, 4rem);
+	padding-block: var(--section-block-tight);
 }
 
 section[id] {
@@ -505,6 +452,6 @@ section[id] {
 
 @media (max-width: 640px) {
 	.shell {
-		width: min(100% - 2rem, 90rem);
+		width: min(100% - 2rem, var(--shell-max));
 	}
 }
