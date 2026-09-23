@@ -4,7 +4,7 @@ Cloudflare Pages will take over `blog.samizdata.co` and issue HTTP 301 redirects
 
 The destinations are confirmed: the old publication home, `/archive`, and `/subscribe` go to `/blog/`; the old RSS endpoint goes to the Astro feed at `/rss.xml`. Substack is being retired completely; these redirects do not send visitors back there.
 
-**Current status (2026-09-23):** The redirect project is live at `https://substack-redirects.pages.dev/`. All 31 rules return the expected 301 and `Location` there. Do not attach `blog.samizdata.co` or switch its DNS yet: the mapped destinations on the live `samizdata.co` currently return 404 because the Astro site has not replaced the current production site. Deploy Astro first, verify its blog, story, about, and RSS destinations return 200, then proceed with the custom-domain/DNS steps below.
+**Current status (2026-09-23):** The Astro site is deployed at `https://samizdata.co/`; the GitHub Pages smoke check passes and all 14 distinct redirect destinations return HTTP 200. The redirect project is live at `https://substack-redirects.pages.dev/`; all 31 rules return the expected 301 and `Location` there. Next, add `blog.samizdata.co` as the Pages custom domain, then switch only its DNS record using the steps below.
 
 ## Redirect map
 

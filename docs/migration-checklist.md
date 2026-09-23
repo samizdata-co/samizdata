@@ -11,8 +11,8 @@ Use this before merging the Astro refactor to `main` and during the first week a
 
 ## 2. URL and redirect coverage
 
-- [x] Compared the old SvelteKit sitemap/route tree with the Astro targets. All 27 sitemap path targets (including trailing-slash output) exist in the current `dist/`; 11/11 substantive Substack slugs resolve to built `/story/{slug}/` pages. Eight listed legacy training pages currently 404 on production but are restored at the same paths in Astro. See [migration URL inventory](migration-url-inventory.md).
-- [x] Created 31 Cloudflare Pages rules in `/home/nicu/Projects/samizdata/substack-redirects/public/_redirects` and verified their 301/Location headers at `https://substack-redirects.pages.dev/`. [ ] Deploy Astro to `samizdata.co` and verify every redirect target is 200 before adding `blog.samizdata.co` to Pages and switching its DNS.
+- [x] Compared the old SvelteKit sitemap/route tree with Astro targets. All 27 sitemap path targets exist in the Astro build; 11/11 substantive Substack slugs resolve to `/story/{slug}/`. Eight Training URLs returned 404 in the pre-migration production snapshot and are restored at those paths. See [migration URL inventory](migration-url-inventory.md).
+- [x] Created 31 Cloudflare Pages rules in `/home/nicu/Projects/samizdata/substack-redirects/public/_redirects`; verified all 31 redirects at `https://substack-redirects.pages.dev/` and all 14 unique destinations return 200 on `samizdata.co`. [ ] Add `blog.samizdata.co` in Cloudflare Pages and switch only its DNS record.
 - [x] Confirmed source URLs are on `blog.samizdata.co` at `/p/{slug}` with no-slash canonicals; the tested trailing-slash form 301s to that canonical. Separate Cloudflare Pages host selected; deployment and DNS cutover remain pending.
 - [ ] Preserve relevant asset URLs or provide replacements for links to images, PDFs, downloadable files, and training media.
 - [ ] Remember GitHub Pages serves static files: Astro's generated redirect pages are not HTTP 301/308 responses. Current static redirects use an immediate meta refresh and `noindex`; some paths may first be normalized by Pages. Do not promise search engines or clients an HTTP permanent redirect unless the hosting setup actually provides one.
@@ -21,7 +21,7 @@ Use this before merging the Astro refactor to `main` and during the first week a
 
 ## 3. Astro build and content checks
 
-- [ ] Run `npm ci` from the committed lockfile, then `npm run verify`. Resolve all check, route/link/fragment, feed, metadata, image-budget, and build failures before merge.
+- [x] Ran `npm run verify` locally and in the GitHub Actions deployment workflow; both pass.
 - [ ] Check the built `dist/` route inventory against the URL spreadsheet: every intended page exists at the expected directory path and has the expected trailing slash.
 - [ ] Review English and Romanian pages, article bodies, pagination/indexes, internal links, images and alt text, feed entries, sitemap URLs, canonical tags, language alternates, Open Graph metadata, and `robots.txt`.
 - [ ] Confirm untranslated posts do not claim a translation, English-only Training links identify their language where relevant, and no drafts/private content are included.
@@ -30,14 +30,14 @@ Use this before merging the Astro refactor to `main` and during the first week a
 
 ## 4. GitHub Pages cutover
 
-- [ ] Review the new `.github/workflows/deploy.yml`: it installs with `npm ci`, runs `npm run verify`, and uploads `dist/`. Confirm the workflow is the only production deployment workflow after merge; the current `main` workflow uses pnpm/SvelteKit and uploads `build/`.
-- [ ] Confirm GitHub Pages is configured to deploy **from GitHub Actions**, not a branch/folder source. Check repository permissions for Pages deployment and the `github-pages` environment.
-- [ ] Confirm the workflow deploy trigger is the intended branch (`main`) and manual dispatch is available. Make sure merging the PR will not leave two workflows racing to publish different artifacts.
-- [ ] Keep `public/CNAME` with `samizdata.co` in the deployed artifact. Preserve the root `/sitemap.xml` compatibility endpoint for GitHub Pages continuity, in addition to the generated sitemap.
-- [ ] Before merging, confirm the domain's DNS records still point to GitHub Pages and GitHub's custom-domain / HTTPS settings are intact. Do not change DNS as part of this code migration unless the current configuration requires it.
-- [ ] Build and inspect the exact commit/artifact that will be deployed. A local Astro preview cannot validate GitHub Pages routing, redirect behavior, custom 404s, or preservation of the custom domain.
-- [ ] After deployment, run `npm run smoke -- https://samizdata.co` and check the Actions deployment URL. Also test representative legacy URLs directly in a browser and with HTTP headers/statuses; record the fact that static redirects are not server-side 301s.
-- [ ] Verify apex and `www` behavior, HTTPS certificate, homepage, bilingual routes, editorial posts, services, Training, RSS, `/sitemap.xml`, generated sitemap, CNAME, slash normalization, missing-page 404, and redirect pages.
+- [x] Confirmed `.github/workflows/deploy.yml` is the production workflow: it runs `npm ci`, `npm run verify`, and uploads `dist/`. It replaced the former SvelteKit/pnpm workflow on `main`.
+- [x] Confirmed GitHub Pages deploys **from GitHub Actions** with `main` as source, `samizdata.co` as the custom domain, and HTTPS enforced.
+- [x] Confirmed the workflow runs on pushes to `main` and supports manual dispatch; the merged deployment used only the replacement workflow.
+- [x] Confirmed `public/CNAME` and the `/sitemap.xml` compatibility endpoint are present in the Astro deployment.
+- [x] Confirmed the existing apex/custom-domain configuration and HTTPS are intact; `www.samizdata.co` permanently redirects to `samizdata.co`.
+- [x] The deployed artifact passed the post-deployment smoke test at `https://samizdata.co`; the GitHub Actions deployment run succeeded.
+- [x] Ran `npm run smoke -- https://samizdata.co`; it passed representative routes, feeds, sitemap compatibility, 404 behavior, and slash/static redirects.
+- [x] Verified apex/`www`, HTTPS, bilingual routes, editorial pages, services, Training, RSS, sitemap compatibility, trailing-slash behavior, custom 404, and static legacy redirects in the deployed smoke test.
 
 ## 5. Search, newsletter, and analytics continuity
 
