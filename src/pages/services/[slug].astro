@@ -1,0 +1,8 @@
+---
+import ServiceDetail from '../../components/services/ServiceDetail.astro';
+import { getServiceSlugs } from '../../lib/services';
+
+export const getStaticPaths = () => getServiceSlugs().map((slug) => ({ params: { slug } }));
+---
+
+<ServiceDetail lang="en" slug={Astro.params.slug!} />

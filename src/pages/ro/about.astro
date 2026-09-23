@@ -1,0 +1,38 @@
+---
+import Layout from '../../layouts/BlogPost.astro';
+import { getLanguage, useTranslations } from '../../i18n';
+
+const t = useTranslations(getLanguage(Astro.currentLocale));
+---
+
+<Layout title={t('nav.about')} description={t('site.description')}>
+	<h2>Ce este SAMIZDATA?</h2>
+	<p>
+		SAMIZDATA este o publicație de jurnalism de date axată pe Europa de Est și Asia Centrală, cu un accent deosebit pe Republica Moldova. De asemenea, suntem o <a href="/ro/">agenție</a> care ajută organizații să-și comunice mai eficient și frumos datele.
+	</p>
+	<h2>Ce este jurnalismul de date?</h2>
+	<p>
+		Jurnalismul de date este o formă de jurnalism care folosește datele ca o sursă de informații. Asta poate însemna analizarea unor seturi de date, vizualizarea datelor, sau folosirea datelor pentru a construi narațiuni care ar fi dificil de spus altfel. Vezi <a href="/training/ddj/" hreflang="en">materialele noastre de instruire în engleză</a> pentru mai multe informații.
+	</p>
+	<p>
+		Jurnalismul de date există cel puțin din anii 1800. Însă în Europa de Est și Asia Centrală, jurnalismul nu inovează suficient, cu doar câteva publicații care fac jurnalism de date.
+	</p>
+	<h2>Cine conduce proiectul?</h2>
+	<p>
+		SAMIZDATA este condusă de <a href="https://nicu.md/" target="_blank" rel="noopener noreferrer">Nicu Calcea</a>, un jurnalist care operează din Chișinău, Republica Moldova și Londra, Regatul Unit. Nicu a activat ca jurnalist la <em><a href="https://nicu.md/work?publication=Global+Witness" target="_blank" rel="noopener noreferrer">Global Witness</a></em>, <em><a href="https://nicu.md/work?publication=BBC+News" target="_blank" rel="noopener noreferrer">BBC News</a></em> și <a href="https://nicu.md/work?publication=New+Statesman" target="_blank" rel="noopener noreferrer">New Statesman</a>. A preadat jurnalism de date la City, University of London.
+	</p>
+	<p>
+		Îl poți urmări pe Nicu pe <a href="https://journa.host/@nicu" target="_blank" rel="noopener noreferrer">Mastodon</a>,{' '}
+		<a href="https://bsky.app/profile/nicu.md" target="_blank" rel="noopener noreferrer">Bluesky</a>,{' '}
+		<a href="https://www.linkedin.com/in/nicucalcea/" target="_blank" rel="noopener noreferrer">LinkedIn</a> sau{' '}
+		<a href="https://www.facebook.com/nicucalcea/">Facebook</a>.
+	</p>
+	<h2>Ce înseamnă numele?</h2>
+	<p>
+		<a href="https://ro.wikipedia.org/wiki/Samizdat" target="_blank" rel="noopener noreferrer">Samizdatul</a> a fost o formă de auto-publicare în Uniunea Sovietică și Blocul Estic, în mare parte a textelor interzise sau cenzurate. "Data" înseamnă date.
+	</p>
+	<h2>Hai să ne cunoaștem!</h2>
+	<p>
+		Dacă ai nevoie de <a href="/ro/">ajutor cu un proiect de date</a>, de <a href="/training/" hreflang="en">instruire în engleză pentru organizația ta</a>, vrei să colaborăm la o investigație sau pur și simplu vrei să spui salut, te rugăm să <a href="/ro/contact/">ne contactezi</a>.
+	</p>
+</Layout>

@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import StudioSections from '../components/studio/StudioSections.astro';
+import '../styles/studio.css';
+import { useTranslations } from '../i18n';
+
+const t = useTranslations('en');
+---
+
+<Base title={t('studio.seo.title')} description={t('studio.seo.description')}>
+	<main class="studio-main">
+		<StudioSections />
+	</main>
+</Base>

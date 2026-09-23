@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ['main']
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -15,51 +15,36 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build_site:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v3
-        with:
-          version: 8
-
-      - name: Install Node.js
-        uses: actions/setup-node@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
         with:
           node-version: 22
-          cache: pnpm
-
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
+          cache: npm
 
       - name: Install dependencies
-        run: pnpm install
+        run: npm ci
 
-      # - name: Fetch RSS feed
-      #   run: node scripts/fetch-rss.js
+      - name: Verify and build
+        run: npm run verify
 
-      - name: build
-        run: |
-          pnpm run build
-
-      - name: Upload Artifacts
-        uses: actions/upload-pages-artifact@v3
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v5
         with:
-          # this should match the `pages` option in your adapter-static options
-          path: 'build/'
+          path: dist
 
   deploy:
-    needs: build_site
+    needs: build
     runs-on: ubuntu-latest
-
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
     steps:
       - name: Deploy
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5

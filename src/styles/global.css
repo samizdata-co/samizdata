@@ -1,0 +1,457 @@
+/* Vendored from samizdata-co/brand v1.0.0; refresh with `npm run brand:sync`. */
+@import './vendor/samizdata/tokens.css';
+
+/*
+	SAMIZDATA website aliases + base styles.
+	Canonical foundations come from the vendored brand tokens above. Theme is
+	driven by data-theme on <html>, so every page shares one explicit switch.
+ */
+
+:root {
+	/* Website vocabulary mapped to canonical tokens. */
+	--color-primary: var(--sz-color-primary);
+	--color-primary-container: var(--sz-color-primary-container);
+	--color-accent-text: var(--sz-color-accent-text);
+	--color-accent-text-hover: var(--sz-color-accent-text-hover);
+	--color-logo-mark: var(--sz-color-logo-mark);
+	--color-surface: var(--sz-color-surface);
+	--color-surface-low: var(--sz-color-surface-low);
+	--color-surface-container: var(--sz-color-surface-container);
+	--color-surface-high: var(--sz-color-surface-high);
+	--color-surface-highest: var(--sz-color-surface-highest);
+	--color-surface-lowest: var(--sz-color-surface-lowest);
+	--color-surface-dim: var(--sz-color-surface-dim);
+	--color-ink: var(--sz-color-ink);
+	--color-muted: var(--sz-color-muted);
+	--color-ink-soft: var(--sz-color-ink-soft);
+	--color-outline: var(--sz-color-outline);
+	--color-outline-ghost: var(--sz-color-outline-ghost);
+	--color-border-soft: var(--sz-color-border-soft);
+	--color-border-strong: var(--sz-color-border-strong);
+	--color-border-accent: var(--sz-color-border-accent);
+	--color-primary-glow: var(--sz-color-primary-glow);
+	--color-primary-deep: var(--sz-color-primary);
+	--color-nav-surface: color-mix(in srgb, var(--color-surface) 84%, transparent);
+	--destructive-text: var(--sz-color-destructive-text);
+
+	/* Legacy website aliases retained while local styles use them. */
+	--on-primary: var(--sz-color-on-primary);
+	--primary-deep: var(--color-primary-deep);
+	--primary-container: var(--color-primary-container);
+	--accent-text: var(--color-accent-text);
+	--accent-text-hover: var(--color-accent-text-hover);
+	--surface: var(--color-surface);
+	--surface-low: var(--color-surface-low);
+	--surface-container: var(--color-surface-container);
+	--surface-high: var(--color-surface-high);
+	--surface-highest: var(--color-surface-highest);
+	--surface-lowest: var(--color-surface-lowest);
+	--ink: var(--color-ink);
+	--ink-soft: var(--color-ink-soft);
+	--muted: var(--color-muted);
+	--outline: var(--color-outline);
+	--border-soft: var(--color-border-soft);
+	--border-strong: var(--color-border-strong);
+	--border-accent: var(--color-border-accent);
+	--primary-glow: var(--color-primary-glow);
+
+	/* Website layout aliases. */
+	--shadow-ambient: var(--sz-shadow-ambient);
+	--shell-max: var(--sz-shell-max);
+	--shell-pad: 1rem;
+	--section-block: var(--sz-section-block);
+	--section-block-tight: var(--sz-section-block-tight);
+	--grid-gap: var(--sz-grid-gap);
+	--nav-offset: var(--sz-nav-offset);
+	--scroll-target-offset: var(--sz-nav-offset);
+	--radius: var(--sz-radius-structural);
+
+	/* Astro supplies generated font-family names through these variables. */
+	--font-display: var(--font-space-grotesk), ui-sans-serif, sans-serif;
+	--font-body: var(--font-work-sans), ui-sans-serif, sans-serif;
+
+	--text-display: clamp(3.75rem, 8vw, 10rem);
+	--text-headline: clamp(2.5rem, 6vw, 4.5rem);
+	--text-intro: clamp(1.75rem, 4vw, 2.375rem);
+	--text-card-title: clamp(1.5rem, 3vw, 2rem);
+	--text-body-lg: 1.1875rem; /* 19px */
+	--text-body-md: 1rem; /* 16px */
+	--text-label-md: 0.875rem; /* 14px */
+	--text-label-sm: 0.75rem; /* 12px */
+	--text-button: 0.8125rem; /* 13px */
+}
+
+:root[data-theme='dark'] {
+	--color-nav-surface: color-mix(in srgb, var(--color-surface) 78%, transparent);
+}
+
+/* Pagefind's generated stylesheet supplies the component structure; these
+   local aliases keep its modal and trigger on the shared site theme. */
+.pagefind-search {
+	--pf-text: var(--color-ink);
+	--pf-text-secondary: var(--color-muted);
+	--pf-text-muted: var(--color-ink-soft);
+	--pf-background: var(--color-surface-lowest);
+	--pf-border: var(--color-border-soft);
+	--pf-border-focus: var(--color-border-accent);
+	--pf-skeleton: var(--color-surface-high);
+	--pf-skeleton-shine: var(--color-surface-highest);
+	--pf-hover: var(--color-surface-high);
+	--pf-mark: var(--color-accent-text);
+	--pf-scroll-shadow: var(--color-outline-ghost);
+	--pf-shadow-sm: var(--shadow-ambient);
+	--pf-shadow-md: var(--shadow-ambient);
+	--pf-shadow-lg: var(--shadow-ambient);
+	--pf-error-bg: var(--color-surface-high);
+	--pf-error-border: var(--color-border-accent);
+	--pf-error-text: var(--destructive-text);
+	--pf-error-text-secondary: var(--destructive-text);
+	--pf-outline-focus: var(--color-accent-text);
+	--pf-outline-width: 2px;
+	--pf-outline-offset: 3px;
+	--pf-font: var(--font-body);
+	--pf-input-height: 44px;
+	--pf-input-font-size: 16px;
+	--pf-result-title-font-size: 16px;
+	--pf-result-excerpt-font-size: 14px;
+	--pf-border-radius: 0;
+	--pf-modal-backdrop: rgba(12, 14, 13, 0.72);
+	--pf-modal-max-width: 720px;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	background: var(--color-surface);
+	scroll-behavior: smooth;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: var(--font-body);
+	background: var(--color-surface);
+	color: var(--color-ink);
+	font-size: var(--text-body-lg);
+	line-height: 1.6;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+::selection {
+	background: var(--color-primary-container);
+	color: #fff;
+}
+
+:focus-visible {
+	outline: var(--sz-focus-width) solid var(--sz-focus-color);
+	outline-offset: var(--sz-focus-offset);
+}
+
+img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+iframe {
+	max-width: 100%;
+}
+
+main {
+	width: min(1080px, 100%);
+	margin: 0 auto;
+	/* reserve room for the fixed site nav */
+	padding: var(--nav-offset) 1rem var(--section-block);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	margin: 0 0 1rem;
+	font-family: var(--font-display);
+	font-weight: 900;
+	color: var(--ink);
+	line-height: 0.95;
+	letter-spacing: -0.04em;
+	text-wrap: balance;
+}
+
+h1 {
+	font-size: var(--text-headline);
+}
+h2 {
+	font-size: clamp(1.75rem, 4vw, 2.5rem);
+}
+h3 {
+	font-size: 1.5rem;
+}
+h4 {
+	font-size: 1.25rem;
+}
+h5 {
+	font-size: 1.125rem;
+}
+h6 {
+	font-size: 1rem;
+}
+
+strong,
+b {
+	font-weight: 500;
+}
+
+a {
+	color: var(--accent-text);
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.2em;
+}
+
+a:hover {
+	color: var(--accent-text-hover);
+}
+
+p {
+	margin-bottom: 1em;
+}
+
+.prose {
+	color: var(--muted);
+}
+
+.prose p {
+	margin-bottom: 2em;
+}
+
+textarea,
+input {
+	font-size: 16px;
+	font-family: inherit;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+code {
+	padding: 2px 5px;
+	background-color: var(--surface-container);
+	border-radius: 2px;
+	font-family: var(--sz-font-monospace);
+	font-size: 0.875em;
+}
+
+pre {
+	padding: 1.5em;
+	background: var(--surface-container);
+	border-radius: 0;
+	overflow-x: auto;
+}
+
+pre > code {
+	all: unset;
+}
+
+blockquote {
+	border-left: 4px solid var(--primary-container);
+	padding: 0 0 0 20px;
+	margin: 0;
+	font-size: 1.125em;
+	color: var(--ink);
+}
+
+hr {
+	border: none;
+	border-top: 1px solid var(--border-soft);
+}
+
+/* Uppercase Space Grotesk "data label" voice — eyebrows, meta, tags */
+.label {
+	font-family: var(--font-display);
+	font-size: var(--text-label-md);
+	font-weight: 700;
+	line-height: 1;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+}
+
+/* Buttons — ported from the original shadcn `Button` (base + default size +
+   primary variant): Work Sans 12.8px, 24px horizontal padding, 0 radius,
+   uppercase tracked. Colors stay 0the brand tokens. */
+.btn {
+	display: inline-flex;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	gap: 0.75rem;
+	white-space: nowrap;
+	padding: 1rem 1.5rem;
+	border: 1px solid var(--border-soft);
+	border-radius: 0;
+	background: var(--surface-lowest);
+	color: var(--ink);
+	font-family: var(--font-body);
+	font-size: 0.8rem;
+	font-weight: 700;
+	line-height: 1;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	text-decoration: none;
+	cursor: pointer;
+	transition:
+		background-color 0.2s ease,
+		color 0.2s ease,
+		border-color 0.2s ease;
+}
+
+.btn:hover {
+	border-color: var(--primary-container);
+	color: var(--ink);
+}
+
+.btn-primary {
+	background: var(--primary-container);
+	border: transparent;
+	color: var(--on-primary);
+	box-shadow: var(--shadow-ambient);
+}
+
+.btn-primary:hover {
+	background: var(--primary-deep);
+	color: var(--on-primary);
+}
+
+@media (max-width: 720px) {
+	body {
+		font-size: var(--text-body-md);
+	}
+
+	main {
+		padding: var(--nav-offset) 1rem var(--section-block-tight);
+	}
+}
+
+.skip-link {
+	position: fixed;
+	top: 0.75rem;
+	left: 0.75rem;
+	z-index: 100;
+	padding: 0.75rem 1rem;
+	background: var(--color-surface-lowest);
+	color: var(--color-accent-text);
+	font-family: var(--font-display);
+	font-size: var(--text-button);
+	font-weight: 700;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+	transform: translateY(calc(-100% - 1rem));
+}
+
+.skip-link:focus {
+	transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		scroll-behavior: auto !important;
+		transition-duration: 0.01ms !important;
+	}
+}
+
+.sr-only {
+	border: 0;
+	padding: 0;
+	margin: 0;
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	clip: rect(1px 1px 1px 1px);
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+/* ─────────────────────────────────────────────────────────────────────
+   Brand layout primitives — shared by the site nav/footer and the
+   studio (portfolio) sections. Single source; no per-page duplication.
+   ───────────────────────────────────────────────────────────────────── */
+
+.shell {
+	width: min(100% - 4rem, var(--shell-max));
+	margin: 0 auto;
+}
+
+.eyebrow {
+	font-family: var(--font-display);
+	font-size: 0.75rem;
+	font-weight: 700;
+	letter-spacing: 0.22em;
+	text-transform: uppercase;
+}
+
+.display-title {
+	font-family: var(--font-display);
+	font-size: clamp(3.75rem, 8vw, 10rem);
+	font-weight: 900;
+	letter-spacing: -0.05em;
+	line-height: 0.85;
+}
+
+.section-title {
+	font-family: var(--font-display);
+	font-size: clamp(4rem, 8vw, 8rem);
+	font-weight: 900;
+	letter-spacing: -0.05em;
+	line-height: 0.85;
+}
+
+.button-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+}
+
+.section-block {
+	padding-block: var(--section-block);
+}
+
+.section-block-tight {
+	padding-block: var(--section-block-tight);
+}
+
+section[id] {
+	scroll-margin-top: var(--scroll-target-offset);
+}
+
+.body-copy {
+	margin: 0;
+	max-width: 40rem;
+	font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+	line-height: 1.6;
+	color: var(--color-muted);
+}
+
+.muted {
+	color: var(--color-muted);
+}
+
+@media (max-width: 640px) {
+	.shell {
+		width: min(100% - 2rem, var(--shell-max));
+	}
+}

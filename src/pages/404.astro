@@ -1,0 +1,164 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Logo from '../components/Logo.astro';
+
+const title = 'Page not found • SAMIZDATA';
+const description = 'The requested page could not be found.';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} canonical={false} robots="noindex" />
+		<script is:inline>
+			const isRomanian = location.pathname === '/ro' || location.pathname.startsWith('/ro/');
+			document.documentElement.lang = isRomanian ? 'ro' : 'en';
+			document.documentElement.dataset.errorLocale = isRomanian ? 'ro' : 'en';
+			if (isRomanian) {
+				document.title = 'Pagina nu a fost găsită • SAMIZDATA';
+				document.querySelector('meta[name="description"]')?.setAttribute(
+					'content',
+					'Pagina solicitată nu a putut fi găsită.',
+				);
+			}
+		</script>
+	</head>
+	<body>
+		<a class="skip-link" href="#main-content">Skip / Sari la conținut</a>
+		<header class="error-header">
+			<div class="shell">
+				<a href="/" aria-label="SAMIZDATA home"><Logo /></a>
+			</div>
+		</header>
+
+		<main class="error-shell" id="main-content" tabindex="-1">
+			<section class="shell error-copy en">
+				<p class="eyebrow status-line">Error 404</p>
+				<h1>404</h1>
+				<h2>The page you were looking for is not here.</h2>
+				<p class="body-copy">The link may be outdated, moved, or typed incorrectly. Try one of the useful routes below.</p>
+				<div class="actions">
+					<a class="btn-primary" href="/">← Back to homepage</a>
+					<a class="btn-outline" href="/training/">Browse training</a>
+					<a class="btn-outline" href="/contact/">Contact us</a>
+				</div>
+			</section>
+
+			<section class="shell error-copy ro">
+				<p class="eyebrow status-line">Eroare 404</p>
+				<h1>404</h1>
+				<h2>Pagina căutată nu există.</h2>
+				<p class="body-copy">Linkul poate fi învechit, mutat sau introdus greșit. Încearcă una dintre rutele utile de mai jos.</p>
+				<div class="actions">
+					<a class="btn-primary" href="/ro/">← Înapoi la homepage</a>
+					<a class="btn-outline" href="/training/" hreflang="en">Training în engleză</a>
+					<a class="btn-outline" href="/ro/contact/">Contact</a>
+				</div>
+			</section>
+		</main>
+		<script is:inline async src="https://analytics.samizdata.co/proxy.js"></script>
+	</body>
+</html>
+
+<style>
+	.error-header {
+		border-bottom: 1px solid var(--color-border-soft);
+		background: var(--color-nav-surface);
+	}
+	.error-header .shell {
+		display: flex;
+		align-items: center;
+		min-height: var(--nav-offset);
+	}
+	.error-header a {
+		color: var(--color-ink);
+		text-decoration: none;
+	}
+	.error-shell {
+		display: grid;
+		width: auto;
+		max-width: none;
+		min-height: calc(100vh - var(--nav-offset));
+		margin: 0;
+		padding: 0;
+		background:
+			radial-gradient(circle at top left, var(--color-primary-glow), transparent 30%),
+			linear-gradient(180deg, var(--color-surface-low), var(--color-surface));
+	}
+	.error-copy {
+		display: grid;
+		align-content: center;
+		justify-items: start;
+		gap: 1.5rem;
+		padding-block: var(--section-block);
+	}
+	.error-copy.ro {
+		display: none;
+	}
+	:global(html[data-error-locale='ro']) .error-copy.en {
+		display: none;
+	}
+	:global(html[data-error-locale='ro']) .error-copy.ro {
+		display: grid;
+	}
+	.status-line {
+		color: var(--color-accent-text);
+	}
+	h1 {
+		color: var(--color-primary-container);
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: clamp(5rem, 16vw, 10rem);
+		font-weight: 900;
+		letter-spacing: -0.06em;
+		line-height: 0.85;
+		text-shadow: 0 0 2.5rem var(--color-primary-glow);
+	}
+	h2 {
+		max-width: 44rem;
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: clamp(2rem, 4vw, 3.25rem);
+		font-weight: 900;
+		line-height: 0.95;
+		letter-spacing: -0.04em;
+	}
+	.body-copy {
+		max-width: 38rem;
+	}
+	.actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+	}
+	.btn-primary,
+	.btn-outline {
+		display: inline-flex;
+		align-items: center;
+		min-height: 3rem;
+		padding: 1rem 2rem;
+		border: 1px solid var(--color-border-strong);
+		font-family: var(--font-display);
+		font-size: var(--text-button);
+		font-weight: 700;
+		letter-spacing: 0.18em;
+		line-height: 1;
+		text-decoration: none;
+		text-transform: uppercase;
+	}
+	.btn-primary {
+		border-color: var(--color-primary-container);
+		background: var(--color-primary-container);
+		color: #fff;
+	}
+	.btn-outline {
+		background: var(--color-surface-lowest);
+		color: var(--color-ink);
+	}
+	.btn-primary:hover {
+		background: var(--color-primary-deep);
+	}
+	.btn-outline:hover {
+		border-color: var(--color-primary-container);
+	}
+</style>

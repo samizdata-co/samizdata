@@ -1,0 +1,320 @@
+---
+// Site navigation — ONE nav for the whole site (blog + studio). Fixed,
+// blurred surface backdrop, uppercase tracked links, theme toggle, language
+// switcher and a progressively enhanced mobile disclosure. Self-contained
+// i18n: only the page-route links are passed in, so nothing drifts.
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getLanguage, useTranslations } from '../i18n';
+import type { LocaleAlternate } from '../lib/metadata';
+import Logo from './Logo.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import Icon from './Icon.astro';
+
+interface Props {
+	navItems: { label: string; href: string }[];
+	alternate?: LocaleAlternate;
+}
+
+const { navItems, alternate } = Astro.props;
+const lang = getLanguage(Astro.currentLocale);
+const t = useTranslations(lang);
+const homeHref = getRelativeLocaleUrl(lang, '/');
+
+// Active-link detection (route links only, e.g. /, /about, /studio).
+const norm = (s: string) => s.replace(/\/+$/, '');
+const currentPath = norm(Astro.url.pathname);
+const isActive = (href: string) => {
+	const itemPath = norm(href);
+	return currentPath === itemPath || (itemPath !== '' && itemPath !== '/' && currentPath.startsWith(`${itemPath}/`));
+};
+---
+
+<nav class="site-nav">
+	<div class="shell nav-inner">
+		<a href={homeHref} aria-label={t('studio.nav.homeLabel')} class="site-nav-logo">
+			<Logo />
+		</a>
+
+		<div class="nav-links" aria-label={t('studio.nav.primary')}>
+			{
+				navItems.map((item) => {
+					const active = isActive(item.href);
+					return (
+						<a href={item.href} aria-current={active ? 'page' : undefined} class:list={['nav-link', { active }]}>
+							{item.label}
+						</a>
+					);
+				})
+			}
+		</div>
+
+		<div class="nav-actions">
+			<pagefind-modal-trigger class="pagefind-search" compact hide-shortcut></pagefind-modal-trigger>
+			<ThemeToggle
+				switchToDark={t('studio.nav.switchToDark')}
+				switchToLight={t('studio.nav.switchToLight')}
+			/>
+			{
+				alternate && (
+					<LanguageSwitcher
+						alternate={alternate}
+						altLabel={alternate.lang === 'ro' ? 'Română' : 'English'}
+						altFlag={alternate.lang === 'ro' ? '🇷🇴' : '🇬🇧'}
+					/>
+				)
+			}
+
+			<details class="mobile-nav" data-mobile-nav>
+				<summary class="sheet-trigger" aria-label={t('studio.nav.primary')}>
+					<Icon name="menu" size={24} strokeWidth={2.25} class="icon-open" />
+					<Icon name="x" size={24} strokeWidth={2.25} class="icon-close" />
+				</summary>
+				<nav class="sheet" aria-label={t('studio.nav.primary')}>
+					<div class="sheet-links">
+						{
+							navItems.map((item) => {
+								const active = isActive(item.href);
+								return (
+									<a
+										href={item.href}
+										class:list={['sheet-link', { active }]}
+										aria-current={active ? 'page' : undefined}
+									>
+										{item.label}
+									</a>
+								);
+							})
+						}
+					</div>
+				</nav>
+			</details>
+		</div>
+	</div>
+</nav>
+
+<style>
+	.site-nav {
+		position: fixed;
+		inset: 0 0 auto 0;
+		z-index: 50;
+		border-bottom: 1px solid var(--color-border-soft);
+		background: var(--color-nav-surface);
+		backdrop-filter: blur(20px);
+		-webkit-backdrop-filter: blur(20px);
+	}
+
+	.nav-inner {
+		display: flex;
+		align-items: center;
+		gap: 1.5rem;
+		padding-block: 1rem;
+	}
+
+	.site-nav-logo {
+		flex-shrink: 0;
+		text-decoration: none;
+		color: inherit;
+	}
+
+	.nav-links {
+		display: none;
+		align-items: center;
+		gap: 3rem;
+		margin-left: auto;
+		margin-right: 3rem;
+	}
+
+	.nav-link {
+		padding: 0.25em 0;
+		color: var(--color-ink-soft);
+		text-decoration: none;
+		font-family: var(--font-display);
+		font-size: 0.875rem;
+		font-weight: 700;
+		line-height: 1;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		transition: color 0.18s ease;
+	}
+
+	.nav-link:hover {
+		color: var(--color-accent-text-hover);
+	}
+
+	.nav-link.active {
+		color: var(--color-accent-text);
+	}
+
+	.nav-actions {
+		display: flex;
+		align-items: center;
+		gap: 1.25rem;
+		margin-left: auto;
+	}
+
+	pagefind-modal-trigger {
+		width: 44px;
+		height: 44px;
+		flex-shrink: 0;
+	}
+
+	pagefind-modal-trigger :global(.pf-trigger-btn) {
+		padding: 0 !important;
+		justify-content: center !important;
+		border-radius: 9999px !important;
+		transition:
+			color 0.18s ease,
+			border-color 0.18s ease,
+			background-color 0.18s ease !important;
+	}
+
+	pagefind-modal-trigger :global(.pf-trigger-btn:hover) {
+		background: var(--color-surface-high);
+	}
+
+	pagefind-modal-trigger :global(.pf-trigger-icon) {
+		width: 18px;
+		height: 18px;
+	}
+
+	.mobile-nav {
+		position: relative;
+	}
+
+	.sheet-trigger {
+		display: inline-flex;
+		list-style: none;
+		align-items: center;
+		justify-content: center;
+		width: 44px;
+		height: 44px;
+		flex-shrink: 0;
+		padding: 0;
+		border: 1px solid var(--color-border-soft);
+		border-radius: 9999px;
+		background: var(--color-surface-lowest);
+		color: var(--color-ink-soft);
+		cursor: pointer;
+		transition:
+			color 0.18s ease,
+			border-color 0.18s ease,
+			background-color 0.18s ease;
+	}
+
+	.sheet-trigger::-webkit-details-marker {
+		display: none;
+	}
+
+	.sheet-trigger:hover {
+		color: var(--color-accent-text);
+		border-color: var(--color-border-accent);
+		background: var(--color-surface-high);
+	}
+
+	:global(.sheet-trigger .icon-close) {
+		display: none;
+	}
+	.mobile-nav[open] :global(.sheet-trigger .icon-open) {
+		display: none;
+	}
+	.mobile-nav[open] :global(.sheet-trigger .icon-close) {
+		display: block;
+	}
+
+	.mobile-nav:not([open]) .sheet {
+		display: none;
+	}
+
+	.sheet {
+		position: fixed;
+		top: calc(var(--nav-offset) - 0.25rem);
+		right: 1rem;
+		z-index: 45;
+		width: min(calc(100vw - 2rem), 24rem);
+		max-height: calc(100vh - var(--nav-offset) - 1rem);
+		overflow-y: auto;
+		border: 1px solid var(--color-border-soft);
+		border-radius: 1rem;
+		background: var(--color-surface-lowest);
+		box-shadow: var(--shadow-ambient);
+	}
+
+	.sheet-links {
+		display: grid;
+		gap: 0.4rem;
+		padding: 1rem 1.5rem;
+	}
+
+	.sheet-link {
+		padding: 0.9rem 0;
+		color: var(--color-ink-soft);
+		text-decoration: none;
+		font-family: var(--font-display);
+		font-size: 0.9rem;
+		font-weight: 700;
+		line-height: 1;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		transition: color 0.18s ease;
+	}
+
+	.sheet-link:hover {
+		color: var(--color-accent-text-hover);
+	}
+
+	.sheet-link.active {
+		color: var(--color-accent-text);
+	}
+
+	/* Dark-mode tweak for the logo inside the nav link */
+	:global(html[data-theme='dark']) .site-nav-logo .logo .mark {
+		filter: brightness(1.14) saturate(1.06)
+			drop-shadow(0 0 0.35rem rgba(198, 33, 104, 0.2));
+	}
+
+	@media (max-width: 459px) {
+		.nav-inner,
+		.nav-actions {
+			gap: 0.5rem;
+		}
+
+		:global(.site-nav-logo .logo span) {
+			display: none;
+		}
+	}
+
+	@media (min-width: 800px) {
+		.nav-links {
+			display: flex;
+		}
+
+		.nav-actions {
+			margin-left: 0;
+		}
+
+		.mobile-nav {
+			display: none;
+		}
+	}
+</style>
+
+<script>
+	const menus = document.querySelectorAll<HTMLDetailsElement>('[data-mobile-nav]');
+	const desktop = window.matchMedia('(min-width: 800px)');
+
+	const closeMenus = (returnFocus = false) => {
+		for (const menu of menus) {
+			if (!menu.open) continue;
+			menu.open = false;
+			if (returnFocus) menu.querySelector<HTMLElement>('summary')?.focus();
+		}
+	};
+
+	document.addEventListener('keydown', (event) => {
+		if (event.key === 'Escape') closeMenus(true);
+	});
+	desktop.addEventListener('change', (event) => {
+		if (event.matches) closeMenus();
+	});
+</script>

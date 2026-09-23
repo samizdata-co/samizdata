@@ -1,0 +1,8 @@
+/* Studio pages don't use the blog <main> column; sections are full-bleed.
+   Shared primitives and design tokens live in global.css. */
+.studio-main {
+	width: auto;
+	max-width: none;
+	margin: 0;
+	padding: 0;
+}

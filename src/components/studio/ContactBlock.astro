@@ -1,0 +1,156 @@
+---
+// Contact block — ported from ContactBlock.svelte. Large email tile that
+// inverts to raspberry on hover, plus LinkedIn and location tiles.
+import Icon from '../Icon.astro';
+import { siteConfig } from '../../lib/site';
+
+interface Props {
+	title: string;
+	body: string;
+	emailLabel: string;
+	locationLabel: string;
+	location: string;
+	socialLabel: string;
+	standalone?: boolean;
+}
+
+const { title, body, emailLabel, locationLabel, location, socialLabel, standalone = false } = Astro.props;
+const Heading = standalone ? 'h1' : 'h2';
+---
+
+<section class="contact section-block" id="contact">
+	<div class="shell contact-grid">
+		<div class="intro">
+			<Heading class="section-title">{title}</Heading>
+			<p class="body-copy">{body}</p>
+		</div>
+
+		<div class="contact-links">
+			<a class="email-tile" href={`mailto:${siteConfig.email}`}>
+				<div class="email-copy">
+					<span class="eyebrow email-label">{emailLabel}</span>
+					<strong>{siteConfig.email}</strong>
+				</div>
+				<Icon name="arrow-up-right" size={36} strokeWidth={2.1} />
+			</a>
+
+			<div class="info-grid">
+				<div class="info-tile">
+					<span class="eyebrow muted">{socialLabel}</span>
+					<p><a href={siteConfig.linkedinUrl} target="_blank" rel="noreferrer">LinkedIn</a></p>
+				</div>
+				<div class="info-tile">
+					<span class="eyebrow muted">{locationLabel}</span>
+					<p>{location}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.contact {
+		background: var(--color-surface);
+	}
+	.contact-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		align-items: start;
+		gap: 3rem;
+	}
+	.intro .section-title {
+		margin-bottom: 2rem;
+	}
+	.intro .body-copy {
+		max-width: 32rem;
+	}
+	.contact-links {
+		display: grid;
+		gap: 1.25rem;
+	}
+	.email-tile {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1.5rem;
+		padding: 2rem;
+		border: 1px solid var(--color-border-soft);
+		background: var(--color-surface-low);
+		color: var(--color-ink);
+		text-decoration: none;
+		transition:
+			background-color 0.22s ease,
+			color 0.22s ease,
+			transform 0.22s ease,
+			border-color 0.22s ease;
+	}
+	.email-copy {
+		min-width: 0;
+	}
+	.email-label {
+		display: block;
+		margin-bottom: 0.6rem;
+		color: var(--color-accent-text);
+	}
+	.email-tile strong {
+		color: inherit;
+		font-family: var(--font-display);
+		font-size: clamp(1.6rem, 6vw, 3rem);
+		font-weight: 900;
+		letter-spacing: -0.06em;
+		overflow-wrap: anywhere;
+	}
+	.email-tile:hover {
+		transform: translateY(-0.15rem);
+		border-color: var(--color-primary);
+		background: var(--color-primary-container);
+		color: #fff;
+	}
+	.email-tile:hover .email-label {
+		color: #fff;
+	}
+	.info-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1.25rem;
+	}
+	.info-tile {
+		padding: 2rem;
+		border: 1px solid var(--color-border-soft);
+		background: var(--color-surface-high);
+		color: var(--color-ink);
+	}
+	.info-tile p {
+		margin-top: 0.9rem;
+		color: var(--color-ink);
+		font-family: var(--font-display);
+		font-size: 2rem;
+		font-weight: 900;
+		letter-spacing: -0.04em;
+	}
+	.info-tile a {
+		text-decoration: underline;
+		text-decoration-color: var(--color-primary-container);
+		text-underline-offset: 0.5rem;
+	}
+	@media (min-width: 641px) {
+		.info-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+	@media (min-width: 900px) {
+		.contact-grid {
+			grid-template-columns: minmax(0, 1fr) minmax(24rem, 36rem);
+			gap: 4rem;
+		}
+	}
+	@media (max-width: 640px) {
+		.email-tile,
+		.info-tile {
+			padding: 2rem;
+		}
+		.email-tile {
+			gap: 1rem;
+		}
+	}
+</style>

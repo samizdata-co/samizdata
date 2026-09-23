@@ -1,0 +1,20 @@
+---
+import { defaultLang } from '../i18n';
+
+interface Props {
+	date: Date;
+	locale?: string;
+}
+
+const { date, locale = defaultLang } = Astro.props;
+---
+
+<time datetime={date.toISOString()}>
+	{
+		date.toLocaleDateString(locale === 'ro' ? 'ro-RO' : 'en-GB', {
+			day: 'numeric',
+			month: 'long',
+			year: 'numeric',
+		})
+	}
+</time>

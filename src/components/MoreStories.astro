@@ -1,0 +1,111 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import type { Language } from '../i18n';
+import { useTranslations } from '../i18n';
+import { postPath } from '../lib/blog';
+import FormattedDate from './FormattedDate.astro';
+
+interface Props {
+	posts: CollectionEntry<'blog'>[];
+	locale: Language;
+}
+
+const { posts, locale } = Astro.props;
+const t = useTranslations(locale);
+---
+
+<section class="more-stories" aria-labelledby="more-stories-heading" data-pagefind-ignore="all">
+	<h2 id="more-stories-heading">{t('blog.moreStories')}</h2>
+	<ul>
+		{
+			posts.map((post) => (
+				<li>
+					<a href={postPath(post.id)}>
+						{post.data.image && (
+							<Image
+								width={720}
+								height={360}
+								src={post.data.image}
+								alt=""
+								sizes="(max-width: 640px) calc(100vw - 4rem), (max-width: 900px) calc(50vw - 3.75rem), 21rem"
+							/>
+						)}
+						<h3>{post.data.title}</h3>
+						<p class="date">
+							<FormattedDate date={post.data.date} locale={locale} />
+						</p>
+					</a>
+				</li>
+			))
+		}
+	</ul>
+</section>
+
+<style>
+	.more-stories {
+		padding-top: var(--section-block-tight);
+		border-top: 1px solid var(--border-soft);
+	}
+	h2 {
+		margin-bottom: 2rem;
+	}
+	ul {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+		gap: var(--grid-gap);
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	li {
+		min-width: 0;
+	}
+	a {
+		display: flex;
+		height: 100%;
+		flex-direction: column;
+		gap: 0.75rem;
+		padding: 1rem;
+		background: var(--surface-lowest);
+		border: 1px solid var(--border-soft);
+		color: var(--ink);
+		text-decoration: none;
+		transition:
+			transform 0.2s ease,
+			box-shadow 0.2s ease,
+			border-color 0.2s ease;
+	}
+	a:hover {
+		transform: translateY(-0.2rem);
+		box-shadow: var(--shadow-ambient);
+		border-color: var(--border-accent);
+		color: var(--ink);
+	}
+	a:hover h3,
+	a:hover .date {
+		color: var(--accent-text);
+	}
+	img {
+		width: 100%;
+		aspect-ratio: 2 / 1;
+		object-fit: cover;
+	}
+	h3 {
+		margin: 0;
+		font-size: clamp(1.375rem, 2.5vw, 1.75rem);
+		line-height: 1.04;
+		transition: color 0.2s ease;
+	}
+	.date {
+		margin: auto 0 0;
+		color: var(--muted);
+		font-family: var(--font-display);
+		font-size: var(--text-label-sm);
+		font-weight: 700;
+		line-height: 1;
+		letter-spacing: 0.22em;
+		text-transform: uppercase;
+		transition: color 0.2s ease;
+	}
+</style>

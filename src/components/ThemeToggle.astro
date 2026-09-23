@@ -1,0 +1,89 @@
+---
+// Theme toggle — vanilla JS, no framework. Reads/writes the shared
+// `samizdata-theme` key and the `data-theme` attribute on <html> (set
+// before paint in BaseHead). Works on every page of the site.
+import Icon from './Icon.astro';
+
+interface Props {
+	switchToDark: string;
+	switchToLight: string;
+	class?: string;
+}
+
+const { switchToDark, switchToLight, class: className = '' } = Astro.props;
+---
+
+<button
+	type="button"
+	class:list={['theme-toggle', className]}
+	data-theme-toggle
+	aria-label={switchToDark}
+	data-label-dark={switchToDark}
+	data-label-light={switchToLight}
+>
+	<Icon name="sun" size={18} strokeWidth={2.2} class="icon-sun" />
+	<Icon name="moon" size={18} strokeWidth={2.2} class="icon-moon" />
+</button>
+
+<style>
+	.theme-toggle {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 44px;
+		height: 44px;
+		flex-shrink: 0;
+		padding: 0;
+		border: 1px solid var(--color-border-soft);
+		border-radius: var(--sz-radius-full);
+		background: var(--color-surface-lowest);
+		color: var(--color-ink-soft);
+		cursor: pointer;
+		transition:
+			color var(--sz-transition-duration) ease,
+			border-color var(--sz-transition-duration) ease,
+			background-color var(--sz-transition-duration) ease;
+	}
+	.theme-toggle:hover {
+		color: var(--color-accent-text);
+		border-color: var(--color-border-accent);
+		background: var(--color-surface-high);
+	}
+	/* Icons render inside the child <Icon> component (own Astro scope), so the
+	   classes aren't reachable via a locally-scoped selector here — scope globally. */
+	:global(.theme-toggle .icon-sun) {
+		display: none;
+	}
+	:global(html[data-theme='dark']) :global(.theme-toggle .icon-sun) {
+		display: block;
+	}
+	:global(html[data-theme='dark']) :global(.theme-toggle .icon-moon) {
+		display: none;
+	}
+</style>
+
+<script>
+	const buttons = document.querySelectorAll<HTMLElement>('[data-theme-toggle]');
+	for (const btn of buttons) {
+		// The label states the theme this toggle switches *to*, based on the
+		// theme already applied to <html> before paint (in BaseHead).
+		const syncLabel = () =>
+			btn.setAttribute(
+				'aria-label',
+				document.documentElement.dataset.theme === 'dark'
+					? btn.dataset.labelLight || ''
+					: btn.dataset.labelDark || ''
+			);
+		syncLabel();
+		btn.addEventListener('click', () => {
+			const root = document.documentElement;
+			root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+			try {
+				localStorage.setItem('samizdata-theme', root.dataset.theme);
+			} catch {
+				/* private mode */
+			}
+			syncLabel();
+		});
+	}
+</script>
