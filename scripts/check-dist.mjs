@@ -298,7 +298,7 @@ for (const surface of ['surface', 'surface-low', 'surface-container', 'surface-h
 // Every content file defines a locale route and appears on that locale's blog index.
 for (const locale of ['en', 'ro']) {
 	const sourceDir = join(root, 'src/content/blog', locale);
-	const posts = (await walk(sourceDir)).filter((path) => /\.(?:md|mdx)$/.test(path));
+	const posts = existsSync(sourceDir) ? (await walk(sourceDir)).filter((path) => /\.(?:md|mdx)$/.test(path)) : [];
 	const blogIndex = await read(locale === 'en' ? 'dist/blog/index.html' : 'dist/ro/blog/index.html');
 	for (const post of posts) {
 		const slug = relative(sourceDir, post).split(sep).join('/').replace(/\.(?:md|mdx)$/, '');
@@ -340,7 +340,7 @@ if (!homeHtml.includes('<details class="mobile-nav"')) fail('mobile navigation m
 if (homeHtml.includes('data-sheet-backdrop')) fail('closed mobile navigation must not leave an off-screen focusable sheet');
 for (const locale of ['en', 'ro']) {
 	const sourceDir = join(root, 'src/content/blog', locale);
-	const posts = (await walk(sourceDir)).filter((path) => /\.(?:md|mdx)$/.test(path));
+	const posts = existsSync(sourceDir) ? (await walk(sourceDir)).filter((path) => /\.(?:md|mdx)$/.test(path)) : [];
 	const pathname = locale === 'en' ? 'dist/index.html' : 'dist/ro/index.html';
 	const html = await read(pathname);
 	const blogHref = locale === 'en' ? '/blog/' : '/ro/blog/';
