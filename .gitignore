@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # pi tool state
 .pi/
+
+# hypa data
+.hypa/
