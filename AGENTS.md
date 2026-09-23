@@ -16,7 +16,7 @@ Manage the background server with `astro dev stop`, `astro dev status`, and `ast
 
 Run `npm run verify` after changes. It performs strict Astro/TypeScript checking, builds once, then validates source-derived routes, links, fragments, services, feeds, and metadata in `dist`.
 
-HTML routes use trailing slashes (`trailingSlash: 'always'` with directory output). Keep internal links, canonical URLs, RSS, and sitemap entries consistent with that policy. The root is intentionally blog-first; the studio lives at `/studio/`. Training is English-only, and Romanian links to it must identify the destination language.
+HTML routes use trailing slashes (`trailingSlash: 'always'` with directory output). Keep internal links, canonical URLs, RSS, and sitemap entries consistent with that policy. The studio is the homepage; editorial indexes live at `/blog/` and `/ro/blog/`. Training is English-only, and Romanian links to it must identify the destination language.
 
 Legacy Training redirects are generated from the content tree in `redirects.mjs`; update that source of truth rather than adding redirect pages by hand. Preserve `public/CNAME` and the `/sitemap.xml` compatibility endpoint for GitHub Pages continuity.
 

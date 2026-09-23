@@ -16,7 +16,8 @@ export const ui = {
 		'site.description': 'Reading Eastern Europe through data.',
 		'nav.home': 'Home',
 		'nav.about': 'About',
-		'nav.studio': 'Studio',
+		'nav.services': 'Services',
+		'nav.blog': 'Blog',
 		'nav.training': 'Training',
 		'nav.skip': 'Skip to content',
 		'last.updated': 'Last updated on',
@@ -27,6 +28,7 @@ export const ui = {
 		'home.studio.title': 'Let\'s work together.',
 		'home.studio.cta': 'Visit the studio',
 		'home.studio.servicesLabel': 'Studio services',
+
 
 		// Studio (portfolio) page
 		'studio.nav.homeLabel': 'SAMIZDATA home',
@@ -106,7 +108,8 @@ export const ui = {
 		'site.description': 'Citim Europa de Est prin date.',
 		'nav.home': 'Acasă',
 		'nav.about': 'Despre',
-		'nav.studio': 'Studio',
+		'nav.services': 'Servicii',
+		'nav.blog': 'Articole',
 		'nav.training': 'Training',
 		'nav.skip': 'Sari la conținut',
 		'last.updated': 'Ultima actualizare:',
@@ -117,6 +120,7 @@ export const ui = {
 		'home.studio.title': 'Hai să lucrăm împreună.',
 		'home.studio.cta': 'Descoperă studioul',
 		'home.studio.servicesLabel': 'Serviciile studioului',
+
 
 		'studio.nav.homeLabel': 'Pagina principală SAMIZDATA',
 		'studio.nav.menuOpen': 'Deschide meniul',

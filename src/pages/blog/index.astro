@@ -1,0 +1,15 @@
+---
+import Base from '../../layouts/Base.astro';
+import HomepageStudioPromo from '../../components/HomepageStudioPromo.astro';
+import BlogList from '../../components/BlogList.astro';
+import { useTranslations } from '../../i18n';
+
+const t = useTranslations('en');
+---
+
+<Base title={t('site.title')} description={t('site.description')}>
+	<main>
+		<BlogList locale="en" />
+		<HomepageStudioPromo />
+	</main>
+</Base>

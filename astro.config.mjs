@@ -1,6 +1,7 @@
 // @ts-check
 
 import mdx from '@astrojs/mdx';
+import { satteri } from '@astrojs/markdown-satteri';
 import sitemap from '@astrojs/sitemap';
 import pagefind from 'astro-pagefind';
 import { defineConfig, fontProviders } from 'astro/config';
@@ -9,6 +10,31 @@ import { legacyTrainingRedirects } from './redirects.mjs';
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://samizdata.co',
+	markdown: {
+		processor: satteri({
+			hastPlugins: [{
+				name: 'external-links-new-tab',
+				element: {
+					filter: ['a'],
+					visit(node, context) {
+						const href = node.properties.href;
+						if (typeof href !== 'string') return;
+						let url;
+						try {
+							url = new URL(href, 'https://samizdata.co');
+						} catch {
+							return;
+						}
+						if (!['http:', 'https:'].includes(url.protocol) || url.hostname === 'samizdata.co') return;
+						context.setProperty(node, 'target', '_blank');
+						const rel = node.properties.rel;
+						const relTokens = Array.isArray(rel) ? rel : [];
+						context.setProperty(node, 'rel', [...new Set([...relTokens, 'noopener', 'noreferrer'])]);
+					},
+				},
+			}],
+		}),
+	},
 	trailingSlash: 'always',
 	build: {
 		format: 'directory',
@@ -18,7 +44,7 @@ export default defineConfig({
 		responsiveStyles: true,
 		breakpoints: [320, 480, 720, 1020],
 	},
-	redirects: legacyTrainingRedirects,
+	redirects: { ...legacyTrainingRedirects, '/studio': '/', '/ro/studio': '/ro/' },
 	i18n: {
 		locales: ['en', 'ro'],
 		defaultLocale: 'en',

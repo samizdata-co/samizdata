@@ -32,8 +32,9 @@ async function request(path, redirect = 'follow') {
 const pages = [
 	'/',
 	'/ro/',
+	'/blog/',
+	'/ro/blog/',
 	'/story/what-is-eastern-europe/',
-	'/studio/',
 	'/contact/',
 	'/services/',
 	'/training/',
@@ -71,7 +72,7 @@ if (missing) {
 	if (!body.includes('Pagina căutată nu există.')) fail(`${missingPath}: custom bilingual 404 was not served`);
 }
 
-for (const path of ['/ro', '/studio', '/services', '/training']) {
+for (const path of ['/ro', '/blog', '/ro/blog', '/studio', '/services', '/training']) {
 	const response = await request(path, 'manual');
 	if (!response) continue;
 	if (![301, 308].includes(response.status)) {
@@ -81,6 +82,17 @@ for (const path of ['/ro', '/studio', '/services', '/training']) {
 	const location = response.headers.get('location');
 	const actualPath = location ? new URL(location, base).pathname : '';
 	if (actualPath !== `${path}/`) fail(`${path}: expected redirect to ${path}/, got ${location ?? 'no Location header'}`);
+}
+for (const [source, destination] of [['/studio/', '/'], ['/ro/studio/', '/ro/']]) {
+	const response = await request(source);
+	if (!response) continue;
+	if (response.status !== 200) {
+		fail(`${source}: expected static redirect page, got ${response.status}`);
+		continue;
+	}
+	if (!(await response.text()).includes(`content="0;url=${destination}"`)) {
+		fail(`${source}: expected redirect to ${destination}`);
+	}
 }
 
 for (const [source, destination] of [

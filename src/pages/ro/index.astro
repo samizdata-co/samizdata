@@ -1,16 +1,14 @@
 ---
 import Base from '../../layouts/Base.astro';
-import BlogList from '../../components/BlogList.astro';
-import HomepageStudioPromo from '../../components/HomepageStudioPromo.astro';
-import { getLanguage, useTranslations } from '../../i18n';
+import StudioSections from '../../components/studio/StudioSections.astro';
+import '../../styles/studio.css';
+import { useTranslations } from '../../i18n';
 
-const lang = getLanguage(Astro.currentLocale);
-const t = useTranslations(lang);
+const t = useTranslations('ro');
 ---
 
-<Base title={t('site.title')} description={t('site.description')}>
-	<main>
-		<BlogList locale="ro" />
-		<HomepageStudioPromo />
+<Base title={t('studio.seo.title')} description={t('studio.seo.description')}>
+	<main class="studio-main">
+		<StudioSections />
 	</main>
 </Base>

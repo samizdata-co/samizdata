@@ -33,6 +33,14 @@ function classCount(html, ...names) {
 		.filter((match) => names.every((name) => match[1].split(/\s+/).includes(name)))
 		.length;
 }
+function isExternalHref(href) {
+	try {
+		const url = new URL(href, site);
+		return ['http:', 'https:'].includes(url.protocol) && url.hostname !== site.hostname;
+	} catch {
+		return false;
+	}
+}
 
 function slugify(value) {
 	return value
@@ -131,6 +139,20 @@ for (const file of htmlFiles) {
 	for (const [iframe] of html.matchAll(/<iframe\b[^>]*>/g)) {
 		if (!/\btitle="[^"]+"/.test(iframe)) fail(`${pathname}: iframe is missing a title`);
 	}
+	if (pathname.includes('/story/') || pathname.startsWith('/training/')) {
+		for (const articleMatch of html.matchAll(/<article\b[\s\S]*?<\/article>/g)) {
+			const article = articleMatch[0];
+			for (const anchorMatch of article.matchAll(/<a\b[^>]*>/g)) {
+				const anchor = anchorMatch[0];
+				const href = anchor.match(/\bhref="([^"]+)"/)?.[1];
+				if (!href || !isExternalHref(href)) continue;
+				const rel = anchor.match(/\brel="([^"]*)"/)?.[1]?.split(/\s+/) ?? [];
+				if (!/\btarget="_blank"/.test(anchor) || !rel.includes('noopener') || !rel.includes('noreferrer')) {
+					fail(`${pathname}: external Markdown link ${href} must open in a new tab securely`);
+				}
+			}
+		}
+	}
 
 	for (const [, href] of html.matchAll(/\bhref="([^"]+)"/g)) {
 		if (!href || /^(?:mailto:|tel:|javascript:)/.test(href)) continue;
@@ -184,6 +206,16 @@ for (const [source, destination] of Object.entries(legacyTrainingRedirects)) {
 	}
 	const html = await read(path);
 	if (!html.includes(`content="0;url=${destination}"`)) fail(`${source}: expected redirect to ${destination}`);
+}
+for (const [source, destination] of [['/studio/', '/'], ['/ro/studio/', '/ro/']]) {
+	const path = outputPath(source);
+	if (!has(path)) {
+		fail(`missing legacy studio redirect ${source} → ${destination}`);
+		continue;
+	}
+	if (!(await read(path)).includes(`content="0;url=${destination}"`)) {
+		fail(`${source}: expected redirect to ${destination}`);
+	}
 }
 
 // Source assets have one canonical copy, and build output stays within reviewed budgets.
@@ -263,11 +295,11 @@ for (const surface of ['surface', 'surface-low', 'surface-container', 'surface-h
 	if (!accentText || !background || contrast(accentText, background) < 4.5) fail(`dark ${surface}: accent text does not meet 4.5:1 contrast`);
 }
 
-// Every content file defines a locale route and appears on that locale's home page.
+// Every content file defines a locale route and appears on that locale's blog index.
 for (const locale of ['en', 'ro']) {
 	const sourceDir = join(root, 'src/content/blog', locale);
 	const posts = (await walk(sourceDir)).filter((path) => /\.(?:md|mdx)$/.test(path));
-	const home = await read(locale === 'en' ? 'dist/index.html' : 'dist/ro/index.html');
+	const blogIndex = await read(locale === 'en' ? 'dist/blog/index.html' : 'dist/ro/blog/index.html');
 	for (const post of posts) {
 		const slug = relative(sourceDir, post).split(sep).join('/').replace(/\.(?:md|mdx)$/, '');
 		const pathname = `/${locale === 'en' ? '' : 'ro/'}story/${slug}/`;
@@ -283,11 +315,11 @@ for (const locale of ['en', 'ro']) {
 				if (Number(descriptor) > 1440) fail(`${pathname}: generated image width exceeds the 1440px editorial ceiling`);
 			}
 		}
-		if (!home.includes(`href="${pathname}"`)) fail(`${pathname} is missing from the ${locale} home page`);
+		if (!blogIndex.includes(`href="${pathname}"`)) fail(`${pathname} is missing from the ${locale} blog index`);
 	}
 
 	const storyPaths = [...new Set(
-		[...home.matchAll(/href="(\/(?:ro\/)?story\/[^\"]+\/)"/g)].map((match) => match[1]),
+		[...blogIndex.matchAll(/href="(\/(?:ro\/)?story\/[^\"]+\/)"/g)].map((match) => match[1]),
 	)];
 	for (const pathname of storyPaths) {
 		const html = await read(outputPath(pathname));
@@ -306,6 +338,17 @@ for (const locale of ['en', 'ro']) {
 const homeHtml = await read('dist/index.html');
 if (!homeHtml.includes('<details class="mobile-nav"')) fail('mobile navigation must use a native details disclosure');
 if (homeHtml.includes('data-sheet-backdrop')) fail('closed mobile navigation must not leave an off-screen focusable sheet');
+for (const locale of ['en', 'ro']) {
+	const sourceDir = join(root, 'src/content/blog', locale);
+	const posts = (await walk(sourceDir)).filter((path) => /\.(?:md|mdx)$/.test(path));
+	const pathname = locale === 'en' ? 'dist/index.html' : 'dist/ro/index.html';
+	const html = await read(pathname);
+	const blogHref = locale === 'en' ? '/blog/' : '/ro/blog/';
+	const isLinked = html.includes(`href="${blogHref}"`);
+	if (isLinked !== (posts.length > 0)) {
+		fail(`${pathname}: Blog navigation visibility must match whether ${locale} has articles`);
+	}
+}
 
 const servicesIndex = await read('dist/services/index.html');
 const serviceSlugs = [...new Set([...servicesIndex.matchAll(/href="\/services\/([^"/]+)\/"/g)].map((match) => match[1]))];
@@ -344,12 +387,12 @@ if (!/href="\/training\/"[^>]*hreflang="en"/.test(roServices)) {
 }
 if (!roServices.includes('doar în limba engleză')) fail('/ro/services/: Training card must disclose that resources are English-only');
 
-const roStudio = await read('dist/ro/studio/index.html');
+const roStudio = await read('dist/ro/index.html');
 if (!roStudio.includes('Reportaj original, cercetare bazată pe documente')) {
-	fail('/ro/studio/: featured service descriptions must remain localized');
+	fail('/ro/: featured service descriptions must remain localized');
 }
 if (roStudio.includes('Original reporting, document-heavy research')) {
-	fail('/ro/studio/: featured service descriptions must not be replaced with English CV summaries');
+	fail('/ro/: featured service descriptions must not be replaced with English CV summaries');
 }
 
 // Feeds and sitemaps must only publish URLs that resolve in dist.

@@ -53,15 +53,15 @@ The public route contract is:
 
 | Area | English | Romanian |
 | --- | --- | --- |
-| Editorial index | `/` | `/ro/` |
+| Studio | `/` | `/ro/` |
+| Editorial index | `/blog/` | `/ro/blog/` |
 | Stories | `/story/{slug}/` | `/ro/story/{slug}/` |
-| Studio | `/studio/` | `/ro/studio/` |
 | Services | `/services/` | `/ro/services/` |
 | Contact | `/contact/` | `/ro/contact/` |
 | Feed | `/rss.xml` | `/ro/rss.xml` |
 | Training | `/training/` | English only |
 
-HTML routes always use trailing slashes. The build uses directory output, and canonical URLs, internal links, feeds, and sitemaps must follow the same policy. `/sitemap.xml` is retained as a compatibility sitemap index. The root is intentionally the English blog index, not the studio.
+HTML routes always use trailing slashes. The build uses directory output, and canonical URLs, internal links, feeds, and sitemaps must follow the same policy. The studio occupies the homepage; the editorial index is at `/blog/` (and `/ro/blog/` in Romanian).
 
 ## Content workflows
 
