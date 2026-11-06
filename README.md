@@ -6,6 +6,7 @@ The source for [samizdata.co](https://samizdata.co): a bilingual editorial site,
 
 - Node.js 22.12 or newer
 - npm 10 or newer (the committed lockfile is lockfile version 3)
+- A checkout of [samizdata-co/brand](https://github.com/samizdata-co/brand) next to this one (`../brand`), or `SAMIZDATA_BRAND_DIR` pointing at one, for the shared `data/cv.json`
 
 Install the exact locked dependencies:
 
@@ -45,7 +46,7 @@ Run `npm run verify` after every change. The deployment smoke check is deliberat
 - `src/content/blog/{en,ro}/` contains editorial Markdown/MDX.
 - `src/content/training/` contains English-only training Markdown/MDX.
 - `src/lib/blog.ts`, `src/lib/training.ts`, and `src/lib/services.ts` derive lists and routes from content and portfolio data.
-- `src/portfolio/cv.json` is the source of truth for studio work, skills, services, publications, and projects.
+- `../brand/data/cv.json` (in [samizdata-co/brand](https://github.com/samizdata-co/brand)) is the source of truth for studio work, skills, services, publications, and projects. It is shared with nicu.md. `npm run dev`, `check` and `build` copy it to the git-ignored `src/portfolio/cv.json` (`npm run cv:sync` does only that); CI checks out brand into `.brand/`. Never edit the copy.
 - `src/styles/global.css` owns design tokens and global prose styles; feature styles remain plain, scoped CSS.
 - The shared layout loads the existing privacy-friendly Simple Analytics endpoint at `analytics.samizdata.co`.
 
@@ -98,13 +99,13 @@ Training is English-only. Romanian links to it must use `hreflang="en"` and visi
 
 ### Add or update a service
 
-Services are selected skills from `src/portfolio/cv.json`. Publications and projects whose `skills` include the exact skill name become examples on that service page.
+Services are selected skills from `cv.json` in brand. Publications and projects whose `skills` include the exact skill name become examples on that service page.
 
-To introduce a service, update the skill in `cv.json`, then add its name to `serviceOrder`, icon mapping, and Romanian translation in `src/lib/services.ts`. The slug is derived from the English skill name. Do not create separate locale pages; the existing thin route wrappers render both languages.
+To introduce a service, update the skill in brand's `data/cv.json`, then add its name to `serviceOrder`, icon mapping, and Romanian translation in `src/lib/services.ts`. The slug is derived from the English skill name. Do not create separate locale pages; the existing thin route wrappers render both languages.
 
 ### Add a portfolio item
 
-Add the publication or project to `src/portfolio/cv.json`. Use the existing JSON shape, valid dates and URLs, and exact skill names from `skills`. If it has local media, put the file in `src/portfolio/img/` and set `img` to its filename. Shared blog/portfolio media belongs in `src/assets/shared/`. GIF and SVG portfolio media are passed through; raster media receives responsive variants.
+Add the publication or project to `data/cv.json` in brand, then push brand and redeploy this site (and nicu.md). Use the existing JSON shape, valid dates and URLs, and exact skill names from `skills`. If it has local media, put the file in `src/portfolio/img/` and set `img` to its filename. Shared blog/portfolio media belongs in `src/assets/shared/`. GIF and SVG portfolio media are passed through; raster media receives responsive variants.
 
 ## Sources of truth
 
@@ -114,7 +115,7 @@ Add the publication or project to `src/portfolio/cv.json`. Use the existing JSON
 | Localized interface copy | `src/i18n.ts` |
 | Content schemas | `src/content.config.ts` |
 | Blog and training content | `src/content/` |
-| Studio, services, publications, projects | `src/portfolio/cv.json` |
+| Studio, services, publications, projects | `data/cv.json` in brand |
 | Service selection and Romanian service copy | `src/lib/services.ts` |
 | Design tokens | `src/styles/global.css` |
 | Legacy Training redirects | `redirects.mjs` plus `src/content/training/` |

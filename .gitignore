@@ -28,3 +28,6 @@ pnpm-debug.log*
 
 # hypa data
 .hypa/
+# Shared portfolio data, copied from samizdata-co/brand by scripts/sync-cv.mjs
+/src/portfolio/cv.json
+/.brand/

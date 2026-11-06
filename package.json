@@ -7,13 +7,14 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-    "dev": "astro dev",
-    "check": "astro check --minimumFailingSeverity warning",
+    "dev": "node scripts/sync-cv.mjs && astro dev",
+    "check": "node scripts/sync-cv.mjs && astro check --minimumFailingSeverity warning",
     "build": "npm run check && astro build",
     "test:dist": "node scripts/check-dist.mjs",
     "verify": "npm run build && npm run test:dist",
     "brand:sync": "cp ../brand/css/tokens.css src/styles/vendor/samizdata/tokens.css",
     "brand:check": "cmp ../brand/css/tokens.css src/styles/vendor/samizdata/tokens.css",
+    "cv:sync": "node scripts/sync-cv.mjs",
     "smoke": "node scripts/smoke-deployment.mjs",
     "preview": "astro preview",
     "astro": "astro"
