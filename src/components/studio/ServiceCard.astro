@@ -8,9 +8,12 @@ import type { ServiceCardData } from '../../lib/portfolio';
 interface Props {
 	card: ServiceCardData;
 	large?: boolean;
+	/** Heading level for the card title; use 2 when the cards sit directly under the page h1. */
+	headingLevel?: 2 | 3;
 }
 
-const { card, large = false } = Astro.props;
+const { card, large = false, headingLevel = 3 } = Astro.props;
+const Heading = `h${headingLevel}` as const;
 const external = card.href?.startsWith('http') ?? false;
 ---
 
@@ -26,7 +29,7 @@ const external = card.href?.startsWith('http') ?? false;
 	<div class="content">
 		<div>
 			<Icon name={card.icon} size={36} class="icon" />
-			<h3>{card.title}</h3>
+			<Heading class="card-title">{card.title}</Heading>
 			<p>{card.description}</p>
 		</div>
 
@@ -69,7 +72,7 @@ const external = card.href?.startsWith('http') ?? false;
 	:global(.service-card.accent) :global(svg) {
 		color: #fff;
 	}
-	h3 {
+	.card-title {
 		margin: 0.85rem 0 0.55rem;
 		font-family: var(--font-display);
 		font-size: clamp(1.45rem, 3.8vw, 2rem);
@@ -96,7 +99,7 @@ const external = card.href?.startsWith('http') ?? false;
 	:global(.service-card.accent) p {
 		color: #fff;
 	}
-	:global(.service-card.accent) h3 {
+	:global(.service-card.accent) .card-title {
 		color: #fff;
 	}
 	.cta,
@@ -125,7 +128,7 @@ const external = card.href?.startsWith('http') ?? false;
 		:global(.service-card.large) {
 			padding: 1rem;
 		}
-		:global(.service-card.large) h3 {
+		:global(.service-card.large) .card-title {
 			font-size: 1.35rem;
 		}
 		:global(.service-card.large) p {
@@ -137,7 +140,7 @@ const external = card.href?.startsWith('http') ?? false;
 		:global(.service-card.large) {
 			padding: clamp(1.6rem, 2vw, 2.25rem);
 		}
-		:global(.service-card.large) h3 {
+		:global(.service-card.large) .card-title {
 			margin: 1rem 0 0.7rem;
 			font-size: clamp(1.8rem, 2.5vw, 2.5rem);
 			-webkit-line-clamp: 2;

@@ -162,6 +162,65 @@ iframe {
 	max-width: 100%;
 }
 
+/* Click-to-play video placeholder (see BlogPost.astro). Without JS it is a
+   plain link to the video; with JS it is swapped for the embed on click, so
+   the third-party player only loads for readers who want it. */
+.video-embed,
+.video-embed-frame {
+	display: block;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	margin: 0 0 2em;
+	border: 0;
+}
+.video-embed {
+	position: relative;
+	display: grid;
+	place-items: end start;
+	padding: 1.25rem;
+	background:
+		radial-gradient(circle at center, color-mix(in srgb, var(--color-primary-container) 30%, transparent), transparent 60%),
+		#111311;
+	color: #fff;
+	text-decoration: none;
+}
+.video-embed::before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 4.5rem;
+	height: 4.5rem;
+	border-radius: 50%;
+	background: var(--color-primary-container);
+	transform: translate(-50%, -50%);
+	transition: transform 0.2s ease;
+}
+.video-embed::after {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	border-style: solid;
+	border-width: 0.8rem 0 0.8rem 1.35rem;
+	border-color: transparent transparent transparent #fff;
+	transform: translate(-35%, -50%);
+}
+.video-embed:hover,
+.video-embed:focus-visible {
+	color: #fff;
+}
+.video-embed:hover::before,
+.video-embed:focus-visible::before {
+	transform: translate(-50%, -50%) scale(1.08);
+}
+.video-embed-label {
+	position: relative;
+	font-family: var(--font-display);
+	font-weight: 700;
+	line-height: 1.2;
+}
+
 main {
 	width: min(1080px, 100%);
 	margin: 0 auto;
@@ -371,6 +430,12 @@ hr {
 		scroll-behavior: auto !important;
 		transition-duration: 0.01ms !important;
 	}
+}
+
+/* Without JS the theme script never sets data-theme, and portfolio videos
+   have no poster or playback; PortfolioMedia's <noscript> image shows instead. */
+:root:not([data-theme]) video[data-portfolio-video] {
+	display: none;
 }
 
 .sr-only {

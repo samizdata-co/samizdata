@@ -67,6 +67,24 @@ const t = useTranslations(lang);
 	</main>
 </Base>
 
+<script>
+	// Upgrade click-to-play video links (.video-embed) to their embed on demand.
+	for (const link of document.querySelectorAll<HTMLAnchorElement>('a.video-embed[data-embed]')) {
+		link.addEventListener('click', (event) => {
+			if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+			event.preventDefault();
+			const frame = document.createElement('iframe');
+			frame.className = 'video-embed-frame';
+			frame.src = link.dataset.embed!;
+			frame.title = link.dataset.title ?? link.textContent ?? '';
+			frame.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture';
+			frame.allowFullscreen = true;
+			link.replaceWith(frame);
+			frame.focus();
+		});
+	}
+</script>
+
 <style>
 	.hero-image {
 		width: 100%;

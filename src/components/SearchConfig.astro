@@ -1,0 +1,15 @@
+---
+// Pagefind search config. Replaces astro-pagefind's PagefindConfig so that the
+// component UI stylesheet (~29 KB, only needed once the search UI is up) does
+// not block first render. The search UI is JS-only, so loading its CSS from an
+// async stylesheet costs nothing without JS; site theming lives in global.css
+// on `.pagefind-search`, which wins over Pagefind's `:root` defaults
+// regardless of load order.
+import pagefindCss from '@pagefind/component-ui/css/pagefind-component-ui.css?url';
+---
+
+<link rel="stylesheet" href={pagefindCss} media="print" onload="this.media='all'" />
+<pagefind-config bundle-path={`${import.meta.env.BASE_URL.replace(/\/?$/, '/')}pagefind/`}></pagefind-config>
+<script>
+	import '@pagefind/component-ui';
+</script>

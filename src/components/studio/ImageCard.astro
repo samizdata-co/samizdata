@@ -1,45 +1,36 @@
 ---
 // Image card — ported from ImageCard.svelte. Media card with a contained
 // image and gentle zoom on hover.
-import { Image } from 'astro:assets';
 import CardShell from './CardShell.astro';
+import PortfolioMedia from './PortfolioMedia.astro';
 import type { ImageCardData } from '../../lib/portfolio';
+import { isExternalHref } from '../../lib/cv';
 
 interface Props {
 	card: ImageCardData;
 }
 
 const { card } = Astro.props;
+const external = isExternalHref(card.href);
 ---
 
 <CardShell
 	class="image-card"
 	href={card.href}
-	target="_blank"
-	rel="noreferrer"
+	hreflang={card.href && !external ? 'en' : undefined}
+	target={external ? '_blank' : undefined}
+	rel={external ? 'noreferrer' : undefined}
 	variant="media"
 >
-	{card.image && (card.image.format === 'gif' || card.image.format === 'svg' ? (
-		<img
-			src={card.image.src}
-			width={card.image.width}
-			height={card.image.height}
+	{card.image && (
+		<PortfolioMedia
+			image={card.image}
 			alt={card.title}
-			loading="lazy"
-			decoding="async"
-			fetchpriority="low"
-		/>
-	) : (
-		<Image
-			src={card.image}
-			alt={card.title}
-			loading="lazy"
-			decoding="async"
 			fetchpriority="low"
 			widths={[320, 640, 960]}
 			sizes="(min-width: 1200px) 22rem, (min-width: 640px) 50vw, 100vw"
 		/>
-	))}
+	)}
 </CardShell>
 
 <style>
@@ -49,14 +40,16 @@ const { card } = Astro.props;
 		justify-content: center;
 		background: var(--color-surface-high);
 	}
-	img {
+	img,
+	video {
 		display: block;
 		width: 100%;
 		height: 100%;
 		object-fit: contain;
 		transition: transform 600ms ease;
 	}
-	:global(.card-shell:hover .image-card) img {
+	:global(.card-shell:hover .image-card) img,
+	:global(.card-shell:hover .image-card) video {
 		transform: scale(1.05);
 	}
 </style>

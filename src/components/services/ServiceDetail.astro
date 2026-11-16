@@ -52,9 +52,10 @@ const heroTitle = `${t('services.seo.title')} • ${service.name}`;
 							<ServiceExampleMasonry examples={service.examples} />
 						) : (
 							<div class="example-grid">
-								{service.examples.map((example) => (
+								{service.examples.map((example, index) => (
 									<ServiceExampleCard
 										example={example}
+										priority={index === 0}
 										labels={{
 											publication: t('services.publicationsLabel'),
 											project: t('services.projectsLabel'),

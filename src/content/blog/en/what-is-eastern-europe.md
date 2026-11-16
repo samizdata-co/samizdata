@@ -8,8 +8,6 @@ image: '../../../assets/posts/477515bb-c175-4ebf-abee-3e684e901df3_1280x1042.png
 
 Welcome to the first edition of the SAMIZDATA newsletter.
 
-If you’re reading this online, you can subscribe below or, if you’ve already subscribed, why not [share it with a friend](https://blog.samizdata.co/?utm_medium=email&action=share)?
-
 Since this is a newsletter about Eastern Europe, it follows that a good starting point is defining what that is. Can data show us the way?
 
 ---
@@ -32,7 +30,7 @@ On the other hand, people in Georgia, Armenia or Kazakhstan will claim to be in 
 
 In the *Balkan Spirit* documentary, Slavoj Žižek jokes about how Austrians will claim the Balkans start in Slovenia, Slovenians will tell you that they start in Croatia, Croatians will point to Serbia, [and so on and so on](https://www.youtube.com/watch?v=SVXbQGZE-lI). Eastern Europe follows a similar approach.
 
-<iframe src="https://www.youtube-nocookie.com/embed/3rpEQmtkstM?rel=0&autoplay=0&showinfo=0&enablejsapi=0" title="Slavoj Žižek discusses where the Balkans begin" loading="lazy" allow="autoplay; fullscreen" allowfullscreen width="728" height="409"></iframe>
+<a class="video-embed" href="https://www.youtube.com/watch?v=3rpEQmtkstM" target="_blank" rel="noopener noreferrer" data-embed="https://www.youtube-nocookie.com/embed/3rpEQmtkstM?rel=0&autoplay=1" data-title="Slavoj Žižek discusses where the Balkans begin"><span class="video-embed-label">Play video: Slavoj Žižek discusses where the Balkans begin</span></a>
 
 Or, as author Francis Tapon [puts it](https://francistapon.com/Books/The-Hidden-Europe/Where-is-Eastern-Europe-and-what-countries-are-in-it):
 

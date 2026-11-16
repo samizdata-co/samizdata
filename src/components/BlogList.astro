@@ -11,6 +11,10 @@ interface Props {
 const { locale } = Astro.props;
 
 const posts = await getPosts(locale);
+// Actual rendered slot widths: main is capped at 1080px with 1rem gutters, and
+// each card adds 1rem padding + border. Below 721px the grid is one column.
+const featuredSizes = '(min-width: 1080px) 1014px, calc(100vw - 4.125rem)';
+const cardSizes = '(min-width: 1080px) 490px, (min-width: 721px) calc(50vw - 3rem), calc(100vw - 4.125rem)';
 ---
 
 <section aria-labelledby="blog-heading">
@@ -27,6 +31,7 @@ const posts = await getPosts(locale);
 								src={post.data.image}
 								alt=""
 								priority={i === 0}
+								sizes={i === 0 ? featuredSizes : cardSizes}
 							/>
 						)}
 						<h2 class="title">{post.data.title}</h2>

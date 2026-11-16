@@ -1,10 +1,15 @@
 ---
-// Clients / bylines logo grid — ported from ClientsGrid.svelte. Logos are
-// grayscale and warm up to full colour on hover (dark-safe).
+// Clients / bylines logos — ported from ClientsGrid.svelte. Logos are
+// grayscale and warm up to full colour on hover (dark-safe). Eight logos fit
+// one static row on wide screens; narrower screens get a CSS marquee (paused
+// on hover or with the toggle, static grid under prefers-reduced-motion).
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
+import { getLanguage, useTranslations } from '../../i18n';
 import bbcNews from '../../portfolio/logos/bbc-news.png';
+import cpr from '../../portfolio/logos/cpr.png';
 import globalWitness from '../../portfolio/logos/global-witness.svg?url';
+import ims from '../../portfolio/logos/ims.svg?url';
 import infogr8 from '../../portfolio/logos/infogr8.png';
 import newStatesman from '../../portfolio/logos/new-statesman.png';
 import transportEnvironment from '../../portfolio/logos/transport-environment.png';
@@ -15,49 +20,89 @@ interface Props {
 }
 
 const { title } = Astro.props;
+const t = useTranslations(getLanguage(Astro.currentLocale));
 
-const logos: { src: ImageMetadata | string; alt: string }[] = [
+// SVGs are passed through as URLs, so they carry their intrinsic size here.
+type Logo =
+	| { src: ImageMetadata; alt: string }
+	| { src: string; alt: string; width: number; height: number };
+const logos: Logo[] = [
 	{ src: bbcNews, alt: 'BBC News' },
 	{ src: newStatesman, alt: 'New Statesman' },
 	{ src: vice, alt: 'VICE' },
-	{ src: globalWitness, alt: 'Global Witness' },
+	{ src: globalWitness, alt: 'Global Witness', width: 293, height: 39 },
 	{ src: transportEnvironment, alt: 'Transport & Environment' },
 	{ src: infogr8, alt: 'Infogr8' },
+	{ src: ims, alt: 'International Media Support (IMS)', width: 255, height: 97 },
+	{ src: cpr, alt: 'Centrul de Politici și Reforme (CPR)' },
 ];
+// The marquee animates two identical lists side by side; the second copy is
+// hidden from assistive tech and search, and only shown while scrolling.
+const copies = [false, true];
 ---
 
 <section class="clients" aria-labelledby="clients-heading">
-	<h2 id="clients-heading">{title}</h2>
+	<div class="clients-header">
+		<h2 id="clients-heading">{title}</h2>
+		<button
+			type="button"
+			class="marquee-toggle"
+			aria-controls="clients-rail"
+			data-pause={t('studio.clients.pause')}
+			data-play={t('studio.clients.play')}
+			hidden
+		>
+			{t('studio.clients.pause')}
+		</button>
+	</div>
 
-	<ul class="logos">
-		{logos.map((logo) => (
-			<li>
-				{typeof logo.src === 'string' ? (
-					// SVG can't be rasterized (would need dangerouslyProcessSVG); pass it
-					// through unchanged via format="svg" — it's tiny, no optimization needed.
-					<Image
-						src={logo.src}
-						alt={logo.alt}
-						format="svg"
-						width={293}
-						height={39}
-						loading="lazy"
-						decoding="async"
-					/>
-				) : (
-					<Image
-						src={logo.src}
-						alt={logo.alt}
-						loading="lazy"
-						decoding="async"
-						widths={[160, 320, 480]}
-						sizes="12rem"
-					/>
-				)}
-			</li>
+	<div class="rail" id="clients-rail">
+		{copies.map((isCopy) => (
+			<ul
+				class:list={['logos', isCopy && 'logos-copy']}
+				aria-hidden={isCopy ? 'true' : undefined}
+				data-pagefind-ignore={isCopy ? 'all' : undefined}
+			>
+				{logos.map((logo) => (
+					<li>
+						{'width' in logo ? (
+							// SVGs are vector and tiny: serve them as-is, no responsive variants.
+							<img
+								src={logo.src}
+								alt={logo.alt}
+								width={logo.width}
+								height={logo.height}
+								loading="lazy"
+								decoding="async"
+							/>
+						) : (
+							<Image
+								src={logo.src}
+								alt={logo.alt}
+								loading="lazy"
+								decoding="async"
+								widths={[160, 320, 480]}
+								sizes="12rem"
+							/>
+						)}
+					</li>
+				))}
+			</ul>
 		))}
-	</ul>
+	</div>
 </section>
+
+<script>
+	const rail = document.getElementById('clients-rail');
+	const toggle = document.querySelector<HTMLButtonElement>('.marquee-toggle[aria-controls="clients-rail"]');
+	if (rail && toggle) {
+		toggle.hidden = false;
+		toggle.addEventListener('click', () => {
+			const paused = rail.classList.toggle('is-paused');
+			toggle.textContent = (paused ? toggle.dataset.play : toggle.dataset.pause) ?? '';
+		});
+	}
+</script>
 
 <style>
 	.clients {
@@ -65,26 +110,74 @@ const logos: { src: ImageMetadata | string; alt: string }[] = [
 		padding-top: 2rem;
 		border-top: 1px solid var(--color-outline-ghost);
 	}
+	.clients-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		margin-bottom: 1.5rem;
+	}
 	h2 {
-		margin: 0 0 1.5rem;
+		margin: 0;
 		font-family: var(--font-display);
 		font-size: clamp(1.1rem, 1.8vw, 1.45rem);
 		font-weight: 800;
 		letter-spacing: -0.03em;
 		color: var(--color-ink);
 	}
+	.marquee-toggle {
+		flex: none;
+		min-height: 2rem;
+		padding: 0.35rem 0.8rem;
+		border: 1px solid var(--color-border-soft);
+		background: transparent;
+		color: var(--color-muted);
+		font-family: var(--font-display);
+		font-size: var(--text-label-sm);
+		font-weight: 700;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		cursor: pointer;
+		transition:
+			color 180ms ease,
+			border-color 180ms ease;
+	}
+	.marquee-toggle:hover {
+		border-color: var(--color-border-accent);
+		color: var(--color-accent-text);
+	}
+
+	/* Narrow screens: marquee. Both lists shift by their own width, so the
+	   copy slides into the original's place and the loop is seamless. */
+	.rail {
+		display: flex;
+		overflow: hidden;
+		mask-image: linear-gradient(90deg, transparent, #000 1.5rem, #000 calc(100% - 1.5rem), transparent);
+	}
 	.logos {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
+		display: flex;
+		flex: none;
 		gap: 1rem;
 		margin: 0;
-		padding: 0;
+		padding: 0 1rem 0 0;
 		list-style: none;
+		animation: clients-marquee 40s linear infinite;
+	}
+	.rail:hover .logos,
+	.rail.is-paused .logos {
+		animation-play-state: paused;
+	}
+	@keyframes clients-marquee {
+		to {
+			transform: translateX(-100%);
+		}
 	}
 	.logos li {
 		display: flex;
+		flex: none;
 		align-items: center;
 		justify-content: center;
+		width: 9.5rem;
 		min-height: 5.5rem;
 		padding: 0.5rem 0.75rem;
 		transition: transform 180ms ease;
@@ -117,14 +210,36 @@ const logos: { src: ImageMetadata | string; alt: string }[] = [
 	:global(:root[data-theme='dark']) .logos li:hover img {
 		filter: grayscale(100%) invert(1) brightness(1.24);
 	}
-	@media (min-width: 700px) {
+
+	/* Static layouts: one row of eight when it fits, a wrapped grid when the
+	   reader prefers reduced motion. */
+	@media (min-width: 1100px), (prefers-reduced-motion: reduce) {
+		.rail {
+			mask-image: none;
+		}
 		.logos {
-			grid-template-columns: repeat(3, minmax(0, 1fr));
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			flex: 1;
+			padding: 0;
+			animation: none;
+		}
+		.logos-copy,
+		.marquee-toggle {
+			display: none;
+		}
+		.logos li {
+			width: auto;
+		}
+	}
+	@media (min-width: 700px) and (prefers-reduced-motion: reduce) {
+		.logos {
+			grid-template-columns: repeat(4, minmax(0, 1fr));
 		}
 	}
 	@media (min-width: 1100px) {
 		.logos {
-			grid-template-columns: repeat(6, minmax(0, 1fr));
+			grid-template-columns: repeat(8, minmax(0, 1fr));
 		}
 	}
 </style>
