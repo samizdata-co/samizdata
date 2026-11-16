@@ -1,0 +1,129 @@
+---
+// Portfolio media for cards: optimized responsive raster images, SVGs passed
+// through, and animated GIFs (whose `image` is the poster frame) swapped for their MP4 encodes (~80% smaller; see
+// scripts/encode-portfolio-media.mjs). Videos are muted, loop, and autoplay
+// only while on screen; they show their poster frame without JS or when the
+// reader prefers reduced motion. Extra attributes (including the parent's
+// scoped-style attribute) are forwarded to the rendered element.
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { getPortfolioVideo } from '../../lib/cv';
+
+interface Props {
+	image: ImageMetadata;
+	alt: string;
+	widths: number[];
+	sizes: string;
+	loading?: 'eager' | 'lazy';
+	fetchpriority?: 'high' | 'low' | 'auto';
+	[attribute: `data-${string}`]: unknown;
+}
+
+const { image, alt, widths, sizes, loading = 'lazy', fetchpriority, ...attributes } = Astro.props;
+const video = getPortfolioVideo(image);
+---
+
+{video ? (
+	<>
+		{/* Off-screen posters are set from data-poster as the card nears the
+		    viewport so they don't compete with critical requests; an eager
+		    (above-the-fold) video gets its poster up front. */}
+		<video
+			{...attributes}
+			data-portfolio-video
+			data-poster={video.poster.src}
+			poster={loading === 'eager' ? video.poster.src : undefined}
+			src={video.src}
+			width={image.width}
+			height={image.height}
+			muted
+			loop
+			playsinline
+			disablepictureinpicture
+			preload="none"
+			aria-hidden="true"
+		/>
+		{alt && <span class="sr-only">{alt}</span>}
+		<noscript>
+			<img
+				{...attributes}
+				src={video.poster.src}
+				width={image.width}
+				height={image.height}
+				alt=""
+				loading="lazy"
+				decoding="async"
+			/>
+		</noscript>
+	</>
+) : image.format === 'svg' ? (
+	<img
+		{...attributes}
+		src={image.src}
+		width={image.width}
+		height={image.height}
+		alt={alt}
+		loading={loading}
+		decoding="async"
+		fetchpriority={fetchpriority}
+	/>
+) : (
+	<Image
+		{...attributes}
+		src={image}
+		alt={alt}
+		loading={loading}
+		decoding="async"
+		fetchpriority={fetchpriority}
+		widths={widths}
+		sizes={sizes}
+	/>
+)}
+
+<script>
+	const videos = document.querySelectorAll<HTMLVideoElement>('video[data-portfolio-video]');
+	const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+	const showPoster = (video: HTMLVideoElement) => {
+		if (!video.poster && video.dataset.poster) video.poster = video.dataset.poster;
+	};
+
+	if (videos.length > 0 && 'IntersectionObserver' in window) {
+		// Posters load a screen ahead, like native lazy images.
+		const posterObserver = new IntersectionObserver(
+			(entries) => {
+				for (const { target, isIntersecting } of entries) {
+					if (!isIntersecting) continue;
+					showPoster(target as HTMLVideoElement);
+					posterObserver.unobserve(target);
+				}
+			},
+			{ rootMargin: '1250px 0px' },
+		);
+		// Videos play only while (nearly) on screen.
+		const playObserver = new IntersectionObserver(
+			(entries) => {
+				for (const { target, isIntersecting } of entries) {
+					const video = target as HTMLVideoElement;
+					if (isIntersecting && !reducedMotion.matches) {
+						showPoster(video);
+						// Muted inline playback needs no gesture; if it is still refused
+						// (e.g. data saver), the poster stays.
+						video.play().catch(() => {});
+					} else {
+						video.pause();
+					}
+				}
+			},
+			{ rootMargin: '200px 0px' },
+		);
+		const observePlayback = () => {
+			playObserver.disconnect();
+			for (const video of videos) playObserver.observe(video);
+		};
+		for (const video of videos) posterObserver.observe(video);
+		observePlayback();
+		reducedMotion.addEventListener('change', observePlayback);
+	} else {
+		videos.forEach(showPoster);
+	}
+</script>

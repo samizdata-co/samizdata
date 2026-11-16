@@ -3,10 +3,11 @@
 // card for one publication/project: optional image, kind eyebrow, source
 // + year, title, summary and a "View work" CTA. External link when the
 // example has one.
-import { Image } from 'astro:assets';
 import CardShell from './CardShell.astro';
+import PortfolioMedia from './PortfolioMedia.astro';
 import Icon from '../Icon.astro';
 import type { ServiceExample } from '../../lib/services';
+import { isExternalHref } from '../../lib/cv';
 
 interface Props {
 	example: ServiceExample;
@@ -15,42 +16,35 @@ interface Props {
 		project: string;
 		visit: string;
 	};
+	/** The first example is above the fold and is the page's LCP element. */
+	priority?: boolean;
 }
 
-const { example, labels } = Astro.props;
+const { example, labels, priority = false } = Astro.props;
+const external = isExternalHref(example.href);
 const kindLabel = example.kind === 'publication' ? labels.publication : labels.project;
 ---
 
 <CardShell
 	class="example-card"
 	href={example.href}
-	target={example.href ? '_blank' : undefined}
-	rel={example.href ? 'noreferrer' : undefined}
+	hreflang={example.href && !external ? 'en' : undefined}
+	target={external ? '_blank' : undefined}
+	rel={external ? 'noreferrer' : undefined}
 	variant={example.image ? 'media' : 'surface'}
 	aspect="auto"
 >
 	<div class:list={['example-body', Boolean(example.image) && 'with-image']}>
 		{example.image && (
 			<div class="media-frame">
-				{example.image.format === 'gif' || example.image.format === 'svg' ? (
-					<img
-						src={example.image.src}
-						width={example.image.width}
-						height={example.image.height}
-						alt={example.title}
-						loading="lazy"
-						decoding="async"
-					/>
-				) : (
-					<Image
-						src={example.image}
-						alt={example.title}
-						loading="lazy"
-						decoding="async"
-						widths={[320, 480, 640]}
-						sizes="(min-width: 900px) 16rem, 100vw"
-					/>
-				)}
+				<PortfolioMedia
+					image={example.image}
+					alt={example.title}
+					loading={priority ? 'eager' : 'lazy'}
+					fetchpriority={priority ? 'high' : undefined}
+					widths={[320, 480, 640]}
+					sizes="(min-width: 900px) 16rem, 100vw"
+				/>
 			</div>
 		)}
 
@@ -92,7 +86,8 @@ const kindLabel = example.kind === 'publication' ? labels.publication : labels.p
 		border-bottom: 1px solid var(--color-border-soft);
 		background: var(--color-surface-high);
 	}
-	.media-frame img {
+	.media-frame img,
+	.media-frame video {
 		display: block;
 		width: 100%;
 		height: 100%;

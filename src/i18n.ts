@@ -56,6 +56,8 @@ export const ui = {
 		'studio.about.introTail':
 			", a journalist with 16 years' experience in media. Here are some of the things he has worked on.",
 		'studio.clients.title': 'Clients and bylines',
+		'studio.clients.pause': 'Pause',
+		'studio.clients.play': 'Play',
 		'studio.contact.title': 'Get in touch',
 		'studio.contact.body':
 			"Whether you have a massive dataset or just the seed of an idea, let's talk about it.",
@@ -148,6 +150,8 @@ export const ui = {
 		'studio.about.introTail':
 			', un jurnalist cu 16 ani de experiență. Iată câteva dintre proiectele la care a lucrat.',
 		'studio.clients.title': 'Clienți și publicații',
+		'studio.clients.pause': 'Pauză',
+		'studio.clients.play': 'Redă',
 		'studio.contact.title': 'Ia legătura cu noi',
 		'studio.contact.body':
 			'Fie că ai un set uriaș de date sau doar germenul unei idei, hai să vorbim.',

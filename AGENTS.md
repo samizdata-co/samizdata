@@ -22,7 +22,7 @@ Legacy Training redirects are generated from the content tree in `redirects.mjs`
 
 Keep SEO metadata in the typed `Base`/`BaseHead` contract. Only connect translated posts by giving both entries the same explicit `translationGroup`; untranslated posts and English-only Training pages must not advertise locale alternates.
 
-Editorial raster sources are capped at 1440px wide and shared post/portfolio images belong in `src/assets/shared`. Keep responsive image widths within the declared slot sizes, pass GIF/SVG portfolio media through without raster variants, preload only the critical display-font face, and preserve the checked 36 MiB `dist` / 1 MiB optimized-image budgets.
+Editorial raster sources are capped at 1440px wide and shared post/portfolio images belong in `src/assets/shared`. Keep responsive image widths within the declared slot sizes, pass SVG portfolio media through without raster variants, ship animated portfolio GIFs as the MP4 + poster pairs from `node scripts/encode-portfolio-media.mjs` (rerun it and commit `src/portfolio/video` when a GIF changes; `PortfolioMedia.astro` renders them), preload only the critical display-font face, and preserve the checked 36 MiB `dist` / 1 MiB optimized-image budgets.
 
 Use `--color-accent-text` for links and small raspberry text, especially in dark mode; `--color-primary-container` is a fill/control token and fails small-text contrast on dark surfaces. Use scoped plain CSS; Tailwind was removed deliberately and should not be reintroduced for utility styling. The mobile navigation must remain a native `<details>` disclosure so it works without JavaScript and keeps closed links unfocusable.
 

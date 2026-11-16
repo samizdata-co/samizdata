@@ -247,9 +247,21 @@ for (const path of distFiles) {
 const animatedNames = sourceAssets
 	.filter((path) => extname(path).toLowerCase() === '.gif')
 	.map((path) => basename(path, '.gif'));
+// Animated GIFs ship as one MP4 + one poster frame (scripts/encode-portfolio-media.mjs),
+// never as the GIF itself or as animated WebP variants.
 for (const name of animatedNames) {
-	if (distFiles.some((path) => basename(path).startsWith(`${name}.`) && extname(path) === '.webp')) {
-		fail(`${name}.gif must be passed through once, not expanded into animated WebP variants`);
+	const emitted = distFiles.filter((path) => basename(path).startsWith(`${name}.`));
+	const byExtension = (extension) => emitted.filter((path) => extname(path) === extension);
+	if (byExtension('.gif').length > 0) fail(`${name}.gif must ship as MP4, not as the original GIF`);
+	const videos = byExtension('.mp4');
+	if (videos.length !== 1) fail(`${name}.gif should emit exactly one MP4, found ${videos.length}`);
+	for (const path of videos) {
+		if ((await stat(path)).size > 600 * 1024) fail(`${relative(root, path)} exceeds the 600 KiB portfolio video budget`);
+	}
+	const posters = byExtension('.webp');
+	if (posters.length !== 1) fail(`${name}.gif should emit exactly one poster WebP, found ${posters.length}`);
+	for (const path of posters) {
+		if ((await stat(path)).size > 100 * 1024) fail(`${relative(root, path)} exceeds the 100 KiB poster budget`);
 	}
 }
 const fontPreloads = [...homeDocument.matchAll(/<link rel="preload"[^>]+as="font"/g)];

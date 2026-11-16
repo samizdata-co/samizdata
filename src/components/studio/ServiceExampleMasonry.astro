@@ -3,51 +3,46 @@
 // CSS-only (column-count) instead of the JS column-balancing version. Used
 // for the Visualisation service. Items render as link/overlay media or a
 // plain fallback copy block when there's no image.
-import { Image } from 'astro:assets';
+import PortfolioMedia from './PortfolioMedia.astro';
 import type { ServiceExample } from '../../lib/services';
+import { isExternalHref } from '../../lib/cv';
 
 interface Props {
 	examples: ServiceExample[];
 }
 
 const { examples } = Astro.props;
-
-const ariaLabel = (example: ServiceExample) =>
-	[example.title, example.source, example.year].filter(Boolean).join(', ');
+// CSS columns fill top-to-bottom, so only the first item is reliably at the
+// top of the gallery; it is the LCP element on mobile. Everything else lazy-loads.
+// Slot widths mirror .shell (1440px max, 2rem/1rem side gutters) and the
+// 1 → 2 → 3 column layout with 1rem gaps below.
+const sizes =
+	'(min-width: 1504px) 29.5rem, (min-width: 1120px) calc((100vw - 6rem) / 3), (min-width: 760px) calc((100vw - 5rem) / 2), (min-width: 641px) calc(100vw - 4rem), calc(100vw - 2rem)';
 ---
 
 <div class="example-masonry">
-	{examples.map((example) => {
+	{examples.map((example, index) => {
 		const Tag = example.href ? 'a' : 'article';
+		const external = isExternalHref(example.href);
+		const loading = index === 0 ? 'eager' : 'lazy';
 		return (
 		<Tag
 			class="gallery-item"
 			href={example.href ?? undefined}
-			target={example.href ? '_blank' : undefined}
-			rel={example.href ? 'noreferrer' : undefined}
-			aria-label={example.href ? ariaLabel(example) : undefined}
+			hreflang={example.href && !external ? 'en' : undefined}
+			target={external ? '_blank' : undefined}
+			rel={external ? 'noreferrer' : undefined}
 		>
 			{example.image ? (
 				<>
-					{example.image.format === 'gif' || example.image.format === 'svg' ? (
-						<img
-							src={example.image.src}
-							width={example.image.width}
-							height={example.image.height}
-							alt={example.title}
-							loading="lazy"
-							decoding="async"
-						/>
-					) : (
-						<Image
-							src={example.image}
-							alt={example.title}
-							loading="lazy"
-							decoding="async"
-							widths={[320, 480, 720, 960]}
-							sizes="(min-width: 1120px) 30rem, (min-width: 760px) 50vw, 100vw"
-						/>
-					)}
+					<PortfolioMedia
+						image={example.image}
+						alt=""
+						loading={loading}
+						fetchpriority={index === 0 ? 'high' : undefined}
+						widths={[320, 480, 720, 960]}
+						sizes={sizes}
+					/>
 					<div class="overlay">
 						<div class="meta eyebrow">
 							{example.source && <span>{example.source}</span>}
@@ -98,7 +93,8 @@ const ariaLabel = (example: ServiceExample) =>
 	.gallery-item:focus-visible {
 		outline-offset: 4px;
 	}
-	img {
+	img,
+	video {
 		display: block;
 		width: 100%;
 		height: auto;
@@ -122,7 +118,9 @@ const ariaLabel = (example: ServiceExample) =>
 		pointer-events: none;
 	}
 	.gallery-item:hover img,
-	.gallery-item:focus-visible img {
+	.gallery-item:hover video,
+	.gallery-item:focus-visible img,
+	.gallery-item:focus-visible video {
 		transform: scale(1.02);
 	}
 	.meta {
